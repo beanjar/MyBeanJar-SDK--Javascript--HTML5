@@ -1,0 +1,12 @@
+1. limit_value in mybeans get result olny for 0.
+2. limit_value don't make effect in get_sponsors.
+3. null data at wrong callback.
+4.awards : 
+POST https://api.mybeanjar.com/json/services 500 (Internal Server Error)
+5. Output of getAward not done because of Internal Server Error.
+6. We didn't test Reedem and delete functions for correct beans because we have olny have 2 awards at the moment (see point 4) and that why there aren't examples messages of success Reedem and delete of bean from server in api doc, however it should work correctly (we test it in another functions). 
+7.We don't make location_for_sponsor method in doc because : locations of sponsor is empty for tokenUser: {"status":1,"response":{"locations":[]}}.
+For register user : {"status":0,"response":{"message":"Invalid Username and\/or Password"}}
+8. tokenPassword and tokenUser are in SDK. Should be delete at final version (for example if we don't need username and password to get categories, it can be make without tokenUser).
+
+
