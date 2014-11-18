@@ -34,7 +34,7 @@ function parse_award_and_callback(data, callback) {
         awardArray = json.response;
         parse_award(award);
         result = STATUS_SUCCESS;
-        callback(result,awad);
+        callback(result,award);
     } else {
         result = STATUS_FAIL;
         callback(result,award);
