@@ -314,15 +314,15 @@ function parse_authenticateuser_and_callback(data, callback){
 }
 
 var award = [];
-var currentWinArray = [];
+var awardArray = [];
 
 function parse_award(award) {
 
     award.push({
-        awarded: currentWinArray.awarded,
-        beankey: currentWinArray.beankey,
-        imageurl: currentWinArray.imageurl,
-        message: currentWinArray.message
+        awarded: awardArray.awarded,
+        beankey: awardArray.beankey,
+        imageurl: awardArray.imageurl,
+        message: awardArray.message
     });
 
     return award;
