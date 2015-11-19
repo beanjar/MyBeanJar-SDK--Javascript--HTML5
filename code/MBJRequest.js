@@ -141,15 +141,18 @@ function reedem_bean(username, password, beankey, callback) {
     return request_to_api(callback, "v2services", "redeembean", params, API_URL);
 }
 
-function register_user(username, password, email, zipcode, categories, callback) {
+function register_user(username, password, email, zipcode, lat, lon, categories, callback) {
 
     var params = {
         "username": username,
         "password": MD5(password),
         "email": email,
         "zipcode": zipcode,
-        "categories": categories
+        "categories": categories,
+        "lat": lat,
+        "lon": lon
     }
+  //  console.log(params);
 
     return request_to_api(callback, "v2services", "registerUser", params, API_URL);
 }
@@ -179,11 +182,10 @@ function request_to_api(callback, resource, method, params, url) {
         alert('CORS not supported');
         return "corsNotSupported";
     }
-    
+
     // Response handlers.
     xhr.onload = function() {
         var data = xhr.responseText;
-
         if (method === "winners"){
             parse_winners_and_callback(data, callback);
         } else if (method === "apps") {
@@ -210,11 +212,20 @@ function request_to_api(callback, resource, method, params, url) {
             parse_authenticateuser_and_callback(data, callback);
         } else if (method === "validateuser"){
             parse_validateuser_and_callback(data, callback);
-        }
+        } else if (method === "imagebuy"){
+            parse_userimage_and_callback(data, callback);
+        } else if (method === "imageget"){
+            parse_userimageget_and_callback(data, callback);
+        } else if (method === "imagelist"){
+        	parse_imagelist_and_callback(data, callback);   
+        } else if (method === "randomimage"){
+        	console.log('after resonse');
+        	parse_randomimage_and_callback(data, callback);
+        }                
     };
 
     xhr.onerror = function() {
-        alert('There was an error making the request.');
+        alert('Sorry! There was an error making the request.');
     };
 
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -292,7 +303,7 @@ function parse_apps_and_callback(data, callback) {
 }
 
 function parse_authenticateuser_and_callback(data, callback){
-    
+
    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,message);
@@ -302,11 +313,19 @@ function parse_authenticateuser_and_callback(data, callback){
     var json = JSON.parse(data);
     var status = json.status;
     var message = json.response.message;
+    var email = json.response.email;
+
+    if (email != '') { 
+    sessionStorage.setItem('email',email);
+    $('#email').val(email);
+    } else {
+        sessionStorage.removeItem('email') ;  	
+    }
     var result;
 
     if (status === 1) {
         result = STATUS_SUCCESS;
-        callback(result,message);
+        callback(result,message,email);
     } else {
         result = STATUS_FAIL;
         callback(result,message);
@@ -314,15 +333,15 @@ function parse_authenticateuser_and_callback(data, callback){
 }
 
 var award = [];
-var awardArray = [];
+var currentWinArray = [];
 
 function parse_award(award) {
 
     award.push({
-        awarded: awardArray.awarded,
-        beankey: awardArray.beankey,
-        imageurl: awardArray.imageurl,
-        message: awardArray.message
+        awarded: currentWinArray.awarded,
+        beankey: currentWinArray.beankey,
+        imageurl: currentWinArray.imageurl,
+        message: currentWinArray.message
     });
 
     return award;
@@ -349,7 +368,7 @@ function parse_award_and_callback(data, callback) {
         awardArray = json.response;
         parse_award(award);
         result = STATUS_SUCCESS;
-        callback(result,award);
+        callback(result,awad);
     } else {
         result = STATUS_FAIL;
         callback(result,award);
@@ -743,6 +762,78 @@ function parse_register_and_callback(data, callback) {
         callback(result,message);
     }
 }
+function parse_userimage_and_callback(data, callback) {
+    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+        result = INTERNAL_SERVER_ERROR;
+        callback(result,message);
+        return;
+    }
+    
+    var json = JSON.parse(data);
+
+    var status = json.status;
+    var message = json.response.message;
+
+    var result;
+
+    if (status === 1) {
+        result = STATUS_SUCCESS;
+        callback(result,message);
+    } else {
+        result = STATUS_FAIL;
+        callback(result,message);
+    }
+}
+
+function parse_imagelist_and_callback(data, callback) {
+
+    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+        result = INTERNAL_SERVER_ERROR;
+        callback(result,message);
+        return;
+    }
+    
+    var json = JSON.parse(data);
+
+    var status = json.status;
+    var message = json.response.message;
+    var appimages = json.response.appimages;
+    var result;
+
+    if (status === 1) {
+        result = STATUS_SUCCESS;
+        callback(result,message,appimages);
+    } else {
+        result = STATUS_FAIL;
+        callback(result,message,null);
+    }
+}
+
+function parse_randomimage_and_callback(data, callback) {
+
+    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+        result = INTERNAL_SERVER_ERROR;
+        callback(result,message);
+        return;
+    }
+    
+    var json = JSON.parse(data);
+
+    var status = json.status;
+    var message = json.response.message;
+    randomimg = json.response.randomimage;
+
+    var result;
+
+    if (status === 1) {
+        result = STATUS_SUCCESS;
+        callback(result,message,randomimg);
+    } else {
+        result = STATUS_FAIL;
+        callback(result,message,null);
+    }
+}
+
 
 function parse_sendpassword_and_callback(data, callback) {
     
@@ -927,4 +1018,49 @@ function parse_winners_and_callback(data, callback) {
         result = STATUS_FAIL;
         callback(result,winners);
     }
+}
+
+function insert_user_image(username, password, appkey,image, callback) {
+
+    var params = {
+        username: username,
+        password: MD5(password),
+        appkey: appkey,
+        image: image
+    }
+    return request_to_api(callback, "v2services", "imagebuy", params, API_URL);
+
+}
+function get_user_image(email, appkey, callback) {
+
+    var params = {
+        email: email,
+        appkey: appkey
+    }
+    return request_to_api(callback, "v2services", "imageget", params, API_URL);
+
+}
+function get_app_images(bucket,imagepath, prefix, thprefix, appkey, callback) {
+
+    var params = {
+        bucket: bucket,
+        imagepath: imagepath,
+        prefix: prefix,
+        thprefix: thprefix,
+        appkey: appkey
+    }
+
+    return request_to_api(callback, "v2services", "imagelist", params, API_URL);
+
+}
+
+function get_random_image(imagepath, appkey, callback) {
+
+    var params = {
+        imagepath: imagepath,
+        appkey: appkey
+    }
+
+    return request_to_api(callback, "v2services", "randomimage", params, API_URL);
+
 }
