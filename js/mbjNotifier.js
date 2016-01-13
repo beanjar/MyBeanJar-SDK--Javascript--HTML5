@@ -29,7 +29,7 @@ var hardPass = "40f4d87250c70278580bc8fb47e5caaa";
 // var validpurchase = false;
 // var catArray = null;
 
-// var debugMode = true;
+var debugMode = true;
 
 
 
@@ -39,8 +39,10 @@ var hardPass = "40f4d87250c70278580bc8fb47e5caaa";
 //
 
 function mbjDebug(message) {
-    if (debugMode == true) {
-        console.log(message);
+    if (typeof debugMode != 'undefined') {
+        if (debugMode == true) {
+            console.log(message);
+        }
     }
 };
 
