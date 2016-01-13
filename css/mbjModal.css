@@ -40,3 +40,35 @@ html, body {
     overflow: auto;
 }
 
+
+/***          - ADAPTIVE LAYOUTS -        ***/
+
+
+/* Mobile portrait */
+
+@media all and (max-width: 600px) and (orientation:portrait) {              
+    .bean_notification_window {
+        /*height:;*/
+    }
+}
+
+
+
+
+
+/* Desktop landscape */
+
+@media all and (orientation:landscape) {                                
+    .mbj_notification {
+        width: 343px;
+    }
+}
+
+
+
+
+/* Desktop portrait */
+
+@media all and (min-width: 600px) and (orientation:portrait) {
+
+}

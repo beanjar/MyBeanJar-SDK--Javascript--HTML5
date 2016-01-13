@@ -56,28 +56,32 @@ function mbjAddAwardBean() {
     
     // Get any queued Beans in session storage, add a new one, save new total to session storage
     queuedBeans = sessionStorage.getItem("queuedBeans");
-    queuedBeans++
-    queuedBeans = sessionStorage.setItem("queuedBeans", queuedBeans);
+    queuedBeans++;
+    sessionStorage.setItem("queuedBeans", queuedBeans);
 
     mbjDebug("Queued Bean count: " + queuedBeans);
 
-    // Get session data relevant to login state
-    username = sessionStorage.getItem("username");
-    userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+    mbjAttemptAward();
 
-    if (userLoggedIn && username) {
-        mbjAttemptAward();
-    }
-    else {
-        mbjAttemptYouvewon();
-    }
+    // if (userLoggedIn && username != 'null') {
+        
+    // }
+    // else {
+    //     mbjAttemptYouvewon();
+    // }
 }
 
 
 
 function mbjAttemptAward() {
 
-    if (mbjUserLoggedIn) {
+    // Get session data relevant to login state
+    username = sessionStorage.getItem("username");
+    userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+
+    
+    // If user is logged in and username is valid, attempt to retrieve award bean
+    if (userLoggedIn && username != 'null') {
         u = sessionStorage.getItem("username");
         p = 'password';
         mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting " + queuedBeans + " award Beans");
@@ -130,7 +134,7 @@ function mbjAttemptLogin() {
         mbjDebug("Attempting to log in... " + u);
         mbjDebug("Queued Bean count: " + queuedBeans);
 
-        mbjAttemptAuthenticate();
+        mbjAttemptAuthenticate(u, p);
         mbjDebug("Authentication method called.");
 
     });
@@ -360,7 +364,7 @@ function mbjAttemptYouvewon() {
 
 
 
-function mbjAttemptAuthenticate() {
+function mbjAttemptAuthenticate(username, password) {
 
     jQuery('div.mbj_login_status').removeClass('success fail');
     jQuery('div.mbj_login_status').html('<div id="spinner_login"></div>');
@@ -371,7 +375,7 @@ function mbjAttemptAuthenticate() {
     u = jQuery('#mbj_form_u').val();
 
     // Add submitted username to session storage
-    if (typeof u === 'undefined') {
+    if (typeof u != 'undefined') {
         sessionStorage.setItem('username',u);
     };
 
@@ -384,7 +388,7 @@ function mbjAttemptAuthenticate() {
 
 
 
-function mbjNotifyAuthenticate(result, message,email) {
+function mbjNotifyAuthenticate(result, message, email) {
 
     mbjDebug("Authenticating...");
 
@@ -392,7 +396,7 @@ function mbjNotifyAuthenticate(result, message,email) {
         mbjDebug("Result = " + result);
         mbjDebug("Message = " + message);
         mbjDebug("Authentication succeeded.");
-        mbjDebug("Email" + email);
+        //mbjDebug("Email" + email);
         // sessionStorage.setItem('email',email);
         sessionStorage.setItem('mbjUserLoggedIn','true');
           jQuery('#email').val(email);
@@ -432,7 +436,7 @@ function mbjNotifyAuthenticate(result, message,email) {
         if (queuedBeans > 0) {
             mbjAttemptAward();
         }
-        play();
+
     }
     else {
         mbjDebug("Result = " + result);
@@ -667,23 +671,25 @@ function mbjNotifyRegistration(result, message) {
 
 
 function flashLoginStatus() {
-    if (!flashingLoginStatus) {
-        flashingLoginStatus = true;
-        jQuery("div.mbj_login_status")
-                .finish()
-                .animate({
-                    opacity: 1
-                }, 0)
-                .slideDown()
-                .fadeIn(200)
-                .delay(3000)
-                .animate({
-                    opacity: 0
-                }, 200)
-                .slideUp(function() {
-                    flashingLoginStatus = false;
-                }
-                );
+    if (typeof flashLoginStatus === 'undefined') {
+        if (!flashingLoginStatus) {
+            flashingLoginStatus = true;
+            jQuery("div.mbj_login_status")
+                    .finish()
+                    .animate({
+                        opacity: 1
+                    }, 0)
+                    .slideDown()
+                    .fadeIn(200)
+                    .delay(3000)
+                    .animate({
+                        opacity: 0
+                    }, 200)
+                    .slideUp(function() {
+                        flashingLoginStatus = false;
+                    }
+                    );
+        }
     }
 }
 ;
@@ -845,11 +851,11 @@ function append_totalbeans(totalWin) {
 //
 
 function fetchCategories(){
-get_categories(hardUser, hardPass, prepareCategories);
+    get_categories(hardUser, hardPass, prepareCategories);
 }
 
 function prepareCategories(result, categories) {
-catArray = categories;
+    catArray = categories;
 }
 
 function centerOnboardModal(){    
@@ -1012,7 +1018,17 @@ else {
 //
 
 jQuery(document).ready(function() {
-    if (sessionStorage.getItem("mbjUserLoggedIn") !== null) { mbjUserLoggedIn = true; }
+    
+    // TEMP
+    if (typeof debugMode != 'undefined') {
+        if (debugMode == true) {
+            sessionStorage.clear();
+        }
+    }
+
+    if (sessionStorage.getItem("mbjUserLoggedIn") !== null) { 
+        mbjUserLoggedIn = true;
+    }
 });
 
 function closeOnboardModal() {
@@ -1081,7 +1097,7 @@ jQuery( 'body' ).append(''
 };
 
 window.addEventListener('resize', function(){
-    document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight - headerFooterMargin;
+    document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight;
 }, false);
 
 
