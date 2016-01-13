@@ -29,8 +29,42 @@ var randomimg;
 var validpurchase = false;
 var catArray = null;
 
-mbjImagePreloader();
+var debugMode = true;
 
+
+
+
+//
+//  MyBeanJar debug message handler
+//
+
+function mbjDebug(message) {
+    if (debugMode == true) {
+        console.log(message);
+    }
+};
+
+
+
+//
+//  Locally grants the user a queued Bean (to be redeemed for an actual Bean from the MyBeanJar server)
+//
+
+function mbjAddAwardBean() {
+    queuedBeans++
+    mbjDebug("Queued Bean count: " + queuedBeans);
+
+    // Get session data relevant to login state
+    username = sessionStorage.getItem("email");
+    userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+
+    if (userLoggedIn && username) {
+        mbjAttemptAward();
+    }
+    else {
+        mbjAttemptYouvewon();
+    }
+}
 
 
 
@@ -39,12 +73,12 @@ function mbjAttemptAward() {
     if (mbjUserLoggedIn) {
         u = sessionStorage.getItem("email");
         p = 'password';
-        console.log("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting " + queuedBeans + " award Beans");
+        mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting " + queuedBeans + " award Beans");
 
         if (queuedBeans > 0) {
             for (i = queuedBeans; i > 0; i--) {
                 get_award(u, p, mbjAppID, BeanAwardAlert);
-                console.log(queuedBeans + " queued Beans remaining...");
+                mbjDebug(queuedBeans + " queued Beans remaining...");
             }
         }
     } else {
@@ -53,12 +87,12 @@ function mbjAttemptAward() {
 //        u='guest';
 //        p='guest';
 //        mbjUserLoggedIn = true;
-//        console.log("User logged in" + /*as " + u + " : " + p + "*/". Requesting " + queuedBeans + " award Beans");
+//        mbjDebug("User logged in" + /*as " + u + " : " + p + "*/". Requesting " + queuedBeans + " award Beans");
 //
 //        if (queuedBeans > 0) {
 //            for (i = queuedBeans; i > 0; i--) {
 //                get_award(u, p, mbjAppID, BeanAwardAlert);
-//                console.log(queuedBeans + " queued Beans remaining...");
+//                mbjDebug(queuedBeans + " queued Beans remaining...");
 //            }
 //            ;
 //        }
@@ -73,10 +107,10 @@ function mbjAttemptAward() {
 
 
 function mbjAttemptLogin() {
-    console.log('Prompting user to log in...');
+    mbjDebug('Prompting user to log in...');
 // Prompt for login/registration
 //    jQuery('div.mbj_notification_container').fadeIn();
-	jQuery( '#mbj_notification_container_youvewon' ).hide();
+    jQuery( '#mbj_notification_container_youvewon' ).hide();
     MbjCreateOnboardModal();
 
 // If login form is submitted...
@@ -86,11 +120,11 @@ function mbjAttemptLogin() {
         u = jQuery('#mbj_form_u',this).val();
         p = jQuery('#mbj_form_p', this).val();
         p = '';
-        console.log("Attempting to log in... " + u);
-        console.log("Queued Bean count: " + queuedBeans);
+        mbjDebug("Attempting to log in... " + u);
+        mbjDebug("Queued Bean count: " + queuedBeans);
 
         mbjAttemptAuthenticate();
-        console.log("Authentication method called.");
+        mbjDebug("Authentication method called.");
 
     });
 
@@ -115,8 +149,8 @@ function mbjAttemptLogin() {
         }
 
         cats = catArray;*/
-        console.log("Attempting to register...");
-        console.log("Queued Bean count: " + queuedBeans);
+        mbjDebug("Attempting to register...");
+        mbjDebug("Queued Bean count: " + queuedBeans);
 
         mbjAttemptRegistration();
 
@@ -125,15 +159,16 @@ function mbjAttemptLogin() {
     jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        jQuery('#mbj_notification_container_login')
-                .fadeOut(500, "swing");
+        jQuery( '#mbj_modal' )
+                .fadeOut(500, "swing")
+                .remove();
 
     });
 
     jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
 
         jQuery('div.mbj_notification_pane_selector').each(function() {
-            console.log("Check!");
+            mbjDebug("Check!");
 
             if (jQuery(this).hasClass('active_selector')) {
                 jQuery(this).removeClass('active_selector').addClass('inactive_selector');
@@ -155,27 +190,70 @@ function mbjAttemptLogin() {
             ;
         });
 
-// if (jQuery('#mbj_register').hasClass('active_pane')){									// Commented out to temporarily resolve close button vanishing issue
+// if (jQuery('#mbj_register').hasClass('active_pane')){                                    // Commented out to temporarily resolve close button vanishing issue
 
-// 	jQuery('#mbj_notification_container_login')
-// 		.finish()
-// 		.animate({ 'height' : '100%' });
+//  jQuery('#mbj_notification_container_login')
+//      .finish()
+//      .animate({ 'height' : '100%' });
 // }
 
 // else {
 
-// 	jQuery('#mbj_notification_container_login')
-// 		.finish()
-// 		.animate({ 'height' : '100%' });
+//  jQuery('#mbj_notification_container_login')
+//      .finish()
+//      .animate({ 'height' : '100%' });
 
 // };
     });
 }
 
 function mbjAttemptYouvewon() {
-    console.log('Prompting user to log in...');
+    mbjDebug('Prompting user to log in...');
 // Prompt for login/registration
 //    jQuery('div.mbj_notification_container').fadeIn();
+    
+    // Create modal div if it doesn't already exist
+    if (!jQuery( '#mbj_notification_container_youvewon' ).length) {
+        jQuery( 'body' ).append(''
+        + '<table id="mbj_modal">'
+        +   '<tbody id="modal-tbody">'
+        +       '<tr id="modal-tr">'
+        +           '<td id="modal-td">'
+        +               '<div id="modal-box">'
+        +                   '<div id="modal-content">'
+        +                       '<div id="modal-body">'
+        +                           '<!-- CONTENT -->'
+        +                           '<div class="mbj_notification mbj_notification_container onboard-modal" id="mbj_notification_container_youvewon" style="max-width: none; width: 343px; padding: 0px; display: block; position: relative;">'
+        +                                '<div class="mbj_notification_inner" id="mbj-youvewon-init" style=height:375px; width:343px; background-color:black; background-image: url(\'img/youcouldvewon.png\');position:absolute;background-repeat:no-repeat">'
+        +                                    '<div' + /* style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;" */ + '>'
+        +                                        '<form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false">'
+        +                                            '<div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">'
+        +                                                'MBJ users<br>log in'
+        +                                            '</div>'
+        +                                            '<div class="element-input" style="float: left; padding-right: 5px;margin-top:0px">'
+        +                                                '<input class="" style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required="">'
+        +                                            '</div>'
+        +                                            '<button class="submit" style="height: 24px; margin-top: 0px;float:right;background:white" onclick="mbjAttemptAuthenticate()">'
+        +                                                '<span class="mbj-button-text" style="color: black">Log In</span>'
+        +                                            '</button>'
+        +                                        '</form>'
+        +                                    '</div>'
+        // +                                    '<div style="margin-top: 0px; margin-left:10px;">'
+        // +                                        '<a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a>'
+        // +                                        '<a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a>'
+        // +                                    '</div>'
+        +                                '</div>'
+        +                            '</div>'
+        +                       '</div>'
+        +                   '</div>'
+        +               '</div>'
+        +           '</td>'
+        +       '</tr>'
+        +   '</tbody>'
+        + '</table>');
+
+        // <div class="mbj_notification mbj_notification_container onboard-modal" id="mbj_notification_container_youvewon" style="max-width: none; height: 400px; width: 343px; padding: 0px; left: 504px; top: 42px; display: block;"><div class="mbj_notification_inner" id="mbj-youvewon-init" style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:absolute;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class="" style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required=""></div><button class="submit" style="height: 24px; margin-top: 0px;float:right;background:white" onclick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div> ');
+    }
     MbjDisplayhYouveWon();
     MbjCreateOnboardModal2();
 
@@ -186,11 +264,11 @@ function mbjAttemptYouvewon() {
         u = jQuery('#mbj_form_u',this).val();
         p = jQuery('#mbj_form_p', this).val();
         p = '';
-        console.log("Attempting to log in... " + u);
-        console.log("Queued Bean count: " + queuedBeans);
+        mbjDebug("Attempting to log in... " + u);
+        mbjDebug("Queued Bean count: " + queuedBeans);
 
         mbjAttemptAuthenticate();
-        console.log("Authentication method called.");
+        mbjDebug("Authentication method called.");
 
     });
 
@@ -215,8 +293,8 @@ function mbjAttemptYouvewon() {
         }
 
         cats = catArray;*/
-        console.log("Attempting to register...");
-        console.log("Queued Bean count: " + queuedBeans);
+        mbjDebug("Attempting to register...");
+        mbjDebug("Queued Bean count: " + queuedBeans);
 
         mbjAttemptRegistration();
 
@@ -225,15 +303,16 @@ function mbjAttemptYouvewon() {
     jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        jQuery('#mbj_notification_container_login')
-                .fadeOut(500, "swing");
+        jQuery( '#mbj_modal' )
+                .fadeOut(500, "swing")
+                .remove();
 
     });
 
     jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
 
         jQuery('div.mbj_notification_pane_selector').each(function() {
-            console.log("Check!");
+            mbjDebug("Check!");
 
             if (jQuery(this).hasClass('active_selector')) {
                 jQuery(this).removeClass('active_selector').addClass('inactive_selector');
@@ -255,18 +334,18 @@ function mbjAttemptYouvewon() {
             ;
         });
 
-// if (jQuery('#mbj_register').hasClass('active_pane')){									// Commented out to temporarily resolve close button vanishing issue
+// if (jQuery('#mbj_register').hasClass('active_pane')){                                    // Commented out to temporarily resolve close button vanishing issue
 
-// 	jQuery('#mbj_notification_container_login')
-// 		.finish()
-// 		.animate({ 'height' : '100%' });
+//  jQuery('#mbj_notification_container_login')
+//      .finish()
+//      .animate({ 'height' : '100%' });
 // }
 
 // else {
 
-// 	jQuery('#mbj_notification_container_login')
-// 		.finish()
-// 		.animate({ 'height' : '100%' });
+//  jQuery('#mbj_notification_container_login')
+//      .finish()
+//      .animate({ 'height' : '100%' });
 
 // };
     });
@@ -284,37 +363,40 @@ function mbjAttemptAuthenticate() {
 
     u = jQuery('#mbj_form_u').val();
 
+    // Add submitted username to session storage
+    sessionStorage.setItem('email',u);
+
     flashLoginStatus();
     SummonSpinner('spinner_login');
 
     validate_user(u, mbjNotifyAuthenticate);
-    console.log("Queued Bean count: " + queuedBeans);
+    mbjDebug("Queued Bean count: " + queuedBeans);
 }
 
 
 
 function mbjNotifyAuthenticate(result, message,email) {
 
-    console.log("Authenticating...");
+    mbjDebug("Authenticating...");
 
     if (result == STATUS_SUCCESS) {
-        console.log("Result = " + result);
-        console.log("Message = " + message);
-        console.log("Authentication succeeded.");
-        console.log("Email" + email);
-        sessionStorage.setItem('email',email);
+        mbjDebug("Result = " + result);
+        mbjDebug("Message = " + message);
+        mbjDebug("Authentication succeeded.");
+        mbjDebug("Email" + email);
+        // sessionStorage.setItem('email',email);
         sessionStorage.setItem('mbjUserLoggedIn','true');
           jQuery('#email').val(email);
  
       jQuery("#mbj_form_reg_email").val(email);
 
-    //      testpostedimg();
+    //      //testpostedimg();
 
         mbjUserLoggedIn = true;
-        ga('send', 'pageview', 'mbjLoggedIn');
+        //ga('send', 'pageview', 'mbjLoggedIn');
 //        if(isplay)
    //     {
-            testpostedimg();
+            //testpostedimg();
  //       }
 //mbjGetUserimage();
 // Hide "sign-up button"
@@ -332,8 +414,9 @@ function mbjNotifyAuthenticate(result, message,email) {
             flashLoginStatus();
 
             setTimeout(function() {
-                jQuery("div.mbj_notification_container")
-                        .fadeOut(200, "swing");
+                jQuery( '#mbj_modal' )
+                    .fadeOut(500, "swing")
+                    .remove();
             }, 2000);
         }, 200);
 
@@ -343,9 +426,9 @@ function mbjNotifyAuthenticate(result, message,email) {
         play();
     }
     else {
-        console.log("Result = " + result);
-        console.log("Message = " + message);
-        console.log("Authentication failed.");
+        mbjDebug("Result = " + result);
+        mbjDebug("Message = " + message);
+        mbjDebug("Authentication failed.");
 
 
         setTimeout(function() {
@@ -365,8 +448,17 @@ function mbjAttemptRegistration() {
     flashLoginStatus();
     SummonSpinner('spinner_login');
 
-    event.preventDefault();
-    event.stopPropagation();
+    /*
+    *
+    *   [question]
+    *   Why were these here..?
+    *
+    */
+
+    // event.preventDefault();
+    // event.stopPropagation();
+
+
     u = jQuery('#mbj_form_reg_email').val();
     p = jQuery('#mbj_form_reg_p').val();
     p2 = jQuery('#mbj_form_reg_p2').val();
@@ -390,18 +482,18 @@ function mbjAttemptRegistration() {
 
     
     if (p != p2) {
-        console.log("Password mismatch detected");
+        mbjDebug("Password mismatch detected");
         mbjNotifyRegistrationPassMismatch();
 //        mbjAttemptLogin();
     } else if (p.length < 6) {
-        console.log("Invalid password");
+        mbjDebug("Invalid password");
         mbjNotifyRegistrationInvalidPass();
  //       mbjAttemptLogin();
     } else if ( cats == null)     { 
-    	mbjNotifyRegistrationCategories(3);
- //       mbjAttemptLogin();  	
+        mbjNotifyRegistrationCategories(3);
+ //       mbjAttemptLogin();    
     } else if (cats.length < 3){
-    	mbjNotifyRegistrationCategories(3);
+        mbjNotifyRegistrationCategories(3);
   //      mbjAttemptLogin();
     } else {
 
@@ -509,9 +601,9 @@ function mbjNotifyRegistrationInvalidZip() {
 
 function mbjNotifyRegistration(result, message) {
     if (result == STATUS_SUCCESS) {
-        console.log("Result = " + result);
-        console.log("Message = " + message);
-        console.log("Registration succeeded as " + email);
+        mbjDebug("Result = " + result);
+        mbjDebug("Message = " + message);
+        mbjDebug("Registration succeeded as " + email);
 
         sessionStorage.setItem('email',email);
         sessionStorage.setItem('mbjUserLoggedIn','true');
@@ -519,10 +611,10 @@ function mbjNotifyRegistration(result, message) {
 
     jQuery("#mbj_form_reg_email").val(email);
 
-        testpostedimg();
+        //testpostedimg();
 
       mbjUserLoggedIn = true;
-      ga('send', 'pageview', 'registrationSuccess');
+      //ga('send', 'pageview', 'registrationSuccess');
 
 // award Bean for successful registration
 //        queuedBeans++;
@@ -545,14 +637,14 @@ function mbjNotifyRegistration(result, message) {
 //        }
     }
     else {
-        console.log("Result = " + result);
-        console.log("Message = " + message);
-        console.log("Registration failed.");
+        mbjDebug("Result = " + result);
+        mbjDebug("Message = " + message);
+        mbjDebug("Registration failed.");
 
 
         setTimeout(function() {
  //
-  //      	alert("Registration Failed: " + message);
+  //        alert("Registration Failed: " + message);
             jQuery("div.mbj_login_status").addClass("fail");
 
             jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Registration failed. ' + message + ' </p>');
@@ -615,36 +707,76 @@ function SummonSpinner(div_id) {
 
 BeanAwardAlert = function(result, award) {
 
-    console.log("Retrieving award from server.");
-    console.log(result);
+    mbjDebug("Retrieving award from server.");
+    mbjDebug(result);
 
 // check to see if request was successful
 
     if (result == STATUS_SUCCESS) {
         var awardImage = awardArray.imageurl;
         queuedBeans--;
-        console.log("Request successful!");
+        mbjDebug("Request successful!");
+        if (!jQuery( '#mbj_modal' ).length) {
+
+            jQuery( 'body' ).append(''
+            + '<table id="mbj_modal">'
+            +   '<tbody id="modal-tbody">'
+            +       '<tr id="modal-tr">'
+            +           '<td id="modal-td">'
+            +               '<div id="modal-box">'
+            +                   '<div id="modal-content">'
+            +                       '<div id="modal-body">'
+            +                           '<!-- CONTENT -->'
+            +                           '<div class="mbj_notification bean_notification_window">'
+            +                               '<img class="bean_notification_image" src="">'
+            +                           '</div>'
+            +                       '</div>'
+            +                   '</div>'
+            +               '</div>'
+            +           '</td>'
+            +       '</tr>'
+            +   '</tbody>'
+            + '</table>');
+
+            // jQuery( 'body' ).append('<div class="mbj_notification bean_notification_window"><img class="bean_notification_image" src=""><!--                    <p class="bean_notification_text">...</p>--></div>' );
+        }
         jQuery('.bean_notification_image')
                 .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
         jQuery('#mbj_award_img')
                 .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
 // mbjCapsuleAward();
-        jQuery("div.bean_notification_window")
+        jQuery("#mbj_modal, .bean_notification_window")
                 .fadeIn(500, "swing");
         jQuery("div.bean_notification_window")
                 .html('<button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="this.parentElement.style.display = \'none\';"> <img src="img/ui_action_close.png"> </button> <img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
-        jQuery("div.bean_notification_window")
+        jQuery(".bean_notification_window, #mbj_modal")
                 .delay(10000)
                 .fadeOut(500, "swing");
-        ga('send', 'pageview', 'beanAward');
+        //ga('send', 'pageview', 'beanAward');
     }
 
-    else if (failArray.message == "No beans available for your category and/or location.") {
-        console.log("WARNING: " + failArray.message);
-    }
+
+    /*
+    *
+    *   [QUESTION]
+    *   Why was this causing issues?
+    * 
+    */
+
+    // else if (failArray.message == "No beans available for your category and/or location.") {
+    //     mbjDebug("WARNING: " + failArray.message);
+    // }
+
+
+    /*
+    *
+    *   [QUESTION]
+    *   What is the desired way to gracefully fail
+    * 
+    */
 
     else {
-        console.log("Request failed.");
+        mbjDebug("Request failed.");
         jQuery('#mbj_award_img')
                 .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + capsulePlaceholderImageURL + '">');
         jQuery("div.bean_notification_window")
@@ -655,7 +787,7 @@ BeanAwardAlert = function(result, award) {
 };
 
 FakeBeanAwardAlert = function(result, award) {
-    console.log("Awarding mock Bean!");
+    mbjDebug("Awarding mock Bean!");
     awardImage = "img/7170.png";
     msgMoreInfo = "This is a fake Bean.";
     jQuery('.bean_notification_image')
@@ -672,19 +804,6 @@ FakeBeanAwardAlert = function(result, award) {
             .fadeOut(500, "swing");
 };
 
-
-
-
-function mbjAddAwardBean() {
-    queuedBeans++
-    console.log("Queued Bean count: " + queuedBeans);
-    if (mbjUserLoggedIn) {
-        mbjAttemptAward();
-    }
-    else {
-        mbjAttemptYouvewon();
-    }
-}
 
 
 
@@ -709,7 +828,7 @@ function mbjCapsuleAward() {
         top: "+=250px",
     },
             1000, function() {
-                console.log("done!");
+                mbjDebug("done!");
                 var capsuleLidTimeout = setTimeout(function() {
                     jQuery('.mbj_capsule_lid').addClass('mbj_anim_rotatepartial').stop().animate({left: "-=1500px", opacity: 0}, 100)
                 }, 800);
@@ -719,7 +838,7 @@ function mbjCapsuleAward() {
         top: "-=250px",
     },
             1000, function() {
-                console.log("done!");
+                mbjDebug("done!");
                 var capsuleBodyTimeout = setTimeout(function() {
                     jQuery('.mbj_capsule_body').addClass('mbj_anim_rotatepartial').stop().animate({left: "+=1500px", opacity: 0}, 100)
                 }, 800);
@@ -729,7 +848,7 @@ function mbjCapsuleAward() {
         opacity: "0",
     },
             2800, function() {
-                console.log("done!");
+                mbjDebug("done!");
             });
 
     var capsulePayloadTimeout = setTimeout(function() {
@@ -784,7 +903,7 @@ function bindFooterListener() {
         if (!target.is("#footer-signup")) {
             if (!footerCollapsed) {
                 footerHeight = jQuery("#main_container").height();
-                console.log(footerHeight);
+                mbjDebug(footerHeight);
                 jQuery("#slider1_container").animate({opacity: 0}, 200, function() {
                     jQuery("#main_container").animate({height: 0}, 800, function() {
                         jQuery(".frosted-overlay").hide(0);
@@ -814,7 +933,7 @@ function gotohome()
     document.getElementById('info-page').style.display = 'none';
     // document.getElementById('user-img-listing-page').style.display = 'none';
     // document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'home');
+    //ga('send', 'pageview', 'home');
 }
 function getimageforplay(img) {
     image = img.src;
@@ -822,7 +941,7 @@ function getimageforplay(img) {
 
 //document.getElementById('puzzUserImg').innerHTML='<img class="jqPuzzle jqp-r3-c3-h1-SNABCDE userimg" id="mbj_award_img" src="'+image+'" >';
 //jQuery( '.jqp-r3-c3-h1-SNABCDE' )
-//	.replaceWith( '<img class="jqPuzzle jqp-r3-c3-h1-SNABCDE userimg" id="mbj_award_img" src="' + image + '">'  );
+//  .replaceWith( '<img class="jqPuzzle jqp-r3-c3-h1-SNABCDE userimg" id="mbj_award_img" src="' + image + '">'  );
 //initJQPuzzle();
     document.getElementById('image-preview').style.display = 'none';
     document.getElementById('title-page').style.display = 'none';
@@ -832,7 +951,7 @@ function getimageforplay(img) {
     document.getElementById('user-img-listing-page').style.display = 'none';
     document.getElementById('user-puzzle-page').style.display = 'block';
 //jQuery('#imgusr').jqPuzzle();
-    ga('send', 'pageview', 'puzzle');
+    //ga('send', 'pageview', 'puzzle');
     initJQPuzzle();
 }
 
@@ -847,7 +966,7 @@ function getimage(img) {
     document.getElementById('info-page').style.display = 'none';
     document.getElementById('user-img-listing-page').style.display = 'none';
     document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'preview: '+image);
+    //ga('send', 'pageview', 'preview: '+image);
 }
 
 function selectedimage(img) {
@@ -873,19 +992,19 @@ function checkseletedimage()
 }
 
 //function loadGame(){
-//	console.log("Loading game!");
-//	document.getElementById('title-page').style.display = 'none';
+//  mbjDebug("Loading game!");
+//  document.getElementById('title-page').style.display = 'none';
 //        document.getElementById('listing-page').style.display = 'block'; 
-//	document.getElementById('puzzle-page').style.display = 'none';        
+//  document.getElementById('puzzle-page').style.display = 'none';        
 //        document.getElementById('info-page').style.display = 'none';
 //}
 
 function play() {
-    console.log("Loading game!");
+    mbjDebug("Loading game!");
     isplay = true;
 //    if(mbjUserLoggedIn)
 //    {
-        testpostedimg();
+        //testpostedimg();
  //   }
         document.getElementById('mbj_notification_container_youvewon').style.display = 'none';
     document.getElementById('title-page').style.display = 'none';
@@ -895,27 +1014,27 @@ function play() {
     document.getElementById('image-preview').style.display = 'none';
     document.getElementById('user-img-listing-page').style.display = 'none';
     document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'puzzle list');
+    //ga('send', 'pageview', 'puzzle list');
 }
 function resetPuzzImg() 
 {
-	var myAnchor = document.getElementById("puzzImg");
-	  var myImg = document.createElement("img");
-	  myImg.className = "jqPuzzle jqp-r3-c3-h1-SNABCDE";
-	  myImg.id = "puzzImg";
-	  myAnchor.parentNode.replaceChild(myImg, myAnchor);
+    var myAnchor = document.getElementById("puzzImg");
+      var myImg = document.createElement("img");
+      myImg.className = "jqPuzzle jqp-r3-c3-h1-SNABCDE";
+      myImg.id = "puzzImg";
+      myAnchor.parentNode.replaceChild(myImg, myAnchor);
 }
 function freeplay(imagename) {
-	isplay = true;
-	var prefix = 'Angry%20Babies%20Series%201%20game%20images';
-    console.log("Loading free game! image " + imagename);
+    isplay = true;
+    var prefix = 'Angry%20Babies%20Series%201%20game%20images';
+    mbjDebug("Loading free game! image " + imagename);
     if(typeof imagename != 'undefined') { 
-    	resetPuzzImg();
-    	
+        resetPuzzImg();
+        
     document.getElementById('puzzImg').src='img/puzz/' + prefix + '/' + imagename ;
     } else {
-  //  	var fileNameIndex = document.getElementById('puzzImg').src.lastIndexOf("/") + 1;
-  //  	var imagename = document.getElementById('puzzImg').src.substr(fileNameIndex);
+  //    var fileNameIndex = document.getElementById('puzzImg').src.lastIndexOf("/") + 1;
+  //    var imagename = document.getElementById('puzzImg').src.substr(fileNameIndex);
   //      document.getElementById('puzzImg').src='img/puzz/'+prefix+ '/' + imagename ; 
         resetPuzzImg();
         var imagename = randomimg;
@@ -925,8 +1044,8 @@ function freeplay(imagename) {
 
     
    initJQPuzzle();
-	jQuery('.btn-hint').toggle(true);
-	jQuery('.btn-play-more').toggle(false);
+    jQuery('.btn-hint').toggle(true);
+    jQuery('.btn-play-more').toggle(false);
     document.getElementById('title-page').style.display = 'none';
     document.getElementById('listing-page').style.display = 'none';
     document.getElementById('puzzle-page').style.display = 'block';
@@ -934,13 +1053,13 @@ function freeplay(imagename) {
     document.getElementById('image-preview').style.display = 'none';
     document.getElementById('user-img-listing-page').style.display = 'none';
     document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'puzzle: '+imagename);
+    //ga('send', 'pageview', 'puzzle: '+imagename);
 }
 
 function randomfreeplay(imagename) {
-	isplay = true;
-	var prefix = 'Random%20images';
-    console.log("Loading free game! image " + imagename);
+    isplay = true;
+    var prefix = 'Random%20images';
+    mbjDebug("Loading free game! image " + imagename);
 
         resetPuzzImg();
        
@@ -948,8 +1067,8 @@ function randomfreeplay(imagename) {
         
     
    initJQPuzzle();
-	jQuery('.btn-hint').toggle(true);
-	jQuery('.btn-play-more').toggle(false);
+    jQuery('.btn-hint').toggle(true);
+    jQuery('.btn-play-more').toggle(false);
     document.getElementById('title-page').style.display = 'none';
     document.getElementById('listing-page').style.display = 'none';
     document.getElementById('puzzle-page').style.display = 'block';
@@ -957,18 +1076,18 @@ function randomfreeplay(imagename) {
     document.getElementById('image-preview').style.display = 'none';
     document.getElementById('user-img-listing-page').style.display = 'none';
     document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'free puzzle: '+imagename);  
+    //ga('send', 'pageview', 'free puzzle: '+imagename);  
 }
 
 //function GoToCBLDF() {
-//	console.log("Loading info page!");
-//	document.getElementById('title-page').style.display = 'none';
+//  mbjDebug("Loading info page!");
+//  document.getElementById('title-page').style.display = 'none';
 //        document.getElementById('listing-page').style.display = 'none';
-//	document.getElementById('puzzle-page').style.display = 'none';
+//  document.getElementById('puzzle-page').style.display = 'none';
 //        document.getElementById('info-page').style.display = 'block';
 //}
 function info() {
-    console.log("Loading info page!");
+    mbjDebug("Loading info page!");
     document.getElementById('title-page').style.display = 'none';
     document.getElementById('listing-page').style.display = 'none';
     document.getElementById('puzzle-page').style.display = 'none';
@@ -977,7 +1096,7 @@ function info() {
     // document.getElementById('image-preview').style.display = 'none';
     // document.getElementById('user-img-listing-page').style.display = 'none';
     // document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'info');
+    //ga('send', 'pageview', 'info');
 }
 
 function mbjImagePreloader() {
@@ -986,7 +1105,7 @@ function mbjImagePreloader() {
 ;
 
 function append_totalbeans(totalWin) {
-    console.log("updating bean count");
+    mbjDebug("updating bean count");
     if (oldWinCount == 0) {
         oldWinCount = totalWin;
     }
@@ -1027,7 +1146,7 @@ function purchaseclickimage()
     var imagecount = 0;
     validpurchase = false;
     for (var i=0; i<len; i++) {
-        console.log(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
+        mbjDebug(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
         if(cboxes[i].checked && (!cboxes[i].disabled))
         {
             tempimgname = tempimgname+"img/puzz/"+imagename+cboxes[i].value+",";        
@@ -1035,8 +1154,8 @@ function purchaseclickimage()
         }
     }
     if (validpurchase == false && mbjUserLoggedIn ==true){
-    	alert("You must select an image to purchase");
-    	return false;
+        alert("You must select an image to purchase");
+        return false;
     } else { 
     tempimgname = tempimgname.substring(0, tempimgname.length - 1);
    temp();
@@ -1050,7 +1169,7 @@ function checkSelection() {
 
     validpurchase = false;
     for (var i=0; i<len; i++) {
-        console.log(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
+        mbjDebug(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
         if(cboxes[i].checked && (!cboxes[i].disabled))
         {
     
@@ -1058,13 +1177,13 @@ function checkSelection() {
         }
     }
     if (validpurchase == false){
-    	alert("You must select an image to purchase");
-    	return false;
+        alert("You must select an image to purchase");
+        return false;
     } else { 
 
    return true;
     }
-	
+    
 }
 
 function temp()
@@ -1097,12 +1216,12 @@ function temp()
 
         else {
             mbjAttemptLogin();
-            testpostedimg();   
+            //testpostedimg();   
         }
 
     }else {
         mbjAttemptLogin();
-        testpostedimg();   
+        //testpostedimg();   
     }
 }
 function mbjNotifyBuyUserimage123(result, message) {
@@ -1118,12 +1237,12 @@ function mbjNotifyBuyUserimage123(result, message) {
         
         
     var dg = new PAYPAL.apps.DGFlow(
-	{
-		trigger: 'paypal_submit',
-		expType: 'instant'
+    {
+        trigger: 'paypal_submit',
+        expType: 'instant'
                 
-		 //PayPal will decide the experience type for the buyer based on his/her 'Remember me on your computer' option.
-	});
+         //PayPal will decide the experience type for the buyer based on his/her 'Remember me on your computer' option.
+    });
     jQuery('#buyimages').attr("action","paypal/checkout.php");
     jQuery("#paypal_submit").trigger('click');
          imagelenght1='';
@@ -1158,7 +1277,7 @@ function mbjGetUserimage() {
 }
 
 function mbjNotifyGetUserimage(result, message) {
-//console.log(message.length);
+//mbjDebug(message.length);
     uimg = [];
     document.getElementById('userimages').innerHTML = '';
     for (var i = 0; i < message.length; i++)
@@ -1175,7 +1294,7 @@ function mbjNotifyGetUserimage(result, message) {
     document.getElementById('info-page').style.display = 'none';
     document.getElementById('user-img-listing-page').style.display = 'block';
     document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'users puzzle list');
+    //ga('send', 'pageview', 'users puzzle list');
 }
 ;
 
@@ -1213,10 +1332,10 @@ function RemoveFromCart(imgButton) {
 }
 
 function PreviewImage(imagename) {
- //   console.log("Pressed:" + button);
+ //   mbjDebug("Pressed:" + button);
  //   var activeImg = jQuery(button).parent().parent().children('img').attr('src');
  //   getimage(activeImg);
-	var wimagename = imagename.substr(0, imagename.lastIndexOf(".")) + ".png";
+    var wimagename = imagename.substr(0, imagename.lastIndexOf(".")) + ".png";
     document.getElementById('load-preview-image').innerHTML = '';
     document.getElementById('load-preview-image').innerHTML = '<img class="img-center-new" src="img/puzz/WatermarkedImages/' + wimagename + '">';
     document.getElementById('load-preview-title').innerHTML = abappimages[imagename]['title'];
@@ -1229,7 +1348,7 @@ function PreviewImage(imagename) {
     document.getElementById('info-page').style.display = 'none';
     document.getElementById('user-img-listing-page').style.display = 'none';
     document.getElementById('user-puzzle-page').style.display = 'none';
-    ga('send', 'pageview', 'preview image: '+imagename);
+    //ga('send', 'pageview', 'preview image: '+imagename);
 }
 
 //
@@ -1246,8 +1365,8 @@ catArray = categories;
 
 function centerOnboardModal(){    
 jQuery('.onboard-modal').each(function(){
-    console.log("This.height: " + jQuery(this).outerHeight());
-    console.log("Parent.height: " + jQuery(this).innerHeight());
+    mbjDebug("This.height: " + jQuery(this).outerHeight());
+    mbjDebug("Parent.height: " + jQuery(this).innerHeight());
     jQuery(this).css('left',((((jQuery(window).innerWidth() - (jQuery(this).outerWidth())) / 2)) + 'px'));
     jQuery(this).css('top',((((jQuery(window).innerHeight() - (jQuery(this).outerHeight())) / 3)) + 'px'));
 });
@@ -1278,17 +1397,24 @@ jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
 
 function MbjCreateOnboardModal2(){
 
-	fetchCategories();
+    fetchCategories();
 
-	centerOnboardModal();
+    //centerOnboardModal();
 
-	jQuery( '#mbj_notification_container_youvewon' ).fadeOut(1, "swing");
-	MbjDisplayhYouveWon();
-	jQuery('#mbj_notification_container_youvewon').fadeIn(500, "swing");
-	}
+    if (!jQuery( '#mbj_modal' ).length) {
+        MbjDisplayhYouveWon();
+    }
+
+    else if (!jQuery( '#mbj_modal' ).css('display') == 'none') {
+        jQuery( '#mbj_modal' ).fadeOut(1, "swing");
+    }
+
+    //MbjDisplayhYouveWon();
+    jQuery('#mbj_modal').fadeIn(500, "swing");
+}
 
 function RegistrationBack() {
-	jQuery('#mbj-login-details').replaceWith(mbjloginregister);
+    jQuery('#mbj-login-details').replaceWith(mbjloginregister);
 }
 
 var mbjloginregister =  '<div class="mbj_notification_inner" id="mbj-login-register"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">username</label> <input class="large" id="mbj_form_u" type="text" name="mbj_login" required/> <a class="password-recovery" onClick="MbjDisplayAccountRecoveryView()">forgot username?</a></div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="mbjAttemptAuthenticate()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log In</span> </button> <button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayRegistrationView()"> <span class="mbj-button-icon"><i class="ion-android-clipboard" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Sign Up</span> </button> </div></div>';
@@ -1301,15 +1427,15 @@ jQuery( '#mbj-login-register' ).replaceWith('  <div class="mbj_notification_inne
 }
 
 function MbjDisplayRegistrationView() {
-	var catSize = catArray.length;
-	var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%" multiple="multiple">';
-	
-	for (var i = 0; i < catSize; i++){
-	    var catName = catArray[i].name;
-	    var catKey = catArray[i].categorykey;
-	    catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
-	}	
-		catSelect = catSelect + '</select>';
+    var catSize = catArray.length;
+    var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%" multiple="multiple">';
+    
+    for (var i = 0; i < catSize; i++){
+        var catName = catArray[i].name;
+        var catKey = catArray[i].categorykey;
+        catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
+    }   
+        catSelect = catSelect + '</select>';
 /*jQuery( '#mbj-login-register' ).replaceWith(' <div class="mbj_notification_inner" id="mbj-login-details"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_details"> <form class="mbj-form" id="mbj_details_form" method="post"><input type="hidden" name="lat" id="lat" value=""/><input type="hidden" name="lon" id="lon" value=""/><div class="element-input"> <label class="title" style="color: #a9a9a9;">e-mail</label> <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/> </div><div class="element-input"> <label class="title" style="color: #a9a9a9;">ZIP (US only)</label> <input class="small" size="5" maxlength="5" id="mbj_form_reg_zip" type="text" name="mbj_reg_zip"/>&nbsp;OR&nbsp;<button type="button" class="btn-mbj btn-location" style="margin-top:0px" onClick="getLocation();"><span class="mbj-button-icon"><i class="ion-location" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Current Location</span></button></div><div style="width: 100%"><div class="element-input" style="width:45%;float:left;"> <label class="title" style="color: #a9a9a9;">password</label> <input class="small" style="width:100%" id="mbj_form_reg_p" type="password" name="mbj_password" required=""></div><div class="element-input" style="width: 45%;float:right;margin-top:0px"><label class="title">confirm password</label><input class="small" style="width:100%" id="mbj_form_reg_p2" type="password" name="mbj_password_confirm"></div></div><div class="element-input"><label class="title"><br>What sort of rewards would you like to receive?</br>Select at least 3</label>'+catSelect+'</div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-submit" onClick="mbjAttemptRegistration()"> <span class="mbj-button-icon"><i class="ion-android-send" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Submit</span> </button> </div></div>');
 */
 jQuery( '#mbj-login-register'  ).replaceWith(' <div class="mbj_notification_inner" id="mbj-login-details"> <button type="submit" class="btn-back" style="margin-top:-20px" id="mbj_notification_back_submit" onClick="RegistrationBack()"><img src="img/ui_action_back.png"></button><br clear="all"><div class="mbj_notification_title"><h2 style="color:yellow;font-size: 1.1rem;top:-10px;font-weight: bold; ">get real&mdash;redeem NOW!</h2><h3 style="color:white">Real stuff, not points or badges. Instant redemption from anywhere.</h3> </div><div class="mbj-login mbj-form-block" id="mbj_details"> <form class="mbj-form" id="mbj_details_form" method="post"><input type="hidden" name="lat" id="lat" value=""/><input type="hidden" name="lon" id="lon" value=""/><div class="element-input"> <label class="title" style="color: #a9a9a9;">email&mdash;no spam ever</label> <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/></div><div style="width: 100%;padding-top:5px"><div class="element-input" style="width:45%;float:left;"> <label class="title" style="color: #a9a9a9;">password (&gt;5 chars)</label> <input class="small" style="width:100%;" id="mbj_form_reg_p" type="password" name="mbj_password" required=""></div><div class="element-input" style="width: 45%;float:right;margin-top:0px"><label class="title">confirm password</label><input class="small" style="width:100%;" id="mbj_form_reg_p2" type="password" name="mbj_password_confirm"></div></div><div style="width: 100%;padding-top:5px;white-space:nowrap;display:inline-block"><div class="element-input" > <label class="title" style="color: #a9a9a9;font-size:8pt;padding-top:5px">ZIP (US only)&mdash;to find cool stuff nearby</label> <input class="small"  style="width:45%;" maxlength="5" id="mbj_form_reg_zip" type="text" name="mbj_reg_zip"/>&nbsp;or&nbsp;<button type="button" class="btn-mbj btn-location" style="margin-top:0px;float:right;background-color:lightgreen;border-color:lightgreen;" onClick="getLocation();"><span class="mbj-button-text" style="color:black;font-size:8pt">current location</span></button></div></div><div class="element-input"><label class="title"><br>Choose only the rewards you want (select 3+)</label>'+catSelect+'</div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"><a href="http://www.mybeanjar.com/#players" style="text-decoration:none"><img src="img/bean.png" style="vertical-align:middle">&nbsp;myBeanJar.com</a> <button class="btn-mbj submit small" style="float:right" id="mbj-submit-done" onClick="mbjAttemptRegistration()"><span class="mbj-button-text">done</span> </button> </div></div>');
@@ -1319,49 +1445,49 @@ jQuery( '#mbj-login-register'  ).replaceWith(' <div class="mbj_notification_inne
 
 
 function MbjDisplayRegistrationView2() {
-	var catSize = catArray.length;
-	var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%;" multiple="multiple">';
-	
-	for (var i = 0; i < catSize; i++){
-	    var catName = catArray[i].name;
-	    var catKey = catArray[i].categorykey;
-	    catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
-	}	
-		catSelect = catSelect + '</select>';
+    var catSize = catArray.length;
+    var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%;" multiple="multiple">';
+    
+    for (var i = 0; i < catSize; i++){
+        var catName = catArray[i].name;
+        var catKey = catArray[i].categorykey;
+        catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
+    }   
+        catSelect = catSelect + '</select>';
 jQuery( '#mbj-youvewon-init'  ).replaceWith(' <div class="mbj_notification_inner" id="mbj-login-details"> <button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="closeOnboardModal2()"> <img src="img/ui_action_close.png"> </button><br clear="all"><div class="mbj_notification_title"><h2 style="color:yellow;font-size: 1.1rem;top:-10px;font-weight: bold; ">get real&mdash;redeem NOW!</h2><h3 style="color:white">Real stuff, not points or badges. Instant redemptions from anywhere.</h3> </div><div class="mbj-login mbj-form-block" id="mbj_details"> <form class="mbj-form" id="mbj_details_form" method="post"><input type="hidden" name="lat" id="lat" value=""/><input type="hidden" name="lon" id="lon" value=""/><div class="element-input"> <label class="title" style="color: #a9a9a9;">email&mdash;no spam ever</label> <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/></div><div style="width: 100%;padding-top:5px"><div class="element-input" style="width:45%;float:left;"> <label class="title" style="color: #a9a9a9;">password (&gt;5 chars)</label> <input class="small" style="width:100%;" id="mbj_form_reg_p" type="password" name="mbj_password" required=""></div><div class="element-input" style="width: 45%;float:right;margin-top:0px"><label class="title">confirm password</label><input class="small" style="width:100%;" id="mbj_form_reg_p2" type="password" name="mbj_password_confirm"></div></div><div style="width: 100%;padding-top:5px;white-space:nowrap;display:inline-block"><div class="element-input"> <label class="title" style="color: #a9a9a9;font-size:8pt;padding-top:5px">ZIP (US only)&mdash;to find cool stuff nearby</label> <input class="small"  style="width:45%;" maxlength="5" id="mbj_form_reg_zip" type="text" name="mbj_reg_zip"/>&nbsp;or&nbsp;<button type="button" class="btn-mbj btn-location" style="margin-top:0px;float:right;background-color:lightgreen;border-color:lightgreen" onClick="getLocation();"><span class="mbj-button-text" style="color:black;font-size:8pt">current location</span></button></div></div><div class="element-input"><label class="title"><br>Choose only the rewards you want (select 3+)</label>'+catSelect+'</div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"><a href="http://www.mybeanjar.com/#players" style="text-decoration:none"><img src="img/bean.png" style="vertical-align:middle">&nbsp;myBeanJar.com</a> <button class="btn-mbj submit small" style="float:right" id="mbj-submit-done" onClick="mbjAttemptRegistration()"><span class="mbj-button-text">done</span> </button> </div></div>');
 
 }
 
 function MbjDisplayRegistrationView3() {
-//	MbjCreateOnboardModal();
-	fetchCategories();
+//  MbjCreateOnboardModal();
+    fetchCategories();
 
-	centerOnboardModal();
-	
-	jQuery('#mbj_notification_container_youvewon').fadeIn(500,"swing");
+    centerOnboardModal();
+    
+    jQuery('#mbj_notification_container_youvewon').fadeIn(500,"swing");
 
 }
 
 function MbjHomeLogin(){
-	centerOnboardModal();	
-	jQuery( '#mbj_notification_container_youvewon' ).fadeOut(1, "swing");
+    centerOnboardModal();   
+    jQuery( '#mbj_notification_container_youvewon' ).fadeOut(1, "swing");
 
-	jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
+    jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
 }
 
 function MbjDisplayhYouveWon() {
-    ga('send', 'pageview', 'youvewon');
-	jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init"	style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:absolute;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class=""	style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px"	id="mbj_form_u" type="text" name="mbj_login" required /></div><button class="submit"	style="height: 24px; margin-top: 0px;float:right;background:white"	onClick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div>	');
-	jQuery( '#mbj-youvewon-init'  ).parent().css("max-width","none").css("height","400px").css("width","343px").css("padding","0px");
+    //ga('send', 'pageview', 'youvewon');
+    jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:relative;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class=""   style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required /></div><button class="submit"    style="height: 24px; margin-top: 0px;float:right;background:white"  onClick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div> ');
+    jQuery( '#mbj-youvewon-init'  ).parent().css("max-width","none").css("height","auto").css("width","343px").css("padding","0px");
 }
 
 function MbjDisplayhYouveWonOld() {
-	
-	jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="padding:0px 0px 10px 0px;width:100%;background:black"> <div class="mbj_notification action-buttons" style="background:grey;padding-bottom: 10px"><button type="submit" class="btn-close" id="mbj_notification_close_submit" style="top:-10px" onClick="closeOnboardModal2()"> <img src="img/ui_action_close.png"> </button> <br><button class="btn-mbj submit" id="mbj-login" onClick="closeOnboardModal2();play()" style="height:30px;margin:auto"><span class="mbj-button-text" style="color:black;font-family:sans-serif;text-align:center;font-size:16px;font-weight: bold;margin: 0px 0 0 0px;">keep playing for fun</span> </button> </div><div class="mbj_notification action-buttons" style="background:black;text-align:center"><h3 style="color: orange;text-align:center;font-size:16pt"><i>or</i></h3><button class="btn-mbj-light submit" id="mbj-login" onClick="MbjDisplayRegistrationView2()" style="height:60px;padding:0px;margin:auto;max-width:90%;"><span class="mbj-button-text" style="color:black;text-align:center;font-size:24px;font-weight: bold;margin: 0 0 0 5px;">keep playing for fun <i style="font-style:italic">and</i> real stuff</span> </button> </div>	<div class="mbj_notification_title"> <h2 style="color:lightgreen;font-weight: bold;font-family: sans-serif;font-size: 18px">from sponsors like these:</h2></div><div class="mbj_notification_beanticker" style="margin: 2em 0px 1em 0px;"> <div id="main_container" class="panel_container"> <div class="slider_temp"> <div id="slider1_container_t2"> <div u="slides" id="slider_components_t2"> <img src="img/ticker.jpg" style="width:100%"></div></div></div></div></div><div style="width:90%;padding:5px;margin:auto;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"> <div style="float:left"><img src="img/mbj_logo_50px.png" style="width:50px;height:50px;"/> </div><div class="element-input" style="float:left;padding-right:5px"> <label class="" style="color: orange;font-family:sans-serif;font-size:14px;font-weight:bold">MBJ Users Log In:</label> <input class="" style="width:120px;background-color:silver;float:left" id="mbj_form_u" type="text" name="mbj_login" required/></div>&nbsp;<button class="btn-mbj submit"  style="height:30px;float:left;margin-top:1em" onClick="mbjAttemptAuthenticate()" ><span class="mbj-button-text" style="color:black">Log In</span> </button>  </form></div>');
+    
+    jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="padding:0px 0px 10px 0px;width:100%;background:black"> <div class="mbj_notification action-buttons" style="background:grey;padding-bottom: 10px"><button type="submit" class="btn-close" id="mbj_notification_close_submit" style="top:-10px" onClick="closeOnboardModal2()"> <img src="img/ui_action_close.png"> </button> <br><button class="btn-mbj submit" id="mbj-login" onClick="closeOnboardModal2();play()" style="height:30px;margin:auto"><span class="mbj-button-text" style="color:black;font-family:sans-serif;text-align:center;font-size:16px;font-weight: bold;margin: 0px 0 0 0px;">keep playing for fun</span> </button> </div><div class="mbj_notification action-buttons" style="background:black;text-align:center"><h3 style="color: orange;text-align:center;font-size:16pt"><i>or</i></h3><button class="btn-mbj-light submit" id="mbj-login" onClick="MbjDisplayRegistrationView2()" style="height:60px;padding:0px;margin:auto;max-width:90%;"><span class="mbj-button-text" style="color:black;text-align:center;font-size:24px;font-weight: bold;margin: 0 0 0 5px;">keep playing for fun <i style="font-style:italic">and</i> real stuff</span> </button> </div>    <div class="mbj_notification_title"> <h2 style="color:lightgreen;font-weight: bold;font-family: sans-serif;font-size: 18px">from sponsors like these:</h2></div><div class="mbj_notification_beanticker" style="margin: 2em 0px 1em 0px;"> <div id="main_container" class="panel_container"> <div class="slider_temp"> <div id="slider1_container_t2"> <div u="slides" id="slider_components_t2"> <img src="img/ticker.jpg" style="width:100%"></div></div></div></div></div><div style="width:90%;padding:5px;margin:auto;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"> <div style="float:left"><img src="img/mbj_logo_50px.png" style="width:50px;height:50px;"/> </div><div class="element-input" style="float:left;padding-right:5px"> <label class="" style="color: orange;font-family:sans-serif;font-size:14px;font-weight:bold">MBJ Users Log In:</label> <input class="" style="width:120px;background-color:silver;float:left" id="mbj_form_u" type="text" name="mbj_login" required/></div>&nbsp;<button class="btn-mbj submit"  style="height:30px;float:left;margin-top:1em" onClick="mbjAttemptAuthenticate()" ><span class="mbj-button-text" style="color:black">Log In</span> </button>  </form></div>');
 }
 
 function MbjDisplayYoureIn() { 
-	jQuery('#mbj-login-details').replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="padding:0px 0px 0px 0px;width:100%;background:black"> <button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="closeOnboardModal2();closeOnboardModal()"> <img src="img/ui_action_close.png"> </button><br clear="all"><div style="text-align:center"><h2 style="color:goldenrod;font-weight:bold;font-size:24pt">YOU\'RE IN!</h2><p style="font-size:12pt">Keep playing to win more in this game.</p><p style="font-size:12pt">Check your email later for instructions on how to redeem your rewards, and install the MyBeanJar app</p></div><button class="btn-mbj submit" onClick="closeOnboardModal2();closeOnboardModal();" style="height:30px;margin:auto;width:80%;text-align:center"><span class="mbj-button-text" style="color:black;font-family:sans-serif;text-align:center;font-size:16px;font-weight:bold;">Play On</span></div>');
+    jQuery('#mbj-login-details').replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="padding:0px 0px 0px 0px;width:100%;background:black"> <button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="closeOnboardModal2();closeOnboardModal()"> <img src="img/ui_action_close.png"> </button><br clear="all"><div style="text-align:center"><h2 style="color:goldenrod;font-weight:bold;font-size:24pt">YOU\'RE IN!</h2><p style="font-size:12pt">Keep playing to win more in this game.</p><p style="font-size:12pt">Check your email later for instructions on how to redeem your rewards, and install the MyBeanJar app</p></div><button class="btn-mbj submit" onClick="closeOnboardModal2();closeOnboardModal();" style="height:30px;margin:auto;width:80%;text-align:center"><span class="mbj-button-text" style="color:black;font-family:sans-serif;text-align:center;font-size:16px;font-weight:bold;">Play On</span></div>');
 }
 
 function MbjDisplayCategoriesView() {
@@ -1398,7 +1524,7 @@ else {
 
 jQuery(document).ready(function() {
     
-	if (sessionStorage.getItem("mbjUserLoggedIn") !== null) { mbjUserLoggedIn = true; }
+    if (sessionStorage.getItem("mbjUserLoggedIn") !== null) { mbjUserLoggedIn = true; }
     // Info view
     jQuery('#info-close').off('submit').on('submit', function(event) {
         event.preventDefault();
@@ -1423,37 +1549,39 @@ jQuery(document).ready(function() {
         play();
     });
     
-    console.log('mbjUserLoggedIn: '+mbjUserLoggedIn);
+    mbjDebug('mbjUserLoggedIn: '+mbjUserLoggedIn);
     
  //   jQuery("#paypal_submit").click(function(event) {
- //   	event.preventDefault();
- //   	purchaseclickimage();
+ //     event.preventDefault();
+ //     purchaseclickimage();
  //   });
     
 //    jQuery("#paypal_submit").click(function(event) {
-//    	if( validpurchase == false){
+//      if( validpurchase == false){
 //            event.preventDefault(); 
 //            alert('Please select some images for purchase');
  //           document.forms['buyimages'].action = "";
   //          return false;
- //   	} else { 
- //   	document.forms['buyimages'].action = "paypal/checkout.php";
+ //     } else { 
+ //     document.forms['buyimages'].action = "paypal/checkout.php";
  //       document.forms['buyimages'].submit();
- //   		return true;
- //   	}	
+ //         return true;
+ //     }   
  //        });
 });
 
 function closeOnboardModal() {
-    jQuery('#mbj_notification_container_login')
-            .fadeOut(500, "swing");
+    jQuery('#mbj_modal')
+            .fadeOut(500, "swing")
+            .remove();
  //   setTimeout(function(){jQuery( '#mbj_notification_container_login' ).remove()}, 600);
 }
 
 function closeOnboardModal2() {
-    jQuery('#mbj_notification_container_youvewon')
-            .fadeOut(500, "swing");
-    MbjDisplayhYouveWon();
+    jQuery('#mbj_modal')
+            .fadeOut(500, "swing")
+            .remove();
+    // MbjDisplayhYouveWon();
  //   setTimeout(function(){jQuery( '#mbj_notification_container_login' ).remove()}, 600);
 }
 
@@ -1468,10 +1596,47 @@ function getLocation() {
     }
 }
 function showPosition(position) {
-	var lat = document.getElementById("lat");
-	var lon = document.getElementById("lon");
-	lat.value = position.coords.latitude;
-	lon.value = position.coords.longitude; 
-	alert(lat.value + ' x ' + lon.value);
-	jQuery('.btn-location').replaceWith('<div style="font-weight:bold;color:yellow;font-size:larger">Using Current Location</div>');
+    var lat = document.getElementById("lat");
+    var lon = document.getElementById("lon");
+    lat.value = position.coords.latitude;
+    lon.value = position.coords.longitude; 
+    alert(lat.value + ' x ' + lon.value);
+    jQuery('.btn-location').replaceWith('<div style="font-weight:bold;color:yellow;font-size:larger">Using Current Location</div>');
 }
+
+
+
+
+
+
+
+
+
+// ------ EXPERIMENTAL MODAL ------ //
+
+function testModal() {
+jQuery( 'body' ).append('' 
+    + '<table id="modal">'
+    +   '<tbody id="modal-tbody">'
+    +       '<tr id="modal-tr">'
+    +           '<td id="modal-td">'
+    +               '<div id="modal-box">'
+    +                   '<div id="modal-content">'
+    +                       '<div id="modal-body">'
+    +                           '<!-- CONTENT -->'
+    +                           '<h2>Test</h2>'
+    +                           '<p>This is a test.</p>'
+    +                       '</div>'
+    +                   '</div>'
+    +               '</div>'
+    +           '</td>'
+    +       '</tr>'
+    +   '</tbody>'
+    + '</table>');
+};
+
+window.addEventListener('resize', function(){
+    document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight - headerFooterMargin;
+}, false);
+
+
