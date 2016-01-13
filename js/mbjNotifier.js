@@ -1,35 +1,35 @@
 var hardUser = "ryanfister3";
 var hardPass = "40f4d87250c70278580bc8fb47e5caaa";
 
-var isplay = false;
-var mbjUserLoggedIn = false;
-var j=0;
-var imagelenght1 = '';
-var msgAwardSuccess = "Bean Awarded!";
-var msgMoreInfo = 'Visit <a href="http://mybeanjar.com">MyBeanJar.com</a> for more info.';
-var u = null;
-var p = "";
-var email = "";
-var result = null;
-var queuedBeans = 0;
-var footerCollapsed = false;
-var footerHeight = 0;
+// var isplay = false;
+// var mbjUserLoggedIn = false;
+// var j=0;
+// var imagelenght1 = '';
+// var msgAwardSuccess = "Bean Awarded!";
+// var msgMoreInfo = 'Visit <a href="http://mybeanjar.com">MyBeanJar.com</a> for more info.';
+// var u = null;
+// var p = "";
+// var email = "";
+// var result = null;
+// var queuedBeans = 0;
+// var footerCollapsed = false;
+// var footerHeight = 0;
 
-var flashingLoginStatus;
-var capsulePlaceholderImageURL = "img/mbj_payload_img.png";
+// var flashingLoginStatus;
+// var capsulePlaceholderImageURL = "img/mbj_payload_img.png";
 
 // Timeouts
-var capsuleLidTimeout;
-var capsuleBodyTimeout;
-var capsulePayloadTimeout;
-var capsuleFadeOutTimeout;
-var image = null;
-var customids = '';
-var randomimg;
-var validpurchase = false;
-var catArray = null;
+// var capsuleLidTimeout;
+// var capsuleBodyTimeout;
+// var capsulePayloadTimeout;
+// var capsuleFadeOutTimeout;
+// var image = null;
+// var customids = '';
+// var randomimg;
+// var validpurchase = false;
+// var catArray = null;
 
-var debugMode = true;
+// var debugMode = true;
 
 
 
@@ -51,11 +51,16 @@ function mbjDebug(message) {
 //
 
 function mbjAddAwardBean() {
+    
+    // Get any queued Beans in session storage, add a new one, save new total to session storage
+    queuedBeans = sessionStorage.getItem("queuedBeans");
     queuedBeans++
+    queuedBeans = sessionStorage.setItem("queuedBeans", queuedBeans);
+
     mbjDebug("Queued Bean count: " + queuedBeans);
 
     // Get session data relevant to login state
-    username = sessionStorage.getItem("email");
+    username = sessionStorage.getItem("username");
     userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
 
     if (userLoggedIn && username) {
@@ -71,7 +76,7 @@ function mbjAddAwardBean() {
 function mbjAttemptAward() {
 
     if (mbjUserLoggedIn) {
-        u = sessionStorage.getItem("email");
+        u = sessionStorage.getItem("username");
         p = 'password';
         mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting " + queuedBeans + " award Beans");
 
@@ -364,7 +369,9 @@ function mbjAttemptAuthenticate() {
     u = jQuery('#mbj_form_u').val();
 
     // Add submitted username to session storage
-    sessionStorage.setItem('email',u);
+    if (typeof u === 'undefined') {
+        sessionStorage.setItem('username',u);
+    };
 
     flashLoginStatus();
     SummonSpinner('spinner_login');
@@ -605,7 +612,7 @@ function mbjNotifyRegistration(result, message) {
         mbjDebug("Message = " + message);
         mbjDebug("Registration succeeded as " + email);
 
-        sessionStorage.setItem('email',email);
+        sessionStorage.setItem('username',email);
         sessionStorage.setItem('mbjUserLoggedIn','true');
         jQuery('#email').val(email);
 
@@ -807,298 +814,6 @@ FakeBeanAwardAlert = function(result, award) {
 
 
 
-function mbjCapsuleAward() {
-
-// Animation to accompany Bean awarding. Displays award within gashapon-style capsule.
-
-    clearTimeout(capsuleLidTimeout);
-    clearTimeout(capsuleBodyTimeout);
-    clearTimeout(capsulePayloadTimeout);
-    clearTimeout(capsuleFadeOutTimeout);
-
-    mbjResetCapsule();
-
-    jQuery('.mbj_capsule_container').removeClass('hidden').css({display: "block"});
-
-    sxAutocenterer();
-
-    jQuery('.mbj_capsule').stop().fadeIn().removeClass('mbj_anim_capsule_init').addClass('mbj_anim_fullscale');
-
-    jQuery('.mbj_capsule_lid').stop().animate({
-        top: "+=250px",
-    },
-            1000, function() {
-                mbjDebug("done!");
-                var capsuleLidTimeout = setTimeout(function() {
-                    jQuery('.mbj_capsule_lid').addClass('mbj_anim_rotatepartial').stop().animate({left: "-=1500px", opacity: 0}, 100)
-                }, 800);
-            });
-
-    jQuery('.mbj_capsule_body').stop().animate({
-        top: "-=250px",
-    },
-            1000, function() {
-                mbjDebug("done!");
-                var capsuleBodyTimeout = setTimeout(function() {
-                    jQuery('.mbj_capsule_body').addClass('mbj_anim_rotatepartial').stop().animate({left: "+=1500px", opacity: 0}, 100)
-                }, 800);
-            });
-
-    jQuery('#mbj_payload_overlay').stop().animate({
-        opacity: "0",
-    },
-            2800, function() {
-                mbjDebug("done!");
-            });
-
-    var capsulePayloadTimeout = setTimeout(function() {
-        jQuery('.mbj_capsule_payload').removeClass('mbj_anim_halfscale').addClass('mbj_anim_fullscale')
-    }, 2000);
-
-    var capsuleFadeOutTimeout = setTimeout(function() {
-        jQuery('.mbj_capsule_container').stop().fadeOut().removeClass('mbj_anim_capsule_fullscale').addClass('mbj_anim_init');
-    }, 10000);
-
-}
-;
-
-function mbjResetCapsule() {
-
-// Resets capsule back to initial conditions
-
-    jQuery('.mbj_capsule_container').addClass('hidden');
-    jQuery('.mbj_capsule').hide().removeClass('mbj_anim_fullscale').addClass('mbj_anim_capsule_init');
-
-    jQuery("img.mbj_award_img").replaceWith('<img class="mbj_capsule_payload_contents mbj_award_img" src="img/mbj_payload_img.png">');
-
-    jQuery('.mbj_capsule_lid').css({
-        top: "0px",
-        left: "0px",
-        opacity: 1
-    }).removeClass('mbj_anim_rotatepartial');
-
-    jQuery('.mbj_capsule_body').css({
-        top: "0px",
-        left: "0px",
-        opacity: 1
-    }).removeClass('mbj_anim_rotatepartial');
-
-    jQuery('.mbj_capsule_payload').css({
-        top: "30px",
-        left: "30px",
-        opacity: 1
-    }).removeClass('mbj_anim_fullscale').addClass('mbj_anim_halfscale');
-
-    jQuery('#mbj_payload_overlay').css({
-        opacity: 1
-    });
-}
-;
-
-
-
-function bindFooterListener() {
-    jQuery(".mbj-footer").click(function(event) {
-        var target = jQuery(event.target);
-        if (!target.is("#footer-signup")) {
-            if (!footerCollapsed) {
-                footerHeight = jQuery("#main_container").height();
-                mbjDebug(footerHeight);
-                jQuery("#slider1_container").animate({opacity: 0}, 200, function() {
-                    jQuery("#main_container").animate({height: 0}, 800, function() {
-                        jQuery(".frosted-overlay").hide(0);
-                        footerCollapsed = true;
-                    });
-                });
-            }
-            else {
-                jQuery(".frosted-overlay").show(0, function() {
-                    jQuery("#main_container").animate({height: footerHeight}, 800, function() {
-                        jQuery("#slider1_container").animate({opacity: 1}, 200, function() {
-                            footerCollapsed = false;
-                        });
-                    });
-                });
-            }
-        }
-    });
-}
-function gotohome()
-{
-    document.getElementById('image-preview').style.display = 'none';
-    document.getElementById('title-page').style.display = 'block';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('mbj_notification_container_login').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-    // document.getElementById('user-img-listing-page').style.display = 'none';
-    // document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'home');
-}
-function getimageforplay(img) {
-    image = img.src;
-    jQuery('<img class="jqPuzzle jqp-r3-c3-h1-SNABCDE userimg" id="mbj_award_img" src="' + image + '" >').insertAfter(".aaa");
-
-//document.getElementById('puzzUserImg').innerHTML='<img class="jqPuzzle jqp-r3-c3-h1-SNABCDE userimg" id="mbj_award_img" src="'+image+'" >';
-//jQuery( '.jqp-r3-c3-h1-SNABCDE' )
-//  .replaceWith( '<img class="jqPuzzle jqp-r3-c3-h1-SNABCDE userimg" id="mbj_award_img" src="' + image + '">'  );
-//initJQPuzzle();
-    document.getElementById('image-preview').style.display = 'none';
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'none';
-    document.getElementById('user-puzzle-page').style.display = 'block';
-//jQuery('#imgusr').jqPuzzle();
-    //ga('send', 'pageview', 'puzzle');
-    initJQPuzzle();
-}
-
-function getimage(img) {
-    image = img;
-    document.getElementById('load-preview-image').innerHTML = '';
-    document.getElementById('load-preview-image').innerHTML = '<img class="img-center-new" src="' + image + '">';
-    document.getElementById('image-preview').style.display = 'block';
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'none';
-    document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'preview: '+image);
-}
-
-function selectedimage(img) {
-    image = img;
-    document.getElementById("selectedimage").value = image;
-}
-
-function checkseletedimage()
-{
-    var image_value = document.getElementById("selectedimage").value;
-    if (image_value != '')
-    {
-        mbjBuyUserimage();
-    }
-    else if (mbjUserLoggedIn)
-    {
-        mbjAttemptLogin();
-    }
-    else
-    {
-        alert('select image');
-    }
-}
-
-//function loadGame(){
-//  mbjDebug("Loading game!");
-//  document.getElementById('title-page').style.display = 'none';
-//        document.getElementById('listing-page').style.display = 'block'; 
-//  document.getElementById('puzzle-page').style.display = 'none';        
-//        document.getElementById('info-page').style.display = 'none';
-//}
-
-function play() {
-    mbjDebug("Loading game!");
-    isplay = true;
-//    if(mbjUserLoggedIn)
-//    {
-        //testpostedimg();
- //   }
-        document.getElementById('mbj_notification_container_youvewon').style.display = 'none';
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'block';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('image-preview').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'none';
-    document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'puzzle list');
-}
-function resetPuzzImg() 
-{
-    var myAnchor = document.getElementById("puzzImg");
-      var myImg = document.createElement("img");
-      myImg.className = "jqPuzzle jqp-r3-c3-h1-SNABCDE";
-      myImg.id = "puzzImg";
-      myAnchor.parentNode.replaceChild(myImg, myAnchor);
-}
-function freeplay(imagename) {
-    isplay = true;
-    var prefix = 'Angry%20Babies%20Series%201%20game%20images';
-    mbjDebug("Loading free game! image " + imagename);
-    if(typeof imagename != 'undefined') { 
-        resetPuzzImg();
-        
-    document.getElementById('puzzImg').src='img/puzz/' + prefix + '/' + imagename ;
-    } else {
-  //    var fileNameIndex = document.getElementById('puzzImg').src.lastIndexOf("/") + 1;
-  //    var imagename = document.getElementById('puzzImg').src.substr(fileNameIndex);
-  //      document.getElementById('puzzImg').src='img/puzz/'+prefix+ '/' + imagename ; 
-        resetPuzzImg();
-        var imagename = randomimg;
-        document.getElementById('puzzImg').src='img/puzz/'+prefix+ '/' + imagename ; 
-        
-    }
-
-    
-   initJQPuzzle();
-    jQuery('.btn-hint').toggle(true);
-    jQuery('.btn-play-more').toggle(false);
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'block';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('image-preview').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'none';
-    document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'puzzle: '+imagename);
-}
-
-function randomfreeplay(imagename) {
-    isplay = true;
-    var prefix = 'Random%20images';
-    mbjDebug("Loading free game! image " + imagename);
-
-        resetPuzzImg();
-       
-        document.getElementById('puzzImg').src='img/puzz/' + prefix + '/' + imagename ;
-        
-    
-   initJQPuzzle();
-    jQuery('.btn-hint').toggle(true);
-    jQuery('.btn-play-more').toggle(false);
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'block';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('image-preview').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'none';
-    document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'free puzzle: '+imagename);  
-}
-
-//function GoToCBLDF() {
-//  mbjDebug("Loading info page!");
-//  document.getElementById('title-page').style.display = 'none';
-//        document.getElementById('listing-page').style.display = 'none';
-//  document.getElementById('puzzle-page').style.display = 'none';
-//        document.getElementById('info-page').style.display = 'block';
-//}
-function info() {
-    mbjDebug("Loading info page!");
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'block';
-    document.getElementById('mbj_notification_container_login').style.display = 'none';
-    // document.getElementById('image-preview').style.display = 'none';
-    // document.getElementById('user-img-listing-page').style.display = 'none';
-    // document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'info');
-}
-
 function mbjImagePreloader() {
     jQuery('body').html('<div class="nada"><img src="img/ui_action_fail.png"><img src="img/ui_action_success.png"><img src="img/ui_action_close.png"></div>');
 }
@@ -1121,235 +836,7 @@ function append_totalbeans(totalWin) {
 }
 ;
 
-function mbjBuyUserimage() {
 
-    if (mbjUserLoggedIn) {
-        imagelenght1 = 'done';
- //       insert_user_image(u, p, mbjAppID, image, mbjNotifyBuyUserimage);
-        
-    }
-
-    else {
-        mbjAttemptLogin();
-    }
-}
-function purchaseclickimage()
-{
-    imagelenght1='';
-        j=0;
-        document.getElementById("quantity").value='';
-        document.getElementById('customeid').value='';
-    var cboxes = document.getElementsByName('radio[]');
-    var len = cboxes.length;
-    var imagename = new Array();
-    tempimgname = '';
-    var imagecount = 0;
-    validpurchase = false;
-    for (var i=0; i<len; i++) {
-        mbjDebug(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
-        if(cboxes[i].checked && (!cboxes[i].disabled))
-        {
-            tempimgname = tempimgname+"img/puzz/"+imagename+cboxes[i].value+",";        
-            validpurchase = true;
-        }
-    }
-    if (validpurchase == false && mbjUserLoggedIn ==true){
-        alert("You must select an image to purchase");
-        return false;
-    } else { 
-    tempimgname = tempimgname.substring(0, tempimgname.length - 1);
-   temp();
-   return true;
-    }
-}
-
-function checkSelection() {
-    var cboxes = document.getElementsByName('radio[]');
-    var len = cboxes.length;
-
-    validpurchase = false;
-    for (var i=0; i<len; i++) {
-        mbjDebug(i + (cboxes[i].checked?' checked ':' unchecked ') + cboxes[i].value);
-        if(cboxes[i].checked && (!cboxes[i].disabled))
-        {
-    
-            validpurchase = true;
-        }
-    }
-    if (validpurchase == false){
-        alert("You must select an image to purchase");
-        return false;
-    } else { 
-
-   return true;
-    }
-    
-}
-
-function temp()
-{
-
-     if(tempimgname != '')
-    {
-        var split = tempimgname.split(',');
-        //alert(tempimgname);
-        var splitlength = split.length;
-
-        var quantity = splitlength;
-        document.getElementById("quantity").value = quantity;
-        var splitfinal = splitlength - 1;
-        if (mbjUserLoggedIn) {
-
-            if(j<split.length)
-            {   
-             
-                insert_user_image(u, p, mbjAppID, split[j], mbjNotifyBuyUserimage); 
-                //alert('j is->'+j +'split is'+splitfinal);
-                
-            }
-            if(j == splitfinal)
-                {
-                    imagelenght1 = 'done';
-                }
-
-        }
-
-        else {
-            mbjAttemptLogin();
-            //testpostedimg();   
-        }
-
-    }else {
-        mbjAttemptLogin();
-        //testpostedimg();   
-    }
-}
-function mbjNotifyBuyUserimage123(result, message) {
-    
-    customids = customids+message+","
-    document.getElementById('customeid').value=customids;
-    //alert(customids);
-    //alert(imagelenght1);
-    if(imagelenght1=='done')
-    {
-        //alert('yes');
-        //alert(document.getElementById('customeid').value);
-        
-        
-    var dg = new PAYPAL.apps.DGFlow(
-    {
-        trigger: 'paypal_submit',
-        expType: 'instant'
-                
-         //PayPal will decide the experience type for the buyer based on his/her 'Remember me on your computer' option.
-    });
-    jQuery('#buyimages').attr("action","paypal/checkout.php");
-    jQuery("#paypal_submit").trigger('click');
-         imagelenght1='';
-        j=0;
-        document.getElementById("quantity").value='';
-        document.getElementById('customeid').value='';
-
-     }
-     else
-     {
-         j++;
-         temp();
-     //    alert(imagelenght1);
-         //imagelenght1=false;
-     }
-         
-      
-    //mbjGetUserimage();
-}
-
-
-
-function mbjGetUserimage() {
-    if (mbjUserLoggedIn) {
-        get_user_image(u, mbjAppID, mbjNotifyGetUserimage);
-        
-    }
-
-    else {
-        mbjAttemptLogin();
-    }
-}
-
-function mbjNotifyGetUserimage(result, message) {
-//mbjDebug(message.length);
-    uimg = [];
-    document.getElementById('userimages').innerHTML = '';
-    for (var i = 0; i < message.length; i++)
-    {
-        var img = message[i].image;
-        document.getElementById('userimages').innerHTML += '<li><div><img src="' + img + '" onClick="javascript:getimageforplay(this)"><span>TITLE ARTIST</span></div></li>';
-
-    }
-//document.getElementById('userimages').innerHTML=uimg; 
-    document.getElementById('image-preview').style.display = 'none';
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'block';
-    document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'users puzzle list');
-}
-;
-
-// Get total number of winners periodically
-//setInterval(function() {
-//    get_winners("totalbeans");
-//}, 15000);
-
-
-function WatchPurchaseOptions() {
-
-    // Hacky IAP button toggle fix
-    jQuery( 'div.iap-opt' ).click(function() {
-      jQuery( 'input.iap-check' ).each(function(){
-        jQuery( this ).prop('checked', false);
-        jQuery( this ).parent().parent().removeClass('ab-btn-iap-active');
-      });
-      var currImgCheck = jQuery( this ).children('input');
-      formerImgCheck.attr("checked", !formerImgCheck.attr("checked"));
-      currImgCheck.prop('checked', true);
-      jQuery(currImgCheck).parent().parent().addClass('ab-btn-iap-active');
-    });
-
-
-}
-
-function AddToCart(imgButton) {
-    jQuery( imgButton ).siblings('input').prop('checked', true);
-    jQuery( imgButton ).replaceWith('<button class="btn-mbj btn-iap btn-remove" onClick="javascript:RemoveFromCart(this)"><span><i class="ion-android-remove-circle" style="vertical-align: middle;"></i><br/>remove</span></button>');
-}
-
-function RemoveFromCart(imgButton) {
-    jQuery( imgButton ).siblings('input').prop('checked', false);
-    jQuery( imgButton ).replaceWith('<button class="btn-mbj btn-iap btn-purchase" onClick="javascript:AddToCart(this)"><span style="color:navy"><i class="ion-android-add-circle" style="vertical-align: middle;"></i><br/>99&cent;</span></button>');
-}
-
-function PreviewImage(imagename) {
- //   mbjDebug("Pressed:" + button);
- //   var activeImg = jQuery(button).parent().parent().children('img').attr('src');
- //   getimage(activeImg);
-    var wimagename = imagename.substr(0, imagename.lastIndexOf(".")) + ".png";
-    document.getElementById('load-preview-image').innerHTML = '';
-    document.getElementById('load-preview-image').innerHTML = '<img class="img-center-new" src="img/puzz/WatermarkedImages/' + wimagename + '">';
-    document.getElementById('load-preview-title').innerHTML = abappimages[imagename]['title'];
-    document.getElementById('load-preview-artist').innerHTML= abappimages[imagename]['artist'];
-    document.getElementById('load-preview-bio').innerHTML  = abappimages[imagename]['bio']  ;
-    document.getElementById('image-preview').style.display = 'block';
-    document.getElementById('title-page').style.display = 'none';
-    document.getElementById('listing-page').style.display = 'none';
-    document.getElementById('puzzle-page').style.display = 'none';
-    document.getElementById('info-page').style.display = 'none';
-    document.getElementById('user-img-listing-page').style.display = 'none';
-    document.getElementById('user-puzzle-page').style.display = 'none';
-    //ga('send', 'pageview', 'preview image: '+imagename);
-}
 
 //
 //Misc. helpers
@@ -1523,51 +1010,7 @@ else {
 //
 
 jQuery(document).ready(function() {
-    
     if (sessionStorage.getItem("mbjUserLoggedIn") !== null) { mbjUserLoggedIn = true; }
-    // Info view
-    jQuery('#info-close').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        gotohome();
-    });
-
-
-
-    // IAP image preview view
-    jQuery('#preview-close').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        play();
-    });
-
-    
-    
-    jQuery('#puzzle-page-close').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        play();
-    });
-    
-    mbjDebug('mbjUserLoggedIn: '+mbjUserLoggedIn);
-    
- //   jQuery("#paypal_submit").click(function(event) {
- //     event.preventDefault();
- //     purchaseclickimage();
- //   });
-    
-//    jQuery("#paypal_submit").click(function(event) {
-//      if( validpurchase == false){
-//            event.preventDefault(); 
-//            alert('Please select some images for purchase');
- //           document.forms['buyimages'].action = "";
-  //          return false;
- //     } else { 
- //     document.forms['buyimages'].action = "paypal/checkout.php";
- //       document.forms['buyimages'].submit();
- //         return true;
- //     }   
- //        });
 });
 
 function closeOnboardModal() {
