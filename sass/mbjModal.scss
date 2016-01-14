@@ -2,6 +2,12 @@
 
 /* MyBeanJar Experimental Modal Styles */
 
+
+
+    $mbj-color-goldenrod: #c59a1e;
+
+
+
 html, body {
     height: 100%; /* root and body MUST be height 100% */
     position: relative; /* Required for proper resizing on iOS Safari and other mobile browsers*/
@@ -15,6 +21,10 @@ html, body {
     width: 100%;
     z-index: 999999999;
     display: none;
+
+    a {
+        color: $mbj-color-goldenrod;
+    }
 }
 
 #modal-tbody, #modal-tr, #modal-td {
@@ -43,11 +53,19 @@ html, body {
 /* LEGACY CRUDDY CODE */
 #mbj-youvewon-init {
     height: 375px;
-    width: 343px;
+    //width: 343px;
     background-color: black;
     background-image: url("../img/youcouldvewon.png");
     position: relative;
     background-repeat: no-repeat;
+}
+
+#mbj-notification-youve-won {
+    max-width: none;
+    width: 343px;
+    padding: 0px;
+    display: block;
+    position: relative;
 }
 
 .mbj_notification_sub_inner {

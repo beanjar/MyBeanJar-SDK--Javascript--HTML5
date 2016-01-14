@@ -1,5 +1,5 @@
 /* MyBeanJar Experimental Modal Styles */
-/* line 5, ../sass/mbjModal.scss */
+/* line 11, ../sass/mbjModal.scss */
 html, body {
   height: 100%;
   /* root and body MUST be height 100% */
@@ -7,7 +7,7 @@ html, body {
   /* Required for proper resizing on iOS Safari and other mobile browsers*/
 }
 
-/* line 10, ../sass/mbjModal.scss */
+/* line 16, ../sass/mbjModal.scss */
 #mbj_modal {
   position: absolute;
   top: 0;
@@ -17,19 +17,23 @@ html, body {
   z-index: 999999999;
   display: none;
 }
+/* line 25, ../sass/mbjModal.scss */
+#mbj_modal a {
+  color: #c59a1e;
+}
 
-/* line 20, ../sass/mbjModal.scss */
+/* line 30, ../sass/mbjModal.scss */
 #modal-tbody, #modal-tr, #modal-td {
   height: 100%;
   /* All table elements should be height 100% */
 }
 
-/* line 24, ../sass/mbjModal.scss */
+/* line 34, ../sass/mbjModal.scss */
 #modal-td {
   vertical-align: middle;
 }
 
-/* line 28, ../sass/mbjModal.scss */
+/* line 38, ../sass/mbjModal.scss */
 #modal-content {
   position: relative;
   left: 100%;
@@ -48,17 +52,25 @@ html, body {
 }
 
 /* LEGACY CRUDDY CODE */
-/* line 44, ../sass/mbjModal.scss */
+/* line 54, ../sass/mbjModal.scss */
 #mbj-youvewon-init {
   height: 375px;
-  width: 343px;
   background-color: black;
   background-image: url("../img/youcouldvewon.png");
   position: relative;
   background-repeat: no-repeat;
 }
 
-/* line 53, ../sass/mbjModal.scss */
+/* line 63, ../sass/mbjModal.scss */
+#mbj-notification-youve-won {
+  max-width: none;
+  width: 343px;
+  padding: 0px;
+  display: block;
+  position: relative;
+}
+
+/* line 71, ../sass/mbjModal.scss */
 .mbj_notification_sub_inner {
   width: 270px;
   padding: 5px;
@@ -68,14 +80,14 @@ html, body {
   height: 32px;
 }
 
-/* line 64, ../sass/mbjModal.scss */
+/* line 82, ../sass/mbjModal.scss */
 .mbjBigButton {
   width: 200px;
   height: 75px;
 }
 
 /*** -ANIMATIONS - ***/
-/* line 72, ../sass/mbjModal.scss */
+/* line 90, ../sass/mbjModal.scss */
 .fade-in {
   -webkit-animation: rog-scale 3s 1 ease-in-out forwards;
           animation: rog-scale 3s 1 ease-in-out forwards;
@@ -113,19 +125,19 @@ html, body {
 /*** - ADAPTIVE LAYOUTS - ***/
 /* Generic mobile portrait */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 93, ../sass/mbjModal.scss */
+  /* line 111, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 50vw;
   }
 
-  /* line 97, ../sass/mbjModal.scss */
+  /* line 115, ../sass/mbjModal.scss */
   #modal-content {
     width: 100vw;
   }
 }
 /* Desktop landscape */
 @media all and (orientation: landscape) {
-  /* line 110, ../sass/mbjModal.scss */
+  /* line 128, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 343px;
   }
