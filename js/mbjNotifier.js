@@ -62,13 +62,6 @@ function mbjAddAwardBean() {
     mbjDebug("Queued Bean count: " + queuedBeans);
 
     mbjAttemptAward();
-
-    // if (userLoggedIn && username != 'null') {
-        
-    // }
-    // else {
-    //     mbjAttemptYouvewon();
-    // }
 }
 
 
@@ -95,23 +88,6 @@ function mbjAttemptAward() {
     } else {
 
         mbjAttemptYouvewon();
-//        u='guest';
-//        p='guest';
-//        mbjUserLoggedIn = true;
-//        mbjDebug("User logged in" + /*as " + u + " : " + p + "*/". Requesting " + queuedBeans + " award Beans");
-//
-//        if (queuedBeans > 0) {
-//            for (i = queuedBeans; i > 0; i--) {
-//                get_award(u, p, mbjAppID, BeanAwardAlert);
-//                mbjDebug(queuedBeans + " queued Beans remaining...");
-//            }
-//            ;
-//        }
-//        ;
-//         var u = null;
-//        var p = "";
-//        var mbjUserLoggedIn = false;  
-        //mbjAttemptLogin();
     }
 }
 
@@ -235,24 +211,24 @@ function mbjAttemptYouvewon() {
         +                       '<div id="modal-body">'
         +                           '<!-- CONTENT -->'
         +                           '<div class="mbj_notification mbj_notification_container onboard-modal" id="mbj_notification_container_youvewon" style="max-width: none; width: 343px; padding: 0px; display: block; position: relative;">'
-        +                                '<div class="mbj_notification_inner" id="mbj-youvewon-init" style=height:375px; width:343px; background-color:black; background-image: url(\'img/youcouldvewon.png\');position:absolute;background-repeat:no-repeat">'
-        +                                    '<div' + /* style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;" */ + '>'
+        +                                '<div class="mbj_notification_inner" id="mbj-youvewon-init">'
+        +                                    '<div class="mbj_notification_sub_inner">'
         +                                        '<form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false">'
         +                                            '<div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">'
         +                                                'MBJ users<br>log in'
         +                                            '</div>'
         +                                            '<div class="element-input" style="float: left; padding-right: 5px;margin-top:0px">'
-        +                                                '<input class="" style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required="">'
+        +                                                '<input class="" style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required />'
         +                                            '</div>'
         +                                            '<button class="submit" style="height: 24px; margin-top: 0px;float:right;background:white" onclick="mbjAttemptAuthenticate()">'
         +                                                '<span class="mbj-button-text" style="color: black">Log In</span>'
         +                                            '</button>'
         +                                        '</form>'
         +                                    '</div>'
-        // +                                    '<div style="margin-top: 0px; margin-left:10px;">'
-        // +                                        '<a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a>'
-        // +                                        '<a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a>'
-        // +                                    '</div>'
+        +                                    '<div style="margin-top: 0px; margin-left:10px;">'
+        +                                        '<a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a>'
+        +                                        '<a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a>'
+        +                                    '</div>'
         +                                '</div>'
         +                            '</div>'
         +                       '</div>'
@@ -263,10 +239,12 @@ function mbjAttemptYouvewon() {
         +   '</tbody>'
         + '</table>');
 
+        jQuery('#mbj_modal').fadeIn(500,"swing");
+
         // <div class="mbj_notification mbj_notification_container onboard-modal" id="mbj_notification_container_youvewon" style="max-width: none; height: 400px; width: 343px; padding: 0px; left: 504px; top: 42px; display: block;"><div class="mbj_notification_inner" id="mbj-youvewon-init" style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:absolute;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class="" style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required=""></div><button class="submit" style="height: 24px; margin-top: 0px;float:right;background:white" onclick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div> ');
     }
-    MbjDisplayhYouveWon();
-    MbjCreateOnboardModal2();
+    // MbjDisplayhYouveWon();
+    // MbjCreateOnboardModal2();
 
 // If login form is submitted...
     jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
@@ -319,6 +297,9 @@ function mbjAttemptYouvewon() {
                 .remove();
 
     });
+
+    //fadeElementOut( jQuery('#mbj_notification_close'), jQuery( '#mbj_modal' ) );
+    
 
     jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
 
@@ -913,9 +894,10 @@ function RegistrationBack() {
 }
 
 var mbjloginregister =  '<div class="mbj_notification_inner" id="mbj-login-register"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">username</label> <input class="large" id="mbj_form_u" type="text" name="mbj_login" required/> <a class="password-recovery" onClick="MbjDisplayAccountRecoveryView()">forgot username?</a></div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="mbjAttemptAuthenticate()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log In</span> </button> <button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayRegistrationView()"> <span class="mbj-button-icon"><i class="ion-android-clipboard" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Sign Up</span> </button> </div></div>';
-function MbjDisplayLoginView() {
-jQuery( '#mbj-login-init' ).replaceWith('  <div class="mbj_notification_inner" id="mbj-login-register"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">username</label> <input class="large" id="mbj_form_u" type="text" name="mbj_login" required/> <a class="password-recovery" onClick="MbjDisplayAccountRecoveryView()">forgot username?</a></div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="mbjAttemptAuthenticate()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log In</span> </button> <button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayRegistrationView()"> <span class="mbj-button-icon"><i class="ion-android-clipboard" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Sign Up</span> </button> </div></div>');
-}
+
+// function MbjDisplayLoginView() {
+//     jQuery( '#mbj-login-init' ).replaceWith('  <div class="mbj_notification_inner" id="mbj-login-register"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">username</label> <input class="large" id="mbj_form_u" type="text" name="mbj_login" required/> <a class="password-recovery" onClick="MbjDisplayAccountRecoveryView()">forgot username?</a></div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="mbjAttemptAuthenticate()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log In</span> </button> <button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayRegistrationView()"> <span class="mbj-button-icon"><i class="ion-android-clipboard" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Sign Up</span> </button> </div></div>');
+// }
 
 function MbjDisplayAccountRecoveryView() {
 jQuery( '#mbj-login-register' ).replaceWith('  <div class="mbj_notification_inner" id="mbj-login-recovery"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">e-mail</label> <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/> </div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="send_password()"> <span class="mbj-button-icon"><i class="ion-paper-airplane" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Recover Password</span> </button></div></div>');
@@ -969,6 +951,23 @@ function MbjHomeLogin(){
 
     jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
 }
+
+
+
+
+
+
+function MbjDisplayLoginView() {
+    //ga('send', 'pageview', 'youvewon');
+    jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:relative;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class=""   style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required /></div><button class="submit"    style="height: 24px; margin-top: 0px;float:right;background:white"  onClick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div> ');
+    //jQuery( '#mbj-youvewon-init'  ).parent().css("max-width","none").css("height","auto").css("width","343px").css("padding","0px");
+    jQuery('#mbj-youvewon-init').fadeIn(500,"swing");
+}
+
+
+
+
+
 
 function MbjDisplayhYouveWon() {
     //ga('send', 'pageview', 'youvewon');
@@ -1068,6 +1067,18 @@ function showPosition(position) {
 
 
 
+
+
+
+function fadeElementOut(activator, target) {
+    jQuery(activator).off('submit').on('submit', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        jQuery( target )
+                .fadeOut(500, "swing")
+                .remove();
+    });
+};
 
 
 

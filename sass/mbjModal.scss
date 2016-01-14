@@ -1,0 +1,123 @@
+@charset "UTF-8";
+
+/* MyBeanJar Experimental Modal Styles */
+
+html, body {
+    height: 100%; /* root and body MUST be height 100% */
+    position: relative; /* Required for proper resizing on iOS Safari and other mobile browsers*/
+}
+
+#mbj_modal {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 100%;
+    z-index: 999999999;
+    display: none;
+}
+
+#modal-tbody, #modal-tr, #modal-td {
+    height: 100%; /* All table elements should be height 100% */
+}
+
+#modal-td {
+    vertical-align: middle;
+}
+
+#modal-content {
+    position: relative;
+    left: 100%;
+    height: auto; /* HEIGHT optional, any unit */
+    width: 50%; /* WIDTH optional, any unit */    
+    /* max-height: 80%; /* MAX-HEIGHT optional, if height auto, must be % */
+    /* min-height: 80px; /* MIN-HEIGHT optional, any unit */
+    /* max-width: 225px; /* MAX-WIDTH optional, any unit */
+    /* min-width: 80px; /* MIN-WIDTH optional, any unit */
+    margin: 0 auto;
+    /* border: 1px solid; */
+    /* background: #eaeaea; */
+    overflow: auto;
+}
+
+/* LEGACY CRUDDY CODE */
+#mbj-youvewon-init {
+    height: 375px;
+    width: 343px;
+    background-color: black;
+    background-image: url("../img/youcouldvewon.png");
+    position: relative;
+    background-repeat: no-repeat;
+}
+
+.mbj_notification_sub_inner {
+    width: 270px;
+    padding: 5px;
+    margin-top: 255px;
+    margin-left: 10px;
+    background: black;
+    height: 32px;
+}
+
+
+
+.mbjBigButton {
+    width: 200px;
+    height: 75px;
+}
+
+
+/*** -ANIMATIONS - ***/
+
+.fade-in {
+    animation: 
+        rog-scale 3s 1 ease-in-out forwards;
+}
+
+@keyframes rog-scale {
+  0% { transform: scale(1); }
+  50% { transform: scale(1); }
+  100% { transform: scale(1.25); }
+}
+
+
+
+/*** - ADAPTIVE LAYOUTS - ***/
+
+
+/* Generic mobile portrait */
+
+@media all 
+    and (max-device-width: 667px)
+    and (orientation:portrait) {              
+    .mbj_notification {
+        width: 50vw;
+    }
+
+    #modal-content {
+        width: 100vw;
+    }
+}
+
+
+
+
+
+/* Desktop landscape */
+
+@media all 
+    and (orientation:landscape) {                                
+    .mbj_notification {
+        width: 343px;
+    }
+}
+
+
+
+
+/* Desktop portrait */
+
+@media all 
+    and (min-width: 600px) and (orientation:portrait) {
+
+}
