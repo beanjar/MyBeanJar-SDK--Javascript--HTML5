@@ -52,7 +52,7 @@ html, body {
 
 /* LEGACY CRUDDY CODE */
 #mbj-youvewon-init {
-    height: 375px;
+    height: 399px;
     //width: 343px;
     background-color: black;
     background-image: url("../img/youcouldvewon.png");
@@ -68,13 +68,66 @@ html, body {
     position: relative;
 }
 
+#mbj-label-init-username {
+    float: left;
+    color: white;
+    background: black;
+    font-size: 8pt;
+    font-family: Arial;
+    width: 80px;
+    text-align: center;
+}
+
+#mbj-field-init-username {
+    float: left;
+    padding-right: 5px;
+    margin-top: 0px;
+
+    #mbj_form_u {
+        width: 120px;
+        background-color: silver;
+        float: left;
+        border-color: black;
+        border-width: 3px;
+    }
+}
+
+form.mbj-form {
+    button.submit {
+        height: 24px;
+        margin-top: 0px;
+        float: right;
+        background: white;
+
+        span {
+            color: black;
+        }
+    }
+}
+
+#mbj-onboard-buttons {
+    //margin-top: 25px;
+    margin-left:10px;
+    position: absolute;
+    bottom: 4px;
+}
+
+.mbj-aside,
+.mbj-form-label {
+    color: #a9a9a9 !important;
+}
+
+/* END LEGACY CRUDDY CODE */
+
+
+
 .mbj_notification_sub_inner {
     width: 270px;
     padding: 5px;
-    margin-top: 255px;
+    margin-top: 262px;
     margin-left: 10px;
     background: black;
-    height: 32px;
+    //height: 32px;
 }
 
 

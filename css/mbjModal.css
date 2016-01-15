@@ -54,7 +54,7 @@ html, body {
 /* LEGACY CRUDDY CODE */
 /* line 54, ../sass/mbjModal.scss */
 #mbj-youvewon-init {
-  height: 375px;
+  height: 399px;
   background-color: black;
   background-image: url("../img/youcouldvewon.png");
   position: relative;
@@ -71,23 +71,74 @@ html, body {
 }
 
 /* line 71, ../sass/mbjModal.scss */
+#mbj-label-init-username {
+  float: left;
+  color: white;
+  background: black;
+  font-size: 8pt;
+  font-family: Arial;
+  width: 80px;
+  text-align: center;
+}
+
+/* line 81, ../sass/mbjModal.scss */
+#mbj-field-init-username {
+  float: left;
+  padding-right: 5px;
+  margin-top: 0px;
+}
+/* line 86, ../sass/mbjModal.scss */
+#mbj-field-init-username #mbj_form_u {
+  width: 120px;
+  background-color: silver;
+  float: left;
+  border-color: black;
+  border-width: 3px;
+}
+
+/* line 96, ../sass/mbjModal.scss */
+form.mbj-form button.submit {
+  height: 24px;
+  margin-top: 0px;
+  float: right;
+  background: white;
+}
+/* line 102, ../sass/mbjModal.scss */
+form.mbj-form button.submit span {
+  color: black;
+}
+
+/* line 108, ../sass/mbjModal.scss */
+#mbj-onboard-buttons {
+  margin-left: 10px;
+  position: absolute;
+  bottom: 4px;
+}
+
+/* line 115, ../sass/mbjModal.scss */
+.mbj-aside,
+.mbj-form-label {
+  color: #a9a9a9 !important;
+}
+
+/* END LEGACY CRUDDY CODE */
+/* line 124, ../sass/mbjModal.scss */
 .mbj_notification_sub_inner {
   width: 270px;
   padding: 5px;
-  margin-top: 255px;
+  margin-top: 262px;
   margin-left: 10px;
   background: black;
-  height: 32px;
 }
 
-/* line 82, ../sass/mbjModal.scss */
+/* line 135, ../sass/mbjModal.scss */
 .mbjBigButton {
   width: 200px;
   height: 75px;
 }
 
 /*** -ANIMATIONS - ***/
-/* line 90, ../sass/mbjModal.scss */
+/* line 143, ../sass/mbjModal.scss */
 .fade-in {
   -webkit-animation: rog-scale 3s 1 ease-in-out forwards;
           animation: rog-scale 3s 1 ease-in-out forwards;
@@ -125,19 +176,19 @@ html, body {
 /*** - ADAPTIVE LAYOUTS - ***/
 /* Generic mobile portrait */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 111, ../sass/mbjModal.scss */
+  /* line 164, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 50vw;
   }
 
-  /* line 115, ../sass/mbjModal.scss */
+  /* line 168, ../sass/mbjModal.scss */
   #modal-content {
     width: 100vw;
   }
 }
 /* Desktop landscape */
 @media all and (orientation: landscape) {
-  /* line 128, ../sass/mbjModal.scss */
+  /* line 181, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 343px;
   }

@@ -10,44 +10,46 @@
 /*//// SCSS variable pile ////*/
 
     /* color scheme */
-    $ab-color-white:                rgba(255,255,255,1);
-    $ab-color-whitetrans:           rgba(255,255,255,0.75);
-    $ab-color-whitetrans-lt:        rgba(255,255,255,0.25);
+    $mbj-color-white:                rgba(255,255,255,1);
+    $mbj-color-whitetrans:           rgba(255,255,255,0.75);
+    $mbj-color-whitetrans-lt:        rgba(255,255,255,0.25);
 
-    $ab-color-magenta:              rgba(236, 0, 140, 1);
-    $ab-color-cyan:                 rgba(0, 174, 239, 1);
-    $ab-color-nearblack:            rgba(16,16,16,1);
-    $ab-color-nearblacktrans:       rgba(16,16,16,0.8);
-    $ab-color-nearblacktranslt:     rgba(16,16,16,0.4);
+    $mbj-color-magenta:              rgba(236, 0, 140, 1);
+    $mbj-color-cyan:                 rgba(0, 174, 239, 1);
+    $mbj-color-nearblack:            rgba(16,16,16,1);
+    $mbj-color-nearblacktrans:       rgba(16,16,16,0.8);
+    $mbj-color-nearblacktranslt:     rgba(16,16,16,0.4);
     
-    $ab-color-blue:                 rgba(8, 80, 180, 1);
-    $ab-color-blue-lt:              rgba(48, 175, 241, 1);
-    $ab-color-blue-dk:              rgba(4, 40, 90, 1);
+    $mbj-color-blue:                 rgba(8, 80, 180, 1);
+    $mbj-color-blue-lt:              rgba(48, 175, 241, 1);
+    $mbj-color-blue-dk:              rgba(4, 40, 90, 1);
 
-    $ab-color-yellow:               rgba(255, 243, 0, 1);
-    $ab-color-yellow-dk:            rgba(255, 194, 0, 1);
+    $mbj-color-yellow:               rgba(255, 243, 0, 1);
+    $mbj-color-yellow-dk:            rgba(255, 194, 0, 1);
 
-    $ab-color-red:                  rgba(255, 0, 0, 1);
-    $ab-color-red-dk:               rgba(128, 0, 0, 1);
+    $mbj-color-goldenrod:            rgba(179, 154, 19, 1);
 
-    $ab-color-incomplete:           rgba(255, 127, 127, 1);
+    $mbj-color-red:                  rgba(255, 0, 0, 1);
+    $mbj-color-red-dk:               rgba(128, 0, 0, 1);
 
-    $ab-color-grey:                 rgba(204,204,204,1);
-    $ab-color-greydk:               rgba(153,153,153,1);
+    $mbj-color-incomplete:           rgba(255, 127, 127, 1);
 
-    $ab-color-angry-orange:         rgba(248,180,48,1);
-    $ab-color-angry-yellow:         rgba(255,248,142,1);
+    $mbj-color-grey:                 rgba(204,204,204,1);
+    $mbj-color-greydk:               rgba(153,153,153,1);
 
-    $ab-color-green:                rgba(41,182,55,1);
-    $ab-color-green-dk:             rgba(44,111,0,1);
+    $mbj-color-angry-orange:         rgba(248,180,48,1);
+    $mbj-color-angry-yellow:         rgba(255,248,142,1);
+
+    $mbj-color-green:                rgba(41,182,55,1);
+    $mbj-color-green-dk:             rgba(44,111,0,1);
 
     /* hopefully temporary */
-    $ab-color-green-awk:            rgba(144, 238, 144, 1);
+    $mbj-color-green-awk:            rgba(144, 238, 144, 1);
 
-    $ab-color-grey-dk:              rgba(16,16,16,1);
+    $mbj-color-grey-dk:              rgba(16,16,16,1);
 
-    $ab-color-facebook-blue:        #3B5998;
-    $ab-color-facebook-blue-lt:     #627AAD;
+    $mbj-color-facebook-blue:        #3B5998;
+    $mbj-color-facebook-blue-lt:     #627AAD;
 
 
 
@@ -63,6 +65,7 @@
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222229', endColorstr='#37373e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   position: absolute;
   -webkit-transform: translateZ(0);
+  font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
 .mbj_notification_container_container {
@@ -77,17 +80,17 @@
   font-family: 'Museo','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;
   color: #cccccc;
   position: relative;
-  margin: 0px auto;
+  margin: 10px auto;    // Top/bottom margin needs to be same size as shadow!
   z-index: 10;
   top: -100%;
   -webkit-transform: translateZ(0);
-  padding: 8px;
+  //padding: 8px;
   box-shadow: 0 0 10px 1px rgba(0,0,0,0.8);
   border-radius: 8px;
-  border: 3px solid $ab-color-grey-dk;
+  border: 3px solid $mbj-color-grey-dk;
   -webkit-background-clip: padding-box;
   background-clip: padding-box !important;
-  background: $ab-color-whitetrans;
+  background: $mbj-color-whitetrans;
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222229', endColorstr='#37373e',GradientType=1 );
   width: 75%;
   max-height: 78% !important;
@@ -106,6 +109,9 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 300px;
+
+    padding: 10px !important;
+    box-sizing: border-box;
 }
 
 .mbj_notification_beanticker {
@@ -126,10 +132,10 @@
 }
 
 .mbj-form-block {
-    // border: 1px solid $ab-color-whitetrans;
+    // border: 1px solid $mbj-color-whitetrans;
     margin: 0.5rem 0;
     // padding: 1rem;
-    // background-color: $ab-color-nearblacktranslt;
+    // background-color: $mbj-color-nearblacktranslt;
 
     &:last-of-type {
       margin-bottom: 0;
@@ -187,7 +193,7 @@
   p {
     margin: 0.5em 0;
     font-size: 0.75rem;
-    color: $ab-color-white;
+    color: $mbj-color-white;
     // text-transform: uppercase;
   
     &:first-of-type {
@@ -301,36 +307,36 @@ input.success{
   }
 
   &.green {
-    background-color: $ab-color-green-awk;
-    border-color: $ab-color-green-awk;
+    background-color: $mbj-color-green-awk;
+    border-color: $mbj-color-green-awk;
     color: #000000;
     font-size: 8pt;
   }
 }
 
 .btn-facebook {
-  background-image: linear-gradient(top, $ab-color-facebook-blue-lt, $ab-color-facebook-blue);
-  border-color: $ab-color-facebook-blue;
+  background-image: linear-gradient(top, $mbj-color-facebook-blue-lt, $mbj-color-facebook-blue);
+  border-color: $mbj-color-facebook-blue;
 
   &:active {
-    background-image: linear-gradient(bottom, $ab-color-facebook-blue-lt, $ab-color-facebook-blue);
+    background-image: linear-gradient(bottom, $mbj-color-facebook-blue-lt, $mbj-color-facebook-blue);
   }  
 }
 
 .btn-category {
-  background-image: linear-gradient(top, $ab-color-blue, $ab-color-blue-dk);
-  border-color: $ab-color-blue;
+  background-image: linear-gradient(top, $mbj-color-blue, $mbj-color-blue-dk);
+  border-color: $mbj-color-blue;
 
   &:active {
-    background-image: linear-gradient(bottom, $ab-color-blue, $ab-color-blue-dk);
+    background-image: linear-gradient(bottom, $mbj-color-blue, $mbj-color-blue-dk);
   }
 
   &.btn-category-selected {
-    background-image: linear-gradient(top, $ab-color-green, $ab-color-green-dk);
-    border-color: $ab-color-green;
+    background-image: linear-gradient(top, $mbj-color-green, $mbj-color-green-dk);
+    border-color: $mbj-color-green;
 
     &:active {
-      background-image: linear-gradient(bottom, $ab-color-green, $ab-color-green-dk);
+      background-image: linear-gradient(bottom, $mbj-color-green, $mbj-color-green-dk);
     }
   }
 
@@ -538,22 +544,38 @@ p.mbj_caption {
 .mbj_notification_title {
   text-align: center;
   margin-top: 20px;
+
+  img {
+    float: left;
+    margin-top: 8px;
+  }
+
+  h2 {
+    margin: 0.2em auto;
+    display: inline;
+    //top: 1em;
+    position: relative;
+    //font-size: 0.8rem;
+    font-size: 1.5rem;
+    text-align: center;
+    //color: $mbj-color-white;
+    color: $mbj-color-yellow-dk;
+  }
+
+  h3 {
+    //margin: 0.2em auto;
+    //display: inline;
+    //top: 1em;
+    position: relative;
+    //font-size: 0.8rem;
+    font-size: 1rem;
+    text-align: center;
+    //color: $mbj-color-white;
+    color: $mbj-color-white;
+  }
+
 }
 
-.mbj_notification_title img {
-  float: left;
-  margin-top: 8px;
-}
-
-.mbj_notification_title h2{
-  margin: 0.2em auto;
-  display: inline;
-  top: 1em;
-  position: relative;
-  font-size: 0.8rem;
-  text-align: center;
-  color: $ab-color-white;
-}
 
 .mbj_notification_pane_selector {
   display: inline-block;
@@ -1193,10 +1215,10 @@ img.grippy {
 
 .btn-ab-iap li {
   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px 0px;
-  background-color: $ab-color-nearblacktrans;
-  //background: linear-gradient(to bottom,  $ab-color-blue 0%, $ab-color-blue-dk 100%);
+  background-color: $mbj-color-nearblacktrans;
+  //background: linear-gradient(to bottom,  $mbj-color-blue 0%, $mbj-color-blue-dk 100%);
   background-repeat: repeat-x;
-  border-color: $ab-color-blue-dk;
+  border-color: $mbj-color-blue-dk;
   border-width: 1px;
   border-style: solid;
   border-radius: 4px;
@@ -1221,13 +1243,13 @@ img.grippy {
 
 // .btn-ab-iap li:active {
 //   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px 0px;
-//   background-color: $ab-color-blue-dk;
-//   background: linear-gradient(to bottom,  $ab-color-blue-dk 0%, $ab-color-blue 100%);
+//   background-color: $mbj-color-blue-dk;
+//   background: linear-gradient(to bottom,  $mbj-color-blue-dk 0%, $mbj-color-blue 100%);
 // }
 
 li.ab-btn-iap-active {
   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.0470588) 0px 1px 2px 0px;
-  background-color: $ab-color-red-dk;
+  background-color: $mbj-color-red-dk;
 }
 
 .listing-info li {
@@ -1349,7 +1371,7 @@ li.ab-btn-iap-active {
 .ab-title {
   font-family: bangers;
   text-align: center;
-  color: $ab-color-angry-orange;
+  color: $mbj-color-angry-orange;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
@@ -1368,7 +1390,7 @@ li.ab-btn-iap-active {
 .info-title {
   font-family: bangers;
   text-align: left;
-  color: $ab-color-angry-orange;
+  color: $mbj-color-angry-orange;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   margin: 1rem 0;
 }
@@ -1393,7 +1415,7 @@ li.ab-btn-iap-active {
 .des-info-new p {
   font-family: 'komika-disp', cursive;
   font-size: 0.8rem;
-  color: $ab-color-white;
+  color: $mbj-color-white;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   letter-spacing: 0.05rem;
   flex: 1 2 auto;
@@ -1403,13 +1425,13 @@ li.ab-btn-iap-active {
 }
 
 .basic-para a {
-  color: $ab-color-blue-lt;
+  color: $mbj-color-blue-lt;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   text-decoration: none;
 }
 
 .incomplete {
-    background-color: $ab-color-incomplete;
+    background-color: $mbj-color-incomplete;
     transition: background-color 0.3s;
 }
 
@@ -1493,11 +1515,11 @@ li.ab-btn-iap-active {
     /* padding: 10px; */
     padding: 2rem;
     min-height: 100%;
-    background-color: $ab-color-nearblacktrans;
+    background-color: $mbj-color-nearblacktrans;
 }
 
 // .des-info-new {
-//     background: $ab-color-nearblacktrans;
+//     background: $mbj-color-nearblacktrans;
 //     border: 1px solid #cccccc;
 //     border-radius: 0;
 //     color: #000000;
@@ -1510,14 +1532,14 @@ li.ab-btn-iap-active {
 .des-info-new {
   
   .title {
-    color: $ab-color-angry-orange;
+    color: $mbj-color-angry-orange;
     font-size: 1.5rem;
     text-transform: uppercase;
     margin-bottom: 0;
   }
 
   .artist {
-    color: $ab-color-angry-yellow;
+    color: $mbj-color-angry-yellow;
     font-size: 1rem;
     margin-top: 0;
   }
@@ -1552,39 +1574,39 @@ button.btn-iap > span {
 }
 
 .btn-info {
-  background-color: $ab-color-blue-dk;
-  background-image: linear-gradient(top, $ab-color-blue, $ab-color-blue-dk);
-  border-color: $ab-color-blue;
+  background-color: $mbj-color-blue-dk;
+  background-image: linear-gradient(top, $mbj-color-blue, $mbj-color-blue-dk);
+  border-color: $mbj-color-blue;
 }
 
 .btn-info:active {
-  background-color: $ab-color-blue-dk;
-  background-image: linear-gradient(top, $ab-color-blue-dk, $ab-color-blue);
-  border-color: $ab-color-blue;
+  background-color: $mbj-color-blue-dk;
+  background-image: linear-gradient(top, $mbj-color-blue-dk, $mbj-color-blue);
+  border-color: $mbj-color-blue;
 }
 
 .btn-play {
-  background-color: $ab-color-green;
-  background-image: linear-gradient(top, $ab-color-green, $ab-color-green-dk);
-  border-color: $ab-color-green;
+  background-color: $mbj-color-green;
+  background-image: linear-gradient(top, $mbj-color-green, $mbj-color-green-dk);
+  border-color: $mbj-color-green;
 }
 
 .btn-play:active {
-  background-color: $ab-color-green;
-  background-image: linear-gradient(top, $ab-color-green-dk, $ab-color-green);
-  border-color: $ab-color-green;
+  background-color: $mbj-color-green;
+  background-image: linear-gradient(top, $mbj-color-green-dk, $mbj-color-green);
+  border-color: $mbj-color-green;
 }
 
 .btn-purchase {
-  background-color: $ab-color-yellow-dk;
-  background-image: linear-gradient(top, $ab-color-yellow-dk, $ab-color-angry-orange);
-  border-color: $ab-color-yellow;
+  background-color: $mbj-color-yellow-dk;
+  background-image: linear-gradient(top, $mbj-color-yellow-dk, $mbj-color-angry-orange);
+  border-color: $mbj-color-yellow;
 }
 
 .btn-purchase:active {
-  background-color: $ab-color-yellow-dk;
-  background-image: linear-gradient(top, $ab-color-angry-orange, $ab-color-yellow-dk);
-  border-color: $ab-color-yellow;
+  background-color: $mbj-color-yellow-dk;
+  background-image: linear-gradient(top, $mbj-color-angry-orange, $mbj-color-yellow-dk);
+  border-color: $mbj-color-yellow;
 }
 
 
@@ -1608,11 +1630,11 @@ a.password-recovery {
     margin-top: 0.5rem;
     font-size: 0.75rem;
     font-weight: bold;
-    // color: $ab-color-blue;
+    // color: $mbj-color-blue;
     cursor: pointer;
 
     &:hover {
-      color: $ab-color-white;
+      color: $mbj-color-white;
     }
 }
 
