@@ -440,10 +440,7 @@ img.mbj_loading {
   position: relative;
   top: -50%;
   width: 80%;
-  background-color: #ddd;
   color: #ccc;
-  display: none;
-  border: 1px solid #222229;
   font-family: 'Museo','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;
   -webkit-transform: translateZ(0);
   margin: 0 auto;
@@ -484,7 +481,6 @@ img.mbj_loading {
 /* line 487, ../sass/mbjNotifier.scss */
 img.bean_notification_image {
   width: 100%;
-  background-image: url(../img/activity_indicator.gif);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -651,7 +647,7 @@ html {
 /* line 638, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue .large {
   width: 100%;
-  *width: 94%;
+  /*width: 94%;*/
 }
 
 /* line 643, ../sass/mbjNotifier.scss */
@@ -678,7 +674,7 @@ html {
 /* line 668, ../sass/mbjNotifier.scss */
 .mbj-form .large {
   width: 100%;
-  *width: 94%;
+  /*width: 94%;*/
 }
 
 /* address select style */
@@ -904,7 +900,7 @@ Not advised to edit stuff below this line
 .mbj-form input[type=text],
 .mbj-form input[type=password],
 .mbj-form input[type=email] {
-  padding: 6px 2%;
+  padding: 2px;
   font-family: inherit;
   font-size: 0.8em;
   font-size: 0.8rem;
@@ -918,10 +914,9 @@ Not advised to edit stuff below this line
   border-radius: 3px;
   outline: 0;
   box-sizing: border-box;
-  height: 1.5rem;
 }
 
-/* line 919, ../sass/mbjNotifier.scss */
+/* line 920, ../sass/mbjNotifier.scss */
 .mbj-form input[type=text]:focus,
 .mbj-form input[type=password]:focus,
 .mbj-form input[type=email]:focus {
@@ -934,7 +929,7 @@ Not advised to edit stuff below this line
 }
 
 /* .formoid-default-skyblue color scheme end */
-/* line 931, ../sass/mbjNotifier.scss */
+/* line 932, ../sass/mbjNotifier.scss */
 .mbj-footer {
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 100%;
@@ -954,18 +949,18 @@ Not advised to edit stuff below this line
   width: 100%;
 }
 
-/* line 950, ../sass/mbjNotifier.scss */
+/* line 951, ../sass/mbjNotifier.scss */
 .mbj-footer a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* line 955, ../sass/mbjNotifier.scss */
+/* line 956, ../sass/mbjNotifier.scss */
 .mbj-footer p {
   margin: 1em 0;
 }
 
-/* line 959, ../sass/mbjNotifier.scss */
+/* line 960, ../sass/mbjNotifier.scss */
 .slider_h3 {
   color: #cccccc;
   font-size: 0.5rem;
@@ -973,7 +968,7 @@ Not advised to edit stuff below this line
   line-height: 0.6rem;
 }
 
-/* line 966, ../sass/mbjNotifier.scss */
+/* line 967, ../sass/mbjNotifier.scss */
 .slider_div {
   line-height: 0.7rem;
   height: 100% !important;
@@ -997,12 +992,12 @@ Not advised to edit stuff below this line
           align-items: flex-start;
 }
 
-/* line 976, ../sass/mbjNotifier.scss */
+/* line 977, ../sass/mbjNotifier.scss */
 .slider_image {
   margin-bottom: 0.5rem;
 }
 
-/* line 980, ../sass/mbjNotifier.scss */
+/* line 981, ../sass/mbjNotifier.scss */
 #slider_components {
   display: block;
   display: -webkit-box;
@@ -1020,7 +1015,7 @@ Not advised to edit stuff below this line
           align-items: center;
 }
 
-/* line 987, ../sass/mbjNotifier.scss */
+/* line 988, ../sass/mbjNotifier.scss */
 .footer-header-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1044,7 +1039,7 @@ Not advised to edit stuff below this line
   cursor: pointer;
 }
 
-/* line 1008, ../sass/mbjNotifier.scss */
+/* line 1009, ../sass/mbjNotifier.scss */
 .footer-header-strip-title {
   color: #dc5214;
   text-align: left;
@@ -1052,7 +1047,7 @@ Not advised to edit stuff below this line
   padding-left: 3%;
 }
 
-/* line 1015, ../sass/mbjNotifier.scss */
+/* line 1016, ../sass/mbjNotifier.scss */
 .footer-header-strip-counter {
   color: #c09853;
   text-align: right;
@@ -1060,7 +1055,7 @@ Not advised to edit stuff below this line
   padding-right: 3%;
 }
 
-/* line 1022, ../sass/mbjNotifier.scss */
+/* line 1023, ../sass/mbjNotifier.scss */
 .footer-signup-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1070,7 +1065,7 @@ Not advised to edit stuff below this line
   width: 100%;
 }
 
-/* line 1028, ../sass/mbjNotifier.scss */
+/* line 1029, ../sass/mbjNotifier.scss */
 button#footer-signup {
   background-color: #fe8630;
   border: none;
@@ -1081,7 +1076,7 @@ button#footer-signup {
   text-align: left;
 }
 
-/* line 1038, ../sass/mbjNotifier.scss */
+/* line 1039, ../sass/mbjNotifier.scss */
 #mbj-footer-logo {
   width: 15%;
   display: -webkit-box;
@@ -1094,12 +1089,12 @@ button#footer-signup {
           align-items: center;
 }
 
-/* line 1044, ../sass/mbjNotifier.scss */
+/* line 1045, ../sass/mbjNotifier.scss */
 img#footer-logo {
   width: 100%;
 }
 
-/* line 1048, ../sass/mbjNotifier.scss */
+/* line 1049, ../sass/mbjNotifier.scss */
 #mbj-footer-cta {
   width: 85%;
   display: -webkit-box;
@@ -1118,7 +1113,7 @@ img#footer-logo {
   line-height: 1.5rem;
 }
 
-/* line 1057, ../sass/mbjNotifier.scss */
+/* line 1058, ../sass/mbjNotifier.scss */
 #mbj-footer-cta-sub {
   border: 0.5vh solid #222;
   background-color: #222 !important;
@@ -1135,7 +1130,7 @@ img#footer-logo {
   display: flex;
 }
 
-/* line 1066, ../sass/mbjNotifier.scss */
+/* line 1067, ../sass/mbjNotifier.scss */
 .footer-cta-title {
   font-size: 0.7rem;
   padding-left: 0.25rem;
@@ -1143,18 +1138,18 @@ img#footer-logo {
   width: 50%;
 }
 
-/* line 1073, ../sass/mbjNotifier.scss */
+/* line 1074, ../sass/mbjNotifier.scss */
 #splash-fade {
   pointer-events: none;
 }
 
-/* line 1077, ../sass/mbjNotifier.scss */
+/* line 1078, ../sass/mbjNotifier.scss */
 .form-checkbox {
   font-size: 0.7rem !important;
   color: #a9a9a9;
 }
 
-/* line 1082, ../sass/mbjNotifier.scss */
+/* line 1083, ../sass/mbjNotifier.scss */
 .frosted-overlay {
   width: 96%;
   height: 86%;
@@ -1181,21 +1176,21 @@ img#footer-logo {
   border-bottom: 1rem ridge rgba(255, 255, 255, 0.05);
 }
 
-/* line 1107, ../sass/mbjNotifier.scss */
+/* line 1108, ../sass/mbjNotifier.scss */
 #main_container {
   background-color: rgba(40, 40, 60, 0.7);
   box-shadow: inset 0 0 12rem rgba(165, 225, 255, 0.6);
   position: relative;
 }
 
-/* line 1113, ../sass/mbjNotifier.scss */
+/* line 1114, ../sass/mbjNotifier.scss */
 #slider_components * h3 {
   text-shadow: 0px 0px 3px #000000 !important;
   font-size: 0.8rem;
   line-height: 0.9rem;
 }
 
-/* line 1119, ../sass/mbjNotifier.scss */
+/* line 1120, ../sass/mbjNotifier.scss */
 img.grippy {
   width: auto;
   height: 50%;
@@ -1203,7 +1198,7 @@ img.grippy {
   margin-left: 2%;
 }
 
-/* line 1126, ../sass/mbjNotifier.scss */
+/* line 1127, ../sass/mbjNotifier.scss */
 .newcount {
   -webkit-animation: newcountglow 1s 1 linear;
   animation: newcountglow 1s 1 linear;
@@ -1253,7 +1248,7 @@ img.grippy {
     color: #c09853;
   }
 }
-/* line 1216, ../sass/mbjNotifier.scss */
+/* line 1217, ../sass/mbjNotifier.scss */
 .btn-ab-iap li {
   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: rgba(16, 16, 16, 0.8);
@@ -1281,13 +1276,13 @@ img.grippy {
   box-sizing: border-box;
 }
 
-/* line 1250, ../sass/mbjNotifier.scss */
+/* line 1251, ../sass/mbjNotifier.scss */
 li.ab-btn-iap-active {
   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: maroon;
 }
 
-/* line 1255, ../sass/mbjNotifier.scss */
+/* line 1256, ../sass/mbjNotifier.scss */
 .listing-info li {
   list-style: inside none disc;
   font-size: 15px;
@@ -1295,13 +1290,13 @@ li.ab-btn-iap-active {
   color: #ff0;
 }
 
-/* line 1262, ../sass/mbjNotifier.scss */
+/* line 1263, ../sass/mbjNotifier.scss */
 .listing-page-custom {
   padding: 10px;
   float: left;
 }
 
-/* line 1267, ../sass/mbjNotifier.scss */
+/* line 1268, ../sass/mbjNotifier.scss */
 .listing-listing li {
   /*    background: #021CA1;
       color: #ffff00;*/
@@ -1317,17 +1312,17 @@ li.ab-btn-iap-active {
   display: flex;
 }
 
-/* line 1280, ../sass/mbjNotifier.scss */
+/* line 1281, ../sass/mbjNotifier.scss */
 .listing-listing img {
   float: left;
 }
 
-/* line 1284, ../sass/mbjNotifier.scss */
+/* line 1285, ../sass/mbjNotifier.scss */
 .example span {
   color: #000;
 }
 
-/* line 1288, ../sass/mbjNotifier.scss */
+/* line 1289, ../sass/mbjNotifier.scss */
 .listing-listing span {
   font-size: 18px;
   margin: 10px 0 10px 4px;
@@ -1340,7 +1335,7 @@ li.ab-btn-iap-active {
   /*    font-family:"Comic Sans MS", cursive;*/
 }
 
-/* line 1298, ../sass/mbjNotifier.scss */
+/* line 1299, ../sass/mbjNotifier.scss */
 .listing-listing input {
   float: left;
   height: 49px;
@@ -1348,7 +1343,7 @@ li.ab-btn-iap-active {
   width: 27px;
 }
 
-/* line 1305, ../sass/mbjNotifier.scss */
+/* line 1306, ../sass/mbjNotifier.scss */
 .iap-img {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1361,7 +1356,7 @@ li.ab-btn-iap-active {
 }
 
 /* IAP button contents */
-/* line 1313, ../sass/mbjNotifier.scss */
+/* line 1314, ../sass/mbjNotifier.scss */
 .btn-ab-iap img,
 .btn-ab-iap span,
 .btn-ab-iap input {
@@ -1370,7 +1365,7 @@ li.ab-btn-iap-active {
           align-self: center;
 }
 
-/* line 1319, ../sass/mbjNotifier.scss */
+/* line 1320, ../sass/mbjNotifier.scss */
 .btn-ab-iap-flextainer {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1387,14 +1382,14 @@ li.ab-btn-iap-active {
   width: 100%;
 }
 
-/* line 1326, ../sass/mbjNotifier.scss */
+/* line 1327, ../sass/mbjNotifier.scss */
 .btn-ab-iap div > img,
 .btn-ab-iap div > span,
 .btn-ab-iap div > input {
   margin: 5px;
 }
 
-/* line 1344, ../sass/mbjNotifier.scss */
+/* line 1345, ../sass/mbjNotifier.scss */
 .iap-btn-container {
   float: right;
   right: 0;
@@ -1403,7 +1398,7 @@ li.ab-btn-iap-active {
           align-self: center;
 }
 
-/* line 1351, ../sass/mbjNotifier.scss */
+/* line 1352, ../sass/mbjNotifier.scss */
 .btn-ab-buy {
   min-width: 100%;
   min-height: 5rem;
@@ -1413,12 +1408,12 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1360, ../sass/mbjNotifier.scss */
+/* line 1361, ../sass/mbjNotifier.scss */
 .unused {
   display: none;
 }
 
-/* line 1371, ../sass/mbjNotifier.scss */
+/* line 1372, ../sass/mbjNotifier.scss */
 .ab-title {
   font-family: bangers;
   text-align: center;
@@ -1426,20 +1421,20 @@ li.ab-btn-iap-active {
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
-/* line 1378, ../sass/mbjNotifier.scss */
+/* line 1379, ../sass/mbjNotifier.scss */
 #info-page {
   background-color: rgba(0, 0, 0, 0.75);
   overflow: scroll;
 }
 
-/* line 1383, ../sass/mbjNotifier.scss */
+/* line 1384, ../sass/mbjNotifier.scss */
 .info-container {
   padding: 2rem;
   padding-top: 0;
   min-height: 100%;
 }
 
-/* line 1390, ../sass/mbjNotifier.scss */
+/* line 1391, ../sass/mbjNotifier.scss */
 .info-title {
   font-family: bangers;
   text-align: left;
@@ -1448,12 +1443,12 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1398, ../sass/mbjNotifier.scss */
+/* line 1399, ../sass/mbjNotifier.scss */
 #listing-descrip {
   margin: 2rem 0;
 }
 
-/* line 1402, ../sass/mbjNotifier.scss */
+/* line 1403, ../sass/mbjNotifier.scss */
 .listing-blurb {
   font-family: 'komika-disp', cursive;
   font-size: 0.8rem;
@@ -1467,7 +1462,7 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1414, ../sass/mbjNotifier.scss */
+/* line 1415, ../sass/mbjNotifier.scss */
 .basic-para,
 .des-info-new p {
   font-family: 'komika-disp', cursive;
@@ -1486,37 +1481,37 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1427, ../sass/mbjNotifier.scss */
+/* line 1428, ../sass/mbjNotifier.scss */
 .basic-para a {
   color: #30aff1;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   text-decoration: none;
 }
 
-/* line 1433, ../sass/mbjNotifier.scss */
+/* line 1434, ../sass/mbjNotifier.scss */
 .incomplete {
   background-color: #ff7f7f;
   -webkit-transition: background-color 0.3s;
           transition: background-color 0.3s;
 }
 
-/* line 1438, ../sass/mbjNotifier.scss */
+/* line 1439, ../sass/mbjNotifier.scss */
 .required-item {
   -webkit-transition: background-color 0.3s;
           transition: background-color 0.3s;
 }
 
-/* line 1442, ../sass/mbjNotifier.scss */
+/* line 1443, ../sass/mbjNotifier.scss */
 .btn-back img {
   display: block;
 }
 
-/* line 1447, ../sass/mbjNotifier.scss */
+/* line 1448, ../sass/mbjNotifier.scss */
 .btn-back img {
   width: 100% !important;
 }
 
-/* line 1451, ../sass/mbjNotifier.scss */
+/* line 1452, ../sass/mbjNotifier.scss */
 .btn-back {
   position: absolute;
   left: 15px;
@@ -1530,12 +1525,12 @@ li.ab-btn-iap-active {
   background-color: transparent;
 }
 
-/* line 1476, ../sass/mbjNotifier.scss */
+/* line 1477, ../sass/mbjNotifier.scss */
 .info-nav {
   padding: 1rem 2rem 0 2rem;
 }
 
-/* line 1480, ../sass/mbjNotifier.scss */
+/* line 1481, ../sass/mbjNotifier.scss */
 .info-cbldf {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1555,7 +1550,7 @@ li.ab-btn-iap-active {
           align-content: space-between;
 }
 
-/* line 1487, ../sass/mbjNotifier.scss */
+/* line 1488, ../sass/mbjNotifier.scss */
 .info-logo {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 1px;
@@ -1567,7 +1562,7 @@ li.ab-btn-iap-active {
   width: 100%;
 }
 
-/* line 1494, ../sass/mbjNotifier.scss */
+/* line 1495, ../sass/mbjNotifier.scss */
 .btn-preview-close {
   z-index: 200;
   border: none;
@@ -1577,13 +1572,13 @@ li.ab-btn-iap-active {
   float: right;
 }
 
-/* line 1505, ../sass/mbjNotifier.scss */
+/* line 1506, ../sass/mbjNotifier.scss */
 .btn-preview-close img {
   width: 2rem;
   height: 2rem;
 }
 
-/* line 1514, ../sass/mbjNotifier.scss */
+/* line 1515, ../sass/mbjNotifier.scss */
 .pop-page-custom {
   /* padding: 10px; */
   padding: 2rem;
@@ -1591,21 +1586,21 @@ li.ab-btn-iap-active {
   background-color: rgba(16, 16, 16, 0.8);
 }
 
-/* line 1534, ../sass/mbjNotifier.scss */
+/* line 1535, ../sass/mbjNotifier.scss */
 .des-info-new .title {
   color: #f8b430;
   font-size: 1.5rem;
   text-transform: uppercase;
   margin-bottom: 0;
 }
-/* line 1541, ../sass/mbjNotifier.scss */
+/* line 1542, ../sass/mbjNotifier.scss */
 .des-info-new .artist {
   color: #fff88e;
   font-size: 1rem;
   margin-top: 0;
 }
 
-/* line 1553, ../sass/mbjNotifier.scss */
+/* line 1554, ../sass/mbjNotifier.scss */
 button.btn-iap {
   height: 60px;
   width: 60px;
@@ -1621,7 +1616,7 @@ button.btn-iap {
   padding: 0;
 }
 
-/* line 1563, ../sass/mbjNotifier.scss */
+/* line 1564, ../sass/mbjNotifier.scss */
 button.btn-iap > span {
   text-align: center !important;
   width: 100%;
@@ -1630,12 +1625,12 @@ button.btn-iap > span {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 1571, ../sass/mbjNotifier.scss */
+/* line 1572, ../sass/mbjNotifier.scss */
 button.btn-iap > span i {
   font-size: 24px;
 }
 
-/* line 1576, ../sass/mbjNotifier.scss */
+/* line 1577, ../sass/mbjNotifier.scss */
 .btn-info {
   background-color: #04285a;
   background-image: -webkit-linear-gradient(top, #0850b4, #04285a);
@@ -1643,7 +1638,7 @@ button.btn-iap > span i {
   border-color: #0850b4;
 }
 
-/* line 1582, ../sass/mbjNotifier.scss */
+/* line 1583, ../sass/mbjNotifier.scss */
 .btn-info:active {
   background-color: #04285a;
   background-image: -webkit-linear-gradient(top, #04285a, #0850b4);
@@ -1651,7 +1646,7 @@ button.btn-iap > span i {
   border-color: #0850b4;
 }
 
-/* line 1588, ../sass/mbjNotifier.scss */
+/* line 1589, ../sass/mbjNotifier.scss */
 .btn-play {
   background-color: #29b637;
   background-image: -webkit-linear-gradient(top, #29b637, #2c6f00);
@@ -1659,7 +1654,7 @@ button.btn-iap > span i {
   border-color: #29b637;
 }
 
-/* line 1594, ../sass/mbjNotifier.scss */
+/* line 1595, ../sass/mbjNotifier.scss */
 .btn-play:active {
   background-color: #29b637;
   background-image: -webkit-linear-gradient(top, #2c6f00, #29b637);
@@ -1667,7 +1662,7 @@ button.btn-iap > span i {
   border-color: #29b637;
 }
 
-/* line 1600, ../sass/mbjNotifier.scss */
+/* line 1601, ../sass/mbjNotifier.scss */
 .btn-purchase {
   background-color: #ffc200;
   background-image: -webkit-linear-gradient(top, #ffc200, #f8b430);
@@ -1675,7 +1670,7 @@ button.btn-iap > span i {
   border-color: #fff300;
 }
 
-/* line 1606, ../sass/mbjNotifier.scss */
+/* line 1607, ../sass/mbjNotifier.scss */
 .btn-purchase:active {
   background-color: #ffc200;
   background-image: -webkit-linear-gradient(top, #f8b430, #ffc200);
@@ -1683,7 +1678,7 @@ button.btn-iap > span i {
   border-color: #fff300;
 }
 
-/* line 1618, ../sass/mbjNotifier.scss */
+/* line 1619, ../sass/mbjNotifier.scss */
 .metadata {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 0;
@@ -1694,12 +1689,12 @@ button.btn-iap > span i {
           align-self: center;
 }
 
-/* line 1623, ../sass/mbjNotifier.scss */
+/* line 1624, ../sass/mbjNotifier.scss */
 #slider1_container_t {
   max-width: 100%;
 }
 
-/* line 1627, ../sass/mbjNotifier.scss */
+/* line 1628, ../sass/mbjNotifier.scss */
 a.password-recovery {
   text-align: right;
   float: right;
@@ -1708,7 +1703,7 @@ a.password-recovery {
   font-weight: bold;
   cursor: pointer;
 }
-/* line 1636, ../sass/mbjNotifier.scss */
+/* line 1637, ../sass/mbjNotifier.scss */
 a.password-recovery:hover {
   color: white;
 }

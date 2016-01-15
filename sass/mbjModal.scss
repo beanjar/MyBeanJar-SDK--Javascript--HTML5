@@ -39,7 +39,7 @@ html, body {
     position: relative;
     left: 100%;
     height: auto; /* HEIGHT optional, any unit */
-    width: 50%; /* WIDTH optional, any unit */    
+    //width: 50%; /* WIDTH optional, any unit */    
     /* max-height: 80%; /* MAX-HEIGHT optional, if height auto, must be % */
     /* min-height: 80px; /* MIN-HEIGHT optional, any unit */
     /* max-width: 225px; /* MAX-WIDTH optional, any unit */
@@ -117,6 +117,11 @@ form.mbj-form {
     color: #a9a9a9 !important;
 }
 
+.btn-location {
+    margin-top: 0 !important;
+    height: inherit;
+}
+
 /* END LEGACY CRUDDY CODE */
 
 
@@ -138,18 +143,8 @@ form.mbj-form {
 }
 
 
-/*** -ANIMATIONS - ***/
 
-.fade-in {
-    animation: 
-        rog-scale 3s 1 ease-in-out forwards;
-}
 
-@keyframes rog-scale {
-  0% { transform: scale(1); }
-  50% { transform: scale(1); }
-  100% { transform: scale(1.25); }
-}
 
 
 
@@ -162,11 +157,14 @@ form.mbj-form {
     and (max-device-width: 667px)
     and (orientation:portrait) {              
     .mbj_notification {
-        width: 50vw;
+        //width: 50vw;
+        width: 343px;
     }
 
     #modal-content {
-        width: 100vw;
+        //width: 100vw;
+        zoom: 2;
+        width: inherit;
     }
 }
 
@@ -181,6 +179,10 @@ form.mbj-form {
     .mbj_notification {
         width: 343px;
     }
+
+    #modal-content {
+        width: 456px;
+    }
 }
 
 
@@ -191,4 +193,7 @@ form.mbj-form {
 @media all 
     and (min-width: 600px) and (orientation:portrait) {
 
+    #modal-content {
+        width: 456px;
+    }
 }

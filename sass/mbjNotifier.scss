@@ -446,10 +446,10 @@ img.mbj_loading {
   position: relative;
   top: -50%;
   width: 80%;
-  background-color: #ddd;
+  //background-color: #ddd;
   color: #ccc;
-  display: none; 
-  border: 1px solid #222229;
+  //display: none; 
+  //border: 1px solid #222229;
   font-family: 'Museo','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;
   -webkit-transform: translateZ(0);
   margin: 0 auto;
@@ -486,7 +486,7 @@ img.mbj_loading {
 
 img.bean_notification_image {
   width: 100%;
-  background-image: url(../img/activity_indicator.gif);
+  //background-image: url(../img/activity_indicator.gif);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -637,7 +637,7 @@ html {
 
 .formoid-default-skyblue .large {
   width: 100%;
-  *width: 94%;
+  /*width: 94%;*/
 }
 
 .mbj-form {
@@ -667,7 +667,7 @@ html {
 
 .mbj-form .large {
   width: 100%;
-  *width: 94%;
+  /*width: 94%;*/
 }
 
 /* address select style */
@@ -900,7 +900,8 @@ Not advised to edit stuff below this line
 .mbj-form input[type=text],
 .mbj-form input[type=password],
 .mbj-form input[type=email] {
-  padding: 6px 2%;
+  //padding: 6px 2%;
+  padding: 2px;
   font-family: inherit;
   font-size: 0.8em;
   font-size: 0.8rem;
@@ -913,7 +914,7 @@ Not advised to edit stuff below this line
   border-radius: 3px;
   outline: 0;
   box-sizing: border-box;
-  height: 1.5rem;
+  //height: 1.5rem;
 }
 
 .mbj-form input[type=text]:focus,

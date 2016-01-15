@@ -39,8 +39,6 @@ html, body {
   left: 100%;
   height: auto;
   /* HEIGHT optional, any unit */
-  width: 50%;
-  /* WIDTH optional, any unit */
   /* max-height: 80%; /* MAX-HEIGHT optional, if height auto, must be % */
   /* min-height: 80px; /* MIN-HEIGHT optional, any unit */
   /* max-width: 225px; /* MAX-WIDTH optional, any unit */
@@ -121,8 +119,14 @@ form.mbj-form button.submit span {
   color: #a9a9a9 !important;
 }
 
+/* line 120, ../sass/mbjModal.scss */
+.btn-location {
+  margin-top: 0 !important;
+  height: inherit;
+}
+
 /* END LEGACY CRUDDY CODE */
-/* line 124, ../sass/mbjModal.scss */
+/* line 129, ../sass/mbjModal.scss */
 .mbj_notification_sub_inner {
   width: 270px;
   padding: 5px;
@@ -131,66 +135,42 @@ form.mbj-form button.submit span {
   background: black;
 }
 
-/* line 135, ../sass/mbjModal.scss */
+/* line 140, ../sass/mbjModal.scss */
 .mbjBigButton {
   width: 200px;
   height: 75px;
 }
 
-/*** -ANIMATIONS - ***/
-/* line 143, ../sass/mbjModal.scss */
-.fade-in {
-  -webkit-animation: rog-scale 3s 1 ease-in-out forwards;
-          animation: rog-scale 3s 1 ease-in-out forwards;
-}
-
-@-webkit-keyframes rog-scale {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(1.25);
-            transform: scale(1.25);
-  }
-}
-
-@keyframes rog-scale {
-  0% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  50% {
-    -webkit-transform: scale(1);
-            transform: scale(1);
-  }
-  100% {
-    -webkit-transform: scale(1.25);
-            transform: scale(1.25);
-  }
-}
 /*** - ADAPTIVE LAYOUTS - ***/
 /* Generic mobile portrait */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 164, ../sass/mbjModal.scss */
+  /* line 159, ../sass/mbjModal.scss */
   .mbj_notification {
-    width: 50vw;
+    width: 343px;
   }
 
-  /* line 168, ../sass/mbjModal.scss */
+  /* line 164, ../sass/mbjModal.scss */
   #modal-content {
-    width: 100vw;
+    zoom: 2;
+    width: inherit;
   }
 }
 /* Desktop landscape */
 @media all and (orientation: landscape) {
-  /* line 181, ../sass/mbjModal.scss */
+  /* line 179, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 343px;
   }
+
+  /* line 183, ../sass/mbjModal.scss */
+  #modal-content {
+    width: 456px;
+  }
 }
 /* Desktop portrait */
+@media all and (min-width: 600px) and (orientation: portrait) {
+  /* line 196, ../sass/mbjModal.scss */
+  #modal-content {
+    width: 456px;
+  }
+}

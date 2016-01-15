@@ -61,7 +61,10 @@ function mbjAddAwardBean() {
 
     mbjDebug("Queued Bean count: " + queuedBeans);
 
-    mbjAttemptAward();
+    // If no other modal is present, attempt to get award
+    if (!jQuery( '#mbj_modal' ).length) {
+        mbjAttemptAward();
+    };
 }
 
 
@@ -77,13 +80,18 @@ function mbjAttemptAward() {
     if (userLoggedIn && username != 'null') {
         u = sessionStorage.getItem("username");
         p = 'password';
-        mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting " + queuedBeans + " award Beans");
 
-        if (queuedBeans > 0) {
-            for (i = queuedBeans; i > 0; i--) {
-                get_award(u, p, mbjAppID, BeanAwardAlert);
-                mbjDebug(queuedBeans + " queued Beans remaining...");
-            }
+        if (sessionStorage.getItem("queuedBeans") > 0) {
+            // for (i = queuedBeans; i > 0; i--) {
+            //     get_award(u, p, mbjAppID, BeanAwardAlert);
+            //     mbjDebug(queuedBeans + " queued Beans remaining...");
+            // }
+            mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
+            get_award(u, p, mbjAppID, BeanAwardAlert);
+            queuedBeans = sessionStorage.getItem("queuedBeans");
+            queuedBeans--;
+            sessionStorage.setItem("queuedBeans", queuedBeans);
+            mbjDebug(queuedBeans + " queued Beans remaining...");
         }
     } else {
 
@@ -203,8 +211,18 @@ mbjDestroyModal = function() {
     jQuery('#mbj_modal')
         .fadeOut(200, "swing", function() {
             jQuery( this ).remove();
-        })
+
+           
+            // Get session data relevant to login state
+            username = sessionStorage.getItem("username");
+            userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+
+            // If user is logged in, check to see if any beans are left to be awarded after modal closes
+            if (userLoggedIn && username != 'null') {
+                mbjAttemptAward();
+            };
         //.remove();
+    });
 }
 
 function mbjAttemptYouvewon() {
@@ -429,11 +447,6 @@ function mbjNotifyAuthenticate(result, message, email) {
                 mbjDestroyModal();
             }, 2000);
         }, 200);
-
-        if (queuedBeans > 0) {
-            mbjAttemptAward();
-        }
-
     }
     else {
         mbjDebug("Result = " + result);
@@ -745,41 +758,51 @@ BeanAwardAlert = function(result, award) {
         queuedBeans--;
         mbjDebug("Request successful!");
         if (!jQuery( '#mbj_modal' ).length) {
-
-            jQuery( 'body' ).append(''
-            + '<table id="mbj_modal">'
-            +   '<tbody id="modal-tbody">'
-            +       '<tr id="modal-tr">'
-            +           '<td id="modal-td">'
-            +               '<div id="modal-box">'
-            +                   '<div id="modal-content">'
-            +                       '<div id="modal-body">'
-            +                           '<!-- CONTENT -->'
-            +                           '<div class="mbj_notification bean_notification_window">'
-            +                               '<img class="bean_notification_image" src="">'
-            +                           '</div>'
-            +                       '</div>'
-            +                   '</div>'
-            +               '</div>'
-            +           '</td>'
-            +       '</tr>'
-            +   '</tbody>'
-            + '</table>');
+            jQuery( 'body' ).append( '<table id="mbj_modal"></table>' );
+            jQuery( '#mbj_modal' ).load( './assets/modal/bean-award.htm' + '?' + new Date().getTime(), function(){
+                jQuery('.bean_notification_image')
+                .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
+                mbjRevealModal();
+            });
+            // jQuery( 'body' ).append(''
+            // + '<table id="mbj_modal">'
+            // +   '<tbody id="modal-tbody">'
+            // +       '<tr id="modal-tr">'
+            // +           '<td id="modal-td">'
+            // +               '<div id="modal-box">'
+            // +                   '<div id="modal-content">'
+            // +                       '<div id="modal-body">'
+            // +                           '<!-- CONTENT -->'
+            // +                           '<div class="mbj_notification bean_notification_window">'
+            // +                               '<img class="bean_notification_image" src="">'
+            // +                           '</div>'
+            // +                       '</div>'
+            // +                   '</div>'
+            // +               '</div>'
+            // +           '</td>'
+            // +       '</tr>'
+            // +   '</tbody>'
+            // + '</table>');
 
             // jQuery( 'body' ).append('<div class="mbj_notification bean_notification_window"><img class="bean_notification_image" src=""><!--                    <p class="bean_notification_text">...</p>--></div>' );
         }
-        jQuery('.bean_notification_image')
-                .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
-        jQuery('#mbj_award_img')
-                .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
+        
+        // jQuery('#mbj_award_img')
+        //         .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
 // mbjCapsuleAward();
-        jQuery("#mbj_modal, .bean_notification_window")
-                .fadeIn(500, "swing");
-        jQuery("div.bean_notification_window")
-                .html('<button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="this.parentElement.style.display = \'none\';"> <img src="img/ui_action_close.png"> </button> <img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
-        jQuery(".bean_notification_window, #mbj_modal")
-                .delay(10000)
-                .fadeOut(500, "swing");
+        
+        // jQuery("#mbj_modal, .bean_notification_window")
+        //         .fadeIn(500, "swing");
+        // jQuery("div.bean_notification_window")
+        //         .html('<button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="this.parentElement.style.display = \'none\';"> <img src="img/ui_action_close.png"> </button> <img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
+        
+
+        setTimeout(function(){
+            mbjDestroyModal();
+        }, 10000);
+        // jQuery(".bean_notification_window, #mbj_modal")
+        //         .delay(10000)
+        //         .fadeOut(500, "swing");
         //ga('send', 'pageview', 'beanAward');
     }
 
@@ -814,48 +837,48 @@ BeanAwardAlert = function(result, award) {
     }
 };
 
-FakeBeanAwardAlert = function(result, award) {
-    mbjDebug("Awarding mock Bean!");
-    awardImage = "img/7170.png";
-    msgMoreInfo = "This is a fake Bean.";
-    jQuery('.bean_notification_image')
-            .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
-    jQuery('#mbj_award_img')
-            .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
-// mbjCapsuleAward();
-    jQuery("div.bean_notification_window")
-            .fadeIn(500, "swing");
-    jQuery("div.bean_notification_window")
-            .html('<img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
-    jQuery("div.bean_notification_window")
-            .delay(100000)
-            .fadeOut(500, "swing");
-};
+// FakeBeanAwardAlert = function(result, award) {
+//     mbjDebug("Awarding mock Bean!");
+//     awardImage = "img/7170.png";
+//     msgMoreInfo = "This is a fake Bean.";
+//     jQuery('.bean_notification_image')
+//             .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
+//     jQuery('#mbj_award_img')
+//             .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
+// // mbjCapsuleAward();
+//     jQuery("div.bean_notification_window")
+//             .fadeIn(500, "swing");
+//     jQuery("div.bean_notification_window")
+//             .html('<img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
+//     jQuery("div.bean_notification_window")
+//             .delay(100000)
+//             .fadeOut(500, "swing");
+// };
 
 
 
 
-function mbjImagePreloader() {
-    jQuery('body').html('<div class="nada"><img src="img/ui_action_fail.png"><img src="img/ui_action_success.png"><img src="img/ui_action_close.png"></div>');
-}
-;
+// function mbjImagePreloader() {
+//     jQuery('body').html('<div class="nada"><img src="img/ui_action_fail.png"><img src="img/ui_action_success.png"><img src="img/ui_action_close.png"></div>');
+// }
+// ;
 
-function append_totalbeans(totalWin) {
-    mbjDebug("updating bean count");
-    if (oldWinCount == 0) {
-        oldWinCount = totalWin;
-    }
-    if (oldWinCount != totalWin) {
-        jQuery(".count_wins").addClass("newcount");
-        jQuery(".count_wins").empty();
-        jQuery(".count_wins").append("<span>Total Beans awarded: " + totalWin + "</span>");
-        setInterval(function() {
-            jQuery(".count_wins").removeClass("newcount");
-        }, 5000);
-        oldWinCount = totalWin;
-    }
-}
-;
+// function append_totalbeans(totalWin) {
+//     mbjDebug("updating bean count");
+//     if (oldWinCount == 0) {
+//         oldWinCount = totalWin;
+//     }
+//     if (oldWinCount != totalWin) {
+//         jQuery(".count_wins").addClass("newcount");
+//         jQuery(".count_wins").empty();
+//         jQuery(".count_wins").append("<span>Total Beans awarded: " + totalWin + "</span>");
+//         setInterval(function() {
+//             jQuery(".count_wins").removeClass("newcount");
+//         }, 5000);
+//         oldWinCount = totalWin;
+//     }
+// }
+// ;
 
 
 
@@ -903,23 +926,23 @@ jQuery( '#mbj_notification_container_login' ).fadeOut(1, "swing");
 jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
 }
 
-function MbjCreateOnboardModal2(){
+// function MbjCreateOnboardModal2(){
 
-    fetchCategories();
+//     fetchCategories();
 
-    //centerOnboardModal();
+//     //centerOnboardModal();
 
-    if (!jQuery( '#mbj_modal' ).length) {
-        MbjDisplayhYouveWon();
-    }
+//     if (!jQuery( '#mbj_modal' ).length) {
+//         MbjDisplayhYouveWon();
+//     }
 
-    else if (!jQuery( '#mbj_modal' ).css('display') == 'none') {
-        jQuery( '#mbj_modal' ).fadeOut(1, "swing");
-    }
+//     else if (!jQuery( '#mbj_modal' ).css('display') == 'none') {
+//         jQuery( '#mbj_modal' ).fadeOut(1, "swing");
+//     }
 
-    //MbjDisplayhYouveWon();
-    jQuery('#mbj_modal').fadeIn(500, "swing");
-}
+//     //MbjDisplayhYouveWon();
+//     jQuery('#mbj_modal').fadeIn(500, "swing");
+// }
 
 function RegistrationBack() {
     //jQuery('#mbj-login-details').replaceWith(mbjloginregister);
