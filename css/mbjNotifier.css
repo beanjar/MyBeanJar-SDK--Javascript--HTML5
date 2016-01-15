@@ -69,18 +69,22 @@
   padding: 10px !important;
   box-sizing: border-box;
 }
+/* line 116, ../sass/mbjNotifier.scss */
+.mbj_notification_inner > .mbj_notification_title:first-child {
+  margin-top: 20px;
+}
 
-/* line 117, ../sass/mbjNotifier.scss */
+/* line 121, ../sass/mbjNotifier.scss */
 .mbj_notification_beanticker {
   min-height: 80px;
   margin: 2rem -10px;
 }
 
-/* line 122, ../sass/mbjNotifier.scss */
+/* line 126, ../sass/mbjNotifier.scss */
 .action-buttons {
   position: relative;
 }
-/* line 125, ../sass/mbjNotifier.scss */
+/* line 129, ../sass/mbjNotifier.scss */
 .action-buttons button {
   margin-top: 0.5rem;
   display: -webkit-box;
@@ -102,16 +106,16 @@
           align-items: center;
 }
 
-/* line 134, ../sass/mbjNotifier.scss */
+/* line 138, ../sass/mbjNotifier.scss */
 .mbj-form-block {
   margin: 0.5rem 0;
 }
-/* line 140, ../sass/mbjNotifier.scss */
+/* line 144, ../sass/mbjNotifier.scss */
 .mbj-form-block:last-of-type {
   margin-bottom: 0;
 }
 
-/* line 145, ../sass/mbjNotifier.scss */
+/* line 149, ../sass/mbjNotifier.scss */
 .mbj-button-text {
   text-align: right;
   -webkit-box-flex: 1;
@@ -123,7 +127,7 @@
           align-self: center;
 }
 
-/* line 151, ../sass/mbjNotifier.scss */
+/* line 155, ../sass/mbjNotifier.scss */
 .mbj-button-icon i {
   font-size: 1.5rem;
   -webkit-align-self: center;
@@ -133,25 +137,25 @@
   /* hack for Firefox's flex issues */
 }
 
-/* line 157, ../sass/mbjNotifier.scss */
+/* line 161, ../sass/mbjNotifier.scss */
 .category-list {
   max-height: 200px;
   overflow: scroll;
 }
 
-/* line 169, ../sass/mbjNotifier.scss */
+/* line 173, ../sass/mbjNotifier.scss */
 .mbj_notification_container input,
 .mbj_notification_container option {
   color: #666 !important;
 }
 
-/* line 174, ../sass/mbjNotifier.scss */
+/* line 178, ../sass/mbjNotifier.scss */
 .mbj_notiication_pane {
   display: inline-block;
   width: auto;
 }
 
-/* line 179, ../sass/mbjNotifier.scss */
+/* line 183, ../sass/mbjNotifier.scss */
 .mbj_notification_copy {
   padding: 0.75em 0;
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -162,22 +166,22 @@
   text-align: justify;
   letter-spacing: -0.01em;
 }
-/* line 189, ../sass/mbjNotifier.scss */
+/* line 193, ../sass/mbjNotifier.scss */
 .mbj_notification_copy:first-of-type {
   padding-top: 0;
 }
-/* line 193, ../sass/mbjNotifier.scss */
+/* line 197, ../sass/mbjNotifier.scss */
 .mbj_notification_copy p {
   margin: 0.5em 0;
   font-size: 0.75rem;
   color: white;
 }
-/* line 199, ../sass/mbjNotifier.scss */
+/* line 203, ../sass/mbjNotifier.scss */
 .mbj_notification_copy p:first-of-type {
   margin-top: 0;
 }
 
-/* line 211, ../sass/mbjNotifier.scss */
+/* line 215, ../sass/mbjNotifier.scss */
 .two-column {
   position: absolute;
   bottom: 24px;
@@ -185,7 +189,7 @@
   width: 273px;
 }
 
-/* line 218, ../sass/mbjNotifier.scss */
+/* line 222, ../sass/mbjNotifier.scss */
 .mbj_login_status img {
   width: 20%;
   height: auto;
@@ -193,7 +197,7 @@
   position: relative;
 }
 
-/* line 225, ../sass/mbjNotifier.scss */
+/* line 229, ../sass/mbjNotifier.scss */
 p.status {
   text-align: center;
   vertical-align: middle;
@@ -201,39 +205,39 @@ p.status {
   width: 80%;
 }
 
-/* line 232, ../sass/mbjNotifier.scss */
+/* line 236, ../sass/mbjNotifier.scss */
 p.fail {
   color: #fff;
 }
 
-/* line 236, ../sass/mbjNotifier.scss */
+/* line 240, ../sass/mbjNotifier.scss */
 p.success {
   color: #fff;
 }
 
-/* line 240, ../sass/mbjNotifier.scss */
+/* line 244, ../sass/mbjNotifier.scss */
 div.fail {
   background-color: #c21010;
   border-radius: 3px;
 }
 
-/* line 245, ../sass/mbjNotifier.scss */
+/* line 249, ../sass/mbjNotifier.scss */
 div.success {
   background-color: #0fc314;
   border-radius: 3px;
 }
 
-/* line 250, ../sass/mbjNotifier.scss */
+/* line 254, ../sass/mbjNotifier.scss */
 input.fail {
   background-color: #c21010;
 }
 
-/* line 254, ../sass/mbjNotifier.scss */
+/* line 258, ../sass/mbjNotifier.scss */
 input.success {
   background-color: #0fc314;
 }
 
-/* line 258, ../sass/mbjNotifier.scss */
+/* line 262, ../sass/mbjNotifier.scss */
 .btn-mbj {
   box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: #e6611c;
@@ -276,13 +280,13 @@ input.success {
   vertical-align: middle;
   color: #ffffff;
 }
-/* line 303, ../sass/mbjNotifier.scss */
+/* line 307, ../sass/mbjNotifier.scss */
 .btn-mbj:active {
   background-image: none;
   outline: 0;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-/* line 309, ../sass/mbjNotifier.scss */
+/* line 313, ../sass/mbjNotifier.scss */
 .btn-mbj.green {
   background-color: lightgreen;
   border-color: lightgreen;
@@ -290,70 +294,70 @@ input.success {
   font-size: 8pt;
 }
 
-/* line 317, ../sass/mbjNotifier.scss */
+/* line 321, ../sass/mbjNotifier.scss */
 .btn-facebook {
   background-image: -webkit-linear-gradient(top, #627aad, #3b5998);
   background-image: linear-gradient(to bottom, #627aad, #3b5998);
   border-color: #3B5998;
 }
-/* line 321, ../sass/mbjNotifier.scss */
+/* line 325, ../sass/mbjNotifier.scss */
 .btn-facebook:active {
   background-image: -webkit-linear-gradient(bottom, #627aad, #3b5998);
   background-image: linear-gradient(to top, #627aad, #3b5998);
 }
 
-/* line 326, ../sass/mbjNotifier.scss */
+/* line 330, ../sass/mbjNotifier.scss */
 .btn-category {
   background-image: -webkit-linear-gradient(top, #0850b4, #04285a);
   background-image: linear-gradient(to bottom, #0850b4, #04285a);
   border-color: #0850b4;
 }
-/* line 330, ../sass/mbjNotifier.scss */
+/* line 334, ../sass/mbjNotifier.scss */
 .btn-category:active {
   background-image: -webkit-linear-gradient(bottom, #0850b4, #04285a);
   background-image: linear-gradient(to top, #0850b4, #04285a);
 }
-/* line 334, ../sass/mbjNotifier.scss */
+/* line 338, ../sass/mbjNotifier.scss */
 .btn-category.btn-category-selected {
   background-image: -webkit-linear-gradient(top, #29b637, #2c6f00);
   background-image: linear-gradient(to bottom, #29b637, #2c6f00);
   border-color: #29b637;
 }
-/* line 338, ../sass/mbjNotifier.scss */
+/* line 342, ../sass/mbjNotifier.scss */
 .btn-category.btn-category-selected:active {
   background-image: -webkit-linear-gradient(bottom, #29b637, #2c6f00);
   background-image: linear-gradient(to top, #29b637, #2c6f00);
 }
-/* line 343, ../sass/mbjNotifier.scss */
+/* line 347, ../sass/mbjNotifier.scss */
 .btn-category .mbj-button-text {
   text-align: left;
 }
 
-/* line 349, ../sass/mbjNotifier.scss */
+/* line 353, ../sass/mbjNotifier.scss */
 .ab-free-play {
   margin: 0.5rem 0;
 }
 
-/* line 353, ../sass/mbjNotifier.scss */
+/* line 358, ../sass/mbjNotifier.scss */
 .btn-close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 0px;
+  top: 0px;
   z-index: 200;
   border: none;
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  margin: 4px;
+  padding: 0px;
+  float: right;
   cursor: pointer;
   -webkit-transform: translateZ(0);
   background-color: transparent;
 }
-
-/* line 366, ../sass/mbjNotifier.scss */
-.btn-close img {
+/* line 375, ../sass/mbjNotifier.scss */
+.btn-close > img {
   width: 100% !important;
+  display: block;
 }
-
-/* line 370, ../sass/mbjNotifier.scss */
+/* line 381, ../sass/mbjNotifier.scss */
 .btn-close:focus {
   box-shadow: none;
   outline: none;
@@ -361,13 +365,26 @@ input.success {
   outline: none;
 }
 
-/* line 377, ../sass/mbjNotifier.scss */
-.btn-close img {
+/* line 389, ../sass/mbjNotifier.scss */
+.btn-back {
+  left: 0;
+  top: 0;
+  z-index: 200;
+  border: none;
+  width: 32px;
+  margin: 4px;
+  padding: 0px;
+  cursor: pointer;
+  -webkit-transform: translateZ(0);
+  background-color: transparent;
+}
+/* line 415, ../sass/mbjNotifier.scss */
+.btn-back > img {
+  width: 100% !important;
   display: block;
-  width: 16px;
 }
 
-/* line 382, ../sass/mbjNotifier.scss */
+/* line 421, ../sass/mbjNotifier.scss */
 .background {
   height: 120%;
   width: 120%;
@@ -382,7 +399,7 @@ input.success {
   -webkit-transform: translateZ(0);
 }
 
-/* line 396, ../sass/mbjNotifier.scss */
+/* line 435, ../sass/mbjNotifier.scss */
 .mbj_login_response {
   background-color: #2b2c33;
   font-size: 14px;
@@ -409,33 +426,32 @@ input.success {
   vertical-align: baseline;
 }
 
-/* line 422, ../sass/mbjNotifier.scss */
+/* line 461, ../sass/mbjNotifier.scss */
 .mbj_login_status {
   display: none;
   padding: 15px;
   margin: 8px;
   margin-top: 24px !important;
-  height: 50px;
   -webkit-font-smoothing: none;
   border-radius: 8px;
   background-color: transparent;
 }
 
-/* line 433, ../sass/mbjNotifier.scss */
+/* line 472, ../sass/mbjNotifier.scss */
 img.mbj_loading {
   margin: 0 auto;
   display: block;
   padding: 85px;
 }
 
-/* line 439, ../sass/mbjNotifier.scss */
+/* line 478, ../sass/mbjNotifier.scss */
 #spinner_login {
   position: relative;
   padding: 15px;
   height: 50%;
 }
 
-/* line 445, ../sass/mbjNotifier.scss */
+/* line 484, ../sass/mbjNotifier.scss */
 .bean_notification_window {
   position: relative;
   top: -50%;
@@ -447,7 +463,7 @@ img.mbj_loading {
   z-index: 500;
 }
 
-/* line 459, ../sass/mbjNotifier.scss */
+/* line 498, ../sass/mbjNotifier.scss */
 .bean_notification_text {
   position: absolute;
   top: 0;
@@ -465,7 +481,7 @@ img.mbj_loading {
   -webkit-transform: translateZ(0);
 }
 
-/* line 476, ../sass/mbjNotifier.scss */
+/* line 515, ../sass/mbjNotifier.scss */
 .bean_notification_text p {
   position: relative;
   top: 0px;
@@ -473,19 +489,19 @@ img.mbj_loading {
   padding-left: 16px;
 }
 
-/* line 483, ../sass/mbjNotifier.scss */
+/* line 522, ../sass/mbjNotifier.scss */
 .bean_notification_image {
   min-height: 199px;
 }
 
-/* line 487, ../sass/mbjNotifier.scss */
+/* line 526, ../sass/mbjNotifier.scss */
 img.bean_notification_image {
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* line 494, ../sass/mbjNotifier.scss */
+/* line 533, ../sass/mbjNotifier.scss */
 p.mbj_caption {
   font-size: 0.7rem;
   color: #666;
@@ -494,7 +510,7 @@ p.mbj_caption {
   text-align: center;
 }
 
-/* line 503, ../sass/mbjNotifier.scss */
+/* line 542, ../sass/mbjNotifier.scss */
 .mbj_login {
   display: none;
   margin: 0px auto;
@@ -506,54 +522,53 @@ p.mbj_caption {
   -webkit-transform: translateZ(0);
 }
 
-/* line 514, ../sass/mbjNotifier.scss */
+/* line 553, ../sass/mbjNotifier.scss */
 .mbj_award_img {
   width: 100%;
 }
 
-/* line 518, ../sass/mbjNotifier.scss */
+/* line 557, ../sass/mbjNotifier.scss */
 .mbj_notifier_header {
   width: 100%;
 }
 
-/* line 522, ../sass/mbjNotifier.scss */
+/* line 561, ../sass/mbjNotifier.scss */
 .mbj_login_or_register {
   vertical-align: top;
   background-color: rgba(128, 128, 128, 0.1);
   display: none;
 }
 
-/* line 528, ../sass/mbjNotifier.scss */
+/* line 567, ../sass/mbjNotifier.scss */
 .active_pane {
   display: block;
 }
 
-/* line 532, ../sass/mbjNotifier.scss */
+/* line 571, ../sass/mbjNotifier.scss */
 .inactive_pane {
   display: none;
 }
 
-/* line 536, ../sass/mbjNotifier.scss */
+/* line 575, ../sass/mbjNotifier.scss */
 .active_selector {
   background-color: rgba(128, 128, 128, 0.1);
 }
 
-/* line 540, ../sass/mbjNotifier.scss */
+/* line 579, ../sass/mbjNotifier.scss */
 .inactive_selector {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-/* line 544, ../sass/mbjNotifier.scss */
+/* line 583, ../sass/mbjNotifier.scss */
 .mbj_notification_title {
   text-align: center;
-  margin-top: 20px;
 }
-/* line 548, ../sass/mbjNotifier.scss */
+/* line 587, ../sass/mbjNotifier.scss */
 .mbj_notification_title img {
   float: left;
   margin-top: 8px;
 }
-/* line 553, ../sass/mbjNotifier.scss */
+/* line 592, ../sass/mbjNotifier.scss */
 .mbj_notification_title h2 {
   margin: 0.2em auto;
   display: inline;
@@ -562,7 +577,7 @@ p.mbj_caption {
   text-align: center;
   color: #ffc200;
 }
-/* line 565, ../sass/mbjNotifier.scss */
+/* line 604, ../sass/mbjNotifier.scss */
 .mbj_notification_title h3 {
   position: relative;
   font-size: 1rem;
@@ -570,7 +585,7 @@ p.mbj_caption {
   color: white;
 }
 
-/* line 580, ../sass/mbjNotifier.scss */
+/* line 619, ../sass/mbjNotifier.scss */
 .mbj_notification_pane_selector {
   display: inline-block;
   width: 50%;
@@ -581,7 +596,7 @@ p.mbj_caption {
   font-size: 0.7rem;
 }
 
-/* line 590, ../sass/mbjNotifier.scss */
+/* line 629, ../sass/mbjNotifier.scss */
 .mbj_notification_pane_selectors {
   display: -webkit-box;
   display: -webkit-flex;
@@ -598,80 +613,80 @@ p.mbj_caption {
           justify-content: space-between;
 }
 
-/* line 596, ../sass/mbjNotifier.scss */
+/* line 635, ../sass/mbjNotifier.scss */
 input#mbj_form_u,
 input#mbj_form_p {
   font-size: 0.7rem;
 }
 
-/* line 601, ../sass/mbjNotifier.scss */
+/* line 640, ../sass/mbjNotifier.scss */
 label.title,
 label.large {
   font-size: 0.75rem !important;
 }
 
-/* line 606, ../sass/mbjNotifier.scss */
+/* line 645, ../sass/mbjNotifier.scss */
 .mbj_notification_pane_selector h2 {
   text-transform: uppercase;
   display: inline;
   vertical-align: middle;
 }
 
-/* line 612, ../sass/mbjNotifier.scss */
+/* line 651, ../sass/mbjNotifier.scss */
 .hint {
   box-shadow: inset 0px 0px 30px 10px #ffdd15;
 }
 
-/* line 616, ../sass/mbjNotifier.scss */
+/* line 655, ../sass/mbjNotifier.scss */
 .nada {
   display: none;
 }
 
 /* MBJ Form Styles */
 /* default-skyblue */
-/* line 626, ../sass/mbjNotifier.scss */
+/* line 665, ../sass/mbjNotifier.scss */
 html {
   height: 100%;
 }
 
-/* line 630, ../sass/mbjNotifier.scss */
+/* line 669, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue {
   margin: 0 auto;
 }
 
-/* line 634, ../sass/mbjNotifier.scss */
+/* line 673, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue > div {
   margin: 8px;
 }
 
-/* line 638, ../sass/mbjNotifier.scss */
+/* line 677, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue .large {
   width: 100%;
   /*width: 94%;*/
 }
 
-/* line 643, ../sass/mbjNotifier.scss */
+/* line 682, ../sass/mbjNotifier.scss */
 .mbj-form {
   margin: 0 auto;
 }
-/* line 646, ../sass/mbjNotifier.scss */
+/* line 685, ../sass/mbjNotifier.scss */
 .mbj-form .element-input {
   margin-top: 0.5rem;
 }
-/* line 649, ../sass/mbjNotifier.scss */
+/* line 688, ../sass/mbjNotifier.scss */
 .mbj-form .element-input:first-of-type {
   margin-top: 0;
 }
-/* line 655, ../sass/mbjNotifier.scss */
+/* line 694, ../sass/mbjNotifier.scss */
 .mbj-form button {
   margin-top: 0.5rem;
 }
-/* line 658, ../sass/mbjNotifier.scss */
+/* line 697, ../sass/mbjNotifier.scss */
 .mbj-form button:first-of-type {
   margin-top: 1.25rem;
 }
 
-/* line 668, ../sass/mbjNotifier.scss */
+/* line 707, ../sass/mbjNotifier.scss */
 .mbj-form .large {
   width: 100%;
   /*width: 94%;*/
@@ -685,18 +700,18 @@ html {
   font-weight: normal;
   font-style: normal;
 }
-/* line 686, ../sass/mbjNotifier.scss */
+/* line 725, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue {
   color: inherit;
   padding: 5px;
 }
 
-/* line 691, ../sass/mbjNotifier.scss */
+/* line 730, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox] {
   font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 }
 
-/* line 696, ../sass/mbjNotifier.scss */
+/* line 735, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue label {
   display: block;
   font-size: 1em;
@@ -704,7 +719,7 @@ html {
   clear: both;
 }
 
-/* line 703, ../sass/mbjNotifier.scss */
+/* line 742, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue div,
 .formoid-default-skyblue span,
 .formoid-default-skyblue label,
@@ -714,12 +729,12 @@ html {
   color: inherit;
 }
 
-/* line 712, ../sass/mbjNotifier.scss */
+/* line 751, ../sass/mbjNotifier.scss */
 .mbj-form input[type=checkbox] {
   font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
 }
 
-/* line 717, ../sass/mbjNotifier.scss */
+/* line 756, ../sass/mbjNotifier.scss */
 .mbj-form label {
   display: block;
   font-size: 1em;
@@ -727,7 +742,7 @@ html {
   clear: both;
 }
 
-/* line 724, ../sass/mbjNotifier.scss */
+/* line 763, ../sass/mbjNotifier.scss */
 .mbj-form div,
 .mbj-form span,
 .mbj-form label,
@@ -747,7 +762,7 @@ Not advised to edit stuff below this line
 */
 /* Button & submit*/
 /* Radio & checkbox */
-/* line 749, ../sass/mbjNotifier.scss */
+/* line 788, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox] {
   z-index: 1;
   position: absolute;
@@ -761,7 +776,7 @@ Not advised to edit stuff below this line
   -webkit-transform: translateZ(0);
 }
 
-/* line 762, ../sass/mbjNotifier.scss */
+/* line 801, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox] + span {
   height: 19px;
   margin-right: -19px;
@@ -776,7 +791,7 @@ Not advised to edit stuff below this line
   display: block;
 }
 
-/* line 776, ../sass/mbjNotifier.scss */
+/* line 815, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox] + span:before {
   font-family: formoid;
   color: transparent;
@@ -802,7 +817,7 @@ Not advised to edit stuff below this line
 }
 
 /* checkbox */
-/* line 801, ../sass/mbjNotifier.scss */
+/* line 840, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox] + span:before {
   content: "✓";
   font-size: 0.8em;
@@ -811,18 +826,18 @@ Not advised to edit stuff below this line
   border-radius: 0.3em;
 }
 
-/* line 811, ../sass/mbjNotifier.scss */
+/* line 850, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox]:hover + span:before {
   box-shadow: 0 0 2px 2px #F1F1F1;
 }
 
-/* line 815, ../sass/mbjNotifier.scss */
+/* line 854, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=checkbox]:checked + span:before {
   color: #616161;
 }
 
 /* radio */
-/* line 821, ../sass/mbjNotifier.scss */
+/* line 860, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=text],
 .formoid-default-skyblue input[type=password],
 .formoid-default-skyblue input[type=email] {
@@ -852,12 +867,12 @@ Not advised to edit stuff below this line
 }
 
 /* .formoid-default-skyblue color scheme begin */
-/* line 856, ../sass/mbjNotifier.scss */
+/* line 895, ../sass/mbjNotifier.scss */
 .full-width {
   width: 100%;
 }
 
-/* line 860, ../sass/mbjNotifier.scss */
+/* line 899, ../sass/mbjNotifier.scss */
 .formoid-default-skyblue input[type=text]:focus,
 .formoid-default-skyblue input[type=password]:focus,
 .formoid-default-skyblue input[type=email]:focus {
@@ -876,7 +891,7 @@ Not advised to edit stuff below this line
           transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }
 
-/* line 880, ../sass/mbjNotifier.scss */
+/* line 919, ../sass/mbjNotifier.scss */
 .mbj-form input[type=checkbox] + span:before {
   content: "✓";
   font-size: 0.8em;
@@ -885,18 +900,18 @@ Not advised to edit stuff below this line
   border-radius: 0.3em;
 }
 
-/* line 890, ../sass/mbjNotifier.scss */
+/* line 929, ../sass/mbjNotifier.scss */
 .mbj-form input[type=checkbox]:hover + span:before {
   box-shadow: 0 0 2px 2px #F1F1F1;
 }
 
-/* line 894, ../sass/mbjNotifier.scss */
+/* line 933, ../sass/mbjNotifier.scss */
 .mbj-form input[type=checkbox]:checked + span:before {
   color: #616161;
 }
 
 /* radio */
-/* line 900, ../sass/mbjNotifier.scss */
+/* line 939, ../sass/mbjNotifier.scss */
 .mbj-form input[type=text],
 .mbj-form input[type=password],
 .mbj-form input[type=email] {
@@ -916,7 +931,7 @@ Not advised to edit stuff below this line
   box-sizing: border-box;
 }
 
-/* line 920, ../sass/mbjNotifier.scss */
+/* line 959, ../sass/mbjNotifier.scss */
 .mbj-form input[type=text]:focus,
 .mbj-form input[type=password]:focus,
 .mbj-form input[type=email]:focus {
@@ -929,7 +944,7 @@ Not advised to edit stuff below this line
 }
 
 /* .formoid-default-skyblue color scheme end */
-/* line 932, ../sass/mbjNotifier.scss */
+/* line 971, ../sass/mbjNotifier.scss */
 .mbj-footer {
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 100%;
@@ -949,18 +964,18 @@ Not advised to edit stuff below this line
   width: 100%;
 }
 
-/* line 951, ../sass/mbjNotifier.scss */
+/* line 990, ../sass/mbjNotifier.scss */
 .mbj-footer a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.4);
 }
 
-/* line 956, ../sass/mbjNotifier.scss */
+/* line 995, ../sass/mbjNotifier.scss */
 .mbj-footer p {
   margin: 1em 0;
 }
 
-/* line 960, ../sass/mbjNotifier.scss */
+/* line 999, ../sass/mbjNotifier.scss */
 .slider_h3 {
   color: #cccccc;
   font-size: 0.5rem;
@@ -968,7 +983,7 @@ Not advised to edit stuff below this line
   line-height: 0.6rem;
 }
 
-/* line 967, ../sass/mbjNotifier.scss */
+/* line 1006, ../sass/mbjNotifier.scss */
 .slider_div {
   line-height: 0.7rem;
   height: 100% !important;
@@ -992,12 +1007,12 @@ Not advised to edit stuff below this line
           align-items: flex-start;
 }
 
-/* line 977, ../sass/mbjNotifier.scss */
+/* line 1016, ../sass/mbjNotifier.scss */
 .slider_image {
   margin-bottom: 0.5rem;
 }
 
-/* line 981, ../sass/mbjNotifier.scss */
+/* line 1020, ../sass/mbjNotifier.scss */
 #slider_components {
   display: block;
   display: -webkit-box;
@@ -1015,7 +1030,7 @@ Not advised to edit stuff below this line
           align-items: center;
 }
 
-/* line 988, ../sass/mbjNotifier.scss */
+/* line 1027, ../sass/mbjNotifier.scss */
 .footer-header-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1039,7 +1054,7 @@ Not advised to edit stuff below this line
   cursor: pointer;
 }
 
-/* line 1009, ../sass/mbjNotifier.scss */
+/* line 1048, ../sass/mbjNotifier.scss */
 .footer-header-strip-title {
   color: #dc5214;
   text-align: left;
@@ -1047,7 +1062,7 @@ Not advised to edit stuff below this line
   padding-left: 3%;
 }
 
-/* line 1016, ../sass/mbjNotifier.scss */
+/* line 1055, ../sass/mbjNotifier.scss */
 .footer-header-strip-counter {
   color: #c09853;
   text-align: right;
@@ -1055,7 +1070,7 @@ Not advised to edit stuff below this line
   padding-right: 3%;
 }
 
-/* line 1023, ../sass/mbjNotifier.scss */
+/* line 1062, ../sass/mbjNotifier.scss */
 .footer-signup-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1065,7 +1080,7 @@ Not advised to edit stuff below this line
   width: 100%;
 }
 
-/* line 1029, ../sass/mbjNotifier.scss */
+/* line 1068, ../sass/mbjNotifier.scss */
 button#footer-signup {
   background-color: #fe8630;
   border: none;
@@ -1076,7 +1091,7 @@ button#footer-signup {
   text-align: left;
 }
 
-/* line 1039, ../sass/mbjNotifier.scss */
+/* line 1078, ../sass/mbjNotifier.scss */
 #mbj-footer-logo {
   width: 15%;
   display: -webkit-box;
@@ -1089,12 +1104,12 @@ button#footer-signup {
           align-items: center;
 }
 
-/* line 1045, ../sass/mbjNotifier.scss */
+/* line 1084, ../sass/mbjNotifier.scss */
 img#footer-logo {
   width: 100%;
 }
 
-/* line 1049, ../sass/mbjNotifier.scss */
+/* line 1088, ../sass/mbjNotifier.scss */
 #mbj-footer-cta {
   width: 85%;
   display: -webkit-box;
@@ -1113,7 +1128,7 @@ img#footer-logo {
   line-height: 1.5rem;
 }
 
-/* line 1058, ../sass/mbjNotifier.scss */
+/* line 1097, ../sass/mbjNotifier.scss */
 #mbj-footer-cta-sub {
   border: 0.5vh solid #222;
   background-color: #222 !important;
@@ -1130,7 +1145,7 @@ img#footer-logo {
   display: flex;
 }
 
-/* line 1067, ../sass/mbjNotifier.scss */
+/* line 1106, ../sass/mbjNotifier.scss */
 .footer-cta-title {
   font-size: 0.7rem;
   padding-left: 0.25rem;
@@ -1138,18 +1153,18 @@ img#footer-logo {
   width: 50%;
 }
 
-/* line 1074, ../sass/mbjNotifier.scss */
+/* line 1113, ../sass/mbjNotifier.scss */
 #splash-fade {
   pointer-events: none;
 }
 
-/* line 1078, ../sass/mbjNotifier.scss */
+/* line 1117, ../sass/mbjNotifier.scss */
 .form-checkbox {
   font-size: 0.7rem !important;
   color: #a9a9a9;
 }
 
-/* line 1083, ../sass/mbjNotifier.scss */
+/* line 1122, ../sass/mbjNotifier.scss */
 .frosted-overlay {
   width: 96%;
   height: 86%;
@@ -1176,21 +1191,21 @@ img#footer-logo {
   border-bottom: 1rem ridge rgba(255, 255, 255, 0.05);
 }
 
-/* line 1108, ../sass/mbjNotifier.scss */
+/* line 1147, ../sass/mbjNotifier.scss */
 #main_container {
   background-color: rgba(40, 40, 60, 0.7);
   box-shadow: inset 0 0 12rem rgba(165, 225, 255, 0.6);
   position: relative;
 }
 
-/* line 1114, ../sass/mbjNotifier.scss */
+/* line 1153, ../sass/mbjNotifier.scss */
 #slider_components * h3 {
   text-shadow: 0px 0px 3px #000000 !important;
   font-size: 0.8rem;
   line-height: 0.9rem;
 }
 
-/* line 1120, ../sass/mbjNotifier.scss */
+/* line 1159, ../sass/mbjNotifier.scss */
 img.grippy {
   width: auto;
   height: 50%;
@@ -1198,7 +1213,7 @@ img.grippy {
   margin-left: 2%;
 }
 
-/* line 1127, ../sass/mbjNotifier.scss */
+/* line 1166, ../sass/mbjNotifier.scss */
 .newcount {
   -webkit-animation: newcountglow 1s 1 linear;
   animation: newcountglow 1s 1 linear;
@@ -1248,7 +1263,7 @@ img.grippy {
     color: #c09853;
   }
 }
-/* line 1217, ../sass/mbjNotifier.scss */
+/* line 1256, ../sass/mbjNotifier.scss */
 .btn-ab-iap li {
   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: rgba(16, 16, 16, 0.8);
@@ -1276,13 +1291,13 @@ img.grippy {
   box-sizing: border-box;
 }
 
-/* line 1251, ../sass/mbjNotifier.scss */
+/* line 1290, ../sass/mbjNotifier.scss */
 li.ab-btn-iap-active {
   -webkit-box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: maroon;
 }
 
-/* line 1256, ../sass/mbjNotifier.scss */
+/* line 1295, ../sass/mbjNotifier.scss */
 .listing-info li {
   list-style: inside none disc;
   font-size: 15px;
@@ -1290,13 +1305,13 @@ li.ab-btn-iap-active {
   color: #ff0;
 }
 
-/* line 1263, ../sass/mbjNotifier.scss */
+/* line 1302, ../sass/mbjNotifier.scss */
 .listing-page-custom {
   padding: 10px;
   float: left;
 }
 
-/* line 1268, ../sass/mbjNotifier.scss */
+/* line 1307, ../sass/mbjNotifier.scss */
 .listing-listing li {
   /*    background: #021CA1;
       color: #ffff00;*/
@@ -1312,17 +1327,17 @@ li.ab-btn-iap-active {
   display: flex;
 }
 
-/* line 1281, ../sass/mbjNotifier.scss */
+/* line 1320, ../sass/mbjNotifier.scss */
 .listing-listing img {
   float: left;
 }
 
-/* line 1285, ../sass/mbjNotifier.scss */
+/* line 1324, ../sass/mbjNotifier.scss */
 .example span {
   color: #000;
 }
 
-/* line 1289, ../sass/mbjNotifier.scss */
+/* line 1328, ../sass/mbjNotifier.scss */
 .listing-listing span {
   font-size: 18px;
   margin: 10px 0 10px 4px;
@@ -1335,7 +1350,7 @@ li.ab-btn-iap-active {
   /*    font-family:"Comic Sans MS", cursive;*/
 }
 
-/* line 1299, ../sass/mbjNotifier.scss */
+/* line 1338, ../sass/mbjNotifier.scss */
 .listing-listing input {
   float: left;
   height: 49px;
@@ -1343,7 +1358,7 @@ li.ab-btn-iap-active {
   width: 27px;
 }
 
-/* line 1306, ../sass/mbjNotifier.scss */
+/* line 1345, ../sass/mbjNotifier.scss */
 .iap-img {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1356,7 +1371,7 @@ li.ab-btn-iap-active {
 }
 
 /* IAP button contents */
-/* line 1314, ../sass/mbjNotifier.scss */
+/* line 1353, ../sass/mbjNotifier.scss */
 .btn-ab-iap img,
 .btn-ab-iap span,
 .btn-ab-iap input {
@@ -1365,7 +1380,7 @@ li.ab-btn-iap-active {
           align-self: center;
 }
 
-/* line 1320, ../sass/mbjNotifier.scss */
+/* line 1359, ../sass/mbjNotifier.scss */
 .btn-ab-iap-flextainer {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1382,14 +1397,14 @@ li.ab-btn-iap-active {
   width: 100%;
 }
 
-/* line 1327, ../sass/mbjNotifier.scss */
+/* line 1366, ../sass/mbjNotifier.scss */
 .btn-ab-iap div > img,
 .btn-ab-iap div > span,
 .btn-ab-iap div > input {
   margin: 5px;
 }
 
-/* line 1345, ../sass/mbjNotifier.scss */
+/* line 1384, ../sass/mbjNotifier.scss */
 .iap-btn-container {
   float: right;
   right: 0;
@@ -1398,7 +1413,7 @@ li.ab-btn-iap-active {
           align-self: center;
 }
 
-/* line 1352, ../sass/mbjNotifier.scss */
+/* line 1391, ../sass/mbjNotifier.scss */
 .btn-ab-buy {
   min-width: 100%;
   min-height: 5rem;
@@ -1408,12 +1423,12 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1361, ../sass/mbjNotifier.scss */
+/* line 1400, ../sass/mbjNotifier.scss */
 .unused {
   display: none;
 }
 
-/* line 1372, ../sass/mbjNotifier.scss */
+/* line 1411, ../sass/mbjNotifier.scss */
 .ab-title {
   font-family: bangers;
   text-align: center;
@@ -1421,20 +1436,20 @@ li.ab-btn-iap-active {
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
 }
 
-/* line 1379, ../sass/mbjNotifier.scss */
+/* line 1418, ../sass/mbjNotifier.scss */
 #info-page {
   background-color: rgba(0, 0, 0, 0.75);
   overflow: scroll;
 }
 
-/* line 1384, ../sass/mbjNotifier.scss */
+/* line 1423, ../sass/mbjNotifier.scss */
 .info-container {
   padding: 2rem;
   padding-top: 0;
   min-height: 100%;
 }
 
-/* line 1391, ../sass/mbjNotifier.scss */
+/* line 1430, ../sass/mbjNotifier.scss */
 .info-title {
   font-family: bangers;
   text-align: left;
@@ -1443,12 +1458,12 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1399, ../sass/mbjNotifier.scss */
+/* line 1438, ../sass/mbjNotifier.scss */
 #listing-descrip {
   margin: 2rem 0;
 }
 
-/* line 1403, ../sass/mbjNotifier.scss */
+/* line 1442, ../sass/mbjNotifier.scss */
 .listing-blurb {
   font-family: 'komika-disp', cursive;
   font-size: 0.8rem;
@@ -1462,7 +1477,7 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1415, ../sass/mbjNotifier.scss */
+/* line 1454, ../sass/mbjNotifier.scss */
 .basic-para,
 .des-info-new p {
   font-family: 'komika-disp', cursive;
@@ -1481,56 +1496,32 @@ li.ab-btn-iap-active {
   margin: 1rem 0;
 }
 
-/* line 1428, ../sass/mbjNotifier.scss */
+/* line 1467, ../sass/mbjNotifier.scss */
 .basic-para a {
   color: #30aff1;
   text-shadow: -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000;
   text-decoration: none;
 }
 
-/* line 1434, ../sass/mbjNotifier.scss */
+/* line 1473, ../sass/mbjNotifier.scss */
 .incomplete {
   background-color: #ff7f7f;
   -webkit-transition: background-color 0.3s;
           transition: background-color 0.3s;
 }
 
-/* line 1439, ../sass/mbjNotifier.scss */
+/* line 1478, ../sass/mbjNotifier.scss */
 .required-item {
   -webkit-transition: background-color 0.3s;
           transition: background-color 0.3s;
 }
 
-/* line 1443, ../sass/mbjNotifier.scss */
-.btn-back img {
-  display: block;
-}
-
-/* line 1448, ../sass/mbjNotifier.scss */
-.btn-back img {
-  width: 100% !important;
-}
-
-/* line 1452, ../sass/mbjNotifier.scss */
-.btn-back {
-  position: absolute;
-  left: 15px;
-  top: 15px;
-  z-index: 200;
-  border: none;
-  width: 2rem;
-  height: 2rem;
-  cursor: pointer;
-  -webkit-transform: translateZ(0);
-  background-color: transparent;
-}
-
-/* line 1477, ../sass/mbjNotifier.scss */
+/* line 1482, ../sass/mbjNotifier.scss */
 .info-nav {
   padding: 1rem 2rem 0 2rem;
 }
 
-/* line 1481, ../sass/mbjNotifier.scss */
+/* line 1486, ../sass/mbjNotifier.scss */
 .info-cbldf {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1550,7 +1541,7 @@ li.ab-btn-iap-active {
           align-content: space-between;
 }
 
-/* line 1488, ../sass/mbjNotifier.scss */
+/* line 1493, ../sass/mbjNotifier.scss */
 .info-logo {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 1px;
@@ -1562,7 +1553,7 @@ li.ab-btn-iap-active {
   width: 100%;
 }
 
-/* line 1495, ../sass/mbjNotifier.scss */
+/* line 1500, ../sass/mbjNotifier.scss */
 .btn-preview-close {
   z-index: 200;
   border: none;
@@ -1572,13 +1563,13 @@ li.ab-btn-iap-active {
   float: right;
 }
 
-/* line 1506, ../sass/mbjNotifier.scss */
+/* line 1511, ../sass/mbjNotifier.scss */
 .btn-preview-close img {
   width: 2rem;
   height: 2rem;
 }
 
-/* line 1515, ../sass/mbjNotifier.scss */
+/* line 1520, ../sass/mbjNotifier.scss */
 .pop-page-custom {
   /* padding: 10px; */
   padding: 2rem;
@@ -1586,21 +1577,21 @@ li.ab-btn-iap-active {
   background-color: rgba(16, 16, 16, 0.8);
 }
 
-/* line 1535, ../sass/mbjNotifier.scss */
+/* line 1540, ../sass/mbjNotifier.scss */
 .des-info-new .title {
   color: #f8b430;
   font-size: 1.5rem;
   text-transform: uppercase;
   margin-bottom: 0;
 }
-/* line 1542, ../sass/mbjNotifier.scss */
+/* line 1547, ../sass/mbjNotifier.scss */
 .des-info-new .artist {
   color: #fff88e;
   font-size: 1rem;
   margin-top: 0;
 }
 
-/* line 1554, ../sass/mbjNotifier.scss */
+/* line 1559, ../sass/mbjNotifier.scss */
 button.btn-iap {
   height: 60px;
   width: 60px;
@@ -1616,7 +1607,7 @@ button.btn-iap {
   padding: 0;
 }
 
-/* line 1564, ../sass/mbjNotifier.scss */
+/* line 1569, ../sass/mbjNotifier.scss */
 button.btn-iap > span {
   text-align: center !important;
   width: 100%;
@@ -1625,12 +1616,12 @@ button.btn-iap > span {
   margin-left: 0;
   margin-right: 0;
 }
-/* line 1572, ../sass/mbjNotifier.scss */
+/* line 1577, ../sass/mbjNotifier.scss */
 button.btn-iap > span i {
   font-size: 24px;
 }
 
-/* line 1577, ../sass/mbjNotifier.scss */
+/* line 1582, ../sass/mbjNotifier.scss */
 .btn-info {
   background-color: #04285a;
   background-image: -webkit-linear-gradient(top, #0850b4, #04285a);
@@ -1638,7 +1629,7 @@ button.btn-iap > span i {
   border-color: #0850b4;
 }
 
-/* line 1583, ../sass/mbjNotifier.scss */
+/* line 1588, ../sass/mbjNotifier.scss */
 .btn-info:active {
   background-color: #04285a;
   background-image: -webkit-linear-gradient(top, #04285a, #0850b4);
@@ -1646,7 +1637,7 @@ button.btn-iap > span i {
   border-color: #0850b4;
 }
 
-/* line 1589, ../sass/mbjNotifier.scss */
+/* line 1594, ../sass/mbjNotifier.scss */
 .btn-play {
   background-color: #29b637;
   background-image: -webkit-linear-gradient(top, #29b637, #2c6f00);
@@ -1654,7 +1645,7 @@ button.btn-iap > span i {
   border-color: #29b637;
 }
 
-/* line 1595, ../sass/mbjNotifier.scss */
+/* line 1600, ../sass/mbjNotifier.scss */
 .btn-play:active {
   background-color: #29b637;
   background-image: -webkit-linear-gradient(top, #2c6f00, #29b637);
@@ -1662,7 +1653,7 @@ button.btn-iap > span i {
   border-color: #29b637;
 }
 
-/* line 1601, ../sass/mbjNotifier.scss */
+/* line 1606, ../sass/mbjNotifier.scss */
 .btn-purchase {
   background-color: #ffc200;
   background-image: -webkit-linear-gradient(top, #ffc200, #f8b430);
@@ -1670,7 +1661,7 @@ button.btn-iap > span i {
   border-color: #fff300;
 }
 
-/* line 1607, ../sass/mbjNotifier.scss */
+/* line 1612, ../sass/mbjNotifier.scss */
 .btn-purchase:active {
   background-color: #ffc200;
   background-image: -webkit-linear-gradient(top, #f8b430, #ffc200);
@@ -1678,7 +1669,7 @@ button.btn-iap > span i {
   border-color: #fff300;
 }
 
-/* line 1619, ../sass/mbjNotifier.scss */
+/* line 1624, ../sass/mbjNotifier.scss */
 .metadata {
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 0;
@@ -1689,12 +1680,12 @@ button.btn-iap > span i {
           align-self: center;
 }
 
-/* line 1624, ../sass/mbjNotifier.scss */
+/* line 1629, ../sass/mbjNotifier.scss */
 #slider1_container_t {
   max-width: 100%;
 }
 
-/* line 1628, ../sass/mbjNotifier.scss */
+/* line 1633, ../sass/mbjNotifier.scss */
 a.password-recovery {
   text-align: right;
   float: right;
@@ -1703,7 +1694,7 @@ a.password-recovery {
   font-weight: bold;
   cursor: pointer;
 }
-/* line 1637, ../sass/mbjNotifier.scss */
+/* line 1642, ../sass/mbjNotifier.scss */
 a.password-recovery:hover {
   color: white;
 }

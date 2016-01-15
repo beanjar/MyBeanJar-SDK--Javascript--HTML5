@@ -112,6 +112,10 @@
 
     padding: 10px !important;
     box-sizing: border-box;
+
+    & > .mbj_notification_title:first-child {
+      margin-top: 20px;
+    }
 }
 
 .mbj_notification_beanticker {
@@ -350,33 +354,68 @@ input.success{
     margin: 0.5rem 0;
 }
 
+
 .btn-close {
-  position: absolute;
-  right: 15px;
-  top: 15px;
+  //position: absolute;
+  //right: 15px;
+  //top: 15px;
+  right: 0px;
+  top: 0px;
   z-index: 200;
   border: none;
-  width: 2rem;
-  height: 2rem;
+  width: 32px;
+  margin: 4px;
+  padding: 0px;
+  float: right;
+  //height: 2rem;
   cursor: pointer;
   -webkit-transform: translateZ(0);
   background-color: transparent;
+
+  & > img {
+    width: 100% !important;
+    display: block;
+    //width: 16px;
+  }
+
+  &:focus {
+    box-shadow: none;
+    outline: none;
+    box-shadow:none;
+    outline:none;
+  }
 }
 
-.btn-close img {
-  width: 100% !important;
-}
+.btn-back {
+    // position: absolute;
+    left: 0;
+    top: 0;
+ 
+    // z-index: 200;
+    // border: none;
+    // width: 3rem;
+    // height: 3rem;
+    // cursor: pointer;
+    // -webkit-transform: translateZ(0);
+    // background-color: transparent;
 
-.btn-close:focus {
-  box-shadow: none;
-  outline: none;
-  box-shadow:none;
-  outline:none;
-}
+    //position: absolute;
+    //left: 15px;
+    //top: 15px;
+    z-index: 200;
+    border: none;
+    width: 32px;
+    margin: 4px;
+    padding: 0px;
+    //height: 2rem;
+    cursor: pointer;
+    -webkit-transform: translateZ(0);
+    background-color: transparent;
 
-.btn-close img {
-  display: block;
-  width: 16px;
+    & > img {
+        width: 100% !important;
+        display: block;
+    }
 }
 
 .background {
@@ -424,7 +463,7 @@ input.success{
   padding: 15px;
   margin: 8px;
   margin-top: 24px !important;
-  height: 50px;
+  //height: 50px;
   -webkit-font-smoothing: none;
   border-radius: 8px;
   background-color: transparent;
@@ -543,7 +582,7 @@ p.mbj_caption {
 
 .mbj_notification_title {
   text-align: center;
-  margin-top: 20px;
+  //margin-top: 20px;
 
   img {
     float: left;
@@ -1438,40 +1477,6 @@ li.ab-btn-iap-active {
 
 .required-item {
     transition: background-color 0.3s;
-}
-
-.btn-back img {
-    display: block;
-    // width: 32px;
-}
-
-.btn-back img {
-    width: 100% !important;
-}
-
-.btn-back {
-    // position: absolute;
-    // left: 0;
-    // top: 0;
- 
-    // z-index: 200;
-    // border: none;
-    // width: 3rem;
-    // height: 3rem;
-    // cursor: pointer;
-    // -webkit-transform: translateZ(0);
-    // background-color: transparent;
-
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    z-index: 200;
-    border: none;
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
-    -webkit-transform: translateZ(0);
-    background-color: transparent;
 }
 
 .info-nav {

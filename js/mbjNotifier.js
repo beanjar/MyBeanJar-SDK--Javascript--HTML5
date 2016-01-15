@@ -28,8 +28,10 @@ var loginStatusFlashing;
 // var randomimg;
 // var validpurchase = false;
 // var catArray = null;
+var beanDisplayExpiry;
 
 var debugMode = true;
+
 
 
 
@@ -151,14 +153,13 @@ function mbjAttemptLogin() {
 
     });
 
-    jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        jQuery( '#mbj_modal' )
-                .fadeOut(500, "swing")
-                .remove();
-
-    });
+    // jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
+    //     event.preventDefault();
+    //     event.stopPropagation();
+    //     jQuery( '#mbj_modal' )
+    //             .fadeOut(500, "swing")
+    //             .remove();
+    // });
 
     jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
 
@@ -208,6 +209,10 @@ mbjRevealModal = function() {
 };
 
 mbjDestroyModal = function() {
+    
+    // Clear any previously set modal destruction timeouts
+    clearTimeout(beanDisplayExpiry);
+
     jQuery('#mbj_modal')
         .fadeOut(200, "swing", function() {
             jQuery( this ).remove();
@@ -443,7 +448,7 @@ function mbjNotifyAuthenticate(result, message, email) {
 
             flashLoginStatus();
 
-            setTimeout(function() {
+            beanDisplayExpiry = setTimeout(function() {
                 mbjDestroyModal();
             }, 2000);
         }, 200);
@@ -701,24 +706,22 @@ function flashLoginStatus() {
         if (!loginStatusFlashing) {
             loginStatusFlashing = true;
             jQuery("div.mbj_login_status")
-                    .finish()
-                    .animate({
-                        opacity: 1
-                    }, 0)
-                    .slideDown()
-                    .fadeIn(200)
-                    .delay(3000)
-                    .animate({
-                        opacity: 0
-                    }, 200)
-                    .slideUp(function() {
-                        loginStatusFlashing = false;
-                    }
-                    );
+            .finish()
+            .animate({
+                opacity: 1
+            }, 0)
+            .slideDown()
+            .fadeIn(200)
+            .delay(3000)
+            .animate({
+                opacity: 0
+            }, 200)
+            .slideUp(function() {
+                loginStatusFlashing = false;
+            });
         }
     }
-}
-;
+};
 
 
 function SummonSpinner(div_id) {
@@ -742,8 +745,7 @@ function SummonSpinner(div_id) {
     };
     var target = document.getElementById(div_id);
     var spinner = new Spinner(opts).spin(target);
-}
-;
+};
 
 
 BeanAwardAlert = function(result, award) {
@@ -764,47 +766,12 @@ BeanAwardAlert = function(result, award) {
                 .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
                 mbjRevealModal();
             });
-            // jQuery( 'body' ).append(''
-            // + '<table id="mbj_modal">'
-            // +   '<tbody id="modal-tbody">'
-            // +       '<tr id="modal-tr">'
-            // +           '<td id="modal-td">'
-            // +               '<div id="modal-box">'
-            // +                   '<div id="modal-content">'
-            // +                       '<div id="modal-body">'
-            // +                           '<!-- CONTENT -->'
-            // +                           '<div class="mbj_notification bean_notification_window">'
-            // +                               '<img class="bean_notification_image" src="">'
-            // +                           '</div>'
-            // +                       '</div>'
-            // +                   '</div>'
-            // +               '</div>'
-            // +           '</td>'
-            // +       '</tr>'
-            // +   '</tbody>'
-            // + '</table>');
 
-            // jQuery( 'body' ).append('<div class="mbj_notification bean_notification_window"><img class="bean_notification_image" src=""><!--                    <p class="bean_notification_text">...</p>--></div>' );
+
+            beanDisplayExpiry = setTimeout(function() {
+                mbjDestroyModal();
+            }, 10000);
         }
-        
-        // jQuery('#mbj_award_img')
-        //         .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
-// mbjCapsuleAward();
-        
-        // jQuery("#mbj_modal, .bean_notification_window")
-        //         .fadeIn(500, "swing");
-        // jQuery("div.bean_notification_window")
-        //         .html('<button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="this.parentElement.style.display = \'none\';"> <img src="img/ui_action_close.png"> </button> <img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
-        
-
-        setTimeout(function(){
-            mbjDestroyModal();
-        }, 10000);
-        // jQuery(".bean_notification_window, #mbj_modal")
-        //         .delay(10000)
-        //         .fadeOut(500, "swing");
-        //ga('send', 'pageview', 'beanAward');
-    }
 
 
     /*
@@ -826,7 +793,7 @@ BeanAwardAlert = function(result, award) {
     * 
     */
 
-    else {
+    } else {
         mbjDebug("Request failed.");
         jQuery('#mbj_award_img')
                 .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + capsulePlaceholderImageURL + '">');
