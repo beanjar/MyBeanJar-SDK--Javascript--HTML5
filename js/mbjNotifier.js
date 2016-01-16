@@ -1,33 +1,19 @@
-var hardUser = "ryanfister3";
-var hardPass = "40f4d87250c70278580bc8fb47e5caaa";
 
-// var isplay = false;
-// var mbjUserLoggedIn = false;
-// var j=0;
-// var imagelenght1 = '';
-// var msgAwardSuccess = "Bean Awarded!";
-// var msgMoreInfo = 'Visit <a href="http://mybeanjar.com">MyBeanJar.com</a> for more info.';
-// var u = null;
-// var p = "";
-// var email = "";
-// var result = null;
-// var queuedBeans = 0;
-// var footerCollapsed = false;
-// var footerHeight = 0;
+
+
+
+  // Built-in defaults
+
+  var config = {
+    hardUser: 'ryanfister3',                            // username for use with API calls not related to actual user
+    hardPass: '40f4d87250c70278580bc8fb47e5caaa',       // password for use with API calls not related to actual user
+    debugMode: true,                                    // Enable/disable debug mode error logging
+  }
+
+
 
 var loginStatusFlashing;
-// var capsulePlaceholderImageURL = "img/mbj_payload_img.png";
 
-// Timeouts
-// var capsuleLidTimeout;
-// var capsuleBodyTimeout;
-// var capsulePayloadTimeout;
-// var capsuleFadeOutTimeout;
-// var image = null;
-// var customids = '';
-// var randomimg;
-// var validpurchase = false;
-// var catArray = null;
 var beanDisplayExpiry;
 
 var debugMode = true;
@@ -41,8 +27,8 @@ var debugMode = true;
 //
 
 function mbjDebug(message) {
-    if (typeof debugMode != 'undefined') {
-        if (debugMode == true) {
+    if (typeof config.debugMode != 'undefined') {
+        if (config.debugMode == true) {
             console.log(message);
         }
     }
@@ -760,7 +746,7 @@ BeanAwardAlert = function(result, award) {
 //
 
 function fetchCategories(){
-    get_categories(hardUser, hardPass, prepareCategories);
+    get_categories(config.hardUser, config.hardPass, prepareCategories);
 }
 
 function prepareCategories(result, categories) {
@@ -952,8 +938,8 @@ else {
 jQuery(document).ready(function() {
     
     // TEMP
-    if (typeof debugMode != 'undefined') {
-        if (debugMode == true) {
+    if (typeof config.debugMode != 'undefined') {
+        if (config.debugMode == true) {
             sessionStorage.clear();
         }
     }

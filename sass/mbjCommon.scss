@@ -1,0 +1,51 @@
+/*//// SCSS variable pile ////*/
+
+    /* color scheme */
+    $mbj-color-white:                rgba(255,255,255,1);
+    $mbj-color-whitetrans:           rgba(255,255,255,0.75);
+    $mbj-color-whitetrans-lt:        rgba(255,255,255,0.25);
+
+    $mbj-color-magenta:              rgba(236, 0, 140, 1);
+    $mbj-color-cyan:                 rgba(0, 174, 239, 1);
+    $mbj-color-nearblack:            rgba(16,16,16,1);
+    $mbj-color-nearblacktrans:       rgba(16,16,16,0.8);
+    $mbj-color-nearblacktrans-lt:     rgba(16,16,16,0.4);
+    
+    $mbj-color-blue:                 rgba(8, 80, 180, 1);
+    $mbj-color-blue-lt:              rgba(48, 175, 241, 1);
+    $mbj-color-blue-dk:              rgba(4, 40, 90, 1);
+
+    $mbj-color-yellow:               rgba(255, 243, 0, 1);
+    $mbj-color-yellow-dk:            rgba(255, 194, 0, 1);
+
+    $mbj-color-goldenrod:            rgba(179, 154, 19, 1);
+
+    $mbj-color-red:                  rgba(255, 0, 0, 1);
+    $mbj-color-red-dk:               rgba(128, 0, 0, 1);
+
+    $mbj-color-incomplete:           rgba(255, 127, 127, 1);
+
+    $mbj-color-grey:                 rgba(204,204,204,1);
+    $mbj-color-greydk:               rgba(153,153,153,1);
+
+    $mbj-color-angry-orange:         rgba(248,180,48,1);
+    $mbj-color-angry-yellow:         rgba(255,248,142,1);
+
+    $mbj-color-green:                rgba(41,182,55,1);
+    $mbj-color-green-dk:             rgba(44,111,0,1);
+
+    /* hopefully temporary */
+    $mbj-color-green-awk:            rgba(144, 238, 144, 1);
+
+    $mbj-color-grey-dk:              rgba(16,16,16,1);
+
+    $mbj-color-facebook-blue:        #3B5998;
+    $mbj-color-facebook-blue-lt:     #627AAD;
+
+
+    /* TYPOGRAPHY */
+
+    @font-face {
+        font-family: Museo;
+        src: url(../font/Museo300-Regular-webfont.woff);
+    }

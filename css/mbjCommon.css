@@ -1,0 +1,8 @@
+/*//// SCSS variable pile ////*/
+/* color scheme */
+/* hopefully temporary */
+/* TYPOGRAPHY */
+@font-face {
+  font-family: Museo;
+  src: url(../font/Museo300-Regular-webfont.woff);
+}
