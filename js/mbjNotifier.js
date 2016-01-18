@@ -1,3 +1,324 @@
+// MyBeanJar Modal Object
+
+var MbjModal = function(variant){
+    
+    // Assign unique ID based on current timestamp
+    this.uid = Date.now();
+    
+    // On construction, generate a new HTMLement and map it to the modal object 
+    this.Spawn();
+
+    this.element = document.getElementById('mbj-modal-' + this.uid);
+    this.payload = document.getElementById('mbj-modal-payload-' + this.uid);
+
+    //this.element = jQuery( 'body' ).append( '<table class="mbj-modal" id="mbj_modal-' + this.uid + '"></table>' );
+    //jQuery( this.element ).load( './assets/modal/login-register.htm' + '?' + this.uid, this.FadeIn );
+
+    if (variant == 'login') {
+        this.DisplayLogin();
+    }
+}
+
+MbjModal.prototype = {
+    // uid: function() {
+    //     return Date.now()
+    // },
+    constructor: MbjModal,
+    uid: {},
+    payload: {},
+    config: {},
+    Spawn: function() {
+        jQuery( 'body' ).append( '<table class="mbj-modal" id="mbj-modal-' + this.uid + '">'
+            +  '    <tbody id="modal-tbody">'
+            +  '        <tr id="modal-tr">'
+            +  '            <td id="modal-td">'
+            +  '                <div id="modal-box">'
+            +  '                    <div id="modal-content">'
+            +  '                        <div class="mbj-notification" id="mbj-modal-payload-' + this.uid + '">'
+            +  '                        </div>'
+            +  '                    </div>'
+            +  '                </div>'
+            +  '            </td>'
+            +  '        </tr>'
+            +  '    </tbody>'
+            +  '</table>');
+    },
+    DisplayLogin: function() {
+        jQuery( this.payload ).html( '<div class="mbj_notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + this.uid + '">'
+            +  '    <div class="mbj_notification_inner" id="mbj-youvewon-init">'
+            +  '        <!-- <img src="../img/youcouldvewon.png" /> -->'
+            +  '        <div class="mbj_notification_sub_inner">'
+            +  '            <form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false">'
+            +  '                <div id="mbj-label-init-username">'
+            +  '                    <span>MBJ users<br>log in</span>'
+            +  '                </div>'
+            +  '                <div class="element-input" id="mbj-field-init-username">'
+            +  '                    <input class="" id="mbj_form_u" type="text" name="mbj_login" required />'
+            +  '                </div>'
+            +  '                <button class="submit" onclick="mbjAttemptAuthenticate()">'
+            +  '                    <span class="mbj-button-text">Log In</span>'
+            +  '                </button>'
+            +  '            </form>'
+            +  '        </div>'
+            +  '        <div id="mbj-onboard-buttons">'
+            +  '            <img id="close-modal-' + this.uid + '" src="img/forfun.png"></a>'
+            +  '            <a href="javascript:MbjDisplayRegistrationView()"><img src="img/rewards.png"></a>'
+            +  '        </div>'
+            +  '    </div>'
+            +  '</div>');
+
+        var closeButton = document.getElementById('close-modal-' + this.uid);
+        var that = this;
+        closeButton.addEventListener('click', this.SelfDestruct);//.bind(MbjModal);
+        
+        this.FadeIn();
+    },
+    Test: function() {
+        console.log("yo!");
+    },
+    FadeIn: function() {
+        jQuery( this.element )
+            .fadeIn(200,"swing");
+    },
+    SelfDestruct: function() {
+        // Clear any previously set modal destruction timeouts
+        clearTimeout(beanDisplayExpiry);
+
+        // jQuery( this.element )
+        // .fadeOut(200, "swing", function() {
+        //     jQuery( this ).remove();
+        // });
+
+        target = jQuery( this ) .parents( 'table' );
+        jQuery( target ).fadeOut(200, "swing", function() {
+            jQuery( this ).remove();
+        });
+    },
+    Destruct: function( activator ) {
+        var target = jQuery( activator ).parents( table );
+        jQuery( target ).fadeOut(200, "swing", function() {
+            jQuery( this ).remove();
+        });
+    }
+}
+
+// Mbj.prototype = {
+    
+//     mbjAddAwardBean: function() {
+    
+//         // Get any queued Beans in session storage, add a new one, save new total to session storage
+//         queuedBeans = sessionStorage.getItem("queuedBeans");
+//         queuedBeans++;
+//         sessionStorage.setItem("queuedBeans", queuedBeans);
+
+//         mbjDebug("Queued Bean count: " + queuedBeans);
+
+//         // If no other modal is present, attempt to get award
+//         if (!jQuery( '#mbj_modal' ).length) {
+//             mbjAttemptAward();
+//         };
+//     },
+    
+//     mbjAttemptAward: function() {
+
+//         // Get session data relevant to login state
+//         username = sessionStorage.getItem("username");
+//         userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+
+//         // If user is logged in and username is valid, attempt to retrieve award bean
+//         if (userLoggedIn && username != 'null') {
+//             u = sessionStorage.getItem("username");
+//             p = 'password';
+
+//             // If user has queued beans, attempt to get them from MBJ
+//             if (sessionStorage.getItem("queuedBeans") > 0) {
+                
+//                 // If no other modal is present, execute request
+//                 if (!jQuery( '#mbj_modal' ).length) {
+//                     mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
+//                     get_award(u, p, mbjAppID, BeanAwardAlert);
+//                     queuedBeans = sessionStorage.getItem("queuedBeans");
+//                     queuedBeans--;
+//                     sessionStorage.setItem("queuedBeans", queuedBeans);
+//                     mbjDebug(queuedBeans + " queued Beans remaining...");
+//                 }
+//             }
+//         } else {
+//             mbjAttemptYouvewon();
+//         }
+//     },
+
+//     mbjAttemptLogin: function() {
+//         mbjDebug('Prompting user to log in...');
+//         jQuery( '#mbj_notification_container_youvewon' ).hide();
+//         MbjCreateOnboardModal();
+
+//         // If login form is submitted...
+//         jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//             u = jQuery('#mbj_form_u',this).val();
+//             p = jQuery('#mbj_form_p', this).val();
+//             p = '';
+//             mbjDebug("Attempting to log in... " + u);
+//             mbjDebug("Queued Bean count: " + queuedBeans);
+
+//             mbjAttemptAuthenticate(u, p);
+//             mbjDebug("Authentication method called.");
+
+//         });
+
+//         // If registration form is submitted...
+//         jQuery('#mbj_registration_form').off('submit').on('submit', function(event) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//             u = jQuery('#mbj_form_reg_u', this).val();
+//             p = jQuery('#mbj_form_reg_p', this).val();
+//             p2 = jQuery('#mbj_form_reg_p2', this).val();
+//             email = jQuery('#mbj_form_reg_email', this).val();
+//             zip = jQuery('#mbj_form_reg_zip', this).val();
+            
+//             mbjDebug("Attempting to register...");
+//             mbjDebug("Queued Bean count: " + queuedBeans);
+
+//             mbjAttemptRegistration();
+
+//         });
+
+//         jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
+
+//             jQuery('div.mbj_notification_pane_selector').each(function() {
+//                 mbjDebug("Check!");
+
+//                 if (jQuery(this).hasClass('active_selector')) {
+//                     jQuery(this).removeClass('active_selector').addClass('inactive_selector');
+//                 }
+//                 else {
+//                     jQuery(this).removeClass('inactive_selector').addClass('active_selector');
+//                 }
+//                 ;
+//             });
+
+//             jQuery('div.mbj_login_or_register').each(function() {
+
+//                 if (jQuery(this).hasClass('active_pane')) {
+//                     jQuery(this).removeClass('active_pane').addClass('inactive_pane');
+//                 }
+//                 else {
+//                     jQuery(this).removeClass('inactive_pane').addClass('active_pane');
+//                 };
+//             });
+//         });
+//     },
+
+//     mbjRevealModal: function() {
+//         jQuery('#mbj_modal')
+//             .fadeIn(200,"swing");
+//     },
+
+//     mbjDestroyModal: function() {
+    
+//         // Clear any previously set modal destruction timeouts
+//         clearTimeout(beanDisplayExpiry);
+
+//         jQuery('#mbj_modal')
+//         .fadeOut(200, "swing", function() {
+//             jQuery( this ).remove();
+
+           
+//             // Get session data relevant to login state
+//             username = sessionStorage.getItem("username");
+//             userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+
+//             // If user is logged in, check to see if any beans are left to be awarded after modal closes
+//             if (userLoggedIn && username != 'null') {
+//                 mbjAttemptAward();
+//             };
+//         });
+//     },
+
+//     mbjAttemptYouvewon: function() {
+    
+//         mbjDebug('Prompting user to log in...');
+        
+//         // Prompt for login/registration
+//         // Create modal div if it doesn't already exist
+//         if (!jQuery( '#mbj_modal' ).length) {
+//             jQuery( 'body' ).append( '<table id="mbj_modal"></table>' );
+//             jQuery( '#mbj_modal' ).load( './assets/modal/login-register.htm' + '?' + new Date().getTime(), mbjRevealModal );
+
+//         }
+
+//         // If login form is submitted...
+//         jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//             u = jQuery('#mbj_form_u',this).val();
+//             p = jQuery('#mbj_form_p', this).val();
+//             p = '';
+//             mbjDebug("Attempting to log in... " + u);
+//             mbjDebug("Queued Bean count: " + queuedBeans);
+
+//             mbjAttemptAuthenticate();
+
+//             mbjDebug("Authentication method called.");
+
+//         });
+
+//         // If registration form is submitted...
+//         jQuery('#mbj_registration_form').off('submit').on('submit', function(event) {
+//             event.preventDefault();
+//             event.stopPropagation();
+//             u = jQuery('#mbj_form_reg_u', this).val();
+//             p = jQuery('#mbj_form_reg_p', this).val();
+//             p2 = jQuery('#mbj_form_reg_p2', this).val();
+//             email = jQuery('#mbj_form_reg_email', this).val();
+//             zip = jQuery('#mbj_form_reg_zip', this).val();
+
+//             mbjDebug("Attempting to register...");
+//             mbjDebug("Queued Bean count: " + queuedBeans);
+
+//             mbjAttemptRegistration();
+//         });
+
+//         jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
+//             event.preventDefault();
+//             event.stopPropagation();
+            
+//             mbjDestroyModal();
+//         });
+
+        
+
+//         jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
+
+//             jQuery('div.mbj_notification_pane_selector').each(function() {
+//                 mbjDebug("Check!");
+
+//                 if (jQuery(this).hasClass('active_selector')) {
+//                     jQuery(this).removeClass('active_selector').addClass('inactive_selector');
+//                 }
+//                 else {
+//                     jQuery(this).removeClass('inactive_selector').addClass('active_selector');
+//                 }
+//                 ;
+//             });
+
+//             jQuery('div.mbj_login_or_register').each(function() {
+
+//                 if (jQuery(this).hasClass('active_pane')) {
+//                     jQuery(this).removeClass('active_pane').addClass('inactive_pane');
+//                 }
+//                 else {
+//                     jQuery(this).removeClass('inactive_pane').addClass('active_pane');
+//                 }
+//                 ;
+//             });
+//         });
+//     }
+//}
+
+
 
 
 
@@ -123,7 +444,7 @@ function mbjAttemptLogin() {
         zip = jQuery('#mbj_form_reg_zip', this).val();
 
 // Add checkbox items to array
-/*        var catArray = [],
+        var catArray = [],
                 inputs = document.getElementsByClassName("mbj_checkbox");
 
         for (var i = inputs.length - 1; i >= 0; i--) {
@@ -132,7 +453,7 @@ function mbjAttemptLogin() {
             }
         }
 
-        cats = catArray;*/
+        cats = catArray;
         mbjDebug("Attempting to register...");
         mbjDebug("Queued Bean count: " + queuedBeans);
 
@@ -171,14 +492,32 @@ mbjRevealModal = function() {
         .fadeIn(200,"swing");
 };
 
-mbjDestroyModal = function() {
-    
+mbjModalID = function(activator) {
+    var modalID = jQuery( activator ).parents( table ).id;
+    return modalID;
+}
+
+mbjDestroyModal = function(activator) {
+
     // Clear any previously set modal destruction timeouts
     clearTimeout(beanDisplayExpiry);
 
-    jQuery('#mbj_modal')
-    .fadeOut(200, "swing", function() {
+
+
+    var target = jQuery( activator ).parents( table );
+    jQuery( target ).fadeOut(200, "swing", function() {
         jQuery( this ).remove();
+    });
+
+
+
+
+    
+
+
+    // jQuery('#mbj_modal')
+    // .fadeOut(200, "swing", function() {
+    //     jQuery( this ).remove();
 
        
         // Get session data relevant to login state
@@ -189,8 +528,9 @@ mbjDestroyModal = function() {
         if (userLoggedIn && username != 'null') {
             mbjAttemptAward();
         };
-    });
 }
+
+
 
 function mbjAttemptYouvewon() {
     
@@ -231,7 +571,7 @@ function mbjAttemptYouvewon() {
         zip = jQuery('#mbj_form_reg_zip', this).val();
 
 // Add checkbox items to array
-/*        var catArray = [],
+        var catArray = [],
                 inputs = document.getElementsByClassName("mbj_checkbox");
 
         for (var i = inputs.length - 1; i >= 0; i--) {
@@ -240,7 +580,7 @@ function mbjAttemptYouvewon() {
             }
         }
 
-        cats = catArray;*/
+        cats = catArray;
         mbjDebug("Attempting to register...");
         mbjDebug("Queued Bean count: " + queuedBeans);
 

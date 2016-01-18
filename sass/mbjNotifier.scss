@@ -59,11 +59,12 @@
     src: url(../font/Museo300-Regular-webfont.woff);
 }
 
+.mbj-notification,
 .mbj_notification {
   // background: #222229;
   // background: linear-gradient(135deg,  #222229 47%,#37373e 100%);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222229', endColorstr='#37373e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  position: absolute;
+  //position: absolute;
   -webkit-transform: translateZ(0);
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
@@ -75,6 +76,7 @@
 
 }
 
+.mbj-notification-container,
 .mbj_notification_container {
   font-size: 1rem !important;
   font-family: 'Museo','Helvetica Neue','Helvetica',Arial,Verdana,sans-serif;
@@ -97,8 +99,14 @@
   //overflow: scroll;
   overflow: inherit;
   margin-top: 5vh;
+
+  input,
+  option {
+    color: #666 !important;
+  }
 }
 
+.mbj-notification-inner,
 .mbj_notification_inner {
     //background: #11304f;        /* Questionable! */
     background: #000000;
@@ -118,6 +126,7 @@
     }
 }
 
+.mbj-notification-beanticker,
 .mbj_notification_beanticker {
     min-height: 80px;
     margin: 2rem -10px;
@@ -163,23 +172,13 @@
     overflow: scroll;
 }
 
-
-
-
-
-
-
-
-.mbj_notification_container input,
-.mbj_notification_container option {
-  color: #666 !important;
-}
-
+.mbj-notiication-pane,
 .mbj_notiication_pane {
   display: inline-block;
   width: auto;
 }
 
+.mbj-notification-copy,
 .mbj_notification_copy {
   padding: 0.75em 0;
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -318,41 +317,41 @@ input.success{
   }
 }
 
-.btn-facebook {
-  background-image: linear-gradient(top, $mbj-color-facebook-blue-lt, $mbj-color-facebook-blue);
-  border-color: $mbj-color-facebook-blue;
+// .btn-facebook {
+//   background-image: linear-gradient(top, $mbj-color-facebook-blue-lt, $mbj-color-facebook-blue);
+//   border-color: $mbj-color-facebook-blue;
 
-  &:active {
-    background-image: linear-gradient(bottom, $mbj-color-facebook-blue-lt, $mbj-color-facebook-blue);
-  }  
-}
+//   &:active {
+//     background-image: linear-gradient(bottom, $mbj-color-facebook-blue-lt, $mbj-color-facebook-blue);
+//   }  
+// }
 
-.btn-category {
-  background-image: linear-gradient(top, $mbj-color-blue, $mbj-color-blue-dk);
-  border-color: $mbj-color-blue;
+// .btn-category {
+//   background-image: linear-gradient(top, $mbj-color-blue, $mbj-color-blue-dk);
+//   border-color: $mbj-color-blue;
 
-  &:active {
-    background-image: linear-gradient(bottom, $mbj-color-blue, $mbj-color-blue-dk);
-  }
+//   &:active {
+//     background-image: linear-gradient(bottom, $mbj-color-blue, $mbj-color-blue-dk);
+//   }
 
-  &.btn-category-selected {
-    background-image: linear-gradient(top, $mbj-color-green, $mbj-color-green-dk);
-    border-color: $mbj-color-green;
+//   &.btn-category-selected {
+//     background-image: linear-gradient(top, $mbj-color-green, $mbj-color-green-dk);
+//     border-color: $mbj-color-green;
 
-    &:active {
-      background-image: linear-gradient(bottom, $mbj-color-green, $mbj-color-green-dk);
-    }
-  }
+//     &:active {
+//       background-image: linear-gradient(bottom, $mbj-color-green, $mbj-color-green-dk);
+//     }
+//   }
 
-  .mbj-button-text {
-    text-align: left;
-  }
+//   .mbj-button-text {
+//     text-align: left;
+//   }
 
-}
+// }
 
-.ab-free-play {
-    margin: 0.5rem 0;
-}
+// .ab-free-play {
+//     margin: 0.5rem 0;
+// }
 
 
 .btn-close {
