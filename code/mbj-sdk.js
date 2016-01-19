@@ -437,10 +437,10 @@ function parse_authenticateuser_and_callback(data, callback){
 
 
 
-var award = [];
 var currentWinArray = [];
 
-function parse_award(award) {
+function parse_award(currentWinArray) {
+    var award = [];
 
     award.push({
         awarded: currentWinArray.awarded,
@@ -463,7 +463,7 @@ function parse_award_and_callback(data, callback) {
     }
     
     award = [];
-    awardArray = [];
+    //awardArray = [];
     var json = JSON.parse(data);
     console.log("start get json");
     console.log(json);
@@ -472,7 +472,8 @@ function parse_award_and_callback(data, callback) {
 
     var result;
     if (status === 1) {
-        awardArray = json.response;
+        //awardArray = json.response;
+        award = json.response;
         parse_award(award);
         result = STATUS_SUCCESS;
         callback(result,award);

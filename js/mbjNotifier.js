@@ -1,12 +1,18 @@
 // MyBeanJar Modal Object
 
-
+    // Miscellaneous variables
+    var queuedBeans;
+    var loginStatusFlashing;
+    var categories = new Array();
+    // var beanDisplayExpiry;
+    // var debugMode = true;
+    
     // Built-in defaults
-
     var config = {
         hardUser: 'ryanfister3',                            // username for use with API calls not related to actual user
         hardPass: '40f4d87250c70278580bc8fb47e5caaa',       // password for use with API calls not related to actual user
-        debugMode: true,                                    // Enable/disable debug mode error logging
+        debugMode: true,                                    // Should debug log be enabled?
+        rewardLogin: true                                   // Should beans be awarded for logging in?
     }
 
 
@@ -42,9 +48,10 @@ var MbjModal = function(variant){
 
 MbjModal.prototype = {
     constructor: MbjModal,
-    uid: {},
-    payload: {},
-    timeout: {},
+    uid: {},                            // The unique identifier of the modal (timestamp)
+    payload: {},                        // The contents of the modal
+    beanImage: {},                      // The URL for the bean award image
+    timeout: {},                        // The timeout for  modal self-destruction
     currentView: function () {},
     lastView: function() {},
     config: {},
@@ -56,6 +63,9 @@ MbjModal.prototype = {
     },
     DisplayLogin: function() {
         var modal = this;
+
+        // Fetch categories in preparation for registration
+        categories = fetchCategories();
 
         // Load template as modal content
         jQuery( this.payload ).html( modalContent.login(modal) );
@@ -87,6 +97,8 @@ MbjModal.prototype = {
         this.currentView = this.DisplayLogin;
     },
     DisplayBean: function() {
+        //this.Spawn();
+
         var modal = this;
 
         //this.AwardBean
@@ -96,15 +108,26 @@ MbjModal.prototype = {
         // Load template as modal content
         jQuery( this.payload ).html( modalContent.bean(modal) );
 
+        // Load bean image into modal
+        jQuery('.bean_notification_image').replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + this.beanImage + '">');
+
         // Map buttons and assign handlers
         var closeButton     = document.getElementById('close-modal-' + modal.uid);
 
         closeButton.addEventListener('click', function(){
-            modal.SelfDestruct();//.bind(MbjModal);
-        });
+            this.SelfDestruct();
+        }.bind(this));
+
+        // Fade modal into view once loaded
+        this.FadeIn();
+
+        // Set modal self-destruct timeout
+        this.timeout = setTimeout(function() {
+            this.SelfDestruct();
+        }.bind(this), 8000);
 
         // Update view tracker
-        this.currentView = this.DisplayRegistration;
+        this.currentView = this.DisplayBean;
     },
     DisplayRegistration: function() {
         var modal = this;
@@ -117,7 +140,7 @@ MbjModal.prototype = {
         jQuery( this.payload ).html( modalContent.registration(modal) );
 
         // Load categories into content
-        MbjDisplayRegistrationView(this.categories);
+        MbjDisplayRegistrationView(categories);
 
         // Map buttons and assign handlers
         var backButton      = document.getElementById('back-modal-' + modal.uid);
@@ -160,9 +183,12 @@ MbjModal.prototype = {
                 // If no other modal is present, execute request
                 if (!jQuery( '#mbj_modal' ).length) {
                     mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
-                    (function() {
-                        get_award(u, p, mbjAppID, this.BeanAwardAlerts());
-                    });
+                    get_award(u, p, mbjAppID, function(result, award){
+                        mbjDebug('Award: ' + award);
+                        //!\\ BUILD IN FAILURE STATES
+                        this.beanImage = award.imageurl;
+                        this.DisplayBean();
+                    }.bind(this));
                     queuedBeans = sessionStorage.getItem("queuedBeans");
                     queuedBeans--;
                     sessionStorage.setItem("queuedBeans", queuedBeans);
@@ -173,9 +199,6 @@ MbjModal.prototype = {
             // If user isn't logged in, prompt them to do so or to register
             this.DisplayLogin();
         }
-    },
-    BeanAwardAlerts: function(result, award) {
-        console.log(result, award);
     },
     /*Test: function() {
         console.log("yo!");
@@ -274,24 +297,31 @@ MbjModal.prototype = {
     },
     SelfDestruct: function() {
         // Clear any previously set modal destruction timeouts
-        clearTimeout(beanDisplayExpiry);
+        clearTimeout(this.timeout);
 
         jQuery( this.element )
         .fadeOut(200, "swing", function() {
             jQuery( this ).remove();
+            
+            // If user has queued beans and is logged in, attempt to get them from MBJ (See options)
+            if (config.rewardLogin && sessionStorage.getItem("mbjUserLoggedIn")) {
+                if (sessionStorage.getItem("queuedBeans") > 0) {
+                    new MbjModal('awardbean');
+                }
+            }
         });
 
         // target = jQuery( this ) .parents( 'table' );
         // jQuery( target ).fadeOut(200, "swing", function() {
         //     jQuery( this ).remove();
         // });
-    },
-    Destruct: function( activator ) {
-        var target = jQuery( activator ).parents( table );
-        jQuery( target ).fadeOut(200, "swing", function() {
-            jQuery( this ).remove();
-        });
-    }
+    }//,
+    // Destruct: function( activator ) {
+    //     var target = jQuery( activator ).parents( table );
+    //     jQuery( target ).fadeOut(200, "swing", function() {
+    //         jQuery( this ).remove();
+    //     });
+    // }
 }
 
 // modalContent contains the various strings that are used to generate the HTMLelements for modal views
@@ -646,10 +676,7 @@ var modalContent = {
 
 
 
-var queuedBeans;
-var loginStatusFlashing;
-var beanDisplayExpiry;
-var debugMode = true;
+
 
 
 
@@ -801,27 +828,27 @@ function mbjAttemptLogin() {
     });
 }
 
-mbjRevealModal = function() {
-    jQuery('#mbj_modal')
-        .fadeIn(200,"swing");
-};
+// mbjRevealModal = function() {
+//     jQuery('#mbj_modal')
+//         .fadeIn(200,"swing");
+// };
 
-mbjModalID = function(activator) {
-    var modalID = jQuery( activator ).parents( table ).id;
-    return modalID;
-}
+// mbjModalID = function(activator) {
+//     var modalID = jQuery( activator ).parents( table ).id;
+//     return modalID;
+// }
 
-mbjDestroyModal = function(activator) {
+// mbjDestroyModal = function(activator) {
 
-    // Clear any previously set modal destruction timeouts
-    clearTimeout(beanDisplayExpiry);
+//     // Clear any previously set modal destruction timeouts
+//     clearTimeout(beanDisplayExpiry);
 
 
 
-    var target = jQuery( activator ).parents( table );
-    jQuery( target ).fadeOut(200, "swing", function() {
-        jQuery( this ).remove();
-    });
+//     var target = jQuery( activator ).parents( table );
+//     jQuery( target ).fadeOut(200, "swing", function() {
+//         jQuery( this ).remove();
+//     });
 
 
 
@@ -829,20 +856,20 @@ mbjDestroyModal = function(activator) {
     
 
 
-    // jQuery('#mbj_modal')
-    // .fadeOut(200, "swing", function() {
-    //     jQuery( this ).remove();
+//     // jQuery('#mbj_modal')
+//     // .fadeOut(200, "swing", function() {
+//     //     jQuery( this ).remove();
 
        
-        // Get session data relevant to login state
-        username = sessionStorage.getItem("username");
-        userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+//         // Get session data relevant to login state
+//         username = sessionStorage.getItem("username");
+//         userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
 
-        // If user is logged in, check to see if any beans are left to be awarded after modal closes
-        if (userLoggedIn && username != 'null') {
-            mbjAttemptAward();
-        };
-}
+//         // If user is logged in, check to see if any beans are left to be awarded after modal closes
+//         if (userLoggedIn && username != 'null') {
+//             mbjAttemptAward();
+//         };
+// }
 
 
 
