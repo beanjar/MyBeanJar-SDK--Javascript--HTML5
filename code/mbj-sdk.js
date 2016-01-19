@@ -251,7 +251,7 @@ function send_password(username, callback) {
 function validate_user(username,callback){
     
     var params = {
-    "username":username
+        "username":username
     }
 
     return request_to_api(callback, "v2services", "validateuser", params, API_URL);

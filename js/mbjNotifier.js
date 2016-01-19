@@ -44,6 +44,7 @@ MbjModal.prototype = {
     constructor: MbjModal,
     uid: {},
     payload: {},
+    timeout: {},
     currentView: function () {},
     lastView: function() {},
     config: {},
@@ -219,6 +220,57 @@ MbjModal.prototype = {
 
         }
         
+    },
+    DisplayAuthenticated: function(result, message, email) {
+
+        mbjDebug("Authenticating...");
+
+        // If request was successful, record in session storage and destroy the calling modal
+        if (result == STATUS_SUCCESS) {
+            mbjDebug("Result = " + result);
+            mbjDebug("Message = " + message);
+            mbjDebug("Authentication succeeded.");
+            //mbjDebug("Email" + email);
+            // sessionStorage.setItem('email',email);
+            sessionStorage.setItem('mbjUserLoggedIn','true');
+            //jQuery('#email').val(email);
+            //jQuery("#mbj_form_reg_email").val(email);
+
+            mbjUserLoggedIn = true;
+
+            // jQuery("button#footer-signup").fadeOut(200, "swing");
+            // jQuery(".footer-cta-title").css({
+            //     width: "100%",
+            //     textAlign: "center"
+            // });
+
+            setTimeout(function() {
+                jQuery("div.mbj_login_status").addClass("success");
+
+                jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
+
+                flashLoginStatus();
+
+                //beanDisplayExpiry = setTimeout(function() {
+                this.timeout = setTimeout(function() {
+                    this.SelfDestruct();
+                }.bind(this), 2000);
+            }.bind(this), 200);
+        }
+        else {
+            mbjDebug("Result = " + result);
+            mbjDebug("Message = " + message);
+            mbjDebug("Authentication failed.");
+
+
+            setTimeout(function() {
+                jQuery("div.mbj_login_status").addClass("fail");
+
+                jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Login failed.</p>');
+
+                flashLoginStatus();
+            }.bind(this), 200);
+        }
     },
     SelfDestruct: function() {
         // Clear any previously set modal destruction timeouts
@@ -888,7 +940,8 @@ function mbjAttemptYouvewon() {
 
 
 function mbjAttemptAuthenticate(username) { //, password) {
-
+    // var result;
+    // var message;
     jQuery('div.mbj_login_status').removeClass('success fail');
     jQuery('div.mbj_login_status').html('<div id="spinner_login"></div>');
 
@@ -902,7 +955,10 @@ function mbjAttemptAuthenticate(username) { //, password) {
     flashLoginStatus();
     SummonSpinner('spinner_login');
 
-    validate_user(u, mbjNotifyAuthenticate);
+    validate_user(u, function(result, message){
+        //mbjNotifyAuthenticate.bind(this, result, message)();
+        this.DisplayAuthenticated(result, message);
+    }.bind(this));
     mbjDebug("Queued Bean count: " + queuedBeans);
 }
 
@@ -912,6 +968,8 @@ function mbjNotifyAuthenticate(result, message, email) {
 
     mbjDebug("Authenticating...");
 
+    
+    // If request was successful, record in session storage and destroy the calling modal
     if (result == STATUS_SUCCESS) {
         mbjDebug("Result = " + result);
         mbjDebug("Message = " + message);
@@ -919,9 +977,9 @@ function mbjNotifyAuthenticate(result, message, email) {
         //mbjDebug("Email" + email);
         // sessionStorage.setItem('email',email);
         sessionStorage.setItem('mbjUserLoggedIn','true');
-          jQuery('#email').val(email);
+        //jQuery('#email').val(email);
  
-      jQuery("#mbj_form_reg_email").val(email);
+        //jQuery("#mbj_form_reg_email").val(email);
 
 
 
@@ -929,11 +987,11 @@ function mbjNotifyAuthenticate(result, message, email) {
 
 
 
-        jQuery("button#footer-signup").fadeOut(200, "swing");
-        jQuery(".footer-cta-title").css({
-            width: "100%",
-            textAlign: "center"
-        });
+        // jQuery("button#footer-signup").fadeOut(200, "swing");
+        // jQuery(".footer-cta-title").css({
+        //     width: "100%",
+        //     textAlign: "center"
+        // });
 
         setTimeout(function() {
             jQuery("div.mbj_login_status").addClass("success");
@@ -942,8 +1000,9 @@ function mbjNotifyAuthenticate(result, message, email) {
 
             flashLoginStatus();
 
-            beanDisplayExpiry = setTimeout(function() {
-                mbjDestroyModal();
+            //beanDisplayExpiry = setTimeout(function() {
+            this.timeout = setTimeout(function() {
+                this.SelfDestruct();
             }, 2000);
         }, 200);
     }
@@ -962,6 +1021,12 @@ function mbjNotifyAuthenticate(result, message, email) {
         }, 200);
     }
 }
+
+
+
+
+
+
 
 function mbjAttemptRegistration() {
 
