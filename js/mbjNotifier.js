@@ -99,6 +99,7 @@ MbjModal.prototype = {
     payload: {},                        // The contents of the modal
     beanImage: {},                      // The URL for the bean award image
     timeout: {},                        // The timeout for  modal self-destruction
+    loginStatusFlashing: false,         // The status of the login flasher (true = active)
     geolocation: {                      // The lat/long coordinates of the browser
         lat: {},                        // The latitude coordinate supplied by the browser
         lon: {}                         // The longitude coordinate supplied by the browser
@@ -234,7 +235,7 @@ MbjModal.prototype = {
             var catSize = catArray.length;
         };
         
-        var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%" multiple="multiple">';
+        var catSelect = '<select id="mbj-form-reg-cats-' + this.uid + '" name="cats" style="width:100%" multiple="multiple">';
         
         for (var i = 0; i < catSize; i++){
             var catName = catArray[i].name;
@@ -311,43 +312,44 @@ MbjModal.prototype = {
     SubmitRegistration: function() {
         jQuery("div.mbj_login_status").removeClass("success fail");
         jQuery("div.mbj_login_status").html('<div id="spinner_login"></div>');
-        flashLoginStatus();
+        this.FlashLoginStatus();
         SummonSpinner('spinner_login');
 
-        u = jQuery('#mbj_form_reg_email').val();
-        p = jQuery('#mbj_form_reg_p').val();
-        p2 = jQuery('#mbj_form_reg_p2').val();
-        email = jQuery('#mbj_form_reg_email').val();
-        zip = jQuery('#mbj_form_reg_zip').val();
+        // Formerly, username was accepted here. E-mail addresses are used now.
+        u = jQuery('#mbj-form-reg-email-' + this.uid).val();
+        p = jQuery('#mbj-form-reg-p-' + this.uid).val();
+        p2 = jQuery('#mbj-form-reg-p2-' + this.uid).val();
+        email = jQuery('#mbj-form-reg-email-' + this.uid).val();
+        zip = jQuery('#mbj-form-reg-zip-' + this.uid).val();
         lat = jQuery('#lat-' + this.uid).val();
         lon = jQuery('#lon-' + this.uid).val();    
-        cats = jQuery('#mbj_form_reg_cats').val();
+        cats = jQuery('#mbj-form-reg-cats-' + this.uid).val();
         
         if (p != p2) {
             mbjDebug("Password mismatch detected");
-            //!\\ Replace with object method
-            mbjNotifyRegistrationPassMismatch();
+            this.NotifyPasswordMismatch();
         } 
 
-        else if (p.length < 6) {
+        else if (p.length < 5) {
             mbjDebug("Invalid password");
-            //!\\ Replace with object method
-            mbjNotifyRegistrationInvalidPass();
+            this.NotifyPasswordInvalid();
         }
 
-        else if (cats == null)     { 
-            //!\\ Replace with object method
-            mbjNotifyRegistrationCategories(3);  
+        else if (!jQuery.isEmptyObject(cats) && cats.length < 3) {
+            if (cats.length < 3){
+                mbjDebug("Insufficient categories selected");
+                this.NotifyInsufficientCategories();
+            }
         }
 
-        else if (cats.length < 3){
-            //!\\ Replace with object method
-            mbjNotifyRegistrationCategories(3);
+        else if (jQuery.isEmptyObject(cats)) {
+            mbjDebug("Insufficient categories selected");
+            this.NotifyInsufficientCategories();
         }
 
         else {    
             // Pass user data off to API methods
-            register_user(u, p, email, zip, lat,lon, cats, function(result, message) {
+            register_user(u, p, email, zip, lat, lon, cats, function(result, message) {
                 this.UpdateRegistrationStatus(result, message);
             }.bind(this));
         }
@@ -367,11 +369,8 @@ MbjModal.prototype = {
 
             setTimeout(function() {
                 jQuery("div.mbj_login_status").addClass("success");
-
                 jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
-
-                flashLoginStatus();
-
+                this.FlashLoginStatus();
                 this.timeout = setTimeout(function() {
                     this.SelfDestruct();
                 }.bind(this), 2000);
@@ -384,10 +383,8 @@ MbjModal.prototype = {
 
             setTimeout(function() {
                 jQuery("div.mbj_login_status").addClass("fail");
-
                 jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Login failed.</p>');
-
-                flashLoginStatus();
+                this.FlashLoginStatus();
             }.bind(this), 200);
         }
     },
@@ -425,7 +422,7 @@ MbjModal.prototype = {
             sessionStorage.setItem('username',email);
             sessionStorage.setItem('mbjUserLoggedIn','true');
             jQuery('#email').val(email);
-            jQuery("#mbj_form_reg_email").val(email);
+            jQuery("#mbj-form-reg-email").val(email);
               
             // Display registration success notifications
             setTimeout(function() {
@@ -433,7 +430,7 @@ MbjModal.prototype = {
 
                 jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
 
-                flashLoginStatus();
+                this.FlashLoginStatus();
 
                 setTimeout(function() {
                     this.LoadRegistrationSuccessView();
@@ -454,10 +451,115 @@ MbjModal.prototype = {
 
                 jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Registration failed. ' + message + ' </p>');
 
-                flashLoginStatus();
-            }, 200);
+                this.FlashLoginStatus();
+            }.bind(this), 200);
         }
 
+    },
+
+    NotifyPasswordMismatch: function() {
+        setTimeout(function() {
+            jQuery("div.mbj_login_status").addClass("fail");
+            jQuery("div.mbj_login_status").html( modalContent.notify.passwordMismatch(this) );
+
+            this.FlashLoginStatus();
+
+            // Highlight problematic fields
+            jQuery('#mbj-form-reg-p-' + this.uid)
+            .css({backgroundColor: '#c21010'});
+
+            jQuery('#mbj-form-reg-p2-' + this.uid)
+            .css({backgroundColor: '#c21010'});
+        }.bind(this), 200);
+
+        setTimeout(function() {
+            jQuery('#mbj-form-reg-p-' + this.uid)
+            .css({backgroundColor: '#ffffff'});
+
+            jQuery('#mbj-form-reg-p2-' + this.uid)
+            .css({backgroundColor: '#ffffff'});
+        }.bind(this), 3000);
+    },
+
+    NotifyPasswordInvalid: function() {
+        setTimeout(function() {
+            jQuery("div.mbj_login_status").addClass("fail");
+            jQuery("div.mbj_login_status").html( modalContent.notify.invalidPassword(this) );
+
+            this.FlashLoginStatus();
+
+            // Highlight problematic fields
+            jQuery('#mbj-form-reg-p-' + this.uid)
+            .css({backgroundColor: '#c21010'});
+
+            jQuery('#mbj-form-reg-p2-' + this.uid)
+            .css({backgroundColor: '#c21010'});
+        }.bind(this), 200);
+
+        setTimeout(function() {
+            jQuery('#mbj-form-reg-p-' + this.uid)
+            .css({backgroundColor: '#ffffff'});
+
+            jQuery('#mbj-form-reg-p2-' + this.uid)
+            .css({backgroundColor: '#ffffff'});
+        }.bind(this), 3000);
+    },
+
+    NotifyLocationInvalid: function() {
+        setTimeout(function() {
+            jQuery("div.mbj_login_status").addClass("fail");
+            jQuery("div.mbj_login_status").html( modalContent.notify.invalidLocation(this) );
+
+            this.FlashLoginStatus();
+
+            // Highlight problematic fields
+            jQuery("#mbj-form-reg-zip" + this.uid)
+            .css({backgroundColor: '#c21010'});
+        }.bind(this), 200);
+
+        setTimeout(function() {
+            jQuery("#mbj-form-reg-zip" + this.uid)
+            .css({backgroundColor: '#ffffff'});
+        }.bind(this), 3000);
+    },
+
+    NotifyInsufficientCategories: function() {
+        setTimeout(function() {
+            jQuery("div.mbj_login_status").addClass("fail");
+            jQuery("div.mbj_login_status").html( modalContent.notify.insufficientCategories(this) );
+
+            this.FlashLoginStatus();
+
+            // Highlight problematic fields
+            jQuery("#mbj-form-reg-cats-" + this.uid)
+            .css({backgroundColor: '#c21010'});
+        }.bind(this), 200);
+
+        setTimeout(function() {
+            jQuery("#mbj-form-reg-cats-" + this.uid)
+            .css({backgroundColor: '#ffffff'});
+        }.bind(this), 3000);
+    },
+
+    FlashLoginStatus: function() {
+        if (!this.loginStatusFlashing) {
+            this.loginStatusFlashing = true;
+            var statusID = '#mbj-login-status-' + this.uid;
+            jQuery(statusID)
+            .finish()
+            .animate({
+                opacity: 1
+            }, 0)
+            .slideDown()
+            .fadeIn(200)
+            .delay(3000)
+            .animate({
+                opacity: 0
+            }, 200)
+            .slideUp(function() {
+                this.loginStatusFlashing = false;
+            }.bind(this));
+        }
     },
 
     // Stores location data received from browser and applies it to the registration view, if appropriate
@@ -596,22 +698,22 @@ var modalContent = {
                                 +  '                <input type="hidden" name="lon" id="lon-' + modal.uid + '" value=""/>'
                                 +  '                <div class="element-input">'
                                 +  '                    <label class="title mbj-form-label">email&mdash;no spam ever</label>'
-                                +  '                    <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/>'
+                                +  '                    <input class="large" id="mbj-form-reg-email-' + modal.uid + '" type="email" name="mbj_reg_email" required/>'
                                 +  '                </div>'
                                 +  '                <div style="width: 100%;padding-top:5px">'
                                 +  '                       <div class="element-input" style="width:45%;float:left;">'
                                 +  '                                <label class="title mbj-form-label">password (&gt;5 chars)</label>'
-                                +  '                                <input class="small" style="width:100%;" id="mbj_form_reg_p" type="password" name="mbj_password" required="">'
+                                +  '                                <input class="small" style="width:100%;" id="mbj-form-reg-p-' + modal.uid + '" type="password" name="mbj_password" required="">'
                                 +  '                        </div>'
                                 +  '                        <div class="element-input" style="width: 45%;float:right;margin-top:0px">'
                                 +  '                            <label class="title mbj-form-label">confirm password</label>'
-                                +  '                            <input class="small" style="width:100%;" id="mbj_form_reg_p2" type="password" name="mbj_password_confirm">'
+                                +  '                            <input class="small" style="width:100%;" id="mbj-form-reg-p2-' + modal.uid + '" type="password" name="mbj_password_confirm">'
                                 +  '                        </div>'
                                 +  '                </div>'
                                 +  '                <div style="width: 100%;padding-top:5px;white-space:nowrap;display:inline-block">'
                                 +  '                    <div class="element-input" >'
                                 +  '                        <label class="title mbj-form-label">ZIP (US only)&mdash;to find cool stuff nearby</label>'
-                                +  '                        <input class="small"  style="width:45%;" maxlength="5" id="mbj_form_reg_zip" type="text" name="mbj_reg_zip"/>'
+                                +  '                        <input class="small"  style="width:45%;" maxlength="5" id="mbj-form-reg-zip-' + modal.uid + '" type="text" name="mbj_reg_zip"/>'
                                 +  '                       ' + locationButtonString
                                 +  '                    </div>'
                                 +  '                </div>'
@@ -620,7 +722,7 @@ var modalContent = {
                                 +  '                    <div class="mbj-category-selector" id="mbj-category-selector-' + modal.uid + '">'
                                 +  '                    </div>'
                                 +  '                </div>'
-                                +  '                <div class="mbj_login_status"> ' 
+                                +  '                <div class="mbj_login_status" id="mbj-login-status-' + modal.uid + '">' 
                                 +  '                </div>'
                                 +  '            </form>'
                                 +  '        </div>'
@@ -667,6 +769,14 @@ var modalContent = {
                                 +  '    <img class="bean_notification_image" src="">'
                                 +  '</div>';
         return htmlementString;
+    },
+
+    // Notification content
+    notify: {
+        passwordMismatch:       function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">Passwords do not not not match.</p>' },
+        insufficientCategories: function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">You must select at least 3 categories.</p>' },
+        invalidPassword:        function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">Password must be at least 6 alphanumeric characters. Special characters not allowed.</p>' },
+        invalidLocation:        function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">Invalid location.</p>' }
     }
 
 }
@@ -767,7 +877,7 @@ function mbjAttemptAuthenticate(username) {
         sessionStorage.setItem('username',u);
     };
 
-    flashLoginStatus();
+    this.FlashLoginStatus.bind(this)();
     SummonSpinner('spinner_login');
 
     validate_user(u, function(result, message){
@@ -780,77 +890,77 @@ function mbjAttemptAuthenticate(username) {
 
 
 
-function mbjNotifyRegistrationPassMismatch() {
+// function mbjNotifyRegistrationPassMismatch() {
 
-    setTimeout(function() {
-        jQuery("div.mbj_login_status").addClass("fail");
+//     setTimeout(function() {
+//         jQuery("div.mbj_login_status").addClass("fail");
 
-        jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Passwords do not match.</p>');
+//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Passwords do not match.</p>');
 
-        flashLoginStatus();
+//         this.FlashLoginStatus.bind(this)();
 
-        jQuery("#mbj_form_reg_p")
-                .animate({backgroundColor: '#c21010'}, 200);
+//         jQuery(('#mbj-form-reg-p-' + this.uid))
+//                 .animate({backgroundColor: '#c21010'}, 200);
 
-        jQuery("#mbj_form_reg_p2")
-                .animate({backgroundColor: '#c21010'}, 200);
-    }, 200);
+//         jQuery(('#mbj-form-reg-p2-' + this.uid))
+//                 .animate({backgroundColor: '#c21010'}, 200);
+//     }, 200);
 
-    setTimeout(function() {
-        jQuery("#mbj_form_reg_p")
-                .animate({backgroundColor: '#ffffff'}, 200);
+//     setTimeout(function() {
+//         jQuery(('#mbj-form-reg-p-' + this.uid))
+//                 .animate({backgroundColor: '#ffffff'}, 200);
 
-        jQuery("#mbj_form_reg_p2")
-                .animate({backgroundColor: '#ffffff'}, 200);
-    }, 3000);
-}
+//         jQuery(('#mbj-form-reg-p2-' + this.uid))
+//                 .animate({backgroundColor: '#ffffff'}, 200);
+//     }, 3000);
+// }
 
-function mbjNotifyRegistrationCategories(ctmin) {
+// function mbjNotifyRegistrationCategories(ctmin) {
 
-    setTimeout(function() {
-        jQuery("div.mbj_login_status").addClass("fail");
+//     setTimeout(function() {
+//         jQuery("div.mbj_login_status").addClass("fail");
 
-        jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">You must select at least ' + ctmin + ' categories.</p>');
+//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">You must select at least ' + ctmin + ' categories.</p>');
 
-        flashLoginStatus();
+//         this.FlashLoginStatus.bind(this)();
 
-        jQuery("#mbj_form_reg_cats")
-                .animate({backgroundColor: '#c21010'}, 200);
-    }, 200);
+//         jQuery("#mbj-form-reg-cats")
+//                 .animate({backgroundColor: '#c21010'}, 200);
+//     }, 200);
 
-    setTimeout(function() {
-        jQuery("#mbj_form_reg_cats")
-                .animate({backgroundColor: '#ffffff'}, 200);
+//     setTimeout(function() {
+//         jQuery("#mbj-form-reg-cats")
+//                 .animate({backgroundColor: '#ffffff'}, 200);
 
  
-    }, 3000);
-}
+//     }, 3000);
+// }
 
 
-function mbjNotifyRegistrationInvalidPass() {
+// function mbjNotifyRegistrationInvalidPass() {
 
-    setTimeout(function() {
-        jQuery("div.mbj_login_status").addClass("fail");
+//     setTimeout(function() {
+//         jQuery("div.mbj_login_status").addClass("fail");
 
-        jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Password must be at least 6 alphanumeric characters. Special characters not allowed.</p>');
+//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Password must be at least 6 alphanumeric characters. Special characters not allowed.</p>');
 
-        flashLoginStatus();
+//         this.FlashLoginStatus.bind(this)();
 
-        jQuery("#mbj_form_reg_p")
-                .animate({backgroundColor: '#c21010'}, 200);
+//         jQuery(('#mbj-form-reg-p-' + this.uid))
+//                 .animate({backgroundColor: '#c21010'}, 200);
 
-        jQuery("#mbj_form_reg_p2")
-                .animate({backgroundColor: '#c21010'}, 200);
-    }, 200);
+//         jQuery(('#mbj-form-reg-p2-' + this.uid))
+//                 .animate({backgroundColor: '#c21010'}, 200);
+//     }, 200);
 
-    setTimeout(function() {
-        jQuery("#mbj_form_reg_p")
-                .animate({backgroundColor: '#ffffff'}, 200);
+//     setTimeout(function() {
+//         jQuery(('#mbj-form-reg-p-' + this.uid))
+//                 .animate({backgroundColor: '#ffffff'}, 200);
 
-        jQuery("#mbj_form_reg_p2")
-                .animate({backgroundColor: '#ffffff'}, 200);
-    }, 3000);
-};
+//         jQuery(('#mbj-form-reg-p2-' + this.uid))
+//                 .animate({backgroundColor: '#ffffff'}, 200);
+//     }, 3000);
+// };
 
 function mbjNotifyRegistrationInvalidZip() {
 
@@ -859,42 +969,19 @@ function mbjNotifyRegistrationInvalidZip() {
 
         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Invalid ZIP code.</p>');
 
-        flashLoginStatus();
+        this.FlashLoginStatus.bind(this)();
 
-        jQuery("#mbj_form_reg_zip")
+        jQuery("#mbj-form-reg-zip")
                 .animate({backgroundColor: '#c21010'}, 200);
     }, 200);
 
     setTimeout(function() {
-        jQuery("#mbj_form_reg_zip")
+        jQuery("#mbj-form-reg-zip")
                 .animate({backgroundColor: '#ffffff'}, 200);
     }, 3000);
 };
 
 
-
-
-function flashLoginStatus() {
-    if (typeof loginStatusFlashing === 'undefined') {
-        if (!loginStatusFlashing) {
-            loginStatusFlashing = true;
-            jQuery("div.mbj_login_status")
-            .finish()
-            .animate({
-                opacity: 1
-            }, 0)
-            .slideDown()
-            .fadeIn(200)
-            .delay(3000)
-            .animate({
-                opacity: 0
-            }, 200)
-            .slideUp(function() {
-                loginStatusFlashing = false;
-            });
-        }
-    }
-};
 
 
 function SummonSpinner(div_id) {

@@ -104,6 +104,11 @@ form.mbj-form {
             color: black;
         }
     }
+
+    input,
+    select {
+        transition: background-color 0.2s;
+    }
 }
 
 #mbj-onboard-buttons {

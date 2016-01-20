@@ -218,11 +218,13 @@
   width: 273px;
 }
 
-.mbj_login_status img {
-  width: 20%;
-  height: auto;
-  vertical-align: middle;
-  position: relative;
+.mbj_login_status {
+  img {
+    width: 20%;
+    height: auto;
+    vertical-align: middle;
+    position: relative;
+  }
 }
 
 p.status {
@@ -463,7 +465,7 @@ input.success{
   margin: 8px;
   margin-top: 24px !important;
   //height: 50px;
-  -webkit-font-smoothing: none;
+  //-webkit-font-smoothing: none;
   border-radius: 8px;
   background-color: transparent;
 }
