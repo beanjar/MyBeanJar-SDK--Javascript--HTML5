@@ -26,9 +26,9 @@
     |
     °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
-    var queuedBeans;
-    var loginStatusFlashing;
-    var categories = new Array();
+    // var queuedBeans;
+    // var loginStatusFlashing;
+    // var categories = new Array();
 
     
     
@@ -40,13 +40,63 @@
     |
     °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
-    var config = {
-        hardUser: 'ryanfister3',                            // username for use with API calls not related to actual user
-        hardPass: '40f4d87250c70278580bc8fb47e5caaa',       // password for use with API calls not related to actual user
-        debugMode: true,                                    // Enable/disable debug logging
-        rewardLogin: true                                   // Enable/disable awards for user log-ins
-    }
+    // var config = {
+    //     hardUser: 'ryanfister3',                            // username for use with API calls not related to actual user
+    //     hardPass: '40f4d87250c70278580bc8fb47e5caaa',       // password for use with API calls not related to actual user
+    //     debugMode: true,                                    // Enable/disable debug logging
+    //     rewardLogin: true                                   // Enable/disable awards for user log-ins
+    // }
 
+
+
+
+
+var MyBeanJarController = function() {
+    
+    // Assign unique ID based on current timestamp
+    this.FetchCategories();
+
+}
+
+
+
+MyBeanJarController.prototype = {
+    
+    /* * *
+     * MyBeanJar controller object properties
+     */
+
+    constructor: MyBeanJarController,
+    categories: {},                                // An array of bean categories, to be populated with data fetched from MyBeanJar servers
+    queuedBeans: {},                                         // Beans queued to be fetched from server
+    config: {                                               // Default settings
+
+        hardUser: 'ryanfister3',                              // username for use with API calls not related to actual user
+        hardPass: '40f4d87250c70278580bc8fb47e5caaa',         // password for use with API calls not related to actual user
+        debugMode: true,                                      // Enable/disable debug logging
+        rewardLogin: true                                     // Enable/disable awards for user log-ins
+
+    },
+
+    FetchCategories: function() {
+        get_categories(this.config.hardUser, this.config.hardPass, function(result, categories){
+            this.categories = categories;
+        }.bind(this));
+    },
+
+    // Accepts a function as a parameter. This function will get passed to the getCurrentPosition method.
+    GetLocation: function(fx) {
+    
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(fx.bind(this));
+        } 
+
+        else {
+            mbjDebug("Geolocation is not supported by this browser");
+        }
+
+    }
+}
 
 
 
@@ -63,9 +113,10 @@
 |   If no parameter is supplied, a bean award modal will be generated. If the user has not logged into MyBeanJar,
 |   the modal will fall back to a login/registration modal instead.
 |
+|
 °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
-var MbjModal = function(variant){
+var MbjModal = function(variant) {
     
     // Assign unique ID based on current timestamp
     this.uid = Date.now();
@@ -124,8 +175,8 @@ MbjModal.prototype = {
         var modal = this;
 
         // Fetch bean categories if they haven't yet been fetched
-        if (typeof categories == 'undefined'){
-            categories = fetchCategories();
+        if (!jQuery.isEmptyObject(MyBeanJar.categories)) {
+            MyBeanJar.FetchCategories();
         };
 
         // Load template as modal content
@@ -148,7 +199,8 @@ MbjModal.prototype = {
         loginButton.addEventListener('click', function(){
             u = jQuery('#mbj_form_u', this.element).val();
             //p = jQuery('#mbj_form_p', modal.element).val();
-            mbjAttemptAuthenticate.bind(this, u)();//, p);
+            this.SubmitAuthentication(u);
+            //mbjAttemptAuthenticate.bind(this, u)();//, p);
         }.bind(this));
         
         // Fade modal into view once loaded
@@ -218,7 +270,7 @@ MbjModal.prototype = {
         }.bind(this));
 
         locationButton.addEventListener('click', function(){
-            getLocation.bind(this)(this.StoreLocation);
+            MyBeanJar.GetLocation.bind(this)(this.StoreLocation);
         }.bind(this));
 
         registerButton.addEventListener('click', function(){
@@ -289,10 +341,10 @@ MbjModal.prototype = {
                         this.beanImage = award.imageurl;
                         this.LoadAwardView();
                     }.bind(this));
-                    queuedBeans = sessionStorage.getItem("queuedBeans");
-                    queuedBeans--;
-                    sessionStorage.setItem("queuedBeans", queuedBeans);
-                    mbjDebug(queuedBeans + " queued Beans remaining...");
+                    MyBeanJar.queuedBeans = sessionStorage.getItem("queuedBeans");
+                    MyBeanJar.queuedBeans--;
+                    sessionStorage.setItem("queuedBeans", MyBeanJar.queuedBeans);
+                    mbjDebug(MyBeanJar.queuedBeans + " queued Beans remaining...");
                 }
             }
 
@@ -353,6 +405,28 @@ MbjModal.prototype = {
                 this.UpdateRegistrationStatus(result, message);
             }.bind(this));
         }
+    },
+
+    SubmitAuthentication: function(username){
+
+        jQuery('div.mbj_login_status').removeClass('success fail');
+        jQuery('div.mbj_login_status').html('<div id="spinner_login"></div>');
+
+        //u = jQuery('#mbj_form_u').val();
+
+        // Add submitted username to session storage
+        if (typeof username != 'undefined') {
+            sessionStorage.setItem('username', username);
+        };
+
+        this.FlashLoginStatus.bind(this)();
+        SummonSpinner('spinner_login');
+
+        validate_user(username, function(result, message){
+            //mbjNotifyAuthenticate.bind(this, result, message)();
+            this.UpdateAuthenticationStatus(result, message);
+        }.bind(this));
+        mbjDebug("Queued Bean count: " + MyBeanJar.queuedBeans);
     },
 
     // Updates authentication status notification and cleans up authentication activities
@@ -584,8 +658,8 @@ MbjModal.prototype = {
             jQuery( this ).remove();
             
             // If user has queued beans and is logged in, attempt to get them from MyBeanJar (See options)
-            if (config.rewardLogin && sessionStorage.getItem("mbjUserLoggedIn")) {
-                if (sessionStorage.getItem("queuedBeans") > 0) {
+            if (MyBeanJar.config.rewardLogin && sessionStorage.getItem("mbjUserLoggedIn")) {
+                if (sessionStorage.getItem("MyBeanJar.queuedBeans") > 0) {
                     new MbjModal('awardbean');
                 }
             }
@@ -798,8 +872,8 @@ var modalContent = {
 °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
 function mbjDebug(message) {
-    if (typeof config.debugMode != 'undefined') {
-        if (config.debugMode == true) {
+    if (typeof MyBeanJar.config.debugMode != 'undefined') {
+        if (MyBeanJar.config.debugMode == true) {
             console.log(message);
         }
     }
@@ -816,11 +890,11 @@ function mbjDebug(message) {
 function mbjAddAwardBean() {
     
     // Get any queued Beans in session storage, add a new one, save new total to session storage
-    queuedBeans = sessionStorage.getItem("queuedBeans");
-    queuedBeans++;
-    sessionStorage.setItem("queuedBeans", queuedBeans);
+    MyBeanJar.queuedBeans = sessionStorage.getItem("queuedBeans");
+    MyBeanJar.queuedBeans++;
+    sessionStorage.setItem("queuedBeans", MyBeanJar.queuedBeans);
 
-    mbjDebug("Queued Bean count: " + queuedBeans);
+    mbjDebug("Queued Bean count: " + MyBeanJar.queuedBeans);
 
     // If no other modal is present, attempt to get award
     if (!jQuery( '.mbj-modal' ).length) {
@@ -831,136 +905,6 @@ function mbjAddAwardBean() {
 
 
 
-// function mbjAttemptAward() {
-
-//     // Get session data relevant to login state
-//     username = sessionStorage.getItem("username");
-//     userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
-
-    
-//     // If user is logged in and username is valid, attempt to retrieve award bean
-//     if (userLoggedIn && username != 'null') {
-//         u = sessionStorage.getItem("username");
-//         p = 'password';
-
-//         // If user has queued beans, attempt to get them from MBJ
-//         if (sessionStorage.getItem("queuedBeans") > 0) {
-            
-//             // If no other modal is present, execute request
-//             if (!jQuery( '#mbj_modal' ).length) {
-//                 mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
-//                 get_award(u, p, mbjAppID, BeanAwardAlert);
-//                 queuedBeans = sessionStorage.getItem("queuedBeans");
-//                 queuedBeans--;
-//                 sessionStorage.setItem("queuedBeans", queuedBeans);
-//                 mbjDebug(queuedBeans + " queued Beans remaining...");
-//             }
-//         }
-//     } else {
-
-//         mbjAttemptYouvewon();
-//     }
-// }
-
-
-
-
-function mbjAttemptAuthenticate(username) {
-
-    jQuery('div.mbj_login_status').removeClass('success fail');
-    jQuery('div.mbj_login_status').html('<div id="spinner_login"></div>');
-
-    u = jQuery('#mbj_form_u').val();
-
-    // Add submitted username to session storage
-    if (typeof u != 'undefined') {
-        sessionStorage.setItem('username',u);
-    };
-
-    this.FlashLoginStatus.bind(this)();
-    SummonSpinner('spinner_login');
-
-    validate_user(u, function(result, message){
-        //mbjNotifyAuthenticate.bind(this, result, message)();
-        this.UpdateAuthenticationStatus(result, message);
-    }.bind(this));
-    mbjDebug("Queued Bean count: " + queuedBeans);
-}
-
-
-
-
-// function mbjNotifyRegistrationPassMismatch() {
-
-//     setTimeout(function() {
-//         jQuery("div.mbj_login_status").addClass("fail");
-
-//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Passwords do not match.</p>');
-
-//         this.FlashLoginStatus.bind(this)();
-
-//         jQuery(('#mbj-form-reg-p-' + this.uid))
-//                 .animate({backgroundColor: '#c21010'}, 200);
-
-//         jQuery(('#mbj-form-reg-p2-' + this.uid))
-//                 .animate({backgroundColor: '#c21010'}, 200);
-//     }, 200);
-
-//     setTimeout(function() {
-//         jQuery(('#mbj-form-reg-p-' + this.uid))
-//                 .animate({backgroundColor: '#ffffff'}, 200);
-
-//         jQuery(('#mbj-form-reg-p2-' + this.uid))
-//                 .animate({backgroundColor: '#ffffff'}, 200);
-//     }, 3000);
-// }
-
-// function mbjNotifyRegistrationCategories(ctmin) {
-
-//     setTimeout(function() {
-//         jQuery("div.mbj_login_status").addClass("fail");
-
-//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">You must select at least ' + ctmin + ' categories.</p>');
-
-//         this.FlashLoginStatus.bind(this)();
-
-//         jQuery("#mbj-form-reg-cats")
-//                 .animate({backgroundColor: '#c21010'}, 200);
-//     }, 200);
-
-//     setTimeout(function() {
-//         jQuery("#mbj-form-reg-cats")
-//                 .animate({backgroundColor: '#ffffff'}, 200);
-
- 
-//     }, 3000);
-// }
-
-
-// function mbjNotifyRegistrationInvalidPass() {
-
-//     setTimeout(function() {
-//         jQuery("div.mbj_login_status").addClass("fail");
-
-//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Password must be at least 6 alphanumeric characters. Special characters not allowed.</p>');
-
-//         this.FlashLoginStatus.bind(this)();
-
-//         jQuery(('#mbj-form-reg-p-' + this.uid))
-//                 .animate({backgroundColor: '#c21010'}, 200);
-
-//         jQuery(('#mbj-form-reg-p2-' + this.uid))
-//                 .animate({backgroundColor: '#c21010'}, 200);
-//     }, 200);
-
-//     setTimeout(function() {
-//         jQuery(('#mbj-form-reg-p-' + this.uid))
-//                 .animate({backgroundColor: '#ffffff'}, 200);
-
-//         jQuery(('#mbj-form-reg-p2-' + this.uid))
-//                 .animate({backgroundColor: '#ffffff'}, 200);
-//     }, 3000);
-// };
 
 function mbjNotifyRegistrationInvalidZip() {
 
@@ -1015,17 +959,6 @@ function SummonSpinner(div_id) {
 //  Misc. helpers
 //
 
-function fetchCategories(){
-    var categories = [];
-    get_categories(config.hardUser, config.hardPass, function(result, categories){
-        categories = result;
-        return categories;
-    });
-}
-
-function prepareCategories(result, categories) {
-    catArray = categories;
-}
 
 function centerOnboardModal(){    
     jQuery('.onboard-modal').each(function(){
@@ -1050,10 +983,11 @@ window.addEventListener('resize', function(){
 //
 
 jQuery(document).ready(function() {
+
     
     // TEMP
-    if (typeof config.debugMode != 'undefined') {
-        if (config.debugMode == true) {
+    if (typeof MyBeanJar.config.debugMode != 'undefined') {
+        if (MyBeanJar.config.debugMode == true) {
             sessionStorage.clear();
         }
     }
@@ -1062,42 +996,15 @@ jQuery(document).ready(function() {
         mbjUserLoggedIn = true;
     }
 
-    // Fetch MyBeanJar award categories on page load
-    fetchCategories();
 
 });
 
 
 
-//*********  Geolocation *********//
 
 
-// Accepts a function as a parameter. This function will get passed to the getCurrentPosition method.
-function getLocation(fx) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(fx.bind(this));
-            /*, function(error){
-            console.log(error);
-            if (error == 0) {
-                this.ApplyLocation();
-            }
-        }.bind(this));*/
-    } else {
-        mbjDebug("Geolocation is not supported by this browser");
-    }
-}
 
-
-function showPosition(position) {
-    var lat = document.getElementById("lat");
-    var lon = document.getElementById("lon");
-    lat.value = position.coords.latitude;
-    lon.value = position.coords.longitude; 
-    //alert(lat.value + ' x ' + lon.value);
-    jQuery('.btn-location').replaceWith('<div style="font-weight:bold;color:yellow;font-size:larger">Using Current Location</div>');
-}
-
-
+var MyBeanJar = new MyBeanJarController();
 
 
 
