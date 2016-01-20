@@ -1,35 +1,75 @@
-// MyBeanJar Modal Object
+/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
+|
+|   MyBeanJar UI Kit
+|
+|   The mussless and fussless way to get up and running with MyBeanJar!
+|
+|   This script contains a constructor for MyBeanJar modal objects that can be used to 
+|   prompt users for credentials, prompt them to register a new account, and award beans.
+|
+|   These modal objects handle the logic behind bean award events so you don't have to.
+|   Any time you want to award a bean to a user, simply call the mbjAddAwardBean() method
+|   and it will take care of the rest. If the user hasn't yet logged in, it will prompt them
+|   to do so. If they have logged in, it will request a new bean for that user from the 
+|   MyBeanJar servers. That's it! Just attach that method to any events for which you would
+|   like a user to receive a bean and let this script handle the rest.
+|
+°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
-    // Miscellaneous variables
+    
+
+
+
+    /*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
+    |
+    |  Basic variables
+    |
+    °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
+
     var queuedBeans;
     var loginStatusFlashing;
     var categories = new Array();
-    // var beanDisplayExpiry;
-    // var debugMode = true;
+
     
-    // Built-in defaults
+    
+
+
+    /*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
+    |
+    |  Default configuration settings
+    |
+    °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
+
     var config = {
         hardUser: 'ryanfister3',                            // username for use with API calls not related to actual user
         hardPass: '40f4d87250c70278580bc8fb47e5caaa',       // password for use with API calls not related to actual user
-        debugMode: true,                                    // Should debug log be enabled?
-        rewardLogin: true                                   // Should beans be awarded for logging in?
+        debugMode: true,                                    // Enable/disable debug logging
+        rewardLogin: true                                   // Enable/disable awards for user log-ins
     }
 
 
-/***
- *
- *  MbjModal constructor & prototype
- *
- */
+
+
+
+/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
+|
+|   MbjModal constructor
+|   
+|   This constructor accepts an optional parameter that is used to determine the type of modal generated.
+|       
+|       'login':        The login/registration modal
+|       'awardbean':    The bean award modal (containing a freshly minted bean)
+|
+|   If no parameter is supplied, a bean award modal will be generated. If the user has not logged into MyBeanJar,
+|   the modal will fall back to a login/registration modal instead.
+|
+°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
 var MbjModal = function(variant){
     
     // Assign unique ID based on current timestamp
     this.uid = Date.now();
 
-    // // Fetch bean award categories from API
-    // this.categories = fetchCategories();
-    
     // On construction, generate a new HTMLement and map it to the modal object 
     this.Spawn();
 
@@ -39,33 +79,47 @@ var MbjModal = function(variant){
     // Link modal object to its content
     this.payload = document.getElementById('mbj-modal-payload-' + this.uid);
 
+    // Overload checker
+    // If no arguments are supplied, 
     if (arguments.length == 0 || variant == 'awardbean') {
         this.AwardBean();
     } else if (variant == 'login') {
-        this.DisplayLogin();
+        this.LoadLoginView();
     }
 }
 
 MbjModal.prototype = {
+    
+    /* * *
+     * Modal object properties
+     */
+
     constructor: MbjModal,
     uid: {},                            // The unique identifier of the modal (timestamp)
     payload: {},                        // The contents of the modal
     beanImage: {},                      // The URL for the bean award image
     timeout: {},                        // The timeout for  modal self-destruction
     geolocation: {                      // The lat/long coordinates of the browser
-        lat: {},
-        lon: {}
+        lat: {},                        // The latitude coordinate supplied by the browser
+        lon: {}                         // The longitude coordinate supplied by the browser
     },
-    currentView: function () {},
-    lastView: function() {},
-    config: {},
-    // categories: {},
+    currentView: function () {},        // The [function used to generate the] contents of the modal's current view
+    lastView: function() {},            // The [function used to generate the] contents of the modal's previous view (for navigating back)
+
+
+
+    /* * *
+     * Modal object methods
+     */
+
+    // Adds a modal container to the DOM 
     Spawn: function() {
         var modal = this;
-
         jQuery( 'body' ).append( modalContent.frame(modal) );
     },
-    DisplayLogin: function() {
+
+    // Loads login view into modal
+    LoadLoginView: function() {
         var modal = this;
 
         // Fetch bean categories if they haven't yet been fetched
@@ -83,31 +137,29 @@ MbjModal.prototype = {
         var loginButton     = document.getElementById('mbj-login-button-' + modal.uid);
 
         registerButton.addEventListener('click', function(){
-            modal.DisplayRegistration();
-        });
+            this.LoadRegistrationView();
+        }.bind(this));
 
         closeButton.addEventListener('click', function(){
-            modal.SelfDestruct();//.bind(MbjModal);
-        });
+            this.SelfDestruct();
+        }.bind(this));
 
         loginButton.addEventListener('click', function(){
-            u = jQuery('#mbj_form_u', modal.element).val();
+            u = jQuery('#mbj_form_u', this.element).val();
             //p = jQuery('#mbj_form_p', modal.element).val();
-            mbjAttemptAuthenticate.bind(modal, u)();//, p);
-        }.bind(modal));
+            mbjAttemptAuthenticate.bind(this, u)();//, p);
+        }.bind(this));
         
         // Fade modal into view once loaded
         this.FadeIn();
 
         // Update view tracker
-        this.currentView = this.DisplayLogin;
+        this.currentView = this.LoadLoginView;
     },
-    DisplayBean: function() {
-        //this.Spawn();
-
+    
+    // Loads bean award view into modal
+    LoadAwardView: function() {
         var modal = this;
-
-        //this.AwardBean
 
         this.lastView = this.currentView;
 
@@ -118,7 +170,7 @@ MbjModal.prototype = {
         jQuery('.bean_notification_image').replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + this.beanImage + '">');
 
         // Map buttons and assign handlers
-        var closeButton     = document.getElementById('close-modal-' + modal.uid);
+        var closeButton     = document.getElementById('close-modal-' + this.uid);
 
         closeButton.addEventListener('click', function(){
             this.SelfDestruct();
@@ -133,53 +185,70 @@ MbjModal.prototype = {
         }.bind(this), 8000);
 
         // Update view tracker
-        this.currentView = this.DisplayBean;
+        this.currentView = this.LoadAwardView;
     },
-    DisplayRegistration: function() {
+
+
+    // Loads registration view into modal
+    LoadRegistrationView: function() {
         var modal = this;
 
-        //if (!typeof this.lastView == 'undefined'){
         this.lastView = this.currentView;
-        //}
 
         // Load template as modal content
         jQuery( this.payload ).html( modalContent.registration(modal) );
 
         // Load categories into content
-        MbjDisplayRegistrationView(categories);
+        this.ParseCategories(categories);
+        //MbjLoadRegistrationView(categories);
 
         // Map buttons and assign handlers
-        var backButton      = document.getElementById('back-modal-' + modal.uid);
-        var closeButton     = document.getElementById('close-modal-' + modal.uid);
-        var locationButton  = document.getElementById('btn-geolocator-' + modal.uid);
-        var registerButton  = document.getElementById('mbj-register-button-' + modal.uid);
+        var backButton      = document.getElementById('back-modal-' + this.uid);
+        var closeButton     = document.getElementById('close-modal-' + this.uid);
+        var locationButton  = document.getElementById('btn-geolocator-' + this.uid);
+        var registerButton  = document.getElementById('mbj-register-button-' + this.uid);
 
         backButton.addEventListener('click', function(){
-            modal.lastView();
-        });
+            this.lastView();
+        }.bind(this));
 
         closeButton.addEventListener('click', function(){
-            modal.SelfDestruct();//.bind(MbjModal);
-        });
+            this.SelfDestruct();
+        }.bind(this));
 
         locationButton.addEventListener('click', function(){
             getLocation.bind(this)(this.StoreLocation);
-
-            //     function(){
-            //     this.StoreLocation;
-            //     this.ApplyLocation;
-            // }).bind(this);
         }.bind(this));
 
         registerButton.addEventListener('click', function(){
-            modal.SubmitRegistration();
-        });
+            this.SubmitRegistration();
+        }.bind(this));
 
         // Update view tracker
-        this.currentView = this.DisplayRegistration;
+        this.currentView = this.LoadRegistrationView;
     },
+
+    // Injects category selector into view
+    ParseCategories: function(catArray) {
+        if (typeof catArray != 'undefined') {
+            var catSize = catArray.length;
+        };
+        
+        var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%" multiple="multiple">';
+        
+        for (var i = 0; i < catSize; i++){
+            var catName = catArray[i].name;
+            var catKey = catArray[i].categorykey;
+            catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
+        }   
+        
+        catSelect = catSelect + '</select>';
+
+        jQuery( '#mbj-category-selector-' + this.uid).html( catSelect );
+    },
+
+    // Applies location data stored within modal object to registration fields
     ApplyLocation: function() {
-        //var latObject = this.geolocation;
         if (!jQuery.isEmptyObject(this.geolocation)) {
             var lat = document.getElementById("lat-" + this.uid);
             var lon = document.getElementById("lon-" + this.uid);
@@ -190,12 +259,14 @@ MbjModal.prototype = {
             jQuery('#geolocator-block-' + this.uid).html('<div class="notification-geolocator"><span>(Using Current Location)</span></div>');
         };
     },
+
+    // Requests award bean from MyBeanJar
     AwardBean: function(){
         var modal = this;
 
         // Get session data relevant to login state
-        username = sessionStorage.getItem("username");
-        userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+        var username = sessionStorage.getItem("username");
+        var userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
 
         
         // If user is logged in and username is valid, attempt to retrieve award bean
@@ -205,7 +276,7 @@ MbjModal.prototype = {
             // Passwords currently disabled against the best advice of a certain technical consultant...
             p = 'password';
 
-            // If user has queued beans, attempt to get them from MBJ
+            // If user has queued beans, attempt to get them from MyBeanJar
             if (sessionStorage.getItem("queuedBeans") > 0) {
                 
                 // If no other modal is present, execute request
@@ -215,7 +286,7 @@ MbjModal.prototype = {
                         mbjDebug('Award: ' + award);
                         //!\\ BUILD IN FAILURE STATES
                         this.beanImage = award.imageurl;
-                        this.DisplayBean();
+                        this.LoadAwardView();
                     }.bind(this));
                     queuedBeans = sessionStorage.getItem("queuedBeans");
                     queuedBeans--;
@@ -223,20 +294,21 @@ MbjModal.prototype = {
                     mbjDebug(queuedBeans + " queued Beans remaining...");
                 }
             }
+
         } else {
             // If user isn't logged in, prompt them to do so or to register
-            this.DisplayLogin();
+            this.LoadLoginView();
         }
     },
-    /*Test: function() {
-        console.log("yo!");
-    },*/
+
+    // Fade the modal HTMLement into view
     FadeIn: function() {
         jQuery( this.element )
             .fadeIn(200,"swing");
     },
-    SubmitRegistration: function() {
 
+    // Requests new user registration through MyBeanJar
+    SubmitRegistration: function() {
         jQuery("div.mbj_login_status").removeClass("success fail");
         jQuery("div.mbj_login_status").html('<div id="spinner_login"></div>');
         flashLoginStatus();
@@ -253,42 +325,45 @@ MbjModal.prototype = {
         
         if (p != p2) {
             mbjDebug("Password mismatch detected");
+            //!\\ Replace with object method
             mbjNotifyRegistrationPassMismatch();
-        } else if (p.length < 6) {
+        } 
+
+        else if (p.length < 6) {
             mbjDebug("Invalid password");
+            //!\\ Replace with object method
             mbjNotifyRegistrationInvalidPass();
-        } else if ( cats == null)     { 
+        }
+
+        else if (cats == null)     { 
+            //!\\ Replace with object method
             mbjNotifyRegistrationCategories(3);  
-        } else if (cats.length < 3){
+        }
+
+        else if (cats.length < 3){
+            //!\\ Replace with object method
             mbjNotifyRegistrationCategories(3);
-        } else {
+        }
+
+        else {    
+            // Pass user data off to API methods
             register_user(u, p, email, zip, lat,lon, cats, function(result, message) {
-                this.RegistrationResponse(result, message);
+                this.UpdateRegistrationStatus(result, message);
             }.bind(this));
         }
     },
-    DisplayAuthenticated: function(result, message, email) {
 
+    // Updates authentication status notification and cleans up authentication activities
+    UpdateAuthenticationStatus: function(result, message, email) {
         mbjDebug("Authenticating...");
 
-        // If request was successful, record in session storage and destroy the calling modal
+        // If request was successful, record in session storage, show success notification, and destroy the calling modal
         if (result == STATUS_SUCCESS) {
             mbjDebug("Result = " + result);
             mbjDebug("Message = " + message);
             mbjDebug("Authentication succeeded.");
-            //mbjDebug("Email" + email);
-            // sessionStorage.setItem('email',email);
+
             sessionStorage.setItem('mbjUserLoggedIn','true');
-            //jQuery('#email').val(email);
-            //jQuery("#mbj_form_reg_email").val(email);
-
-            mbjUserLoggedIn = true;
-
-            // jQuery("button#footer-signup").fadeOut(200, "swing");
-            // jQuery(".footer-cta-title").css({
-            //     width: "100%",
-            //     textAlign: "center"
-            // });
 
             setTimeout(function() {
                 jQuery("div.mbj_login_status").addClass("success");
@@ -297,7 +372,6 @@ MbjModal.prototype = {
 
                 flashLoginStatus();
 
-                //beanDisplayExpiry = setTimeout(function() {
                 this.timeout = setTimeout(function() {
                     this.SelfDestruct();
                 }.bind(this), 2000);
@@ -307,7 +381,6 @@ MbjModal.prototype = {
             mbjDebug("Result = " + result);
             mbjDebug("Message = " + message);
             mbjDebug("Authentication failed.");
-
 
             setTimeout(function() {
                 jQuery("div.mbj_login_status").addClass("fail");
@@ -319,7 +392,7 @@ MbjModal.prototype = {
         }
     },
     
-    DisplayRegistrationSuccess: function() {
+    LoadRegistrationSuccessView: function() {
         var modal = this;
 
         this.lastView = this.currentView;
@@ -340,11 +413,10 @@ MbjModal.prototype = {
         });
 
         // Update view tracker
-        this.currentView = this.DisplayRegistrationSuccess;
+        this.currentView = this.LoadRegistrationSuccessView;
     },
 
-    RegistrationResponse: function(result, message) {
-        //function mbjNotifyRegistration(result, message) {
+    UpdateRegistrationStatus: function(result, message) {
         if (result == STATUS_SUCCESS) {
             mbjDebug("Result = " + result);
             mbjDebug("Message = " + message);
@@ -353,10 +425,7 @@ MbjModal.prototype = {
             sessionStorage.setItem('username',email);
             sessionStorage.setItem('mbjUserLoggedIn','true');
             jQuery('#email').val(email);
-
             jQuery("#mbj_form_reg_email").val(email);
-
-            //mbjUserLoggedIn = true;
               
             // Display registration success notifications
             setTimeout(function() {
@@ -367,11 +436,12 @@ MbjModal.prototype = {
                 flashLoginStatus();
 
                 setTimeout(function() {
-                    this.DisplayRegistrationSuccess();
+                    this.LoadRegistrationSuccessView();
                 }.bind(this), 2000);
             }.bind(this), 200);
 
         }
+        
         else {
             mbjDebug("Result = " + result);
             mbjDebug("Message = " + message);
@@ -387,17 +457,23 @@ MbjModal.prototype = {
                 flashLoginStatus();
             }, 200);
         }
+
     },
+
+    // Stores location data received from browser and applies it to the registration view, if appropriate
     StoreLocation: function(position) {
         this.geolocation.lat = position.coords.latitude;
         this.geolocation.lon = position.coords.longitude;
 
         // If in registration view, apply coordinates
-        if (this.currentView == this.DisplayRegistration) {
+        if (this.currentView == this.LoadRegistrationView) {
             this.ApplyLocation();
         }
     },
+
+    // Gracefully destroys modal
     SelfDestruct: function() {
+
         // Clear any previously set modal destruction timeouts
         clearTimeout(this.timeout);
 
@@ -405,32 +481,34 @@ MbjModal.prototype = {
         .fadeOut(200, "swing", function() {
             jQuery( this ).remove();
             
-            // If user has queued beans and is logged in, attempt to get them from MBJ (See options)
+            // If user has queued beans and is logged in, attempt to get them from MyBeanJar (See options)
             if (config.rewardLogin && sessionStorage.getItem("mbjUserLoggedIn")) {
                 if (sessionStorage.getItem("queuedBeans") > 0) {
                     new MbjModal('awardbean');
                 }
             }
-        });
 
-        // target = jQuery( this ) .parents( 'table' );
-        // jQuery( target ).fadeOut(200, "swing", function() {
-        //     jQuery( this ).remove();
-        // });
-    }//,
-    // Destruct: function( activator ) {
-    //     var target = jQuery( activator ).parents( table );
-    //     jQuery( target ).fadeOut(200, "swing", function() {
-    //         jQuery( this ).remove();
-    //     });
-    // }
+        });
+    }
 }
 
-// modalContent contains the various strings that are used to generate the HTMLelements for modal views
+
+
+
+
+/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
+|
+|   Modal Content Object
+|
+|   Contains strings representing HTML data to be used in the different modal views.
+|   Used by modal object methods to generate distinct views dynamically.
+|
+°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
+
 var modalContent = {
     
     // The table element that houses modal content
-    // A table is used here to ensure vertical and horizontal centering
+    // (A table is used here to ensure vertical and horizontal centering)
     frame: function(modal){
         htmlementString =       '<table class="mbj-modal" id="mbj-modal-' + modal.uid + '">'
                                 +  '    <tbody id="modal-tbody">'
@@ -481,6 +559,8 @@ var modalContent = {
         // Check to see if page is secure, if so, prepare "get location" button
         // (getCurrentPosition is deprecated on insecure sites)
         var locationButtonString;
+        
+        // If site is secure, include button to get location from browser
         if (location.protocol === 'https:') {
             locationButtonString = '                    <div class="geolocator-block" id="geolocator-block-' + modal.uid + '">'
                                 +  '                        <span class="mbj-form-label">&nbsp;or&nbsp;</span>'
@@ -489,10 +569,11 @@ var modalContent = {
                                 +  '                        </button>'
                                 +  '                    </div>'
         }
+        
+        // ...otherwise, don't
         else {
             locationButtonString = '';
         }
-
 
         htmlementString =       '<div class="mbj-notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
                                 +  '<div class="mbj_notification_inner" id="mbj-login-details">'
@@ -536,7 +617,7 @@ var modalContent = {
                                 +  '                </div>'
                                 +  '                <div class="element-input">'
                                 +  '                    <label class="title mbj-form-label"><br>Choose only the rewards you want (select 3+)</label>'
-                                +  '                    <div class="mbj-category-selector">'
+                                +  '                    <div class="mbj-category-selector" id="mbj-category-selector-' + modal.uid + '">'
                                 +  '                    </div>'
                                 +  '                </div>'
                                 +  '                <div class="mbj_login_status"> ' 
@@ -590,221 +671,6 @@ var modalContent = {
 
 }
 
-// Mbj.prototype = {
-    
-//     mbjAddAwardBean: function() {
-    
-//         // Get any queued Beans in session storage, add a new one, save new total to session storage
-//         queuedBeans = sessionStorage.getItem("queuedBeans");
-//         queuedBeans++;
-//         sessionStorage.setItem("queuedBeans", queuedBeans);
-
-//         mbjDebug("Queued Bean count: " + queuedBeans);
-
-//         // If no other modal is present, attempt to get award
-//         if (!jQuery( '#mbj_modal' ).length) {
-//             mbjAttemptAward();
-//         };
-//     },
-    
-//     mbjAttemptAward: function() {
-
-//         // Get session data relevant to login state
-//         username = sessionStorage.getItem("username");
-//         userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
-
-//         // If user is logged in and username is valid, attempt to retrieve award bean
-//         if (userLoggedIn && username != 'null') {
-//             u = sessionStorage.getItem("username");
-//             p = 'password';
-
-//             // If user has queued beans, attempt to get them from MBJ
-//             if (sessionStorage.getItem("queuedBeans") > 0) {
-                
-//                 // If no other modal is present, execute request
-//                 if (!jQuery( '#mbj_modal' ).length) {
-//                     mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
-//                     get_award(u, p, mbjAppID, BeanAwardAlert);
-//                     queuedBeans = sessionStorage.getItem("queuedBeans");
-//                     queuedBeans--;
-//                     sessionStorage.setItem("queuedBeans", queuedBeans);
-//                     mbjDebug(queuedBeans + " queued Beans remaining...");
-//                 }
-//             }
-//         } else {
-//             mbjAttemptYouvewon();
-//         }
-//     },
-
-//     mbjAttemptLogin: function() {
-//         mbjDebug('Prompting user to log in...');
-//         jQuery( '#mbj_notification_container_youvewon' ).hide();
-//         MbjCreateOnboardModal();
-
-//         // If login form is submitted...
-//         jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             u = jQuery('#mbj_form_u',this).val();
-//             p = jQuery('#mbj_form_p', this).val();
-//             p = '';
-//             mbjDebug("Attempting to log in... " + u);
-//             mbjDebug("Queued Bean count: " + queuedBeans);
-
-//             mbjAttemptAuthenticate(u, p);
-//             mbjDebug("Authentication method called.");
-
-//         });
-
-//         // If registration form is submitted...
-//         jQuery('#mbj_registration_form').off('submit').on('submit', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             u = jQuery('#mbj_form_reg_u', this).val();
-//             p = jQuery('#mbj_form_reg_p', this).val();
-//             p2 = jQuery('#mbj_form_reg_p2', this).val();
-//             email = jQuery('#mbj_form_reg_email', this).val();
-//             zip = jQuery('#mbj_form_reg_zip', this).val();
-            
-//             mbjDebug("Attempting to register...");
-//             mbjDebug("Queued Bean count: " + queuedBeans);
-
-//             mbjAttemptRegistration();
-
-//         });
-
-//         jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
-
-//             jQuery('div.mbj_notification_pane_selector').each(function() {
-//                 mbjDebug("Check!");
-
-//                 if (jQuery(this).hasClass('active_selector')) {
-//                     jQuery(this).removeClass('active_selector').addClass('inactive_selector');
-//                 }
-//                 else {
-//                     jQuery(this).removeClass('inactive_selector').addClass('active_selector');
-//                 }
-//                 ;
-//             });
-
-//             jQuery('div.mbj_login_or_register').each(function() {
-
-//                 if (jQuery(this).hasClass('active_pane')) {
-//                     jQuery(this).removeClass('active_pane').addClass('inactive_pane');
-//                 }
-//                 else {
-//                     jQuery(this).removeClass('inactive_pane').addClass('active_pane');
-//                 };
-//             });
-//         });
-//     },
-
-//     mbjRevealModal: function() {
-//         jQuery('#mbj_modal')
-//             .fadeIn(200,"swing");
-//     },
-
-//     mbjDestroyModal: function() {
-    
-//         // Clear any previously set modal destruction timeouts
-//         clearTimeout(beanDisplayExpiry);
-
-//         jQuery('#mbj_modal')
-//         .fadeOut(200, "swing", function() {
-//             jQuery( this ).remove();
-
-           
-//             // Get session data relevant to login state
-//             username = sessionStorage.getItem("username");
-//             userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
-
-//             // If user is logged in, check to see if any beans are left to be awarded after modal closes
-//             if (userLoggedIn && username != 'null') {
-//                 mbjAttemptAward();
-//             };
-//         });
-//     },
-
-//     mbjAttemptYouvewon: function() {
-    
-//         mbjDebug('Prompting user to log in...');
-        
-//         // Prompt for login/registration
-//         // Create modal div if it doesn't already exist
-//         if (!jQuery( '#mbj_modal' ).length) {
-//             jQuery( 'body' ).append( '<table id="mbj_modal"></table>' );
-//             jQuery( '#mbj_modal' ).load( './assets/modal/login-register.htm' + '?' + new Date().getTime(), mbjRevealModal );
-
-//         }
-
-//         // If login form is submitted...
-//         jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             u = jQuery('#mbj_form_u',this).val();
-//             p = jQuery('#mbj_form_p', this).val();
-//             p = '';
-//             mbjDebug("Attempting to log in... " + u);
-//             mbjDebug("Queued Bean count: " + queuedBeans);
-
-//             mbjAttemptAuthenticate();
-
-//             mbjDebug("Authentication method called.");
-
-//         });
-
-//         // If registration form is submitted...
-//         jQuery('#mbj_registration_form').off('submit').on('submit', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-//             u = jQuery('#mbj_form_reg_u', this).val();
-//             p = jQuery('#mbj_form_reg_p', this).val();
-//             p2 = jQuery('#mbj_form_reg_p2', this).val();
-//             email = jQuery('#mbj_form_reg_email', this).val();
-//             zip = jQuery('#mbj_form_reg_zip', this).val();
-
-//             mbjDebug("Attempting to register...");
-//             mbjDebug("Queued Bean count: " + queuedBeans);
-
-//             mbjAttemptRegistration();
-//         });
-
-//         jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
-//             event.preventDefault();
-//             event.stopPropagation();
-            
-//             mbjDestroyModal();
-//         });
-
-        
-
-//         jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
-
-//             jQuery('div.mbj_notification_pane_selector').each(function() {
-//                 mbjDebug("Check!");
-
-//                 if (jQuery(this).hasClass('active_selector')) {
-//                     jQuery(this).removeClass('active_selector').addClass('inactive_selector');
-//                 }
-//                 else {
-//                     jQuery(this).removeClass('inactive_selector').addClass('active_selector');
-//                 }
-//                 ;
-//             });
-
-//             jQuery('div.mbj_login_or_register').each(function() {
-
-//                 if (jQuery(this).hasClass('active_pane')) {
-//                     jQuery(this).removeClass('active_pane').addClass('inactive_pane');
-//                 }
-//                 else {
-//                     jQuery(this).removeClass('inactive_pane').addClass('active_pane');
-//                 }
-//                 ;
-//             });
-//         });
-//     }
-//}
 
 
 
@@ -812,17 +678,14 @@ var modalContent = {
 
 
 
-
-
-
-
-
-
-
-
-//
-//  MyBeanJar debug message handler
-//
+/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
+|
+|   MyBeanJar debug message handler
+|
+|   If debug mode has been enabled in the configuration settings,
+|   this method will log debug messages to the console.
+|
+°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
 
 function mbjDebug(message) {
     if (typeof config.debugMode != 'undefined') {
@@ -834,8 +697,10 @@ function mbjDebug(message) {
 
 
 
+
 //
-//  Locally grants the user a queued Bean (to be redeemed for an actual Bean from the MyBeanJar server)
+//  Locally grants the user a queued bean (to be exchanged for an actual bean from the MyBeanJar service)
+//  and instantiates a new modal to process that queued bean
 //
 
 function mbjAddAwardBean() {
@@ -848,265 +713,50 @@ function mbjAddAwardBean() {
     mbjDebug("Queued Bean count: " + queuedBeans);
 
     // If no other modal is present, attempt to get award
-    var modal = new MbjModal();
+    if (!jQuery( '.mbj-modal' ).length) {
+        var modal = new MbjModal();
+    }
 
-    // if (!jQuery( '#mbj_modal' ).length) {
-    //     mbjAttemptAward();
-    // };
 }
 
 
 
-function mbjAttemptAward() {
+// function mbjAttemptAward() {
 
-    // Get session data relevant to login state
-    username = sessionStorage.getItem("username");
-    userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+//     // Get session data relevant to login state
+//     username = sessionStorage.getItem("username");
+//     userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
 
     
-    // If user is logged in and username is valid, attempt to retrieve award bean
-    if (userLoggedIn && username != 'null') {
-        u = sessionStorage.getItem("username");
-        p = 'password';
+//     // If user is logged in and username is valid, attempt to retrieve award bean
+//     if (userLoggedIn && username != 'null') {
+//         u = sessionStorage.getItem("username");
+//         p = 'password';
 
-        // If user has queued beans, attempt to get them from MBJ
-        if (sessionStorage.getItem("queuedBeans") > 0) {
+//         // If user has queued beans, attempt to get them from MBJ
+//         if (sessionStorage.getItem("queuedBeans") > 0) {
             
-            // If no other modal is present, execute request
-            if (!jQuery( '#mbj_modal' ).length) {
-                mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
-                get_award(u, p, mbjAppID, BeanAwardAlert);
-                queuedBeans = sessionStorage.getItem("queuedBeans");
-                queuedBeans--;
-                sessionStorage.setItem("queuedBeans", queuedBeans);
-                mbjDebug(queuedBeans + " queued Beans remaining...");
-            }
-        }
-    } else {
+//             // If no other modal is present, execute request
+//             if (!jQuery( '#mbj_modal' ).length) {
+//                 mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
+//                 get_award(u, p, mbjAppID, BeanAwardAlert);
+//                 queuedBeans = sessionStorage.getItem("queuedBeans");
+//                 queuedBeans--;
+//                 sessionStorage.setItem("queuedBeans", queuedBeans);
+//                 mbjDebug(queuedBeans + " queued Beans remaining...");
+//             }
+//         }
+//     } else {
 
-        mbjAttemptYouvewon();
-    }
-}
-
-
-
-function mbjAttemptLogin() {
-    mbjDebug('Prompting user to log in...');
-// Prompt for login/registration
-//    jQuery('div.mbj_notification_container').fadeIn();
-    jQuery( '#mbj_notification_container_youvewon' ).hide();
-    MbjCreateOnboardModal();
-
-// If login form is submitted...
-    jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        u = jQuery('#mbj_form_u',this).val();
-        p = jQuery('#mbj_form_p', this).val();
-        p = '';
-        mbjDebug("Attempting to log in... " + u);
-        mbjDebug("Queued Bean count: " + queuedBeans);
-
-        mbjAttemptAuthenticate(u, p);
-        mbjDebug("Authentication method called.");
-
-    });
-
-// If registration form is submitted...
-    jQuery('#mbj_registration_form').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        u = jQuery('#mbj_form_reg_u', this).val();
-        p = jQuery('#mbj_form_reg_p', this).val();
-        p2 = jQuery('#mbj_form_reg_p2', this).val();
-        email = jQuery('#mbj_form_reg_email', this).val();
-        zip = jQuery('#mbj_form_reg_zip', this).val();
-
-// Add checkbox items to array
-        var catArray = [],
-                inputs = document.getElementsByClassName("mbj_checkbox");
-
-        for (var i = inputs.length - 1; i >= 0; i--) {
-            if (inputs[i].type === "checkbox" && inputs[i].checked) {
-                catArray.push(inputs[i].value);
-            }
-        }
-
-        cats = catArray;
-        mbjDebug("Attempting to register...");
-        mbjDebug("Queued Bean count: " + queuedBeans);
-
-        mbjAttemptRegistration();
-
-    });
-
-    jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
-
-        jQuery('div.mbj_notification_pane_selector').each(function() {
-            mbjDebug("Check!");
-
-            if (jQuery(this).hasClass('active_selector')) {
-                jQuery(this).removeClass('active_selector').addClass('inactive_selector');
-            }
-            else {
-                jQuery(this).removeClass('inactive_selector').addClass('active_selector');
-            }
-            ;
-        });
-
-        jQuery('div.mbj_login_or_register').each(function() {
-
-            if (jQuery(this).hasClass('active_pane')) {
-                jQuery(this).removeClass('active_pane').addClass('inactive_pane');
-            }
-            else {
-                jQuery(this).removeClass('inactive_pane').addClass('active_pane');
-            };
-        });
-    });
-}
-
-// mbjRevealModal = function() {
-//     jQuery('#mbj_modal')
-//         .fadeIn(200,"swing");
-// };
-
-// mbjModalID = function(activator) {
-//     var modalID = jQuery( activator ).parents( table ).id;
-//     return modalID;
-// }
-
-// mbjDestroyModal = function(activator) {
-
-//     // Clear any previously set modal destruction timeouts
-//     clearTimeout(beanDisplayExpiry);
-
-
-
-//     var target = jQuery( activator ).parents( table );
-//     jQuery( target ).fadeOut(200, "swing", function() {
-//         jQuery( this ).remove();
-//     });
-
-
-
-
-    
-
-
-//     // jQuery('#mbj_modal')
-//     // .fadeOut(200, "swing", function() {
-//     //     jQuery( this ).remove();
-
-       
-//         // Get session data relevant to login state
-//         username = sessionStorage.getItem("username");
-//         userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
-
-//         // If user is logged in, check to see if any beans are left to be awarded after modal closes
-//         if (userLoggedIn && username != 'null') {
-//             mbjAttemptAward();
-//         };
+//         mbjAttemptYouvewon();
+//     }
 // }
 
 
 
-function mbjAttemptYouvewon() {
-    
-    mbjDebug('Prompting user to log in...');
-    
-    // Prompt for login/registration
-    // Create modal div if it doesn't already exist
-    if (!jQuery( '#mbj_modal' ).length) {
-        jQuery( 'body' ).append( '<table id="mbj_modal"></table>' );
-        jQuery( '#mbj_modal' ).load( './assets/modal/login-register.htm' + '?' + new Date().getTime(), mbjRevealModal );
 
-    }
+function mbjAttemptAuthenticate(username) {
 
-    // If login form is submitted...
-    jQuery('#mbj_login_form').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        u = jQuery('#mbj_form_u',this).val();
-        p = jQuery('#mbj_form_p', this).val();
-        p = '';
-        mbjDebug("Attempting to log in... " + u);
-        mbjDebug("Queued Bean count: " + queuedBeans);
-
-        mbjAttemptAuthenticate();
-
-        mbjDebug("Authentication method called.");
-
-    });
-
-    // If registration form is submitted...
-    jQuery('#mbj_registration_form').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        u = jQuery('#mbj_form_reg_u', this).val();
-        p = jQuery('#mbj_form_reg_p', this).val();
-        p2 = jQuery('#mbj_form_reg_p2', this).val();
-        email = jQuery('#mbj_form_reg_email', this).val();
-        zip = jQuery('#mbj_form_reg_zip', this).val();
-
-// Add checkbox items to array
-        var catArray = [],
-                inputs = document.getElementsByClassName("mbj_checkbox");
-
-        for (var i = inputs.length - 1; i >= 0; i--) {
-            if (inputs[i].type === "checkbox" && inputs[i].checked) {
-                catArray.push(inputs[i].value);
-            }
-        }
-
-        cats = catArray;
-        mbjDebug("Attempting to register...");
-        mbjDebug("Queued Bean count: " + queuedBeans);
-
-        mbjAttemptRegistration();
-    });
-
-    jQuery('#mbj_notification_close').off('submit').on('submit', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        mbjDestroyModal();
-    });
-
-    
-
-    jQuery('div.mbj_notification_pane_selector').off('click').on('click', function(event) {
-
-        jQuery('div.mbj_notification_pane_selector').each(function() {
-            mbjDebug("Check!");
-
-            if (jQuery(this).hasClass('active_selector')) {
-                jQuery(this).removeClass('active_selector').addClass('inactive_selector');
-            }
-            else {
-                jQuery(this).removeClass('inactive_selector').addClass('active_selector');
-            }
-            ;
-        });
-
-        jQuery('div.mbj_login_or_register').each(function() {
-
-            if (jQuery(this).hasClass('active_pane')) {
-                jQuery(this).removeClass('active_pane').addClass('inactive_pane');
-            }
-            else {
-                jQuery(this).removeClass('inactive_pane').addClass('active_pane');
-            }
-            ;
-        });
-    });
-}
-
-
-
-function mbjAttemptAuthenticate(username) { //, password) {
-    // var result;
-    // var message;
     jQuery('div.mbj_login_status').removeClass('success fail');
     jQuery('div.mbj_login_status').html('<div id="spinner_login"></div>');
 
@@ -1122,137 +772,9 @@ function mbjAttemptAuthenticate(username) { //, password) {
 
     validate_user(u, function(result, message){
         //mbjNotifyAuthenticate.bind(this, result, message)();
-        this.DisplayAuthenticated(result, message);
+        this.UpdateAuthenticationStatus(result, message);
     }.bind(this));
     mbjDebug("Queued Bean count: " + queuedBeans);
-}
-
-
-
-function mbjNotifyAuthenticate(result, message, email) {
-
-    mbjDebug("Authenticating...");
-
-    
-    // If request was successful, record in session storage and destroy the calling modal
-    if (result == STATUS_SUCCESS) {
-        mbjDebug("Result = " + result);
-        mbjDebug("Message = " + message);
-        mbjDebug("Authentication succeeded.");
-        //mbjDebug("Email" + email);
-        // sessionStorage.setItem('email',email);
-        sessionStorage.setItem('mbjUserLoggedIn','true');
-        //jQuery('#email').val(email);
- 
-        //jQuery("#mbj_form_reg_email").val(email);
-
-
-
-        mbjUserLoggedIn = true;
-
-
-
-        // jQuery("button#footer-signup").fadeOut(200, "swing");
-        // jQuery(".footer-cta-title").css({
-        //     width: "100%",
-        //     textAlign: "center"
-        // });
-
-        setTimeout(function() {
-            jQuery("div.mbj_login_status").addClass("success");
-
-            jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
-
-            flashLoginStatus();
-
-            //beanDisplayExpiry = setTimeout(function() {
-            this.timeout = setTimeout(function() {
-                this.SelfDestruct();
-            }, 2000);
-        }, 200);
-    }
-    else {
-        mbjDebug("Result = " + result);
-        mbjDebug("Message = " + message);
-        mbjDebug("Authentication failed.");
-
-
-        setTimeout(function() {
-            jQuery("div.mbj_login_status").addClass("fail");
-
-            jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Login failed.</p>');
-
-            flashLoginStatus();
-        }, 200);
-    }
-}
-
-
-
-
-
-
-
-function mbjAttemptRegistration() {
-
-    jQuery("div.mbj_login_status").removeClass("success fail");
-    jQuery("div.mbj_login_status").html('<div id="spinner_login"></div>');
-    flashLoginStatus();
-    SummonSpinner('spinner_login');
-
-    /*
-    *
-    *   [question]
-    *   Why were these here..?
-    *
-    */
-
-    // event.preventDefault();
-    // event.stopPropagation();
-
-
-    u = jQuery('#mbj_form_reg_email').val();
-    p = jQuery('#mbj_form_reg_p').val();
-    p2 = jQuery('#mbj_form_reg_p2').val();
-    email = jQuery('#mbj_form_reg_email').val();
-    zip = jQuery('#mbj_form_reg_zip').val();
-    lat = jQuery('#lat').val();
-    lon = jQuery('#lon').val();    
-    cats = jQuery('#mbj_form_reg_cats').val();
-    //cats = cats.split(',');
-//Add checkbox items to array
-/*        var catArray = [],
-            inputs = document.getElementsByClassName("mbj_checkbox");
-
-    for (var i = inputs.length - 1; i >= 0; i--) {
-        if (inputs[i].type === "checkbox" && inputs[i].checked) {
-            catArray.push(inputs[i].value);
-        }
-    }
-
-    cats = catArray;*/
-
-    
-    if (p != p2) {
-        mbjDebug("Password mismatch detected");
-        mbjNotifyRegistrationPassMismatch();
-//        mbjAttemptLogin();
-    } else if (p.length < 6) {
-        mbjDebug("Invalid password");
-        mbjNotifyRegistrationInvalidPass();
- //       mbjAttemptLogin();
-    } else if ( cats == null)     { 
-        mbjNotifyRegistrationCategories(3);
- //       mbjAttemptLogin();    
-    } else if (cats.length < 3){
-        mbjNotifyRegistrationCategories(3);
-  //      mbjAttemptLogin();
-    } else {
-
-        register_user(u, p, email, zip, lat,lon, cats,mbjNotifyRegistration);
-
-    }
-    
 }
 
 
@@ -1328,8 +850,7 @@ function mbjNotifyRegistrationInvalidPass() {
         jQuery("#mbj_form_reg_p2")
                 .animate({backgroundColor: '#ffffff'}, 200);
     }, 3000);
-}
-;
+};
 
 function mbjNotifyRegistrationInvalidZip() {
 
@@ -1348,80 +869,8 @@ function mbjNotifyRegistrationInvalidZip() {
         jQuery("#mbj_form_reg_zip")
                 .animate({backgroundColor: '#ffffff'}, 200);
     }, 3000);
-}
-;
+};
 
-// function mbjNotifyRegistration(result, message) {
-//     if (result == STATUS_SUCCESS) {
-//         mbjDebug("Result = " + result);
-//         mbjDebug("Message = " + message);
-//         mbjDebug("Registration succeeded as " + email);
-
-//         sessionStorage.setItem('username',email);
-//         sessionStorage.setItem('mbjUserLoggedIn','true');
-//         jQuery('#email').val(email);
-
-//     jQuery("#mbj_form_reg_email").val(email);
-
-//         //testpostedimg();
-
-//     mbjUserLoggedIn = true;
-//       //ga('send', 'pageview', 'registrationSuccess');
-
-// // award Bean for successful registration
-// //        queuedBeans++;
-      
-//     setTimeout(function() {
-//         jQuery("div.mbj_login_status").addClass("success");
-
-//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
-
-//         flashLoginStatus();
-
-//         setTimeout(function() {
-//             MbjDisplayYoureIn();
-//         }, 2000);
-//     }, 200);
-
-//       //MbjDisplayYoureIn();
-
-
-
-//  //       setTimeout(function() {
-//  //           jQuery("div.mbj_login_status").addClass("success");
-
-//   //          jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success"> ' + message + ' </p>');
-
-//    //         flashLoginStatus();
-
-//  //           setTimeout(function() {
-//   //              jQuery("div.mbj_notification_container")
-//   //                      .fadeOut(200, "swing");
-//   //          }, 3000);
-//   //      }, 200);
-
-// //        if (queuedBeans > 0) {
-// //            mbjAttemptAward();
-// //        }
-//     }
-//     else {
-//         mbjDebug("Result = " + result);
-//         mbjDebug("Message = " + message);
-//         mbjDebug("Registration failed.");
-
-
-//         setTimeout(function() {
-//  //
-//   //        alert("Registration Failed: " + message);
-//             jQuery("div.mbj_login_status").addClass("fail");
-
-//             jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Registration failed. ' + message + ' </p>');
-
-//             flashLoginStatus();
-//         }, 200);
-//  //       mbjAttemptLogin();
-//     }
-// }
 
 
 
@@ -1472,109 +921,11 @@ function SummonSpinner(div_id) {
 };
 
 
-BeanAwardAlert = function(result, award) {
-
-    mbjDebug("Retrieving award from server.");
-    mbjDebug(result);
-
-// check to see if request was successful
-
-    if (result == STATUS_SUCCESS) {
-        var awardImage = awardArray.imageurl;
-        queuedBeans--;
-        mbjDebug("Request successful!");
-        if (!jQuery( '#mbj_modal' ).length) {
-            jQuery( 'body' ).append( '<table id="mbj_modal"></table>' );
-            jQuery( '#mbj_modal' ).load( './assets/modal/bean-award.htm' + '?' + new Date().getTime(), function(){
-                jQuery('.bean_notification_image')
-                .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
-                mbjRevealModal();
-            });
-
-
-            beanDisplayExpiry = setTimeout(function() {
-                mbjDestroyModal();
-            }, 10000);
-        }
-
-
-    /*
-    *
-    *   [QUESTION]
-    *   Why was this causing issues?
-    * 
-    */
-
-    // else if (failArray.message == "No beans available for your category and/or location.") {
-    //     mbjDebug("WARNING: " + failArray.message);
-    // }
-
-
-    /*
-    *
-    *   [QUESTION]
-    *   What is the desired way to gracefully fail
-    * 
-    */
-
-    } else {
-        mbjDebug("Request failed.");
-        jQuery('#mbj_award_img')
-                .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + capsulePlaceholderImageURL + '">');
-        jQuery("div.bean_notification_window")
-                .html('<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><img class="bean_notification_image" src="img/ui_action_fail.png">')
-                .delay(5000)
-                .fadeOut(500, "swing");
-    }
-};
-
-// FakeBeanAwardAlert = function(result, award) {
-//     mbjDebug("Awarding mock Bean!");
-//     awardImage = "img/7170.png";
-//     msgMoreInfo = "This is a fake Bean.";
-//     jQuery('.bean_notification_image')
-//             .replaceWith('<img class="bean_notification_image" id="mbj_award_img" src="' + awardImage + '">');
-//     jQuery('#mbj_award_img')
-//             .replaceWith('<img class="mbj_capsule_payload_contents" id="mbj_award_img" src="' + awardImage + '">');
-// // mbjCapsuleAward();
-//     jQuery("div.bean_notification_window")
-//             .fadeIn(500, "swing");
-//     jQuery("div.bean_notification_window")
-//             .html('<img class="mbj_award_img" src="' + awardImage + '">');//( '<img src="/mbj/mbj_sdk/code/img/mbj_notifier_header.png"><div id="spinner_award"></div><p class="mbj_caption">' + msgMoreInfo + '</p>' );
-//     jQuery("div.bean_notification_window")
-//             .delay(100000)
-//             .fadeOut(500, "swing");
-// };
-
-
-
-
-// function mbjImagePreloader() {
-//     jQuery('body').html('<div class="nada"><img src="img/ui_action_fail.png"><img src="img/ui_action_success.png"><img src="img/ui_action_close.png"></div>');
-// }
-// ;
-
-// function append_totalbeans(totalWin) {
-//     mbjDebug("updating bean count");
-//     if (oldWinCount == 0) {
-//         oldWinCount = totalWin;
-//     }
-//     if (oldWinCount != totalWin) {
-//         jQuery(".count_wins").addClass("newcount");
-//         jQuery(".count_wins").empty();
-//         jQuery(".count_wins").append("<span>Total Beans awarded: " + totalWin + "</span>");
-//         setInterval(function() {
-//             jQuery(".count_wins").removeClass("newcount");
-//         }, 5000);
-//         oldWinCount = totalWin;
-//     }
-// }
-// ;
 
 
 
 //
-//Misc. helpers
+//  Misc. helpers
 //
 
 function fetchCategories(){
@@ -1590,187 +941,25 @@ function prepareCategories(result, categories) {
 }
 
 function centerOnboardModal(){    
-jQuery('.onboard-modal').each(function(){
-    mbjDebug("This.height: " + jQuery(this).outerHeight());
-    mbjDebug("Parent.height: " + jQuery(this).innerHeight());
-    jQuery(this).css('left',((((jQuery(window).innerWidth() - (jQuery(this).outerWidth())) / 2)) + 'px'));
-    jQuery(this).css('top',((((jQuery(window).innerHeight() - (jQuery(this).outerHeight())) / 3)) + 'px'));
-});
+    jQuery('.onboard-modal').each(function(){
+        mbjDebug("This.height: " + jQuery(this).outerHeight());
+        mbjDebug("Parent.height: " + jQuery(this).innerHeight());
+        jQuery(this).css('left',((((jQuery(window).innerWidth() - (jQuery(this).outerWidth())) / 2)) + 'px'));
+        jQuery(this).css('top',((((jQuery(window).innerHeight() - (jQuery(this).outerHeight())) / 3)) + 'px'));
+    });
 };
 
+//  Modal repositioner listner  
+window.addEventListener('resize', function(){
+    document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight;
+}, false);
+
+
+
 
 
 //
-//Onboarding Modal view controllers
-//
-
-function MbjCreateOnboardModal(){
-/*
-if ( jQuery( '#mbj_notification_container_login' ).length ) {
-    jQuery( '#mbj_notification_container_login' ).remove()
-}
-*/
-//get_winners("teaser");
-fetchCategories();
-//jQuery( 'body' ).append('<div class="mbj_notification mbj_notification_container onboard-modal" id="mbj_notification_container_login"><button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="closeOnboardModal()"> <img src="img/ui_action_close.png"> </button> <div class="mbj_notification_inner" id="mbj-login-init"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>WIN REAL STUFF YOU CHOOSE</h2> </div><div class="mbj_notification_beanticker"> <div id="main_container" class="panel_container"> <div class="slider_temp"> <div id="slider1_container_t"> <div u="slides" id="slider_components_t"> </div></div></div></div></div><div class="mbj_notification action-buttons"><fb:login-button  data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false" scope="public_profile,email" onlogin="checkLoginState();"></fb:login-button><button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayLoginView()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log in / sign up with MyBeanJar</span> </button> </div></div></div>');
-
-centerOnboardModal();
-
-jQuery( '#mbj_notification_container_login' ).fadeOut(1, "swing");
-
-jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
-}
-
-// function MbjCreateOnboardModal2(){
-
-//     fetchCategories();
-
-//     //centerOnboardModal();
-
-//     if (!jQuery( '#mbj_modal' ).length) {
-//         MbjDisplayhYouveWon();
-//     }
-
-//     else if (!jQuery( '#mbj_modal' ).css('display') == 'none') {
-//         jQuery( '#mbj_modal' ).fadeOut(1, "swing");
-//     }
-
-//     //MbjDisplayhYouveWon();
-//     jQuery('#mbj_modal').fadeIn(500, "swing");
-// }
-
-function RegistrationBack() {
-    //jQuery('#mbj-login-details').replaceWith(mbjloginregister);
-    jQuery( '#mbj_modal' ).load( './assets/modal/login-register.htm' + '?' + new Date().getTime(), mbjRevealModal );
-}
-
-var mbjloginregister =  '<div class="mbj_notification_inner" id="mbj-login-register"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">username</label> <input class="large" id="mbj_form_u" type="text" name="mbj_login" required/> <a class="password-recovery" onClick="MbjDisplayAccountRecoveryView()">forgot username?</a></div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="mbjAttemptAuthenticate()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log In</span> </button> <button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayRegistrationView()"> <span class="mbj-button-icon"><i class="ion-android-clipboard" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Sign Up</span> </button> </div></div>';
-
-// function MbjDisplayLoginView() {
-//     jQuery( '#mbj-login-init' ).replaceWith('  <div class="mbj_notification_inner" id="mbj-login-register"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">username</label> <input class="large" id="mbj_form_u" type="text" name="mbj_login" required/> <a class="password-recovery" onClick="MbjDisplayAccountRecoveryView()">forgot username?</a></div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="mbjAttemptAuthenticate()"> <span class="mbj-button-icon"><i class="ion-log-in" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Log In</span> </button> <button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayRegistrationView()"> <span class="mbj-button-icon"><i class="ion-android-clipboard" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Sign Up</span> </button> </div></div>');
-// }
-
-function MbjDisplayAccountRecoveryView() {
-jQuery( '#mbj-login-register' ).replaceWith('  <div class="mbj_notification_inner" id="mbj-login-recovery"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_login"> <form class="mbj-form" id="mbj_login_form" method="post"> <div class="element-input"> <label class="title" style="color: #a9a9a9;">e-mail</label> <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/> </div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"> <button class="btn-mbj submit full-width" id="mbj-login" onClick="send_password()"> <span class="mbj-button-icon"><i class="ion-paper-airplane" style="font-size: 28px; vertical-align: middle; padding-right:0.5em;"></i></span><span class="mbj-button-text">Recover Password</span> </button></div></div>');
-}
-
-function MbjDisplayRegistrationView(catArray) {
-    if (typeof catArray != 'undefined') {
-        var catSize = catArray.length;
-    };
-    var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%" multiple="multiple">';
-    
-    for (var i = 0; i < catSize; i++){
-        var catName = catArray[i].name;
-        var catKey = catArray[i].categorykey;
-        catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
-    }   
-        catSelect = catSelect + '</select>';
-
-    // jQuery( '.mbj_notification_container' ).load( './assets/modal/register.htm' + '?' + new Date().getTime(), function(){
-    //     jQuery( '.mbj-category-selector' ).html( catSelect );
-    // });
-
-    jQuery( '.mbj-category-selector' ).html( catSelect );
-    
-
-}
-
-
-// function MbjDisplayRegistrationView2() {
-//     var catSize = catArray.length;
-//     var catSelect = '<select id="mbj_form_reg_cats" name="cats" style="width:100%;" multiple="multiple">';
-    
-//     for (var i = 0; i < catSize; i++){
-//         var catName = catArray[i].name;
-//         var catKey = catArray[i].categorykey;
-//         catSelect = catSelect + '<option value="'+catKey+ '">'+catName+'</option>';
-//     }   
-//         catSelect = catSelect + '</select>';
-// jQuery( '#mbj-youvewon-init'  ).replaceWith(' <div class="mbj_notification_inner" id="mbj-login-details"> <button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="closeOnboardModal2()"> <img src="img/ui_action_close.png"> </button><br clear="all"><div class="mbj_notification_title"><h2 style="color:yellow;font-size: 1.1rem;top:-10px;font-weight: bold; ">get real&mdash;redeem NOW!</h2><h3 style="color:white">Real stuff, not points or badges. Instant redemptions from anywhere.</h3> </div><div class="mbj-login mbj-form-block" id="mbj_details"> <form class="mbj-form" id="mbj_details_form" method="post"><input type="hidden" name="lat" id="lat" value=""/><input type="hidden" name="lon" id="lon" value=""/><div class="element-input"> <label class="title" style="color: #a9a9a9;">email&mdash;no spam ever</label> <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/></div><div style="width: 100%;padding-top:5px"><div class="element-input" style="width:45%;float:left;"> <label class="title" style="color: #a9a9a9;">password (&gt;5 chars)</label> <input class="small" style="width:100%;" id="mbj_form_reg_p" type="password" name="mbj_password" required=""></div><div class="element-input" style="width: 45%;float:right;margin-top:0px"><label class="title">confirm password</label><input class="small" style="width:100%;" id="mbj_form_reg_p2" type="password" name="mbj_password_confirm"></div></div><div style="width: 100%;padding-top:5px;white-space:nowrap;display:inline-block"><div class="element-input"> <label class="title" style="color: #a9a9a9;font-size:8pt;padding-top:5px">ZIP (US only)&mdash;to find cool stuff nearby</label> <input class="small"  style="width:45%;" maxlength="5" id="mbj_form_reg_zip" type="text" name="mbj_reg_zip"/>&nbsp;or&nbsp;<button type="button" class="btn-mbj btn-location" style="margin-top:0px;float:right;background-color:lightgreen;border-color:lightgreen" onClick="getLocation();"><span class="mbj-button-text" style="color:black;font-size:8pt">current location</span></button></div></div><div class="element-input"><label class="title"><br>Choose only the rewards you want (select 3+)</label>'+catSelect+'</div><div class="mbj_login_status"> </div></form> </div><div class="submit action-buttons"><a href="http://www.mybeanjar.com/#players" style="text-decoration:none"><img src="img/bean.png" style="vertical-align:middle">&nbsp;myBeanJar.com</a> <button class="btn-mbj submit small" style="float:right" id="mbj-submit-done" onClick="mbjAttemptRegistration()"><span class="mbj-button-text">done</span> </button> </div></div>');
-
-// }
-
-// function MbjDisplayRegistrationView3() {
-// //  MbjCreateOnboardModal();
-//     fetchCategories();
-
-//     centerOnboardModal();
-    
-//     jQuery('#mbj_notification_container_youvewon').fadeIn(500,"swing");
-
-// }
-
-// function MbjHomeLogin(){
-//     centerOnboardModal();   
-//     jQuery( '#mbj_notification_container_youvewon' ).fadeOut(1, "swing");
-
-//     jQuery('#mbj_notification_container_login').fadeIn(500, "swing");
-// }
-
-
-
-
-
-
-// function MbjDisplayLoginView() {
-//     //ga('send', 'pageview', 'youvewon');
-//     jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:relative;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class=""   style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required /></div><button class="submit"    style="height: 24px; margin-top: 0px;float:right;background:white"  onClick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div> ');
-//     //jQuery( '#mbj-youvewon-init'  ).parent().css("max-width","none").css("height","auto").css("width","343px").css("padding","0px");
-//     jQuery('#mbj-youvewon-init').fadeIn(500,"swing");
-// }
-
-
-
-
-
-
-// function MbjDisplayhYouveWon() {
-//     //ga('send', 'pageview', 'youvewon');
-//     jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="height:375px; width:343px;background-color:black; background-image: url(\'img/youcouldvewon.png\');position:relative;background-repeat:no-repeat"><div style="width: 270px; padding: 5px; margin-top:255px;margin-left:10px;background:black;height:32px;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"><div style="float: left;color:white;background:black;font-size:8pt;font-family:Arial;width:80px;text-align:center">MBJ users<br>log in</div><div class="element-input" style="float: left; padding-right: 5px;margin-top:0px"><input class=""   style="width: 120px; background-color: silver; float: left;border-color:black;border-width:3px" id="mbj_form_u" type="text" name="mbj_login" required /></div><button class="submit"    style="height: 24px; margin-top: 0px;float:right;background:white"  onClick="mbjAttemptAuthenticate()"><span class="mbj-button-text" style="color: black">Log In</span></button></form></div><div style="margin-top: 0px; margin-left:10px;"><a href="javascript:closeOnboardModal2()"><img src="img/forfun.png"></a><a href="javascript:MbjDisplayRegistrationView2()"><img src="img/rewards.png"></a></div></div> ');
-//     jQuery( '#mbj-youvewon-init'  ).parent().css("max-width","none").css("height","auto").css("width","343px").css("padding","0px");
-// }
-
-// function MbjDisplayhYouveWonOld() {
-    
-//     jQuery( '#mbj-youvewon-init'  ).replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="padding:0px 0px 10px 0px;width:100%;background:black"> <div class="mbj_notification action-buttons" style="background:grey;padding-bottom: 10px"><button type="submit" class="btn-close" id="mbj_notification_close_submit" style="top:-10px" onClick="closeOnboardModal2()"> <img src="img/ui_action_close.png"> </button> <br><button class="btn-mbj submit" id="mbj-login" onClick="closeOnboardModal2();play()" style="height:30px;margin:auto"><span class="mbj-button-text" style="color:black;font-family:sans-serif;text-align:center;font-size:16px;font-weight: bold;margin: 0px 0 0 0px;">keep playing for fun</span> </button> </div><div class="mbj_notification action-buttons" style="background:black;text-align:center"><h3 style="color: orange;text-align:center;font-size:16pt"><i>or</i></h3><button class="btn-mbj-light submit" id="mbj-login" onClick="MbjDisplayRegistrationView2()" style="height:60px;padding:0px;margin:auto;max-width:90%;"><span class="mbj-button-text" style="color:black;text-align:center;font-size:24px;font-weight: bold;margin: 0 0 0 5px;">keep playing for fun <i style="font-style:italic">and</i> real stuff</span> </button> </div>    <div class="mbj_notification_title"> <h2 style="color:lightgreen;font-weight: bold;font-family: sans-serif;font-size: 18px">from sponsors like these:</h2></div><div class="mbj_notification_beanticker" style="margin: 2em 0px 1em 0px;"> <div id="main_container" class="panel_container"> <div class="slider_temp"> <div id="slider1_container_t2"> <div u="slides" id="slider_components_t2"> <img src="img/ticker.jpg" style="width:100%"></div></div></div></div></div><div style="width:90%;padding:5px;margin:auto;"><form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false"> <div style="float:left"><img src="img/mbj_logo_50px.png" style="width:50px;height:50px;"/> </div><div class="element-input" style="float:left;padding-right:5px"> <label class="" style="color: orange;font-family:sans-serif;font-size:14px;font-weight:bold">MBJ Users Log In:</label> <input class="" style="width:120px;background-color:silver;float:left" id="mbj_form_u" type="text" name="mbj_login" required/></div>&nbsp;<button class="btn-mbj submit"  style="height:30px;float:left;margin-top:1em" onClick="mbjAttemptAuthenticate()" ><span class="mbj-button-text" style="color:black">Log In</span> </button>  </form></div>');
-// }
-
-function MbjDisplayYoureIn() { 
-    jQuery( '.mbj_notification_container' ).load( './assets/modal/registration-successful.htm' + '?' + new Date().getTime(), mbjRevealModal );
-    //jQuery('#mbj-login-details').replaceWith('<div class="mbj_notification_inner" id="mbj-youvewon-init" style="padding:0px 0px 0px 0px;width:100%;background:black"> <button type="submit" class="btn-close" id="mbj_notification_close_submit" onClick="closeOnboardModal2();closeOnboardModal()"> <img src="img/ui_action_close.png"> </button><br clear="all"><div style="text-align:center"><h2 style="color:goldenrod;font-weight:bold;font-size:24pt">YOU\'RE IN!</h2><p style="font-size:12pt">Keep playing to win more in this game.</p><p style="font-size:12pt">Check your email later for instructions on how to redeem your rewards, and install the MyBeanJar app</p></div><button class="btn-mbj submit" onClick="closeOnboardModal2();closeOnboardModal();" style="height:30px;margin:auto;width:80%;text-align:center"><span class="mbj-button-text" style="color:black;font-family:sans-serif;text-align:center;font-size:16px;font-weight:bold;">Play On</span></div>');
-}
-
-function MbjDisplayCategoriesView() {
-catSize = catArray.length;
-jQuery( '#mbj-login-details' ).replaceWith('<div class="mbj_notification_inner" id="mbj-login-categories"> <div class="mbj_notification_title"> <img src="img/mbj_logo_50px.png"/> <h2>SIGN IN AND WIN FOR REAL</h2> </div><div class="mbj-login mbj-form-block" id="mbj_categories"> <form class="mbj-form" id="mbj_categories_form" method="post"> <div class="mbj_notification_copy"> <p>What sort of rewards would you like to receive?</p><p>Select at least 3</p></div><div class="action-buttons category-list" id="category-list">');
-for (var i = 0; i < catSize; i++){
-    var catName = catArray[i].name;
-    jQuery( '#category-list' ).append('<button type="button" class="btn-mbj btn-category full-width" id="mbj-category-' + i + '" onClick="MbjSelectCategory(this)"> <span class="mbj-button-text">' + catName + '</span><span class="mbj-button-icon"><i class="ion-android-radio-button-off"></i></span></button>');
-}
-jQuery( '#mbj-login-categories' ).append('</div><div class="action-buttons"><button class="btn-mbj submit full-width" id="mbj-login" onClick="MbjDisplayLoginView()"><span class="mbj-button-icon"><i class="ion-android-send"></i></span><span class="mbj-button-text">Submit</span> </button> </div></form></div></div>');
-}
-function MbjSelectCategory(category) {
-
-if (jQuery( category ).hasClass('btn-category-selected')){
-    
-    // Deselect active button
-    jQuery( category ).removeClass('btn-category-selected');
-    jQuery( category ).children('span.mbj-button-icon').children('i').addClass('ion-android-radio-button-off').removeClass('ion-android-radio-button-on');
-}
-
-else {
-    
-    // Select active button
-    jQuery( category ).addClass('btn-category-selected');
-    jQuery( category ).children('span.mbj-button-icon').children('i').removeClass('ion-android-radio-button-off').addClass('ion-android-radio-button-on');
-}
-
-}
-
-
-//
-//  View close behaviors
+//  Initializer behaviors
 //
 
 jQuery(document).ready(function() {
@@ -1791,13 +980,7 @@ jQuery(document).ready(function() {
 
 });
 
-// function closeOnboardModal() {
-//     jQuery('#mbj_modal')
-//         .fadeOut(200, "swing", function(){
-//             jQuery( this ).remove();
-//         }
-//     );
-// }
+
 
 //*********  Geolocation *********//
 
@@ -1830,8 +1013,6 @@ function showPosition(position) {
 
 
 
-window.addEventListener('resize', function(){
-    document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight;
-}, false);
+
 
 
