@@ -1,4 +1,8 @@
 /* MyBeanJar Experimental Modal Styles */
+/*//// SCSS variable pile ////*/
+/* color scheme */
+/* hopefully temporary */
+/* TYPOGRAPHY */
 /* line 11, ../sass/mbjModal.scss */
 html, body {
   height: 100%;
@@ -21,7 +25,7 @@ html, body {
 /* line 26, ../sass/mbjModal.scss */
 .mbj-modal a,
 #mbj_modal a {
-  color: #c59a1e;
+  color: #b39a13;
 }
 
 /* line 31, ../sass/mbjModal.scss */
@@ -143,15 +147,27 @@ form.mbj-form button.submit span {
   height: 75px;
 }
 
+/* line 146, ../sass/mbjModal.scss */
+.geolocator-block {
+  display: inline-block;
+  font-family: inherit;
+  color: #ffc200;
+  font-size: 0.75rem;
+}
+/* line 153, ../sass/mbjModal.scss */
+.geolocator-block .notification-geolocator span {
+  padding-left: 0.5rem;
+}
+
 /*** - ADAPTIVE LAYOUTS - ***/
 /* Generic mobile portrait */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 160, ../sass/mbjModal.scss */
+  /* line 173, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 165, ../sass/mbjModal.scss */
+  /* line 178, ../sass/mbjModal.scss */
   #modal-content {
     zoom: 2;
     width: inherit;
@@ -159,19 +175,19 @@ form.mbj-form button.submit span {
 }
 /* Desktop landscape */
 @media all and (orientation: landscape) {
-  /* line 180, ../sass/mbjModal.scss */
+  /* line 193, ../sass/mbjModal.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 184, ../sass/mbjModal.scss */
+  /* line 197, ../sass/mbjModal.scss */
   #modal-content {
     width: 456px;
   }
 }
 /* Desktop portrait */
 @media all and (min-width: 600px) and (orientation: portrait) {
-  /* line 197, ../sass/mbjModal.scss */
+  /* line 210, ../sass/mbjModal.scss */
   #modal-content {
     width: 456px;
   }

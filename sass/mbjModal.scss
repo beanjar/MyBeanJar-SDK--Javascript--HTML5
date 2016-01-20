@@ -4,7 +4,7 @@
 
 
 
-    $mbj-color-goldenrod: #c59a1e;
+@import 'mbjCommon';
 
 
 
@@ -141,6 +141,19 @@ form.mbj-form {
 .mbjBigButton {
     width: 200px;
     height: 75px;
+}
+
+.geolocator-block {
+    display: inline-block;
+    font-family: inherit;
+    color: $mbj-color-yellow-dk;
+    font-size: 0.75rem;
+
+    .notification-geolocator {
+        span {
+            padding-left: 0.5rem;
+        }
+    }
 }
 
 

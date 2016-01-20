@@ -52,6 +52,10 @@ MbjModal.prototype = {
     payload: {},                        // The contents of the modal
     beanImage: {},                      // The URL for the bean award image
     timeout: {},                        // The timeout for  modal self-destruction
+    geolocation: {                      // The lat/long coordinates of the browser
+        lat: {},
+        lon: {}
+    },
     currentView: function () {},
     lastView: function() {},
     config: {},
@@ -64,8 +68,10 @@ MbjModal.prototype = {
     DisplayLogin: function() {
         var modal = this;
 
-        // Fetch categories in preparation for registration
-        categories = fetchCategories();
+        // Fetch bean categories if they haven't yet been fetched
+        if (typeof categories == 'undefined'){
+            categories = fetchCategories();
+        };
 
         // Load template as modal content
         jQuery( this.payload ).html( modalContent.login(modal) );
@@ -145,6 +151,7 @@ MbjModal.prototype = {
         // Map buttons and assign handlers
         var backButton      = document.getElementById('back-modal-' + modal.uid);
         var closeButton     = document.getElementById('close-modal-' + modal.uid);
+        var locationButton  = document.getElementById('btn-geolocator-' + modal.uid);
         var registerButton  = document.getElementById('mbj-register-button-' + modal.uid);
 
         backButton.addEventListener('click', function(){
@@ -155,12 +162,33 @@ MbjModal.prototype = {
             modal.SelfDestruct();//.bind(MbjModal);
         });
 
+        locationButton.addEventListener('click', function(){
+            getLocation.bind(this)(this.StoreLocation);
+
+            //     function(){
+            //     this.StoreLocation;
+            //     this.ApplyLocation;
+            // }).bind(this);
+        }.bind(this));
+
         registerButton.addEventListener('click', function(){
             modal.SubmitRegistration();
         });
 
         // Update view tracker
         this.currentView = this.DisplayRegistration;
+    },
+    ApplyLocation: function() {
+        //var latObject = this.geolocation;
+        if (!jQuery.isEmptyObject(this.geolocation)) {
+            var lat = document.getElementById("lat-" + this.uid);
+            var lon = document.getElementById("lon-" + this.uid);
+            lat.value = this.geolocation.lat;
+            lon.value = this.geolocation.lon;
+
+            // Replace geolocator button block with notification that location data is being used
+            jQuery('#geolocator-block-' + this.uid).html('<div class="notification-geolocator"><span>(Using Current Location)</span></div>');
+        };
     },
     AwardBean: function(){
         var modal = this;
@@ -219,30 +247,25 @@ MbjModal.prototype = {
         p2 = jQuery('#mbj_form_reg_p2').val();
         email = jQuery('#mbj_form_reg_email').val();
         zip = jQuery('#mbj_form_reg_zip').val();
-        lat = jQuery('#lat').val();
-        lon = jQuery('#lon').val();    
+        lat = jQuery('#lat-' + this.uid).val();
+        lon = jQuery('#lon-' + this.uid).val();    
         cats = jQuery('#mbj_form_reg_cats').val();
         
         if (p != p2) {
             mbjDebug("Password mismatch detected");
             mbjNotifyRegistrationPassMismatch();
-    //        mbjAttemptLogin();
         } else if (p.length < 6) {
             mbjDebug("Invalid password");
             mbjNotifyRegistrationInvalidPass();
-     //       mbjAttemptLogin();
         } else if ( cats == null)     { 
-            mbjNotifyRegistrationCategories(3);
-     //       mbjAttemptLogin();    
+            mbjNotifyRegistrationCategories(3);  
         } else if (cats.length < 3){
             mbjNotifyRegistrationCategories(3);
-      //      mbjAttemptLogin();
         } else {
-
-            register_user(u, p, email, zip, lat,lon, cats,mbjNotifyRegistration);
-
+            register_user(u, p, email, zip, lat,lon, cats, function(result, message) {
+                this.RegistrationResponse(result, message);
+            }.bind(this));
         }
-        
     },
     DisplayAuthenticated: function(result, message, email) {
 
@@ -293,6 +316,85 @@ MbjModal.prototype = {
 
                 flashLoginStatus();
             }.bind(this), 200);
+        }
+    },
+    
+    DisplayRegistrationSuccess: function() {
+        var modal = this;
+
+        this.lastView = this.currentView;
+
+        // Load template as modal content
+        jQuery( this.payload ).html( modalContent.registrationSuccess(modal) );
+
+        // Map buttons and assign handlers
+        var closeButton     = document.getElementById('close-modal-' + modal.uid);
+        var closeButtonAlt  = document.getElementById('close-modal-button-' + modal.uid);
+
+        closeButton.addEventListener('click', function(){
+            modal.SelfDestruct();
+        });
+
+        closeButtonAlt.addEventListener('click', function(){
+            modal.SelfDestruct();
+        });
+
+        // Update view tracker
+        this.currentView = this.DisplayRegistrationSuccess;
+    },
+
+    RegistrationResponse: function(result, message) {
+        //function mbjNotifyRegistration(result, message) {
+        if (result == STATUS_SUCCESS) {
+            mbjDebug("Result = " + result);
+            mbjDebug("Message = " + message);
+            mbjDebug("Registration succeeded as " + email);
+
+            sessionStorage.setItem('username',email);
+            sessionStorage.setItem('mbjUserLoggedIn','true');
+            jQuery('#email').val(email);
+
+            jQuery("#mbj_form_reg_email").val(email);
+
+            //mbjUserLoggedIn = true;
+              
+            // Display registration success notifications
+            setTimeout(function() {
+                jQuery("div.mbj_login_status").addClass("success");
+
+                jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
+
+                flashLoginStatus();
+
+                setTimeout(function() {
+                    this.DisplayRegistrationSuccess();
+                }.bind(this), 2000);
+            }.bind(this), 200);
+
+        }
+        else {
+            mbjDebug("Result = " + result);
+            mbjDebug("Message = " + message);
+            mbjDebug("Registration failed.");
+
+
+            // Display registration failure notification
+            setTimeout(function() {
+                jQuery("div.mbj_login_status").addClass("fail");
+
+                jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Registration failed. ' + message + ' </p>');
+
+                flashLoginStatus();
+            }, 200);
+        }
+    },
+    StoreLocation: function(position) {
+        this.geolocation.lat = position.coords.latitude;
+        this.geolocation.lon = position.coords.longitude;
+
+        // If in registration view, apply coordinates
+        if (this.currentView == this.DisplayRegistration) {
+            this.ApplyLocation();
         }
     },
     SelfDestruct: function() {
@@ -375,6 +477,23 @@ var modalContent = {
     
     // The registration form view
     registration:   function(modal){
+        
+        // Check to see if page is secure, if so, prepare "get location" button
+        // (getCurrentPosition is deprecated on insecure sites)
+        var locationButtonString;
+        if (location.protocol === 'https:') {
+            locationButtonString = '                    <div class="geolocator-block" id="geolocator-block-' + modal.uid + '">'
+                                +  '                        <span class="mbj-form-label">&nbsp;or&nbsp;</span>'
+                                +  '                        <button type="button" class="btn-mbj green btn-location" id="btn-geolocator-' + modal.uid + '">'
+                                +  '                            <span class="mbj-button-text" style="color:black;font-size:8pt">current location</span>'
+                                +  '                        </button>'
+                                +  '                    </div>'
+        }
+        else {
+            locationButtonString = '';
+        }
+
+
         htmlementString =       '<div class="mbj-notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
                                 +  '<div class="mbj_notification_inner" id="mbj-login-details">'
                                 +  '    <div class="mbj-nav-button-block">'
@@ -392,8 +511,8 @@ var modalContent = {
                                 +  '        </div>'
                                 +  '        <div class="mbj-login mbj-form-block" id="mbj_details">'
                                 +  '            <form class="mbj-form" id="mbj_details_form" method="post">'
-                                +  '                <input type="hidden" name="lat" id="lat" value=""/>'
-                                +  '                <input type="hidden" name="lon" id="lon" value=""/>'
+                                +  '                <input type="hidden" name="lat" id="lat-' + modal.uid + '" value=""/>'
+                                +  '                <input type="hidden" name="lon" id="lon-' + modal.uid + '" value=""/>'
                                 +  '                <div class="element-input">'
                                 +  '                    <label class="title mbj-form-label">email&mdash;no spam ever</label>'
                                 +  '                    <input class="large" id="mbj_form_reg_email" type="email" name="mbj_reg_email" required/>'
@@ -412,10 +531,7 @@ var modalContent = {
                                 +  '                    <div class="element-input" >'
                                 +  '                        <label class="title mbj-form-label">ZIP (US only)&mdash;to find cool stuff nearby</label>'
                                 +  '                        <input class="small"  style="width:45%;" maxlength="5" id="mbj_form_reg_zip" type="text" name="mbj_reg_zip"/>'
-                                +  '                        <span class="mbj-form-label">&nbsp;or&nbsp;</span>'
-                                +  '                        <button type="button" class="btn-mbj green btn-location" onClick="getLocation();">'
-                                +  '                            <span class="mbj-button-text" style="color:black;font-size:8pt">current location</span>'
-                                +  '                        </button>'
+                                +  '                       ' + locationButtonString
                                 +  '                    </div>'
                                 +  '                </div>'
                                 +  '                <div class="element-input">'
@@ -439,9 +555,31 @@ var modalContent = {
                                 +  '</div>';
         return htmlementString;
     },
+
+    // The registration success view
+    registrationSuccess:   function(modal){
+        htmlementString =          '<div class="mbj-notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
+                                +  '    <div class="mbj_notification_inner" id="mbj-registration-successful">'
+                                +  '        <div class="mbj-nav-button-block">'
+                                +  '            <button type="submit" class="btn-close" id="close-modal-' + modal.uid + '">'
+                                +  '                <img src="img/ui_action_close.png">'
+                                +  '            </button>'
+                                +  '        </div>'
+                                +  '        <div class="mbj_notification_title">'
+                                +  '            <h2>YOU\'RE IN!</h2>'
+                                +  '            <p>Keep playing to win more in this game.</p>'
+                                +  '            <p>Check your email later for instructions on how to redeem your rewards, and install the MyBeanJar app.</p>'
+                                +  '        </div>'
+                                +  '        <button class="btn-mbj submit" id="close-modal-button-' + modal.uid + '">'
+                                +  '            <span class="mbj-button-text">Play On</span>'
+                                +  '        </button>'
+                                +  '    </div>';
+        return htmlementString;
+    },
+
     // The bean award view
     bean:   function(modal){
-        htmlementString =          '<div class="mbj-notification bean_notification_window" id="mbj-bean-modal' + modal.uid + '">'
+        htmlementString =          '<div class="mbj-notification bean_notification_window" id="mbj-bean-modal-' + modal.uid + '">'
                                 +  '    <button type="submit" class="btn-close" id="close-modal-' + modal.uid + '">'//id="mbj_notification_close_submit" onClick="mbjDestroyModal()">'
                                 +  '        <img src="img/ui_action_close.png">'
                                 +  '    </button>'
@@ -1213,77 +1351,77 @@ function mbjNotifyRegistrationInvalidZip() {
 }
 ;
 
-function mbjNotifyRegistration(result, message) {
-    if (result == STATUS_SUCCESS) {
-        mbjDebug("Result = " + result);
-        mbjDebug("Message = " + message);
-        mbjDebug("Registration succeeded as " + email);
+// function mbjNotifyRegistration(result, message) {
+//     if (result == STATUS_SUCCESS) {
+//         mbjDebug("Result = " + result);
+//         mbjDebug("Message = " + message);
+//         mbjDebug("Registration succeeded as " + email);
 
-        sessionStorage.setItem('username',email);
-        sessionStorage.setItem('mbjUserLoggedIn','true');
-        jQuery('#email').val(email);
+//         sessionStorage.setItem('username',email);
+//         sessionStorage.setItem('mbjUserLoggedIn','true');
+//         jQuery('#email').val(email);
 
-    jQuery("#mbj_form_reg_email").val(email);
+//     jQuery("#mbj_form_reg_email").val(email);
 
-        //testpostedimg();
+//         //testpostedimg();
 
-    mbjUserLoggedIn = true;
-      //ga('send', 'pageview', 'registrationSuccess');
+//     mbjUserLoggedIn = true;
+//       //ga('send', 'pageview', 'registrationSuccess');
 
-// award Bean for successful registration
-//        queuedBeans++;
+// // award Bean for successful registration
+// //        queuedBeans++;
       
-    setTimeout(function() {
-        jQuery("div.mbj_login_status").addClass("success");
+//     setTimeout(function() {
+//         jQuery("div.mbj_login_status").addClass("success");
 
-        jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
+//         jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success">Login successful.</p>');
 
-        flashLoginStatus();
+//         flashLoginStatus();
 
-        setTimeout(function() {
-            MbjDisplayYoureIn();
-        }, 2000);
-    }, 200);
+//         setTimeout(function() {
+//             MbjDisplayYoureIn();
+//         }, 2000);
+//     }, 200);
 
-      //MbjDisplayYoureIn();
-
-
-
- //       setTimeout(function() {
- //           jQuery("div.mbj_login_status").addClass("success");
-
-  //          jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success"> ' + message + ' </p>');
-
-   //         flashLoginStatus();
-
- //           setTimeout(function() {
-  //              jQuery("div.mbj_notification_container")
-  //                      .fadeOut(200, "swing");
-  //          }, 3000);
-  //      }, 200);
-
-//        if (queuedBeans > 0) {
-//            mbjAttemptAward();
-//        }
-    }
-    else {
-        mbjDebug("Result = " + result);
-        mbjDebug("Message = " + message);
-        mbjDebug("Registration failed.");
+//       //MbjDisplayYoureIn();
 
 
-        setTimeout(function() {
- //
-  //        alert("Registration Failed: " + message);
-            jQuery("div.mbj_login_status").addClass("fail");
 
-            jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Registration failed. ' + message + ' </p>');
+//  //       setTimeout(function() {
+//  //           jQuery("div.mbj_login_status").addClass("success");
 
-            flashLoginStatus();
-        }, 200);
- //       mbjAttemptLogin();
-    }
-}
+//   //          jQuery("div.mbj_login_status").html('<img src="img/ui_action_success.png"><p class="status success"> ' + message + ' </p>');
+
+//    //         flashLoginStatus();
+
+//  //           setTimeout(function() {
+//   //              jQuery("div.mbj_notification_container")
+//   //                      .fadeOut(200, "swing");
+//   //          }, 3000);
+//   //      }, 200);
+
+// //        if (queuedBeans > 0) {
+// //            mbjAttemptAward();
+// //        }
+//     }
+//     else {
+//         mbjDebug("Result = " + result);
+//         mbjDebug("Message = " + message);
+//         mbjDebug("Registration failed.");
+
+
+//         setTimeout(function() {
+//  //
+//   //        alert("Registration Failed: " + message);
+//             jQuery("div.mbj_login_status").addClass("fail");
+
+//             jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status fail">Registration failed. ' + message + ' </p>');
+
+//             flashLoginStatus();
+//         }, 200);
+//  //       mbjAttemptLogin();
+//     }
+// }
 
 
 
@@ -1663,64 +1801,34 @@ jQuery(document).ready(function() {
 
 //*********  Geolocation *********//
 
-function getLocation() {
+
+// Accepts a function as a parameter. This function will get passed to the getCurrentPosition method.
+function getLocation(fx) {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(fx.bind(this));
+            /*, function(error){
+            console.log(error);
+            if (error == 0) {
+                this.ApplyLocation();
+            }
+        }.bind(this));*/
     } else {
-        alert("Geolocation is not supported by this browser");
+        mbjDebug("Geolocation is not supported by this browser");
     }
 }
+
+
 function showPosition(position) {
     var lat = document.getElementById("lat");
     var lon = document.getElementById("lon");
     lat.value = position.coords.latitude;
     lon.value = position.coords.longitude; 
-    alert(lat.value + ' x ' + lon.value);
+    //alert(lat.value + ' x ' + lon.value);
     jQuery('.btn-location').replaceWith('<div style="font-weight:bold;color:yellow;font-size:larger">Using Current Location</div>');
 }
 
 
 
-
-
-
-
-// function fadeElementOut(activator, target) {
-//     jQuery(activator).off('submit').on('submit', function(event) {
-//         event.preventDefault();
-//         event.stopPropagation();
-//         jQuery( target )
-//                 .fadeOut(500, "swing")
-//                 .remove();
-//     });
-// };
-
-
-
-
-
-// ------ EXPERIMENTAL MODAL ------ //
-
-// function testModal() {
-// jQuery( 'body' ).append('' 
-//     + '<table id="modal">'
-//     +   '<tbody id="modal-tbody">'
-//     +       '<tr id="modal-tr">'
-//     +           '<td id="modal-td">'
-//     +               '<div id="modal-box">'
-//     +                   '<div id="modal-content">'
-//     +                       '<div id="modal-body">'
-//     +                           '<!-- CONTENT -->'
-//     +                           '<h2>Test</h2>'
-//     +                           '<p>This is a test.</p>'
-//     +                       '</div>'
-//     +                   '</div>'
-//     +               '</div>'
-//     +           '</td>'
-//     +       '</tr>'
-//     +   '</tbody>'
-//     + '</table>');
-// };
 
 window.addEventListener('resize', function(){
     document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight;
