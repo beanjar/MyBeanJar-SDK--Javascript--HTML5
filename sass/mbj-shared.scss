@@ -9,7 +9,7 @@
     $mbj-color-cyan:                 rgba(0, 174, 239, 1);
     $mbj-color-nearblack:            rgba(16,16,16,1);
     $mbj-color-nearblacktrans:       rgba(16,16,16,0.8);
-    $mbj-color-nearblacktrans-lt:     rgba(16,16,16,0.4);
+    $mbj-color-nearblacktrans-lt:    rgba(16,16,16,0.4);
     
     $mbj-color-blue:                 rgba(8, 80, 180, 1);
     $mbj-color-blue-lt:              rgba(48, 175, 241, 1);
@@ -45,6 +45,6 @@
     /* TYPOGRAPHY */
 
     @font-face {
-        //font-family: Museo;
-        //src: url(../font/Museo300-Regular-webfont.woff);
+        font-family: Museo;
+        src: url(../font/Museo300.woff);
     }

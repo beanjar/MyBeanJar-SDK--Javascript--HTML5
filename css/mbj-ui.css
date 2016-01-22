@@ -56,19 +56,90 @@
  *  https://github.com/beanjar
  *
 */
-/*//// SCSS variable pile ////*/
-/* color scheme */
-/* TYPOGRAPHY */
-@font-face {}
+/* *
+ *                                                                                                                        
+ *       ************* **********                                            
+ *       **      *    ****  *** ***                                           
+ *       **   **   **  **   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   **   *   **                                           
+ *       ********************    **                                           
+ *       **           ********   **                                           
+ *       **    ****    ***   *   **                                           
+ *       **    *****   ****     **                                            
+ *       **    *****   *************   ********** *************               
+ *       **    *****   ****        *****        ***           **              
+ *       **    ***    ***    ****   ***   ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    ***            
+ *       **    ****    **    ****   **   +****    *    ****    ***            
+ *       **    *****   **     **   *****          *    ****    ***            
+ *       **    *****   **       *******   ****    *    ****    ***            
+ *       **    *****   **    ****    *    ****    *    ****    ***            
+ *       **    *****   **    ****   **    ****    *    ****    ***            
+ *       **    ***    ****    **   ****    **    **    ****    ***            
+ *       **+*     ****  ****   *********      *****  ******  ***             
+ *        *********    ******************    ******* **   *****              
+ *                   ***+.   ..++*****    **    **     **    ***             
+ *                   **+.    ....+***    ****    *    *****   ***            
+ *                  ***..    ...+++**    ****    *    *****    **            
+ *                  **+..    ....++*******       *    **********             
+ *                 ***..     ....++***    **     *    ***   **               
+ *             *****...     ....+++**    ****    *    ***                    
+ *           ***++...     .....++++**    ****    *    ***                    
+ *          ***+..       ....+++++***    ****    *    ***                    
+ *          **+...    ......+++++*****          **    ***                    
+ *          **+..........++++++****  *****  *******  ***                     
+ *           ***++.....++++++****       ******   ******                      
+ *            *****+++++++*****                                              
+ *               ***********  
+ *
+ *
+ *
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    mbj-shared.scss            ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    MyBeanJar HTML / JS SDK    ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    Shared Styles              ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  
+ * 
+ *
+ *  http://mybeanjar.com
+ *  https://github.com/beanjar
+ *
+*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                     ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Color Schemes    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                     ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Typography    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
+@font-face {
+  font-family: Museo;
+  src: url(../font/Museo300.woff);
+}
 /* MyBeanJar shared styles */
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
- * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
- * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
- * ░░░░▒▒▓▓    Modal Styles                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
- * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
- * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                          ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Basic Modal Styles    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                          ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 */
-/* line 73, ../sass/mbj-ui.scss */
+/* line 81, ../sass/mbj-ui.scss */
 html, body {
   height: 100%;
   /* Required for modal container table sizing */
@@ -76,7 +147,23 @@ html, body {
   /* Required for modal container table sizing */
 }
 
-/* line 78, ../sass/mbj-ui.scss */
+/* line 89, ../sass/mbj-ui.scss */
+button #footer-signup {
+  background-color: #fe8630;
+  border: none;
+  border-radius: 0 3px 3px 0;
+  color: #fff;
+  font-family: museo;
+  width: 40%;
+  text-align: left;
+}
+
+/* line 102, ../sass/mbj-ui.scss */
+.full-width {
+  width: 100%;
+}
+
+/* line 107, ../sass/mbj-ui.scss */
 .mbj-modal,
 #mbj_modal {
   position: absolute;
@@ -87,25 +174,25 @@ html, body {
   z-index: 999999999;
   display: none;
 }
-/* line 88, ../sass/mbj-ui.scss */
+/* line 117, ../sass/mbj-ui.scss */
 .mbj-modal a,
 #mbj_modal a {
   color: #ffc200;
 }
 
-/* line 93, ../sass/mbj-ui.scss */
+/* line 124, ../sass/mbj-ui.scss */
 #modal-tbody,
 #modal-tr,
 #modal-td {
   height: 100%;
 }
 
-/* line 99, ../sass/mbj-ui.scss */
+/* line 132, ../sass/mbj-ui.scss */
 #modal-td {
   vertical-align: middle;
 }
 
-/* line 103, ../sass/mbj-ui.scss */
+/* line 138, ../sass/mbj-ui.scss */
 #modal-content {
   position: relative;
   left: 100%;
@@ -114,7 +201,7 @@ html, body {
   overflow: auto;
 }
 
-/* line 111, ../sass/mbj-ui.scss */
+/* line 148, ../sass/mbj-ui.scss */
 .mbj_notification_sub_inner {
   width: 270px;
   padding: 5px;
@@ -123,39 +210,39 @@ html, body {
   background: black;
 }
 
-/* line 122, ../sass/mbj-ui.scss */
+/* line 159, ../sass/mbj-ui.scss */
 .mbjBigButton {
   width: 200px;
   height: 75px;
 }
 
-/* line 127, ../sass/mbj-ui.scss */
+/* line 166, ../sass/mbj-ui.scss */
 .geolocator-block {
   display: inline-block;
   font-family: inherit;
   color: #ffc200;
   font-size: 0.75rem;
 }
-/* line 134, ../sass/mbj-ui.scss */
+/* line 173, ../sass/mbj-ui.scss */
 .geolocator-block .notification-geolocator span {
   padding-left: 0.5rem;
 }
 
-/* line 145, ../sass/mbj-ui.scss */
+/* line 181, ../sass/mbj-ui.scss */
 .mbj-notification,
 .mbj_notification {
   -webkit-transform: translateZ(0);
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
-/* line 151, ../sass/mbj-ui.scss */
+/* line 189, ../sass/mbj-ui.scss */
 .mbj_notification_container_container {
   position: absolute;
   top: 25%;
   left: 35%;
 }
 
-/* line 157, ../sass/mbj-ui.scss */
+/* line 197, ../sass/mbj-ui.scss */
 .mbj-notification-container,
 .mbj_notification_container {
   font-size: 1rem !important;
@@ -177,7 +264,7 @@ html, body {
   overflow: inherit;
   margin-top: 5vh;
 }
-/* line 181, ../sass/mbj-ui.scss */
+/* line 219, ../sass/mbj-ui.scss */
 .mbj-notification-container input,
 .mbj-notification-container option,
 .mbj_notification_container input,
@@ -185,7 +272,7 @@ html, body {
   color: #666 !important;
 }
 
-/* line 187, ../sass/mbj-ui.scss */
+/* line 227, ../sass/mbj-ui.scss */
 .mbj-notification-inner,
 .mbj_notification_inner {
   background: #000000;
@@ -209,24 +296,24 @@ html, body {
   padding: 10px !important;
   box-sizing: border-box;
 }
-/* line 201, ../sass/mbj-ui.scss */
+/* line 241, ../sass/mbj-ui.scss */
 .mbj-notification-inner > .mbj_notification_title:first-child,
 .mbj_notification_inner > .mbj_notification_title:first-child {
   margin-top: 20px;
 }
 
-/* line 206, ../sass/mbj-ui.scss */
+/* line 248, ../sass/mbj-ui.scss */
 .mbj-notification-beanticker,
 .mbj_notification_beanticker {
   min-height: 80px;
   margin: 2rem -10px;
 }
 
-/* line 212, ../sass/mbj-ui.scss */
+/* line 256, ../sass/mbj-ui.scss */
 .action-buttons {
   position: relative;
 }
-/* line 215, ../sass/mbj-ui.scss */
+/* line 259, ../sass/mbj-ui.scss */
 .action-buttons button {
   margin-top: 0.5rem;
   display: -webkit-box;
@@ -248,16 +335,16 @@ html, body {
           align-items: center;
 }
 
-/* line 224, ../sass/mbj-ui.scss */
+/* line 270, ../sass/mbj-ui.scss */
 .mbj-form-block {
   margin: 0.5rem 0;
 }
-/* line 227, ../sass/mbj-ui.scss */
+/* line 273, ../sass/mbj-ui.scss */
 .mbj-form-block:last-of-type {
   margin-bottom: 0;
 }
 
-/* line 232, ../sass/mbj-ui.scss */
+/* line 280, ../sass/mbj-ui.scss */
 .mbj-button-text {
   text-align: right;
   -webkit-box-flex: 1;
@@ -269,7 +356,7 @@ html, body {
           align-self: center;
 }
 
-/* line 238, ../sass/mbj-ui.scss */
+/* line 288, ../sass/mbj-ui.scss */
 .mbj-button-icon i {
   font-size: 1.5rem;
   -webkit-align-self: center;
@@ -279,20 +366,20 @@ html, body {
   /* hack for Firefox's flex issues */
 }
 
-/* line 244, ../sass/mbj-ui.scss */
+/* line 296, ../sass/mbj-ui.scss */
 .category-list {
   max-height: 200px;
   overflow: scroll;
 }
 
-/* line 249, ../sass/mbj-ui.scss */
+/* line 303, ../sass/mbj-ui.scss */
 .mbj-notiication-pane,
 .mbj_notiication_pane {
   display: inline-block;
   width: auto;
 }
 
-/* line 255, ../sass/mbj-ui.scss */
+/* line 311, ../sass/mbj-ui.scss */
 .mbj-notification-copy,
 .mbj_notification_copy {
   padding: 0.75em 0;
@@ -304,25 +391,25 @@ html, body {
   text-align: justify;
   letter-spacing: -0.01em;
 }
-/* line 266, ../sass/mbj-ui.scss */
+/* line 322, ../sass/mbj-ui.scss */
 .mbj-notification-copy:first-of-type,
 .mbj_notification_copy:first-of-type {
   padding-top: 0;
 }
-/* line 270, ../sass/mbj-ui.scss */
+/* line 326, ../sass/mbj-ui.scss */
 .mbj-notification-copy p,
 .mbj_notification_copy p {
   margin: 0.5em 0;
   font-size: 0.75rem;
   color: white;
 }
-/* line 275, ../sass/mbj-ui.scss */
+/* line 331, ../sass/mbj-ui.scss */
 .mbj-notification-copy p:first-of-type,
 .mbj_notification_copy p:first-of-type {
   margin-top: 0;
 }
 
-/* line 283, ../sass/mbj-ui.scss */
+/* line 341, ../sass/mbj-ui.scss */
 .two-column {
   position: absolute;
   bottom: 24px;
@@ -330,45 +417,45 @@ html, body {
   width: 273px;
 }
 
-/* line 291, ../sass/mbj-ui.scss */
+/* line 351, ../sass/mbj-ui.scss */
 p.status {
   text-align: center;
   vertical-align: middle;
   display: inline-block;
   width: 80%;
 }
-/* line 298, ../sass/mbj-ui.scss */
+/* line 358, ../sass/mbj-ui.scss */
 p.fail {
   color: #fff;
 }
-/* line 302, ../sass/mbj-ui.scss */
+/* line 362, ../sass/mbj-ui.scss */
 p.success {
   color: #fff;
 }
 
-/* line 310, ../sass/mbj-ui.scss */
+/* line 371, ../sass/mbj-ui.scss */
 div.fail,
 input.fail {
   background-color: #c21010;
   border-radius: 3px;
 }
-/* line 315, ../sass/mbj-ui.scss */
+/* line 376, ../sass/mbj-ui.scss */
 div.success,
 input.success {
   background-color: #0fc314;
   border-radius: 3px;
 }
 
-/* line 322, ../sass/mbj-ui.scss */
+/* line 383, ../sass/mbj-ui.scss */
 div.fail {
   border-radius: 3px;
 }
-/* line 326, ../sass/mbj-ui.scss */
+/* line 387, ../sass/mbj-ui.scss */
 div.success {
   border-radius: 3px;
 }
 
-/* line 333, ../sass/mbj-ui.scss */
+/* line 394, ../sass/mbj-ui.scss */
 .btn-mbj {
   box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: #e6611c;
@@ -411,13 +498,13 @@ div.success {
   vertical-align: middle;
   color: #ffffff;
 }
-/* line 375, ../sass/mbj-ui.scss */
+/* line 436, ../sass/mbj-ui.scss */
 .btn-mbj:active {
   background-image: none;
   outline: 0;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-/* line 381, ../sass/mbj-ui.scss */
+/* line 442, ../sass/mbj-ui.scss */
 .btn-mbj.green {
   background-color: lightgreen;
   border-color: lightgreen;
@@ -425,7 +512,7 @@ div.success {
   font-size: 8pt;
 }
 
-/* line 391, ../sass/mbj-ui.scss */
+/* line 452, ../sass/mbj-ui.scss */
 .btn-close {
   right: 0px;
   top: 0px;
@@ -439,12 +526,12 @@ div.success {
   -webkit-transform: translateZ(0);
   background-color: transparent;
 }
-/* line 404, ../sass/mbj-ui.scss */
+/* line 465, ../sass/mbj-ui.scss */
 .btn-close > img {
   width: 100% !important;
   display: block;
 }
-/* line 409, ../sass/mbj-ui.scss */
+/* line 470, ../sass/mbj-ui.scss */
 .btn-close:focus {
   box-shadow: none;
   outline: none;
@@ -452,7 +539,7 @@ div.success {
   outline: none;
 }
 
-/* line 417, ../sass/mbj-ui.scss */
+/* line 480, ../sass/mbj-ui.scss */
 .btn-back {
   left: 0;
   top: 0;
@@ -465,13 +552,13 @@ div.success {
   -webkit-transform: translateZ(0);
   background-color: transparent;
 }
-/* line 429, ../sass/mbj-ui.scss */
+/* line 492, ../sass/mbj-ui.scss */
 .btn-back > img {
   width: 100% !important;
   display: block;
 }
 
-/* line 435, ../sass/mbj-ui.scss */
+/* line 500, ../sass/mbj-ui.scss */
 .mbj_login_response {
   background-color: #2b2c33;
   font-size: 14px;
@@ -498,7 +585,7 @@ div.success {
   vertical-align: baseline;
 }
 
-/* line 461, ../sass/mbj-ui.scss */
+/* line 528, ../sass/mbj-ui.scss */
 .mbj_login_status {
   display: none;
   position: relative;
@@ -508,7 +595,7 @@ div.success {
   border-radius: 8px;
   background-color: transparent;
 }
-/* line 470, ../sass/mbj-ui.scss */
+/* line 537, ../sass/mbj-ui.scss */
 .mbj_login_status img {
   width: 20%;
   height: auto;
@@ -516,21 +603,21 @@ div.success {
   position: relative;
 }
 
-/* line 479, ../sass/mbj-ui.scss */
+/* line 548, ../sass/mbj-ui.scss */
 img.mbj_loading {
   margin: 0 auto;
   display: block;
   padding: 85px;
 }
 
-/* line 485, ../sass/mbj-ui.scss */
+/* line 556, ../sass/mbj-ui.scss */
 .mbj-activity-indicator {
   position: relative;
   padding: 15px;
   height: 50%;
 }
 
-/* line 491, ../sass/mbj-ui.scss */
+/* line 564, ../sass/mbj-ui.scss */
 .bean_notification_window {
   position: relative;
   top: -50%;
@@ -542,7 +629,7 @@ img.mbj_loading {
   z-index: 500;
 }
 
-/* line 502, ../sass/mbj-ui.scss */
+/* line 577, ../sass/mbj-ui.scss */
 .bean_notification_text {
   position: absolute;
   top: 0;
@@ -560,7 +647,7 @@ img.mbj_loading {
   -webkit-transform: translateZ(0);
 }
 
-/* line 519, ../sass/mbj-ui.scss */
+/* line 596, ../sass/mbj-ui.scss */
 .bean_notification_text p {
   position: relative;
   top: 0px;
@@ -568,19 +655,19 @@ img.mbj_loading {
   padding-left: 16px;
 }
 
-/* line 526, ../sass/mbj-ui.scss */
+/* line 605, ../sass/mbj-ui.scss */
 .bean_notification_image {
   min-height: 199px;
 }
 
-/* line 530, ../sass/mbj-ui.scss */
+/* line 611, ../sass/mbj-ui.scss */
 img.bean_notification_image {
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* line 536, ../sass/mbj-ui.scss */
+/* line 619, ../sass/mbj-ui.scss */
 p.mbj_caption {
   font-size: 0.7rem;
   color: #666;
@@ -589,7 +676,7 @@ p.mbj_caption {
   text-align: center;
 }
 
-/* line 545, ../sass/mbj-ui.scss */
+/* line 629, ../sass/mbj-ui.scss */
 .mbj_login {
   display: none;
   margin: 0px auto;
@@ -601,53 +688,53 @@ p.mbj_caption {
   -webkit-transform: translateZ(0);
 }
 
-/* line 556, ../sass/mbj-ui.scss */
+/* line 642, ../sass/mbj-ui.scss */
 .mbj_award_img {
   width: 100%;
 }
 
-/* line 560, ../sass/mbj-ui.scss */
+/* line 648, ../sass/mbj-ui.scss */
 .mbj_notifier_header {
   width: 100%;
 }
 
-/* line 564, ../sass/mbj-ui.scss */
+/* line 654, ../sass/mbj-ui.scss */
 .mbj_login_or_register {
   vertical-align: top;
   background-color: rgba(128, 128, 128, 0.1);
   display: none;
 }
 
-/* line 570, ../sass/mbj-ui.scss */
+/* line 662, ../sass/mbj-ui.scss */
 .active_pane {
   display: block;
 }
 
-/* line 574, ../sass/mbj-ui.scss */
+/* line 668, ../sass/mbj-ui.scss */
 .inactive_pane {
   display: none;
 }
 
-/* line 578, ../sass/mbj-ui.scss */
+/* line 674, ../sass/mbj-ui.scss */
 .active_selector {
   background-color: rgba(128, 128, 128, 0.1);
 }
 
-/* line 582, ../sass/mbj-ui.scss */
+/* line 680, ../sass/mbj-ui.scss */
 .inactive_selector {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-/* line 586, ../sass/mbj-ui.scss */
+/* line 686, ../sass/mbj-ui.scss */
 .mbj_notification_title {
   text-align: center;
 }
-/* line 589, ../sass/mbj-ui.scss */
+/* line 689, ../sass/mbj-ui.scss */
 .mbj_notification_title img {
   float: left;
   margin-top: 8px;
 }
-/* line 594, ../sass/mbj-ui.scss */
+/* line 694, ../sass/mbj-ui.scss */
 .mbj_notification_title h2 {
   margin: 0.2em auto;
   display: inline;
@@ -656,7 +743,7 @@ p.mbj_caption {
   text-align: center;
   color: #ffc200;
 }
-/* line 603, ../sass/mbj-ui.scss */
+/* line 703, ../sass/mbj-ui.scss */
 .mbj_notification_title h3 {
   position: relative;
   font-size: 1rem;
@@ -664,7 +751,7 @@ p.mbj_caption {
   color: white;
 }
 
-/* line 613, ../sass/mbj-ui.scss */
+/* line 714, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selector {
   display: inline-block;
   width: 50%;
@@ -675,7 +762,7 @@ p.mbj_caption {
   font-size: 0.7rem;
 }
 
-/* line 623, ../sass/mbj-ui.scss */
+/* line 726, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selectors {
   display: -webkit-box;
   display: -webkit-flex;
@@ -692,86 +779,58 @@ p.mbj_caption {
           justify-content: space-between;
 }
 
-/* line 630, ../sass/mbj-ui.scss */
+/* line 735, ../sass/mbj-ui.scss */
 input #mbj_form_u,
 input #mbj_form_p {
   font-size: 0.7rem;
 }
 
-/* line 636, ../sass/mbj-ui.scss */
+/* line 743, ../sass/mbj-ui.scss */
 label.title,
 label.large {
   font-size: 0.75rem !important;
 }
 
-/* line 641, ../sass/mbj-ui.scss */
+/* line 750, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selector h2 {
   text-transform: uppercase;
   display: inline;
   vertical-align: middle;
 }
 
-/* line 647, ../sass/mbj-ui.scss */
-.hint {
-  box-shadow: inset 0px 0px 30px 10px #ffdd15;
-}
-
-/* line 651, ../sass/mbj-ui.scss */
+/* line 758, ../sass/mbj-ui.scss */
 .nada {
   display: none;
 }
 
-/* MBJ Form Styles */
-/* default-skyblue */
-/* line 683, ../sass/mbj-ui.scss */
+/* line 775, ../sass/mbj-ui.scss */
 .mbj-form {
   margin: 0 auto;
 }
-/* line 686, ../sass/mbj-ui.scss */
+/* line 779, ../sass/mbj-ui.scss */
 .mbj-form .element-input {
   margin-top: 0.5rem;
 }
-/* line 689, ../sass/mbj-ui.scss */
+/* line 782, ../sass/mbj-ui.scss */
 .mbj-form .element-input:first-of-type {
   margin-top: 0;
 }
-/* line 695, ../sass/mbj-ui.scss */
+/* line 788, ../sass/mbj-ui.scss */
 .mbj-form button {
   margin-top: 0.5rem;
 }
-/* line 698, ../sass/mbj-ui.scss */
+/* line 791, ../sass/mbj-ui.scss */
 .mbj-form button:first-of-type {
   margin-top: 1.25rem;
 }
-
-/* line 708, ../sass/mbj-ui.scss */
-.mbj-form .large {
-  width: 100%;
-  /*width: 94%;*/
-}
-
-/* address select style */
-@font-face {
-  font-family: formoid;
-  src: url("formoid.eot");
-  src: url("formoid.eot?#iefix") format("embedded-opentype"), url("formoid.ttf") format("truetype"), url("formoid.woff") format("woff"), url("formoid.svg#formoid") format("svg");
-  font-weight: normal;
-  font-style: normal;
-}
-/* line 752, ../sass/mbj-ui.scss */
-.mbj-form input[type=checkbox] {
-  font-family: 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
-}
-
-/* line 757, ../sass/mbj-ui.scss */
+/* line 797, ../sass/mbj-ui.scss */
 .mbj-form label {
   display: block;
   font-size: 1em;
   margin-bottom: 3px;
   clear: both;
 }
-
-/* line 764, ../sass/mbj-ui.scss */
+/* line 804, ../sass/mbj-ui.scss */
 .mbj-form div,
 .mbj-form span,
 .mbj-form label,
@@ -779,44 +838,11 @@ label.large {
 .mbj-form button {
   font-family: inherit;
 }
-
-/* Global Declaration */
-/*
-
-CORE FUNCTIONALITY 
-
-Not advised to edit stuff below this line
------------------------------------------------------
-*/
-/* Button & submit*/
-/* Radio & checkbox */
-/* .formoid-default-skyblue color scheme begin */
-/* line 896, ../sass/mbj-ui.scss */
-.full-width {
+/* line 814, ../sass/mbj-ui.scss */
+.mbj-form .large {
   width: 100%;
 }
-
-/* line 920, ../sass/mbj-ui.scss */
-.mbj-form input[type=checkbox] + span:before {
-  content: "✓";
-  font-size: 0.8em;
-  padding: 0.1em;
-  line-height: 1.8;
-  border-radius: 0.3em;
-}
-
-/* line 930, ../sass/mbj-ui.scss */
-.mbj-form input[type=checkbox]:hover + span:before {
-  box-shadow: 0 0 2px 2px #F1F1F1;
-}
-
-/* line 934, ../sass/mbj-ui.scss */
-.mbj-form input[type=checkbox]:checked + span:before {
-  color: #616161;
-}
-
-/* radio */
-/* line 940, ../sass/mbj-ui.scss */
+/* line 818, ../sass/mbj-ui.scss */
 .mbj-form input[type=text],
 .mbj-form input[type=password],
 .mbj-form input[type=email] {
@@ -835,8 +861,7 @@ Not advised to edit stuff below this line
   outline: 0;
   box-sizing: border-box;
 }
-
-/* line 960, ../sass/mbj-ui.scss */
+/* line 835, ../sass/mbj-ui.scss */
 .mbj-form input[type=text]:focus,
 .mbj-form input[type=password]:focus,
 .mbj-form input[type=email]:focus {
@@ -848,8 +873,7 @@ Not advised to edit stuff below this line
           transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }
 
-/* .formoid-default-skyblue color scheme end */
-/* line 979, ../sass/mbj-ui.scss */
+/* line 846, ../sass/mbj-ui.scss */
 .mbj-footer {
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 100%;
@@ -862,25 +886,22 @@ Not advised to edit stuff below this line
   opacity: 1;
   font-size: 0.75rem;
   text-align: center;
-  /*background: linear-gradient(135deg, #222229 47%,#37373e 100%);*/
   color: rgba(255, 255, 255, 0.2);
   position: absolute;
   bottom: 0%;
   width: 100%;
 }
-
-/* line 998, ../sass/mbj-ui.scss */
+/* line 863, ../sass/mbj-ui.scss */
 .mbj-footer a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.4);
 }
-
-/* line 1003, ../sass/mbj-ui.scss */
+/* line 868, ../sass/mbj-ui.scss */
 .mbj-footer p {
-  margin: 1em 0;
+  margin: 1rem 0;
 }
 
-/* line 1007, ../sass/mbj-ui.scss */
+/* line 873, ../sass/mbj-ui.scss */
 .slider_h3 {
   color: #cccccc;
   font-size: 0.5rem;
@@ -888,7 +909,7 @@ Not advised to edit stuff below this line
   line-height: 0.6rem;
 }
 
-/* line 1014, ../sass/mbj-ui.scss */
+/* line 880, ../sass/mbj-ui.scss */
 .slider_div {
   line-height: 0.7rem;
   height: 100% !important;
@@ -912,12 +933,12 @@ Not advised to edit stuff below this line
           align-items: flex-start;
 }
 
-/* line 1024, ../sass/mbj-ui.scss */
+/* line 890, ../sass/mbj-ui.scss */
 .slider_image {
   margin-bottom: 0.5rem;
 }
 
-/* line 1028, ../sass/mbj-ui.scss */
+/* line 894, ../sass/mbj-ui.scss */
 #slider_components {
   display: block;
   display: -webkit-box;
@@ -935,31 +956,28 @@ Not advised to edit stuff below this line
           align-items: center;
 }
 
-/* line 1035, ../sass/mbj-ui.scss */
+/* line 901, ../sass/mbj-ui.scss */
 .footer-header-strip {
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
   -webkit-box-align: center;
+  -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
   background-color: #37383d;
   font-size: 0.75rem;
-  /* height: 3vh; */
   line-height: 2rem;
   border-bottom: 1px solid #282828;
   box-sizing: border-box;
   background: #4a4b51;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #4a4b51), color-stop(100%, #2c2c30));
   background: -webkit-linear-gradient(top, #4a4b51 0%, #2c2c30 100%);
   background: linear-gradient(to bottom, #4a4b51 0%, #2c2c30 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4a4b51', endColorstr='#2c2c30',GradientType=0 );
   cursor: pointer;
 }
 
-/* line 1056, ../sass/mbj-ui.scss */
+/* line 914, ../sass/mbj-ui.scss */
 .footer-header-strip-title {
   color: #dc5214;
   text-align: left;
@@ -967,7 +985,7 @@ Not advised to edit stuff below this line
   padding-left: 3%;
 }
 
-/* line 1063, ../sass/mbj-ui.scss */
+/* line 921, ../sass/mbj-ui.scss */
 .footer-header-strip-counter {
   color: #c09853;
   text-align: right;
@@ -975,7 +993,7 @@ Not advised to edit stuff below this line
   padding-right: 3%;
 }
 
-/* line 1070, ../sass/mbj-ui.scss */
+/* line 928, ../sass/mbj-ui.scss */
 .footer-signup-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -985,18 +1003,7 @@ Not advised to edit stuff below this line
   width: 100%;
 }
 
-/* line 1076, ../sass/mbj-ui.scss */
-button#footer-signup {
-  background-color: #fe8630;
-  border: none;
-  border-radius: 0 3px 3px 0;
-  color: #fff;
-  font-family: museo;
-  width: 40%;
-  text-align: left;
-}
-
-/* line 1086, ../sass/mbj-ui.scss */
+/* line 936, ../sass/mbj-ui.scss */
 #mbj-footer-logo {
   width: 15%;
   display: -webkit-box;
@@ -1009,12 +1016,12 @@ button#footer-signup {
           align-items: center;
 }
 
-/* line 1092, ../sass/mbj-ui.scss */
+/* line 942, ../sass/mbj-ui.scss */
 img#footer-logo {
   width: 100%;
 }
 
-/* line 1096, ../sass/mbj-ui.scss */
+/* line 946, ../sass/mbj-ui.scss */
 #mbj-footer-cta {
   width: 85%;
   display: -webkit-box;
@@ -1033,7 +1040,7 @@ img#footer-logo {
   line-height: 1.5rem;
 }
 
-/* line 1105, ../sass/mbj-ui.scss */
+/* line 955, ../sass/mbj-ui.scss */
 #mbj-footer-cta-sub {
   border: 0.5vh solid #222;
   background-color: #222 !important;
@@ -1050,7 +1057,7 @@ img#footer-logo {
   display: flex;
 }
 
-/* line 1114, ../sass/mbj-ui.scss */
+/* line 964, ../sass/mbj-ui.scss */
 .footer-cta-title {
   font-size: 0.7rem;
   padding-left: 0.25rem;
@@ -1058,18 +1065,18 @@ img#footer-logo {
   width: 50%;
 }
 
-/* line 1121, ../sass/mbj-ui.scss */
+/* line 971, ../sass/mbj-ui.scss */
 #splash-fade {
   pointer-events: none;
 }
 
-/* line 1125, ../sass/mbj-ui.scss */
+/* line 975, ../sass/mbj-ui.scss */
 .form-checkbox {
   font-size: 0.7rem !important;
   color: #a9a9a9;
 }
 
-/* line 1130, ../sass/mbj-ui.scss */
+/* line 980, ../sass/mbj-ui.scss */
 .frosted-overlay {
   width: 96%;
   height: 86%;
@@ -1095,21 +1102,21 @@ img#footer-logo {
   border-bottom: 1rem ridge rgba(255, 255, 255, 0.05);
 }
 
-/* line 1154, ../sass/mbj-ui.scss */
+/* line 1004, ../sass/mbj-ui.scss */
 #main_container {
   background-color: rgba(40, 40, 60, 0.7);
   box-shadow: inset 0 0 12rem rgba(165, 225, 255, 0.6);
   position: relative;
 }
 
-/* line 1160, ../sass/mbj-ui.scss */
+/* line 1010, ../sass/mbj-ui.scss */
 #slider_components * h3 {
   text-shadow: 0px 0px 3px #000000 !important;
   font-size: 0.8rem;
   line-height: 0.9rem;
 }
 
-/* line 1166, ../sass/mbj-ui.scss */
+/* line 1016, ../sass/mbj-ui.scss */
 img.grippy {
   width: auto;
   height: 50%;
@@ -1117,12 +1124,105 @@ img.grippy {
   margin-left: 2%;
 }
 
-/* line 1173, ../sass/mbj-ui.scss */
+/* line 1023, ../sass/mbj-ui.scss */
 .newcount {
   -webkit-animation: newcountglow 1s 1 linear;
   animation: newcountglow 1s 1 linear;
 }
 
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Legacy modal styles
+ * ░░░░▒▒▓▓
+*/
+/* line 1040, ../sass/mbj-ui.scss */
+#mbj-youvewon-init {
+  height: 399px;
+  background-color: black;
+  background-image: url("../img/youcouldvewon.png");
+  position: relative;
+  background-repeat: no-repeat;
+}
+
+/* line 1049, ../sass/mbj-ui.scss */
+#mbj-notification-youve-won {
+  max-width: none;
+  width: 343px;
+  padding: 0px;
+  display: block;
+  position: relative;
+}
+
+/* line 1057, ../sass/mbj-ui.scss */
+#mbj-label-init-username {
+  float: left;
+  color: white;
+  background: black;
+  font-size: 8pt;
+  font-family: Arial;
+  width: 80px;
+  text-align: center;
+}
+
+/* line 1067, ../sass/mbj-ui.scss */
+#mbj-field-init-username {
+  float: left;
+  padding-right: 5px;
+  margin-top: 0px;
+}
+/* line 1072, ../sass/mbj-ui.scss */
+#mbj-field-init-username #mbj_form_u {
+  width: 120px;
+  background-color: silver;
+  float: left;
+  border-color: black;
+  border-width: 3px;
+}
+
+/* line 1082, ../sass/mbj-ui.scss */
+form.mbj-form button.submit {
+  height: 24px;
+  margin-top: 0px;
+  float: right;
+  background: white;
+}
+/* line 1088, ../sass/mbj-ui.scss */
+form.mbj-form button.submit span {
+  color: black;
+}
+/* line 1093, ../sass/mbj-ui.scss */
+form.mbj-form input,
+form.mbj-form select {
+  -webkit-transition: background-color 0.2s;
+          transition: background-color 0.2s;
+}
+
+/* line 1099, ../sass/mbj-ui.scss */
+#mbj-onboard-buttons {
+  margin-left: 10px;
+  position: absolute;
+  bottom: 4px;
+}
+
+/* line 1106, ../sass/mbj-ui.scss */
+.mbj-aside,
+.mbj-form-label {
+  color: #a9a9a9 !important;
+}
+
+/* line 1111, ../sass/mbj-ui.scss */
+.btn-location {
+  margin-top: 0 !important;
+  height: inherit;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Animations    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
 @-webkit-keyframes newcountglow {
   0% {
     text-shadow: 0px 0px 0px #c09853;
@@ -1167,92 +1267,6 @@ img.grippy {
     color: #c09853;
   }
 }
-/*
- * ░░░░▒▒▓▓
- * ░░░░▒▒▓▓    Legacy modal styles
- * ░░░░▒▒▓▓
-*/
-/* line 1716, ../sass/mbj-ui.scss */
-#mbj-youvewon-init {
-  height: 399px;
-  background-color: black;
-  background-image: url("../img/youcouldvewon.png");
-  position: relative;
-  background-repeat: no-repeat;
-}
-
-/* line 1725, ../sass/mbj-ui.scss */
-#mbj-notification-youve-won {
-  max-width: none;
-  width: 343px;
-  padding: 0px;
-  display: block;
-  position: relative;
-}
-
-/* line 1733, ../sass/mbj-ui.scss */
-#mbj-label-init-username {
-  float: left;
-  color: white;
-  background: black;
-  font-size: 8pt;
-  font-family: Arial;
-  width: 80px;
-  text-align: center;
-}
-
-/* line 1743, ../sass/mbj-ui.scss */
-#mbj-field-init-username {
-  float: left;
-  padding-right: 5px;
-  margin-top: 0px;
-}
-/* line 1748, ../sass/mbj-ui.scss */
-#mbj-field-init-username #mbj_form_u {
-  width: 120px;
-  background-color: silver;
-  float: left;
-  border-color: black;
-  border-width: 3px;
-}
-
-/* line 1758, ../sass/mbj-ui.scss */
-form.mbj-form button.submit {
-  height: 24px;
-  margin-top: 0px;
-  float: right;
-  background: white;
-}
-/* line 1764, ../sass/mbj-ui.scss */
-form.mbj-form button.submit span {
-  color: black;
-}
-/* line 1769, ../sass/mbj-ui.scss */
-form.mbj-form input,
-form.mbj-form select {
-  -webkit-transition: background-color 0.2s;
-          transition: background-color 0.2s;
-}
-
-/* line 1775, ../sass/mbj-ui.scss */
-#mbj-onboard-buttons {
-  margin-left: 10px;
-  position: absolute;
-  bottom: 4px;
-}
-
-/* line 1782, ../sass/mbj-ui.scss */
-.mbj-aside,
-.mbj-form-label {
-  color: #a9a9a9 !important;
-}
-
-/* line 1787, ../sass/mbj-ui.scss */
-.btn-location {
-  margin-top: 0 !important;
-  height: inherit;
-}
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
  * ░░░░▒▒▓▓                                    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
@@ -1266,12 +1280,12 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 1815, ../sass/mbj-ui.scss */
+  /* line 1238, ../sass/mbj-ui.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 1820, ../sass/mbj-ui.scss */
+  /* line 1243, ../sass/mbj-ui.scss */
   #modal-content {
     zoom: 2;
     width: inherit;
@@ -1283,12 +1297,12 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (orientation: landscape) {
-  /* line 1837, ../sass/mbj-ui.scss */
+  /* line 1260, ../sass/mbj-ui.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 1841, ../sass/mbj-ui.scss */
+  /* line 1264, ../sass/mbj-ui.scss */
   #modal-content {
     width: 456px;
   }
@@ -1299,7 +1313,7 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (min-width: 600px) and (orientation: portrait) {
-  /* line 1857, ../sass/mbj-ui.scss */
+  /* line 1280, ../sass/mbj-ui.scss */
   #modal-content {
     width: 456px;
   }

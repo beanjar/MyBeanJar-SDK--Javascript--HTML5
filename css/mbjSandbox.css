@@ -2,7 +2,10 @@
 /*//// SCSS variable pile ////*/
 /* color scheme */
 /* TYPOGRAPHY */
-@font-face {}
+@font-face {
+  font-family: Museo;
+  src: url(../font/Museo300.woff);
+}
 /* line 17, ../sass/mbjSandbox.scss */
 .btn-sandbox {
   border-radius: 4px;

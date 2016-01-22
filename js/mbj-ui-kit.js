@@ -381,8 +381,16 @@ MbjModal.prototype = {
         // Map buttons and assign handlers
         var backButton      = document.getElementById('back-modal-' + this.uid);
         var closeButton     = document.getElementById('close-modal-' + this.uid);
-        var locationButton  = document.getElementById('btn-geolocator-' + this.uid);
         var registerButton  = document.getElementById('mbj-register-button-' + this.uid);
+        
+        // Only display "Get Location" button if content served over HTTPS
+        if (location.protocol === 'https:') {
+            var locationButton  = document.getElementById('btn-geolocator-' + this.uid);
+
+            locationButton.addEventListener('click', function(){
+                MyBeanJar.GetLocation.bind(this)(this.StoreLocation);
+            }.bind(this));
+        }
 
         backButton.addEventListener('click', function(){
             this.lastView();
@@ -390,10 +398,6 @@ MbjModal.prototype = {
 
         closeButton.addEventListener('click', function(){
             this.SelfDestruct();
-        }.bind(this));
-
-        locationButton.addEventListener('click', function(){
-            MyBeanJar.GetLocation.bind(this)(this.StoreLocation);
         }.bind(this));
 
         registerButton.addEventListener('click', function(){

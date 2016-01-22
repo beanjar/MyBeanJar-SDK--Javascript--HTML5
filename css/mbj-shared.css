@@ -1,4 +1,7 @@
 /*//// SCSS variable pile ////*/
 /* color scheme */
 /* TYPOGRAPHY */
-@font-face {}
+@font-face {
+  font-family: Museo;
+  src: url(../font/Museo300.woff);
+}
