@@ -1,41 +1,41 @@
 /* *
  *                                                                                                                        
- *       ************* **********                                            
- *       **      *    ****  *** ***                                           
+ *        ************ **********                                            
+ *       **      *    **** **** ***                                           
  *       **   **   **  **   **   **                                           
  *       **   **   **   *   **   **                                           
  *       **   **   **   *   **   **                                           
  *       **   **   **   *   **   **                                           
  *       **   **   **   **   *   **                                           
- *       ********************    **                                           
+ *       *******************     **                                           
  *       **           ********   **                                           
  *       **    ****    ***   *   **                                           
  *       **    *****   ****     **                                            
- *       **    *****   *************   ********** *************               
+ *       **    *****   *************   **********  ************               
  *       **    *****   ****        *****        ***           **              
- *       **    ***    ***    ****   ***   ****   **    ****    **             
- *       **           ***    ****    *    ****    *    ****    ***            
- *       **    ****    **    ****   **   +****    *    ****    ***            
- *       **    *****   **     **   *****          *    ****    ***            
- *       **    *****   **       *******   ****    *    ****    ***            
- *       **    *****   **    ****    *    ****    *    ****    ***            
- *       **    *****   **    ****   **    ****    *    ****    ***            
- *       **    ***    ****    **   ****    **    **    ****    ***            
- *       **+*     ****  ****   *********      *****  ******  ***             
- *        *********    ******************    ******* **   *****              
- *                   ***+.   ..++*****    **    **     **    ***             
- *                   **+.    ....+***    ****    *    *****   ***            
- *                  ***..    ...+++**    ****    *    *****    **            
- *                  **+..    ....++*******       *    **********             
- *                 ***..     ....++***    **     *    ***   **               
+ *       **    ***    ***     **    **    ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    **             
+ *       **    ****    **    ****    ****+****    *    ****    **             
+ *       **    *****   **          ****           *    ****    **             
+ *       **    *****   **    *********    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    ***    ****    **   ****    **    **    ****    **             
+ *       **+*     ****  ****      ******       ****   *****   **             
+ *         ********    ****************************************              
+ *                   ***+......++******         **           ***             
+ *                   **+.. ......+***    ****    *    ****    ***            
+ *                  ***..   ....+++**    ****    *    *****    **            
+ *                  **+..   .....++**********    *    **********             
+ *                 ***..    .....++***           *    ***   **               
  *             *****...     ....+++**    ****    *    ***                    
  *           ***++...     .....++++**    ****    *    ***                    
  *          ***+..       ....+++++***    ****    *    ***                    
- *          **+...    ......+++++*****          **    ***                    
- *          **+..........++++++****  *****  *******  ***                     
- *           ***++.....++++++****       ******   ******                      
+ *          **+...    ......+++++*****    **    **    ***                    
+ *          **+..........++++++****  ***      *****  ***                     
+ *           ***++.....++++++****       ******    ****                       
  *            *****+++++++*****                                              
- *               ***********  
+ *               **********  
  *
  *
  *
@@ -72,7 +72,7 @@
 
 
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    API Constants
  * ░░░░▒▒▓▓
@@ -85,7 +85,7 @@ var STATUS_FAIL  = "Status fail";
 
 
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    High-level API methods  
  * ░░░░▒▒▓▓
@@ -112,10 +112,10 @@ function delete_bean(username, password, beankey, callback) {
 
 function get_apps(username, password, limit_value, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
- * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓    Password optional at present. NOTE: This may change in the future.
  * ░░░░▒▒▓▓
 */
 
@@ -160,10 +160,10 @@ function get_beans(username, password, limit_value, sort_by, callback) {
 
 function get_categories(username, password, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
- * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓    Password optional at present. NOTE: This may change in the future.
  * ░░░░▒▒▓▓
 */
 
@@ -193,10 +193,10 @@ function get_locations_for_sponsor(username,password,sponsorkey,callback){
 
 function get_sponsors(username, password, limit_value, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
- * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓    Password optional at present. NOTE: This may change in the future.
  * ░░░░▒▒▓▓
 */
 
@@ -236,7 +236,7 @@ function reedem_bean(username, password, beankey, callback) {
 
 function register_user(username, password, email, zipcode, lat, lon, categories, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
  * ░░░░▒▒▓▓    Issues have been reported with use of lat/long data
@@ -278,7 +278,7 @@ function validate_user(username,callback){
 
 
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    API request-builder and response handler
  * ░░░░▒▒▓▓    
@@ -359,7 +359,7 @@ function createCORSRequest(method, url) {
 
 
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    API response parsers
  * ░░░░▒▒▓▓    

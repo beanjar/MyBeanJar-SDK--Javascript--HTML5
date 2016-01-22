@@ -1,41 +1,41 @@
 /* *
  *                                                                                                                        
- *       ************* **********                                            
- *       **      *    ****  *** ***                                           
+ *        ************ **********                                            
+ *       **      *    **** **** ***                                           
  *       **   **   **  **   **   **                                           
  *       **   **   **   *   **   **                                           
  *       **   **   **   *   **   **                                           
  *       **   **   **   *   **   **                                           
  *       **   **   **   **   *   **                                           
- *       ********************    **                                           
+ *       *******************     **                                           
  *       **           ********   **                                           
  *       **    ****    ***   *   **                                           
  *       **    *****   ****     **                                            
- *       **    *****   *************   ********** *************               
+ *       **    *****   *************   **********  ************               
  *       **    *****   ****        *****        ***           **              
- *       **    ***    ***    ****   ***   ****   **    ****    **             
- *       **           ***    ****    *    ****    *    ****    ***            
- *       **    ****    **    ****   **   +****    *    ****    ***            
- *       **    *****   **     **   *****          *    ****    ***            
- *       **    *****   **       *******   ****    *    ****    ***            
- *       **    *****   **    ****    *    ****    *    ****    ***            
- *       **    *****   **    ****   **    ****    *    ****    ***            
- *       **    ***    ****    **   ****    **    **    ****    ***            
- *       **+*     ****  ****   *********      *****  ******  ***             
- *        *********    ******************    ******* **   *****              
- *                   ***+.   ..++*****    **    **     **    ***             
- *                   **+.    ....+***    ****    *    *****   ***            
- *                  ***..    ...+++**    ****    *    *****    **            
- *                  **+..    ....++*******       *    **********             
- *                 ***..     ....++***    **     *    ***   **               
+ *       **    ***    ***     **    **    ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    **             
+ *       **    ****    **    ****    ****+****    *    ****    **             
+ *       **    *****   **          ****           *    ****    **             
+ *       **    *****   **    *********    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    ***    ****    **   ****    **    **    ****    **             
+ *       **+*     ****  ****      ******       ****   *****   **             
+ *         ********    ****************************************              
+ *                   ***+......++******         **           ***             
+ *                   **+.. ......+***    ****    *    ****    ***            
+ *                  ***..   ....+++**    ****    *    *****    **            
+ *                  **+..   .....++**********    *    **********             
+ *                 ***..    .....++***           *    ***   **               
  *             *****...     ....+++**    ****    *    ***                    
  *           ***++...     .....++++**    ****    *    ***                    
  *          ***+..       ....+++++***    ****    *    ***                    
- *          **+...    ......+++++*****          **    ***                    
- *          **+..........++++++****  *****  *******  ***                     
- *           ***++.....++++++****       ******   ******                      
+ *          **+...    ......+++++*****    **    **    ***                    
+ *          **+..........++++++****  ***      *****  ***                     
+ *           ***++.....++++++****       ******    ****                       
  *            *****+++++++*****                                              
- *               ***********  
+ *               **********  
  *
  *
  *
@@ -125,25 +125,24 @@ var MyBeanJarController = function() {
         if (sessionStorage.getItem("mbjUserLoggedIn") != null) {
             this.userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
         }      
-    } 
+    }
+
+    // If connection is insecure, disable the use of location services
+    if (location.protocol !== 'https:') {
+        this.Log('Connection is insecure. Disabling the use of location services.');
+        this.config.offerLocation = false;
+    }
 }
 
 MyBeanJarController.prototype = {
 
-    /*
-     * ░░░░▒▒▓▓
-     * ░░░░▒▒▓▓    MyBeanJar controller object properties    
-     * ░░░░▒▒▓▓
+    /* *
+     * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     * ░░░░▒▒▓▓    MyBeanJar default settings    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+     * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
     */
     
-    constructor: MyBeanJarController,
-    categories: {},                                             // An array of bean categories, to be populated with data fetched from MyBeanJar servers
-    queuedBeans: {},                                            // Beans queued to be fetched from server
-    username: {},                                               // The username of the logged-in user (if present)
-    userLoggedIn: false,                                        // User's log-in state
-    
-
-    config: {                                                   // Default settings
+    config: { 
 
         /* * * * * * * * * * * * * * * * * * * * * * * *\
         *                                               *
@@ -156,10 +155,35 @@ MyBeanJarController.prototype = {
         hardUser:       'ryanfister3',                              // Username for use with API calls not related to actual user
         hardPass:       '40f4d87250c70278580bc8fb47e5caaa',         // Password for use with API calls not related to actual user
         appID:          '4e732ced3463d06de0ca9a15b6153677',         // The app key to be used to make API requests (visit http://mybeanjar.com for details)
-        debugMode:      true,                                       // Enable/disable debug logging
-        rewardLogin:    true                                        // Enable/disable awards for user log-ins
+        debugMode:      false,                                      // Enable/disable debug logging
+        rewardLogin:    false,                                      // Enable/disable awards for user log-ins
+        offerLocation:  false                                       // Enable/disable the option to use location during registration (NOTE: CURRENTLY DISABLED ON SERVER)
 
     },
+
+    /* ------------------------------------------------------------------------------------------------------------------------------------------------------------------- */ 
+
+
+
+    /* *
+     * ░░░░▒▒▓▓
+     * ░░░░▒▒▓▓    MyBeanJar controller object properties    
+     * ░░░░▒▒▓▓
+    */
+    
+    constructor: MyBeanJarController,
+    categories: {},                                             // An array of bean categories, to be populated with data fetched from MyBeanJar servers
+    queuedBeans: {},                                            // Beans queued to be fetched from server
+    username: {},                                               // The username of the logged-in user (if present)
+    userLoggedIn: false,                                        // User's log-in state
+
+
+
+    /* *
+     * ░░░░▒▒▓▓
+     * ░░░░▒▒▓▓    MyBeanJar controller object methods    
+     * ░░░░▒▒▓▓
+    */
 
     // Gets latest category list from MyBeanJar servers
     FetchCategories: function() {
@@ -383,8 +407,8 @@ MbjModal.prototype = {
         var closeButton     = document.getElementById('close-modal-' + this.uid);
         var registerButton  = document.getElementById('mbj-register-button-' + this.uid);
         
-        // Only display "Get Location" button if content served over HTTPS
-        if (location.protocol === 'https:') {
+        // Only display "Get Location" button if enabled and if content served over HTTPS
+        if (MyBeanJar.config.offerLocation == true) {
             var locationButton  = document.getElementById('btn-geolocator-' + this.uid);
 
             locationButton.addEventListener('click', function(){
@@ -939,7 +963,7 @@ var modalContent = {
         var locationButtonString;
         
         // If site is secure, include button to get location from browser
-        if (location.protocol === 'https:') {
+        if (MyBeanJar.config.offerLocation == true) {
             locationButtonString = '                    <div class="geolocator-block" id="geolocator-block-' + modal.uid + '">'
                                 +  '                        <span class="mbj-form-label">&nbsp;or&nbsp;</span>'
                                 +  '                        <button type="button" class="btn-mbj green btn-location" id="btn-geolocator-' + modal.uid + '">'
