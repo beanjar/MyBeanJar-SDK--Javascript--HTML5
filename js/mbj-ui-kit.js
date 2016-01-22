@@ -101,9 +101,6 @@
 
 var MyBeanJarController = function() {
     
-    // Assign unique ID based on current timestamp
-    this.FetchCategories();
-
     // Clear session storage if debug mode is active
     if (typeof this.config.debugMode != 'undefined') {
         if (this.config.debugMode == true) {
@@ -132,6 +129,16 @@ var MyBeanJarController = function() {
         this.Log('Connection is insecure. Disabling the use of location services.');
         this.config.offerLocation = false;
     }
+
+    // Send an alert if appID is not set
+    if (this.config.appID == '') {
+        this.Log('MyBeanJar app ID not set. Add a valid app ID to mbj-ui-kit.js');
+    }
+
+    // Fetch bean award categories from MyBeanJar servers
+    else {
+        this.FetchCategories();
+    }
 }
 
 MyBeanJarController.prototype = {
@@ -154,7 +161,7 @@ MyBeanJarController.prototype = {
 
         hardUser:       'ryanfister3',                              // Username for use with API calls not related to actual user
         hardPass:       '40f4d87250c70278580bc8fb47e5caaa',         // Password for use with API calls not related to actual user
-        appID:          '4e732ced3463d06de0ca9a15b6153677',         // The app key to be used to make API requests (visit http://mybeanjar.com for details)
+        appID:          '',                                         // The app key to be used to make API requests (visit http://mybeanjar.com for details)
         debugMode:      false,                                      // Enable/disable debug logging
         rewardLogin:    false,                                      // Enable/disable awards for user log-ins
         offerLocation:  false                                       // Enable/disable the option to use location during registration (NOTE: CURRENTLY DISABLED ON SERVER)
