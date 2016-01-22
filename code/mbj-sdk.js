@@ -1,41 +1,78 @@
-/*
-*
-*
-*       mbj-sdk.js
-*       
-*       MyBeanJar JavaScript SDK
-*
-*
-*       Single script SDK. Subsumes and replaces all other previous SDK scripts.
-*
-*
-*
+/* *
+ *                                                                             
+ *       ************* **********                                            
+ *       **      *    ****  *** ***                                           
+ *       **   **   **  **   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   **  **   **                                           
+ *       ********************   **                                           
+ *       **           ********   **                                           
+ *       **    ****    ***   *   **                                           
+ *       **    *****   ****     **                                            
+ *       **    *****   *************   ********** *************               
+ *       **    *****   ****        *****        ***           **              
+ *       **    ***    ***    ****   ***   ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    ***            
+ *       **    ****    **    ****   **   +****    *    ****    ***            
+ *       **    *****   **     **   *****          *    ****    ***            
+ *       **    *****   **    *  *******   ****    *    ****    ***            
+ *       **    *****   **    ****    *    ****    *    ****    ***            
+ *       **    *****   **    ****   **    ****    *    ****    ***            
+ *       **    ***    ****    **   ****    **    **    ****    ***            
+ *       **+      ****  ****   *********      *****  ******  ***             
+ *        +********    ******************    ******* **   *****              
+ *                   ***+.   ..++*****    **    **     **    ***             
+ *                   **+.    ....+***    ****    *    *****   ***            
+ *                  ***..    ...+++**    ****    *    *****    **            
+ *                  **+..    ....++*******  *    *    **********             
+ *                 ***..     ....++***    **     *    ***   **               
+ *             *****...     ....+++**    ****    *    ***                    
+ *           ***++...     .....++++**    ****    *    ***                    
+ *          ***+..       ....+++++***    ****    *    ***                    
+ *          **+...    ......+++++*****          **    ***                    
+ *          **+..........++++++****  *****  *******  ***                     
+ *           ***++.....++++++****       ******   ******                      
+ *            *****+++++++*****                                              
+ *               ***********      
+ *
+ *
+ *
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    mbj-sdk.js                 ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    MyBeanJar HTML / JS SDK    ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    Core Methods               ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * 
+ *
+ *  http://mybeanjar.com
+ *  https://github.com/beanjar
+ *
 */
 
 
 
-//
-//
-//      ---- (MBJRequest.js)
-//
-//
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    High-level request methods    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓    (MBJRequest.js)               ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
 
 
 
-//
-//  Hard-coded demo user
-//
-
-var tokenUser = {
-    user: "ryanfister3",
-    password: "40f4d87250c70278580bc8fb47e5caaa"
-};
 
 
-
-//
-//  API Environment variables
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    API Constants
+ * ░░░░▒▒▓▓
+*/
 
 var API_URL = "https://api.mybeanjar.com/json/services";
 var INTERNAL_SERVER_ERROR = "Internal Server Error";
@@ -44,9 +81,11 @@ var STATUS_FAIL  = "Status fail";
 
 
 
-//
-//  High-level API methods
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    High-level API methods  
+ * ░░░░▒▒▓▓
+*/
 
 function authenticate_user(username,password,callback) {
     var params = {
@@ -68,25 +107,13 @@ function delete_bean(username, password, beankey, callback) {
 }
 
 function get_apps(username, password, limit_value, callback) {
-    /*
-     *  should be this but atm we get apps for token user so we use password without md5
-     */
 
-//
-//  
-//  [recommendation]
-//  The password parameter should always be hashed.
-//
-//
-
-//
-//  
-//  [recommendation]
-//  If there is nothing sensitive contained within data returned by this method, user authentication should not be required
-//
-//
-
-
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    [NOTICE]
+ * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓
+*/
 
 //    var params = {
 //        username: username,
@@ -129,19 +156,12 @@ function get_beans(username, password, limit_value, sort_by, callback) {
 
 function get_categories(username, password, callback) {
 
-//
-//  
-//  [recommendation]
-//  The password parameter should always be hashed.
-//
-//
-
-//
-//  
-//  [recommendation]
-//  If there is nothing sensitive contained within data returned by this method, user authentication should not be required
-//
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    [NOTICE]
+ * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓
+*/
 
 //    var params = {
 //        username: username,
@@ -169,19 +189,12 @@ function get_locations_for_sponsor(username,password,sponsorkey,callback){
 
 function get_sponsors(username, password, limit_value, callback) {
 
-//
-//  
-//  [recommendation]
-//  The password parameter should always be hashed.
-//
-//
-
-//
-//  
-//  [recommendation]
-//  If there is nothing sensitive contained within data returned by this method, user authentication should not be required
-//
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    [NOTICE]
+ * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓
+*/
 
 //    var params = {
 //        username: username,
@@ -219,12 +232,12 @@ function reedem_bean(username, password, beankey, callback) {
 
 function register_user(username, password, email, zipcode, lat, lon, categories, callback) {
 
-//
-//  
-//  [recommendation]
-//  Request location data on client-side in human-readable format (e.g., city, state, ZIP, or building) and perform geocoding on server 
-//
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    [NOTICE]
+ * ░░░░▒▒▓▓    Issues have been reported with use of lat/long data
+ * ░░░░▒▒▓▓
+*/
 
     var params = {
         "username": username,
@@ -261,11 +274,13 @@ function validate_user(username,callback){
 
 
 
-//
-//  API call method
-//
-//  Sends data to server and prepares the respective callback.
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    API request-builder and response handler
+ * ░░░░▒▒▓▓    
+ * ░░░░▒▒▓▓    Prepares cross-original request and selects the appropriate callbacks
+ * ░░░░▒▒▓▓
+*/
 
 
 function request_to_api(callback, resource, method, params, url) {
@@ -340,11 +355,13 @@ function createCORSRequest(method, url) {
 
 
 
-//
-//  API response handlers
-//
-//  Manipulates and prepares data received from MyBeanJar API
-//
+/*
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    API response parsers
+ * ░░░░▒▒▓▓    
+ * ░░░░▒▒▓▓    Manipulates and prepares data received from MyBeanJar API
+ * ░░░░▒▒▓▓
+*/
 
 
 
@@ -379,7 +396,7 @@ function push_to_apps(apps, i) {
 
 function parse_apps_and_callback(data, callback) {  
     
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,apps);
         return;
@@ -397,7 +414,9 @@ function parse_apps_and_callback(data, callback) {
         parse_apps(apps);
         result = STATUS_SUCCESS;
         callback(result,apps);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,apps);
     }
@@ -421,7 +440,9 @@ function parse_authenticateuser_and_callback(data, callback){
     if (email != '') { 
     sessionStorage.setItem('email',email);
     $('#email').val(email);
-    } else {
+    } 
+
+    else {
         sessionStorage.removeItem('email') ;  	
     }
     var result;
@@ -429,7 +450,9 @@ function parse_authenticateuser_and_callback(data, callback){
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message,email);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
@@ -456,7 +479,7 @@ function parse_award(currentWinArray) {
 
 function parse_award_and_callback(data, callback) {
     
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,award);
         return;
@@ -477,7 +500,9 @@ function parse_award_and_callback(data, callback) {
         parse_award(award);
         result = STATUS_SUCCESS;
         callback(result,award);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,award);
     }
@@ -523,7 +548,7 @@ function push_to_beans(beans,i) {
 
 function parse_beans_and_callback(data, callback) {
     
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,beans);
         return;
@@ -541,7 +566,9 @@ function parse_beans_and_callback(data, callback) {
         parse_beans(beans);
         result = STATUS_SUCCESS;
         callback(result,beans);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,beans);
     }
@@ -584,7 +611,7 @@ function push_to_categories(categories, i) {
 
 function parse_categories_and_callback(data, callback) {
     
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,categories);
         return;
@@ -602,7 +629,9 @@ function parse_categories_and_callback(data, callback) {
         parse_categories(categories);
         result = STATUS_SUCCESS;
         callback(result,categories);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,categories);
     }
@@ -629,19 +658,15 @@ function parse_deletebean_and_callback(data, callback) {
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
 }
 
 
-//
-//  
-//  [question]
-//  What are the benefits of using built-in MD5 methods vs another library?
-//
-//
 
 var MD5 = function (string) {
  
@@ -848,7 +873,7 @@ var MD5 = function (string) {
 
 function parse_redeembean_and_callback(data, callback) {
     
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,message);
         return;
@@ -866,7 +891,9 @@ function parse_redeembean_and_callback(data, callback) {
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
@@ -892,7 +919,9 @@ function parse_register_and_callback(data, callback) {
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
@@ -902,13 +931,13 @@ function parse_register_and_callback(data, callback) {
 
 function parse_sendpassword_and_callback(data, callback) {
     
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
         result = INTERNAL_SERVER_ERROR;
         callback(result,winners);
         return;
     }
     
-    if(data == null || data == 'undefinied' || data == "" || data == "null"){
+    if (data == null || data == 'undefinied' || data == "" || data == "null"){
         result = STATUS_FAIL;
         callback(result,message);
         return;
@@ -927,7 +956,9 @@ function parse_sendpassword_and_callback(data, callback) {
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
@@ -954,7 +985,9 @@ function parse_sponsor_locations_and_callback(data, callback) {
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
@@ -1013,7 +1046,9 @@ function parse_sponsors_and_callback(data, callback) {
         parse_sponsors(sponsors);
         result = STATUS_SUCCESS;
         callback(result,sponsors);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,sponsors);
     }
@@ -1040,7 +1075,9 @@ function parse_validateuser_and_callback(data, callback) {
     if (status === 1) {
         result = STATUS_SUCCESS;
         callback(result,message);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,message);
     }
@@ -1094,7 +1131,9 @@ function parse_winners_and_callback(data, callback) {
         parse_winners(winners);
         result = STATUS_SUCCESS;
         callback(result,winners);
-    } else {
+    } 
+
+    else {
         result = STATUS_FAIL;
         callback(result,winners);
     }
