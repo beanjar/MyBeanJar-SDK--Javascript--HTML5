@@ -1,90 +1,168 @@
-/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
-|
-|   MyBeanJar UI Kit
-|
-|   The mussless and fussless way to get up and running with MyBeanJar!
-|
-|   This script contains a constructor for MyBeanJar modal objects that can be used to 
-|   prompt users for credentials, prompt them to register a new account, and award beans.
-|
-|   These modal objects handle the logic behind bean award events so you don't have to.
-|   Any time you want to award a bean to a user, simply call the mbjAddAwardBean() method
-|   and it will take care of the rest. If the user hasn't yet logged in, it will prompt them
-|   to do so. If they have logged in, it will request a new bean for that user from the 
-|   MyBeanJar servers. That's it! Just attach that method to any events for which you would
-|   like a user to receive a bean and let this script handle the rest.
-|
-°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
+/* *
+ *                                                                             
+ *       ************* **********                                            
+ *       **      *    ****  *** ***                                           
+ *       **   **   **  **   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   **  **   **                                           
+ *       ********************   **                                           
+ *       **           ********   **                                           
+ *       **    ****    ***   *   **                                           
+ *       **    *****   ****     **                                            
+ *       **    *****   *************   ********** *************               
+ *       **    *****   ****        *****        ***           **              
+ *       **    ***    ***    ****   ***   ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    ***            
+ *       **    ****    **    ****   **   +****    *    ****    ***            
+ *       **    *****   **     **   *****          *    ****    ***            
+ *       **    *****   **    *  *******   ****    *    ****    ***            
+ *       **    *****   **    ****    *    ****    *    ****    ***            
+ *       **    *****   **    ****   **    ****    *    ****    ***            
+ *       **    ***    ****    **   ****    **    **    ****    ***            
+ *       **+      ****  ****   *********      *****  ******  ***             
+ *        +********    ******************    ******* **   *****              
+ *                   ***+.   ..++*****    **    **     **    ***             
+ *                   **+.    ....+***    ****    *    *****   ***            
+ *                  ***..    ...+++**    ****    *    *****    **            
+ *                  **+..    ....++*******  *    *    **********             
+ *                 ***..     ....++***    **     *    ***   **               
+ *             *****...     ....+++**    ****    *    ***                    
+ *           ***++...     .....++++**    ****    *    ***                    
+ *          ***+..       ....+++++***    ****    *    ***                    
+ *          **+...    ......+++++*****          **    ***                    
+ *          **+..........++++++****  *****  *******  ***                     
+ *           ***++.....++++++****       ******   ******                      
+ *            *****+++++++*****                                              
+ *               ***********      
+ *
+ *
+ *
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    MyBeanJar HTML / JS SDK    ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    UI Kit                     ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░
+ * 
+ *
+ *  http://mybeanjar.com
+ *  https://github.com/beanjar
+ *
+ *
+ *  The mussless and fussless way to get up and running with MyBeanJar!         
+ *
+ *  This toolkit contains a constructor for MyBeanJar modal objects that 
+ *  can be used to prompt users for credentials, prompt them to register
+ *  a new account, and award beans. 
+ *
+ *  These modal objects handle the logic behind bean award events so you
+ *  don't have to. Any time you want to award a bean to a user, simply 
+ *  call the MyBeanJar.AwardBean() method and it will take care of the 
+ *  rest. If the user hasn't yet logged in, it will prompt them to do so.
+ *  If they have logged in, it will request a new bean for that user from
+ *  the MyBeanJar servers. 
+ *
+ *  That's it! Just attach that method to any events for which you would
+ *  like a user to receive a bean and let this script handle the rest.
+ *
+*/
 
-    
-
-
-
-    /*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
-    |
-    |  Basic variables
-    |
-    °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
-
-    // var queuedBeans;
-    // var loginStatusFlashing;
-    // var categories = new Array();
-
-    
-    
-
-
-    /*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
-    |
-    |  Default configuration settings
-    |
-    °`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
-
-    // var config = {
-    //     hardUser: 'ryanfister3',                            // username for use with API calls not related to actual user
-    //     hardPass: '40f4d87250c70278580bc8fb47e5caaa',       // password for use with API calls not related to actual user
-    //     debugMode: true,                                    // Enable/disable debug logging
-    //     rewardLogin: true                                   // Enable/disable awards for user log-ins
-    // }
 
 
 
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                                 ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Constructors & Prototypes    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                 ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/ 
+
+
+
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    MyBeanJar controller constructor 
+ * ░░░░▒▒▓▓
+ *
+ *  The MyBeanJar controller object contains system-wide references and 
+ *  support methods.
+ *
+ *  One instance is created on load.
+ *
+*/
 
 var MyBeanJarController = function() {
     
     // Assign unique ID based on current timestamp
     this.FetchCategories();
 
+    // Clear session storage if debug mode is active
+    if (typeof this.config.debugMode != 'undefined') {
+        if (this.config.debugMode == true) {
+            sessionStorage.clear();
+        }
+    }
+
+    // Sync MyBeanJar object with session data, if present
+    else {
+        
+        if (sessionStorage.getItem("queuedBeans") != null) {
+            this.queuedBeans = sessionStorage.getItem("queuedBeans");
+        }
+
+        if (sessionStorage.getItem("username") != null) {
+            this.username = sessionStorage.getItem("username");
+        }
+
+        if (sessionStorage.getItem("mbjUserLoggedIn") != null) {
+            this.userLoggedIn = sessionStorage.getItem("mbjUserLoggedIn");
+        }      
+    } 
 }
 
-
-
 MyBeanJarController.prototype = {
+
+    /*
+     * ░░░░▒▒▓▓
+     * ░░░░▒▒▓▓    MyBeanJar controller object properties    
+     * ░░░░▒▒▓▓
+    */
     
-    /* * *
-     * MyBeanJar controller object properties
-     */
-
     constructor: MyBeanJarController,
-    categories: {},                                // An array of bean categories, to be populated with data fetched from MyBeanJar servers
-    queuedBeans: {},                                         // Beans queued to be fetched from server
-    config: {                                               // Default settings
+    categories: {},                                             // An array of bean categories, to be populated with data fetched from MyBeanJar servers
+    queuedBeans: {},                                            // Beans queued to be fetched from server
+    username: {},                                               // The username of the logged-in user (if present)
+    userLoggedIn: false,                                        // User's log-in state
+    
 
-        hardUser: 'ryanfister3',                              // username for use with API calls not related to actual user
-        hardPass: '40f4d87250c70278580bc8fb47e5caaa',         // password for use with API calls not related to actual user
-        debugMode: true,                                      // Enable/disable debug logging
-        rewardLogin: true                                     // Enable/disable awards for user log-ins
+    config: {                                                   // Default settings
+
+        /* * * * * * * * * * * * * * * * * * * * * * * *\
+        *                                               *
+        *   TOTALLY EDITABLE!                           *
+        *                                               *
+        *   Edit as needed to suit your application.    *
+        *                                               *
+        \* * * * * * * * * * * * * * * * * * * * * * * */
+
+        hardUser:       'ryanfister3',                              // Username for use with API calls not related to actual user
+        hardPass:       '40f4d87250c70278580bc8fb47e5caaa',         // Password for use with API calls not related to actual user
+        appID:          '4e732ced3463d06de0ca9a15b6153677',         // The app key to be used to make API requests (visit http://mybeanjar.com for details)
+        debugMode:      true,                                       // Enable/disable debug logging
+        rewardLogin:    true                                        // Enable/disable awards for user log-ins
 
     },
 
+    // Gets latest category list from MyBeanJar servers
     FetchCategories: function() {
         get_categories(this.config.hardUser, this.config.hardPass, function(result, categories){
             this.categories = categories;
         }.bind(this));
     },
 
-    // Accepts a function as a parameter. This function will get passed to the getCurrentPosition method.
+    // Accepts a function as a parameter. This supplied function will get passed to the getCurrentPosition method.
     GetLocation: function(fx) {
     
         if (navigator.geolocation) {
@@ -92,7 +170,31 @@ MyBeanJarController.prototype = {
         } 
 
         else {
-            mbjDebug("Geolocation is not supported by this browser");
+            MyBeanJar.Log("Geolocation is not supported by this browser");
+        }
+    },
+
+    // Optional debug log. Used to process debug log messages. (Enable/disable from MyBeanJar.config.debugMode)
+    Log: function(message){
+        if (typeof this.config.debugMode != 'undefined') {
+            if (this.config.debugMode == true) {
+                console.log(message);
+            }
+        }
+    },
+
+    // Locally grants the user a queued bean (to be exchanged for an actual bean from the MyBeanJar service) and instantiates a new modal to process that queued bean
+    AwardBean: function() {
+        
+        // Get any queued Beans in session storage, add a new one, save new total to session storage
+        this.queuedBeans = sessionStorage.getItem("queuedBeans");
+        this.queuedBeans++;
+        sessionStorage.setItem("queuedBeans", this.queuedBeans);
+        MyBeanJar.Log("Queued Bean count: " + this.queuedBeans);
+
+        // If no other modal is present, attempt to get award
+        if (!jQuery( '.mbj-modal' ).length) {
+            var modal = new MbjModal();
         }
 
     }
@@ -101,20 +203,21 @@ MyBeanJarController.prototype = {
 
 
 
-/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
-|
-|   MbjModal constructor
-|   
-|   This constructor accepts an optional parameter that is used to determine the type of modal generated.
-|       
-|       'login':        The login/registration modal
-|       'awardbean':    The bean award modal (containing a freshly minted bean)
-|
-|   If no parameter is supplied, a bean award modal will be generated. If the user has not logged into MyBeanJar,
-|   the modal will fall back to a login/registration modal instead.
-|
-|
-°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
+
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    MyBeanJar modal constructor 
+ * ░░░░▒▒▓▓
+ *
+ *  This constructor accepts an optional parameter (variant) that is used to determine the type of modal generated.
+ *       
+ *      'login':        The login/registration modal
+ *      'awardbean':    The bean award modal (containing a freshly minted bean)
+ *
+ *  If no parameter is supplied, a bean award modal will be generated. If the user has not logged into MyBeanJar,
+ *  the modal will fall back to a login/registration modal instead.
+ *
+*/
 
 var MbjModal = function(variant) {
     
@@ -130,6 +233,9 @@ var MbjModal = function(variant) {
     // Link modal object to its content
     this.payload = document.getElementById('mbj-modal-payload-' + this.uid);
 
+    // Link modal object to its payload's immediate container (used for dynamic resizing and repositioning)
+    this.payloadContainer = jQuery( this.payload ).parent()[0];
+
     // Overload checker
     // If no arguments are supplied, 
     if (arguments.length == 0 || variant == 'awardbean') {
@@ -141,13 +247,16 @@ var MbjModal = function(variant) {
 
 MbjModal.prototype = {
     
-    /* * *
-     * Modal object properties
-     */
+    /* *
+     * ░░░░▒▒▓▓
+     * ░░░░▒▒▓▓    Modal object properties  
+     * ░░░░▒▒▓▓
+    */
 
     constructor: MbjModal,
     uid: {},                            // The unique identifier of the modal (timestamp)
     payload: {},                        // The contents of the modal
+    payloadContainer: {},               // The parent div of the modal payload
     beanImage: {},                      // The URL for the bean award image
     timeout: {},                        // The timeout for  modal self-destruction
     loginStatusFlashing: false,         // The status of the login flasher (true = active)
@@ -160,15 +269,25 @@ MbjModal.prototype = {
 
 
 
-    /* * *
-     * Modal object methods
-     */
+    /* *
+     * ░░░░▒▒▓▓
+     * ░░░░▒▒▓▓    Modal object methods  
+     * ░░░░▒▒▓▓
+    */
 
     // Adds a modal container to the DOM 
     Spawn: function() {
+        
         var modal = this;
         jQuery( 'body' ).append( modalContent.frame(modal) );
+        
+        //  Modal repositioner listner  
+        window.addEventListener('resize', function(){
+            this.payloadContainer.style.maxHeight = document.documentElement.offsetHeight;
+        }.bind(this), false);
+
     },
+
 
     // Loads login view into modal
     LoadLoginView: function() {
@@ -198,9 +317,7 @@ MbjModal.prototype = {
 
         loginButton.addEventListener('click', function(){
             u = jQuery('#mbj_form_u', this.element).val();
-            //p = jQuery('#mbj_form_p', modal.element).val();
             this.SubmitAuthentication(u);
-            //mbjAttemptAuthenticate.bind(this, u)();//, p);
         }.bind(this));
         
         // Fade modal into view once loaded
@@ -210,6 +327,7 @@ MbjModal.prototype = {
         this.currentView = this.LoadLoginView;
     },
     
+
     // Loads bean award view into modal
     LoadAwardView: function() {
         var modal = this;
@@ -253,7 +371,6 @@ MbjModal.prototype = {
 
         // Load categories into content
         this.ParseCategories(categories);
-        //MbjLoadRegistrationView(categories);
 
         // Map buttons and assign handlers
         var backButton      = document.getElementById('back-modal-' + this.uid);
@@ -281,6 +398,7 @@ MbjModal.prototype = {
         this.currentView = this.LoadRegistrationView;
     },
 
+
     // Injects category selector into view
     ParseCategories: function(catArray) {
         if (typeof catArray != 'undefined') {
@@ -300,6 +418,7 @@ MbjModal.prototype = {
         jQuery( '#mbj-category-selector-' + this.uid).html( catSelect );
     },
 
+
     // Applies location data stored within modal object to registration fields
     ApplyLocation: function() {
         if (!jQuery.isEmptyObject(this.geolocation)) {
@@ -312,6 +431,7 @@ MbjModal.prototype = {
             jQuery('#geolocator-block-' + this.uid).html('<div class="notification-geolocator"><span>(Using Current Location)</span></div>');
         };
     },
+
 
     // Requests award bean from MyBeanJar
     AwardBean: function(){
@@ -334,25 +454,27 @@ MbjModal.prototype = {
                 
                 // If no other modal is present, execute request
                 if (!jQuery( '#mbj_modal' ).length) {
-                    mbjDebug("User logged in as " + u + " : " + p + ": " +mbjAppID +" Requesting award Bean");
-                    get_award(u, p, mbjAppID, function(result, award){
-                        mbjDebug('Award: ' + award);
-                        //!\\ BUILD IN FAILURE STATES
+                    MyBeanJar.Log("User logged in as " + u + " : " + p + ": " + MyBeanJar.config.appID +" Requesting award Bean");
+                    get_award(u, p, MyBeanJar.config.appID, function(result, award){
+                        MyBeanJar.Log('Award: ' + award);
                         this.beanImage = award.imageurl;
                         this.LoadAwardView();
                     }.bind(this));
                     MyBeanJar.queuedBeans = sessionStorage.getItem("queuedBeans");
                     MyBeanJar.queuedBeans--;
                     sessionStorage.setItem("queuedBeans", MyBeanJar.queuedBeans);
-                    mbjDebug(MyBeanJar.queuedBeans + " queued Beans remaining...");
+                    MyBeanJar.Log(MyBeanJar.queuedBeans + " queued Beans remaining...");
                 }
             }
 
-        } else {
+        } 
+
+        else {
             // If user isn't logged in, prompt them to do so or to register
             this.LoadLoginView();
         }
     },
+
 
     // Fade the modal HTMLement into view
     FadeIn: function() {
@@ -360,12 +482,13 @@ MbjModal.prototype = {
             .fadeIn(200,"swing");
     },
 
+
     // Requests new user registration through MyBeanJar
     SubmitRegistration: function() {
         jQuery("div.mbj_login_status").removeClass("success fail");
-        jQuery("div.mbj_login_status").html('<div id="spinner_login"></div>');
+        jQuery("div.mbj_login_status").html('<div id="spinner-login-' + this.uid + '"></div>');
         this.FlashLoginStatus();
-        SummonSpinner('spinner_login');
+        this.SummonSpinner('spinner-login-' + this.uid);
 
         // Formerly, username was accepted here. E-mail addresses are used now.
         u = jQuery('#mbj-form-reg-email-' + this.uid).val();
@@ -378,24 +501,27 @@ MbjModal.prototype = {
         cats = jQuery('#mbj-form-reg-cats-' + this.uid).val();
         
         if (p != p2) {
-            mbjDebug("Password mismatch detected");
+            MyBeanJar.Log("Password mismatch detected");
             this.NotifyPasswordMismatch();
         } 
 
         else if (p.length < 5) {
-            mbjDebug("Invalid password");
+            MyBeanJar.Log("Invalid password");
             this.NotifyPasswordInvalid();
         }
 
+        else if (zip + lat + lon == '') {
+            MyBeanJar.Log("Location data not supplied");
+            this.NotifyInsufficientLocation();
+        }
+
         else if (!jQuery.isEmptyObject(cats) && cats.length < 3) {
-            if (cats.length < 3){
-                mbjDebug("Insufficient categories selected");
-                this.NotifyInsufficientCategories();
-            }
+            MyBeanJar.Log("Insufficient categories selected");
+            this.NotifyInsufficientCategories();
         }
 
         else if (jQuery.isEmptyObject(cats)) {
-            mbjDebug("Insufficient categories selected");
+            MyBeanJar.Log("Insufficient categories selected");
             this.NotifyInsufficientCategories();
         }
 
@@ -407,12 +533,11 @@ MbjModal.prototype = {
         }
     },
 
+
     SubmitAuthentication: function(username){
 
         jQuery('div.mbj_login_status').removeClass('success fail');
-        jQuery('div.mbj_login_status').html('<div id="spinner_login"></div>');
-
-        //u = jQuery('#mbj_form_u').val();
+        jQuery('div.mbj_login_status').html('<div id="spinner-login-' + this.uid + '"></div>');
 
         // Add submitted username to session storage
         if (typeof username != 'undefined') {
@@ -420,25 +545,26 @@ MbjModal.prototype = {
         };
 
         this.FlashLoginStatus.bind(this)();
-        SummonSpinner('spinner_login');
+        this.SummonSpinner('spinner-login-' + this.uid);
 
         validate_user(username, function(result, message){
-            //mbjNotifyAuthenticate.bind(this, result, message)();
             this.UpdateAuthenticationStatus(result, message);
         }.bind(this));
-        mbjDebug("Queued Bean count: " + MyBeanJar.queuedBeans);
+        MyBeanJar.Log("Queued Bean count: " + MyBeanJar.queuedBeans);
     },
+
 
     // Updates authentication status notification and cleans up authentication activities
     UpdateAuthenticationStatus: function(result, message, email) {
-        mbjDebug("Authenticating...");
+        MyBeanJar.Log("Authenticating...");
 
         // If request was successful, record in session storage, show success notification, and destroy the calling modal
         if (result == STATUS_SUCCESS) {
-            mbjDebug("Result = " + result);
-            mbjDebug("Message = " + message);
-            mbjDebug("Authentication succeeded.");
+            MyBeanJar.Log("Result = " + result);
+            MyBeanJar.Log("Message = " + message);
+            MyBeanJar.Log("Authentication succeeded.");
 
+            MyBeanJar.userLoggedIn = true;
             sessionStorage.setItem('mbjUserLoggedIn','true');
 
             setTimeout(function() {
@@ -451,9 +577,9 @@ MbjModal.prototype = {
             }.bind(this), 200);
         }
         else {
-            mbjDebug("Result = " + result);
-            mbjDebug("Message = " + message);
-            mbjDebug("Authentication failed.");
+            MyBeanJar.Log("Result = " + result);
+            MyBeanJar.Log("Message = " + message);
+            MyBeanJar.Log("Authentication failed.");
 
             setTimeout(function() {
                 jQuery("div.mbj_login_status").addClass("fail");
@@ -463,6 +589,7 @@ MbjModal.prototype = {
         }
     },
     
+
     LoadRegistrationSuccessView: function() {
         var modal = this;
 
@@ -487,13 +614,15 @@ MbjModal.prototype = {
         this.currentView = this.LoadRegistrationSuccessView;
     },
 
+
     UpdateRegistrationStatus: function(result, message) {
         if (result == STATUS_SUCCESS) {
-            mbjDebug("Result = " + result);
-            mbjDebug("Message = " + message);
-            mbjDebug("Registration succeeded as " + email);
+            MyBeanJar.Log("Result = " + result);
+            MyBeanJar.Log("Message = " + message);
+            MyBeanJar.Log("Registration succeeded as " + email);
 
             sessionStorage.setItem('username',email);
+            MyBeanJar.userLoggedIn = true;
             sessionStorage.setItem('mbjUserLoggedIn','true');
             jQuery('#email').val(email);
             jQuery("#mbj-form-reg-email").val(email);
@@ -514,9 +643,9 @@ MbjModal.prototype = {
         }
         
         else {
-            mbjDebug("Result = " + result);
-            mbjDebug("Message = " + message);
-            mbjDebug("Registration failed.");
+            MyBeanJar.Log("Result = " + result);
+            MyBeanJar.Log("Message = " + message);
+            MyBeanJar.Log("Registration failed.");
 
 
             // Display registration failure notification
@@ -528,9 +657,9 @@ MbjModal.prototype = {
                 this.FlashLoginStatus();
             }.bind(this), 200);
         }
-
     },
 
+    
     NotifyPasswordMismatch: function() {
         setTimeout(function() {
             jQuery("div.mbj_login_status").addClass("fail");
@@ -540,10 +669,10 @@ MbjModal.prototype = {
 
             // Highlight problematic fields
             jQuery('#mbj-form-reg-p-' + this.uid)
-            .css({backgroundColor: '#c21010'});
+            .css({backgroundColor: '#dd8d82'});
 
             jQuery('#mbj-form-reg-p2-' + this.uid)
-            .css({backgroundColor: '#c21010'});
+            .css({backgroundColor: '#dd8d82'});
         }.bind(this), 200);
 
         setTimeout(function() {
@@ -554,6 +683,7 @@ MbjModal.prototype = {
             .css({backgroundColor: '#ffffff'});
         }.bind(this), 3000);
     },
+
 
     NotifyPasswordInvalid: function() {
         setTimeout(function() {
@@ -564,10 +694,10 @@ MbjModal.prototype = {
 
             // Highlight problematic fields
             jQuery('#mbj-form-reg-p-' + this.uid)
-            .css({backgroundColor: '#c21010'});
+            .css({backgroundColor: '#dd8d82'});
 
             jQuery('#mbj-form-reg-p2-' + this.uid)
-            .css({backgroundColor: '#c21010'});
+            .css({backgroundColor: '#dd8d82'});
         }.bind(this), 200);
 
         setTimeout(function() {
@@ -579,6 +709,7 @@ MbjModal.prototype = {
         }.bind(this), 3000);
     },
 
+
     NotifyLocationInvalid: function() {
         setTimeout(function() {
             jQuery("div.mbj_login_status").addClass("fail");
@@ -588,7 +719,7 @@ MbjModal.prototype = {
 
             // Highlight problematic fields
             jQuery("#mbj-form-reg-zip" + this.uid)
-            .css({backgroundColor: '#c21010'});
+            .css({backgroundColor: '#dd8d82'});
         }.bind(this), 200);
 
         setTimeout(function() {
@@ -597,6 +728,26 @@ MbjModal.prototype = {
         }.bind(this), 3000);
     },
 
+
+    NotifyInsufficientLocation: function() {
+        setTimeout(function() {
+            jQuery("div.mbj_login_status").addClass("fail");
+            jQuery("div.mbj_login_status").html( modalContent.notify.insufficientLocation(this) );
+
+            this.FlashLoginStatus();
+
+            // Highlight problematic fields
+            jQuery("#mbj-form-reg-zip-" + this.uid)
+            .css({backgroundColor: '#dd8d82'});
+        }.bind(this), 200);
+
+        setTimeout(function() {
+            jQuery("#mbj-form-reg-zip-" + this.uid)
+            .css({backgroundColor: '#ffffff'});
+        }.bind(this), 3000);
+    },
+
+    
     NotifyInsufficientCategories: function() {
         setTimeout(function() {
             jQuery("div.mbj_login_status").addClass("fail");
@@ -606,7 +757,7 @@ MbjModal.prototype = {
 
             // Highlight problematic fields
             jQuery("#mbj-form-reg-cats-" + this.uid)
-            .css({backgroundColor: '#c21010'});
+            .css({backgroundColor: '#dd8d82'});
         }.bind(this), 200);
 
         setTimeout(function() {
@@ -615,6 +766,7 @@ MbjModal.prototype = {
         }.bind(this), 3000);
     },
 
+    
     FlashLoginStatus: function() {
         if (!this.loginStatusFlashing) {
             this.loginStatusFlashing = true;
@@ -636,6 +788,42 @@ MbjModal.prototype = {
         }
     },
 
+
+    CenterSelf: function() { 
+        jQuery( this.payload ).each(function(){
+            MyBeanJar.Log("This.height: " + jQuery(this).outerHeight());
+            MyBeanJar.Log("Parent.height: " + jQuery(this).innerHeight());
+            jQuery(this).css('left',((((jQuery(window).innerWidth() - (jQuery(this).outerWidth())) / 2)) + 'px'));
+            jQuery(this).css('top',((((jQuery(window).innerHeight() - (jQuery(this).outerHeight())) / 3)) + 'px'));
+        });
+    },
+
+
+    // Summon activity indicator (NOTE: Depends on spin.js library)
+    SummonSpinner: function(id) {
+        var opts = {
+            lines: 12,                              // The number of lines to draw
+            length: 7,                              // The length of each line
+            width: 2,                               // The line thickness
+            radius: 5,                              // The radius of the inner circle
+            corners: 1,                             // Corner roundness (0..1)
+            rotate: 0,                              // The rotation offset
+            direction: 1,                           // 1: clockwise, -1: counterclockwise
+            color: '#fff',                          // #rgb or #rrggbb or array of colors
+            speed: 1,                               // Rounds per second
+            trail: 60,                              // Afterglow percentage
+            shadow: false,                          // Whether to render a shadow
+            hwaccel: true,                          // Whether to use hardware acceleration
+            className: 'mbj-activity-indicator',    // The CSS class to assign to the spinner
+            zIndex: 2e9,                            // The z-index (defaults to 2000000000)
+            top: '50%',                             // Top position relative to parent
+            left: '50%'                             // Left position relative to parent
+        };
+        var target = document.getElementById(id);
+        var spinner = new Spinner(opts).spin(target);
+    },
+
+
     // Stores location data received from browser and applies it to the registration view, if appropriate
     StoreLocation: function(position) {
         this.geolocation.lat = position.coords.latitude;
@@ -647,7 +835,8 @@ MbjModal.prototype = {
         }
     },
 
-    // Gracefully destroys modal
+
+    // Gracefully destroy modal
     SelfDestruct: function() {
 
         // Clear any previously set modal destruction timeouts
@@ -659,7 +848,7 @@ MbjModal.prototype = {
             
             // If user has queued beans and is logged in, attempt to get them from MyBeanJar (See options)
             if (MyBeanJar.config.rewardLogin && sessionStorage.getItem("mbjUserLoggedIn")) {
-                if (sessionStorage.getItem("MyBeanJar.queuedBeans") > 0) {
+                if (sessionStorage.getItem("queuedBeans") > 0) {
                     new MbjModal('awardbean');
                 }
             }
@@ -671,15 +860,16 @@ MbjModal.prototype = {
 
 
 
-
-/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
-|
-|   Modal Content Object
-|
-|   Contains strings representing HTML data to be used in the different modal views.
-|   Used by modal object methods to generate distinct views dynamically.
-|
-°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                   ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Modal Content String Blocks    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                   ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ *                                                                                
+ *  These string blocks are used to populate the various views of the modal           
+ *                                                                                
+*/
 
 var modalContent = {
     
@@ -692,7 +882,7 @@ var modalContent = {
                                 +  '            <td id="modal-td">'
                                 +  '                <div id="modal-box">'
                                 +  '                    <div id="modal-content">'
-                                +  '                        <div class="mbj-notification" id="mbj-modal-payload-' + modal.uid + '">'
+                                +  '                        <div class="mbj-notification mbj-modal-payload" id="mbj-modal-payload-' + modal.uid + '">'
                                 +  '                        </div>'
                                 +  '                    </div>'
                                 +  '                </div>'
@@ -703,9 +893,10 @@ var modalContent = {
         return htmlementString;
     },
 
+
     // The login/register prompt view
     login: function(modal){
-        htmlementString =       '<div class="mbj-notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
+        htmlementString =       '<div class="mbj-notification mbj-modal-payload mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
                                 +  '    <div class="mbj_notification_inner" id="mbj-youvewon-init">'
                                 +  '        <div class="mbj_notification_sub_inner">'
                                 +  '            <form class="mbj-form" id="mbj_login_form2" method="post" onsubmit="return false">'
@@ -715,7 +906,7 @@ var modalContent = {
                                 +  '                <div class="element-input" id="mbj-field-init-username">'
                                 +  '                    <input class="" id="mbj_form_u" type="text" name="mbj_login" required />'
                                 +  '                </div>'
-                                +  '                <button class="submit" id="mbj-login-button-' + modal.uid + '">'//onclick="mbjAttemptAuthenticate()">'
+                                +  '                <button class="submit" id="mbj-login-button-' + modal.uid + '">'
                                 +  '                    <span class="mbj-button-text">Log In</span>'
                                 +  '                </button>'
                                 +  '            </form>'
@@ -729,6 +920,7 @@ var modalContent = {
         return htmlementString;
     },
     
+
     // The registration form view
     registration:   function(modal){
         
@@ -751,7 +943,7 @@ var modalContent = {
             locationButtonString = '';
         }
 
-        htmlementString =       '<div class="mbj-notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
+        htmlementString =       '<div class="mbj-notification mbj-modal-payload mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
                                 +  '<div class="mbj_notification_inner" id="mbj-login-details">'
                                 +  '    <div class="mbj-nav-button-block">'
                                 +  '            <button type="submit" class="btn-back" id="back-modal-' + modal.uid + '">'
@@ -813,9 +1005,10 @@ var modalContent = {
         return htmlementString;
     },
 
+
     // The registration success view
     registrationSuccess:   function(modal){
-        htmlementString =          '<div class="mbj-notification mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
+        htmlementString =          '<div class="mbj-notification mbj-modal-payload mbj_notification_container onboard-modal" id="mbj-modal-payload-' + modal.uid + '">'
                                 +  '    <div class="mbj_notification_inner" id="mbj-registration-successful">'
                                 +  '        <div class="mbj-nav-button-block">'
                                 +  '            <button type="submit" class="btn-close" id="close-modal-' + modal.uid + '">'
@@ -834,10 +1027,11 @@ var modalContent = {
         return htmlementString;
     },
 
+
     // The bean award view
     bean:   function(modal){
         htmlementString =          '<div class="mbj-notification bean_notification_window" id="mbj-bean-modal-' + modal.uid + '">'
-                                +  '    <button type="submit" class="btn-close" id="close-modal-' + modal.uid + '">'//id="mbj_notification_close_submit" onClick="mbjDestroyModal()">'
+                                +  '    <button type="submit" class="btn-close" id="close-modal-' + modal.uid + '">'
                                 +  '        <img src="img/ui_action_close.png">'
                                 +  '    </button>'
                                 +  '    <img class="bean_notification_image" src="">'
@@ -845,12 +1039,13 @@ var modalContent = {
         return htmlementString;
     },
 
-    // Notification content
+
+    // Notification message snippets
     notify: {
         passwordMismatch:       function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">Passwords do not not not match.</p>' },
         insufficientCategories: function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">You must select at least 3 categories.</p>' },
         invalidPassword:        function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">Password must be at least 6 alphanumeric characters. Special characters not allowed.</p>' },
-        invalidLocation:        function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">Invalid location.</p>' }
+        insufficientLocation:   function(modal) { return '<img src="img/ui_action_fail.png"><p class="status success">No location data provided.</p>' }
     }
 
 }
@@ -858,153 +1053,41 @@ var modalContent = {
 
 
 
-
-
-
-
-/*°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø
-|
-|   MyBeanJar debug message handler
-|
-|   If debug mode has been enabled in the configuration settings,
-|   this method will log debug messages to the console.
-|
-°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø,¸¸,ø¤º°`°º¤ø*/
-
-function mbjDebug(message) {
-    if (typeof MyBeanJar.config.debugMode != 'undefined') {
-        if (MyBeanJar.config.debugMode == true) {
-            console.log(message);
-        }
-    }
-};
-
-
-
-
-//
-//  Locally grants the user a queued bean (to be exchanged for an actual bean from the MyBeanJar service)
-//  and instantiates a new modal to process that queued bean
-//
-
-function mbjAddAwardBean() {
-    
-    // Get any queued Beans in session storage, add a new one, save new total to session storage
-    MyBeanJar.queuedBeans = sessionStorage.getItem("queuedBeans");
-    MyBeanJar.queuedBeans++;
-    sessionStorage.setItem("queuedBeans", MyBeanJar.queuedBeans);
-
-    mbjDebug("Queued Bean count: " + MyBeanJar.queuedBeans);
-
-    // If no other modal is present, attempt to get award
-    if (!jQuery( '.mbj-modal' ).length) {
-        var modal = new MbjModal();
-    }
-
-}
-
-
-
-
-function mbjNotifyRegistrationInvalidZip() {
-
-    setTimeout(function() {
-        jQuery("div.mbj_login_status").addClass("fail");
-
-        jQuery("div.mbj_login_status").html('<img src="img/ui_action_fail.png"><p class="status success">Invalid ZIP code.</p>');
-
-        this.FlashLoginStatus.bind(this)();
-
-        jQuery("#mbj-form-reg-zip")
-                .animate({backgroundColor: '#c21010'}, 200);
-    }, 200);
-
-    setTimeout(function() {
-        jQuery("#mbj-form-reg-zip")
-                .animate({backgroundColor: '#ffffff'}, 200);
-    }, 3000);
-};
-
-
-
-
-function SummonSpinner(div_id) {
-    var opts = {
-        lines: 12, // The number of lines to draw
-        length: 7, // The length of each line
-        width: 2, // The line thickness
-        radius: 5, // The radius of the inner circle
-        corners: 1, // Corner roundness (0..1)
-        rotate: 0, // The rotation offset
-        direction: 1, // 1: clockwise, -1: counterclockwise
-        color: '#fff', // #rgb or #rrggbb or array of colors
-        speed: 1, // Rounds per second
-        trail: 60, // Afterglow percentage
-        shadow: false, // Whether to render a shadow
-        hwaccel: false, // Whether to use hardware acceleration
-        className: 'spinner', // The CSS class to assign to the spinner
-        zIndex: 2e9, // The z-index (defaults to 2000000000)
-        top: '50%', // Top position relative to parent
-        left: '50%' // Left position relative to parent
-    };
-    var target = document.getElementById(div_id);
-    var spinner = new Spinner(opts).spin(target);
-};
-
-
-
-
-
-//
-//  Misc. helpers
-//
-
-
-function centerOnboardModal(){    
-    jQuery('.onboard-modal').each(function(){
-        mbjDebug("This.height: " + jQuery(this).outerHeight());
-        mbjDebug("Parent.height: " + jQuery(this).innerHeight());
-        jQuery(this).css('left',((((jQuery(window).innerWidth() - (jQuery(this).outerWidth())) / 2)) + 'px'));
-        jQuery(this).css('top',((((jQuery(window).innerHeight() - (jQuery(this).outerHeight())) / 3)) + 'px'));
-    });
-};
-
-//  Modal repositioner listner  
-window.addEventListener('resize', function(){
-    document.getElementById('modal-content').style.maxHeight = document.documentElement.offsetHeight;
-}, false);
-
-
-
-
-
-//
-//  Initializer behaviors
-//
-
-jQuery(document).ready(function() {
-
-    
-    // TEMP
-    if (typeof MyBeanJar.config.debugMode != 'undefined') {
-        if (MyBeanJar.config.debugMode == true) {
-            sessionStorage.clear();
-        }
-    }
-
-    if (sessionStorage.getItem("mbjUserLoggedIn") !== null) { 
-        mbjUserLoggedIn = true;
-    }
-
-
-});
-
-
-
-
-
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                           ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    MyBeanJar Controller Initialization    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                           ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░
+ *                                                                              
+ *  Creates a new instance of the MyBeanJar controller object.               
+ *                                                                                
+ *  It really ties the room together.                                          
+ *                                                                                  
+*/
 
 var MyBeanJar = new MyBeanJarController();
+
+
+
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                        ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    Support for Legacy Methods          ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                        ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ *
+ *                                                                              
+ *  Additional methods to provide backwards compatibility with existing 
+ *  MyBeanJar integrations                                                       
+ *                                                                                  
+*/
+
+var mbjAddAwardBean = function() {
+    return MyBeanJar.AwardBean();
+}
 
 
 

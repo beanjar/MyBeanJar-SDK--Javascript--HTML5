@@ -218,15 +218,6 @@
   width: 273px;
 }
 
-.mbj_login_status {
-  img {
-    width: 20%;
-    height: auto;
-    vertical-align: middle;
-    position: relative;
-  }
-}
-
 p.status {
   text-align: center;
   vertical-align: middle;
@@ -461,13 +452,20 @@ input.success{
 
 .mbj_login_status {
   display: none;
+  position: relative;
   padding: 15px;
   margin: 8px;
   margin-top: 24px !important;
-  //height: 50px;
-  //-webkit-font-smoothing: none;
   border-radius: 8px;
   background-color: transparent;
+
+  img {
+    width: 20%;
+    height: auto;
+    vertical-align: middle;
+    position: relative;
+  }
+
 }
 
 img.mbj_loading {
@@ -476,7 +474,7 @@ img.mbj_loading {
   padding: 85px;
 }
 
-#spinner_login {
+.mbj-activity-indicator {
   position: relative;
   padding: 15px;
   height: 50%;
