@@ -3,13 +3,10 @@
 MyBeanJar is a mobile commerce/game reward platform that distributes targeted digital coupons for game achievements. These rewards are redeemed straight from the MyBeanJar wallet, which prompts redemption via location-alerts, sharing, and a real-time leaderboard.
 
 * [Overview](#overview)
-* [Installation](#install)
+* [Installation](#installation)
 * [Examples](#examples)
-* [API Documentation](#api)
-* [Example Programs](#programs)
-* [Troubleshooting](#troubleshooting)
-* [License](#license)
-* [Support](#support)
+* [Usage](#usage)
+* [Customization](#customization)
 
 <a name="overview"></a>
 ## Overview
@@ -64,7 +61,7 @@ The MyBeanJar SDK depends upon jQuery and Spin.js, so make sure you include thos
 
 
 
-<a name="Usage"></a>
+<a name="usage"></a>
 ## Usage
 
 The easiest way to get up and running with MyBeanJar is to attach the following call to any event for which you want the user to receive a bean and let it handle the rest.

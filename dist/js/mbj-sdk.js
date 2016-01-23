@@ -1394,6 +1394,7 @@ function parse_apps_and_callback(data, callback) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Authentication Response
@@ -1494,6 +1495,7 @@ function parse_award_and_callback(data, callback) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Beans Response
@@ -1578,6 +1580,7 @@ function get_expiration_days(date) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Categories Response
@@ -1639,6 +1642,7 @@ function parse_categories_and_callback(data, callback) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Delete Bean Response
@@ -1671,6 +1675,7 @@ function parse_deletebean_and_callback(data, callback) {
         callback(result,message);
     }
 }
+
 
 
 
@@ -1883,6 +1888,7 @@ var MD5 = function (string) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Password Recovery Response
@@ -1926,6 +1932,7 @@ function parse_sendpassword_and_callback(data, callback) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Redeem Bean Response
@@ -1959,6 +1966,7 @@ function parse_redeembean_and_callback(data, callback) {
         callback(result,message);
     }
 }
+
 
 
 
@@ -1996,6 +2004,7 @@ function parse_register_and_callback(data, callback) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    Password Recovery Response
@@ -2028,6 +2037,7 @@ function parse_sponsor_locations_and_callback(data, callback) {
         callback(result,message);
     }
 }
+
 
 
 
@@ -2100,6 +2110,7 @@ function parse_sponsors_and_callback(data, callback) {
 
 
 
+
 /* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    User Validation Response
@@ -2132,6 +2143,7 @@ function parse_validateuser_and_callback(data, callback) {
         callback(result,message);
     }
 }
+
 
 
 
@@ -2196,6 +2208,7 @@ function parse_winners_and_callback(data, callback) {
         callback(result,winners);
     }
 }
+
 
 
 
