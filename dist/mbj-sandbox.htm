@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+
+<!--
+ *                                                                                                                        
+ *        ************ **********                                            
+ *       **      *    **** **** ***                                           
+ *       **   **   **  **   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   **   *   **                                           
+ *       *******************     **                                           
+ *       **           ********   **                                           
+ *       **    ****    ***   *   **                                           
+ *       **    *****   ****     **                                            
+ *       **    *****   *************   **********  ************               
+ *       **    *****   ****        *****        ***           **              
+ *       **    ***    ***     **    **    ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    **             
+ *       **    ****    **    ****    ****+****    *    ****    **             
+ *       **    *****   **          ****           *    ****    **             
+ *       **    *****   **    *********    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    ***    ****    **   ****    **    **    ****    **             
+ *       **+*     ****  ****      ******       ****   *****   **             
+ *         ********    ****************************************              
+ *                   ***+......++******         **           ***             
+ *                   **+.. ......+***    ****    *    ****    ***            
+ *                  ***..   ....+++**    ****    *    *****    **            
+ *                  **+..   .....++**********    *    **********             
+ *                 ***..    .....++***           *    ***   **               
+ *             *****...     ....+++**    ****    *    ***                    
+ *           ***++...     .....++++**    ****    *    ***                    
+ *          ***+..       ....+++++***    ****    *    ***                    
+ *          **+...    ......+++++*****    **    **    ***                    
+ *          **+..........++++++****  ***      *****  ***                     
+ *           ***++.....++++++****       ******    ****                       
+ *            *****+++++++*****                                              
+ *               ********** 
+ *
+ *
+ *
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    mbj-sandbox.htm            ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    MyBeanJar HTML / JS SDK    ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    Test Page                  ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  
+ * 
+ *
+ *  http://mybeanjar.com
+ *  https://github.com/beanjar
+ *
+-->
+
+
+<html>
+
+<head>
+
+	<title>MyBeanJar HTML5/JS SDK Sandbox</title>
+
+	<!-- STYLES -->
+	<link type="text/css" rel="stylesheet" href="css/mbj-ui.css" />
+	<link type="text/css" rel="stylesheet" href="css/mbj-sandbox.css" />
+
+	<!-- SCRIPTS -->
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/spin.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/mbj-sdk.js"></script>
+
+</head>
+
+<body>
+
+			<!-- 	Push button to award a bean 	**>															 	
+								 															 		
+		 	In this case, our win condition is pushing the button. To bring MyBeanJar into the mix, 	
+		 	we have made MyBeanJar.AwardBean() the handler for the button. Whenever the button is 	 	
+	 		pressed, the MyBeanJar.AwardBean() function takes care of the entire bean award flow,   	
+	 		from user login/registration to the actual award itself.								 	
+																							 		
+	 		Simply call MyBeanJar.AwardBean() with any event for which you want to award a bean.		
+
+	 		<-- ------------------------------------------------------------------------------- -->
+
+	<button class="mbjBigButton btn-sandbox bullseye" onclick="MyBeanJar.AwardBean()">Award Bean</button>
+
+</body>
+
+</html>
