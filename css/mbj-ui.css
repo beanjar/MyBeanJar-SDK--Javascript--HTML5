@@ -612,12 +612,11 @@ img.mbj_loading {
 
 /* line 556, ../sass/mbj-ui.scss */
 .mbj-activity-indicator {
-  position: relative;
-  padding: 15px;
-  height: 50%;
+  left: 50%;
+  top: 50%;
 }
 
-/* line 564, ../sass/mbj-ui.scss */
+/* line 563, ../sass/mbj-ui.scss */
 .bean_notification_window {
   position: relative;
   top: -50%;
@@ -629,7 +628,7 @@ img.mbj_loading {
   z-index: 500;
 }
 
-/* line 577, ../sass/mbj-ui.scss */
+/* line 576, ../sass/mbj-ui.scss */
 .bean_notification_text {
   position: absolute;
   top: 0;
@@ -647,7 +646,7 @@ img.mbj_loading {
   -webkit-transform: translateZ(0);
 }
 
-/* line 596, ../sass/mbj-ui.scss */
+/* line 595, ../sass/mbj-ui.scss */
 .bean_notification_text p {
   position: relative;
   top: 0px;
@@ -655,19 +654,19 @@ img.mbj_loading {
   padding-left: 16px;
 }
 
-/* line 605, ../sass/mbj-ui.scss */
+/* line 604, ../sass/mbj-ui.scss */
 .bean_notification_image {
   min-height: 199px;
 }
 
-/* line 611, ../sass/mbj-ui.scss */
+/* line 610, ../sass/mbj-ui.scss */
 img.bean_notification_image {
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* line 619, ../sass/mbj-ui.scss */
+/* line 618, ../sass/mbj-ui.scss */
 p.mbj_caption {
   font-size: 0.7rem;
   color: #666;
@@ -676,7 +675,7 @@ p.mbj_caption {
   text-align: center;
 }
 
-/* line 629, ../sass/mbj-ui.scss */
+/* line 628, ../sass/mbj-ui.scss */
 .mbj_login {
   display: none;
   margin: 0px auto;
@@ -688,53 +687,53 @@ p.mbj_caption {
   -webkit-transform: translateZ(0);
 }
 
-/* line 642, ../sass/mbj-ui.scss */
+/* line 641, ../sass/mbj-ui.scss */
 .mbj_award_img {
   width: 100%;
 }
 
-/* line 648, ../sass/mbj-ui.scss */
+/* line 647, ../sass/mbj-ui.scss */
 .mbj_notifier_header {
   width: 100%;
 }
 
-/* line 654, ../sass/mbj-ui.scss */
+/* line 653, ../sass/mbj-ui.scss */
 .mbj_login_or_register {
   vertical-align: top;
   background-color: rgba(128, 128, 128, 0.1);
   display: none;
 }
 
-/* line 662, ../sass/mbj-ui.scss */
+/* line 661, ../sass/mbj-ui.scss */
 .active_pane {
   display: block;
 }
 
-/* line 668, ../sass/mbj-ui.scss */
+/* line 667, ../sass/mbj-ui.scss */
 .inactive_pane {
   display: none;
 }
 
-/* line 674, ../sass/mbj-ui.scss */
+/* line 673, ../sass/mbj-ui.scss */
 .active_selector {
   background-color: rgba(128, 128, 128, 0.1);
 }
 
-/* line 680, ../sass/mbj-ui.scss */
+/* line 679, ../sass/mbj-ui.scss */
 .inactive_selector {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-/* line 686, ../sass/mbj-ui.scss */
+/* line 685, ../sass/mbj-ui.scss */
 .mbj_notification_title {
   text-align: center;
 }
-/* line 689, ../sass/mbj-ui.scss */
+/* line 688, ../sass/mbj-ui.scss */
 .mbj_notification_title img {
   float: left;
   margin-top: 8px;
 }
-/* line 694, ../sass/mbj-ui.scss */
+/* line 693, ../sass/mbj-ui.scss */
 .mbj_notification_title h2 {
   margin: 0.2em auto;
   display: inline;
@@ -743,7 +742,7 @@ p.mbj_caption {
   text-align: center;
   color: #ffc200;
 }
-/* line 703, ../sass/mbj-ui.scss */
+/* line 702, ../sass/mbj-ui.scss */
 .mbj_notification_title h3 {
   position: relative;
   font-size: 1rem;
@@ -751,7 +750,7 @@ p.mbj_caption {
   color: white;
 }
 
-/* line 714, ../sass/mbj-ui.scss */
+/* line 713, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selector {
   display: inline-block;
   width: 50%;
@@ -762,7 +761,7 @@ p.mbj_caption {
   font-size: 0.7rem;
 }
 
-/* line 726, ../sass/mbj-ui.scss */
+/* line 725, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selectors {
   display: -webkit-box;
   display: -webkit-flex;
@@ -779,58 +778,58 @@ p.mbj_caption {
           justify-content: space-between;
 }
 
-/* line 735, ../sass/mbj-ui.scss */
+/* line 734, ../sass/mbj-ui.scss */
 input #mbj_form_u,
 input #mbj_form_p {
   font-size: 0.7rem;
 }
 
-/* line 743, ../sass/mbj-ui.scss */
+/* line 742, ../sass/mbj-ui.scss */
 label.title,
 label.large {
   font-size: 0.75rem !important;
 }
 
-/* line 750, ../sass/mbj-ui.scss */
+/* line 749, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selector h2 {
   text-transform: uppercase;
   display: inline;
   vertical-align: middle;
 }
 
-/* line 758, ../sass/mbj-ui.scss */
+/* line 757, ../sass/mbj-ui.scss */
 .nada {
   display: none;
 }
 
-/* line 775, ../sass/mbj-ui.scss */
+/* line 774, ../sass/mbj-ui.scss */
 .mbj-form {
   margin: 0 auto;
 }
-/* line 779, ../sass/mbj-ui.scss */
+/* line 778, ../sass/mbj-ui.scss */
 .mbj-form .element-input {
   margin-top: 0.5rem;
 }
-/* line 782, ../sass/mbj-ui.scss */
+/* line 781, ../sass/mbj-ui.scss */
 .mbj-form .element-input:first-of-type {
   margin-top: 0;
 }
-/* line 788, ../sass/mbj-ui.scss */
+/* line 787, ../sass/mbj-ui.scss */
 .mbj-form button {
   margin-top: 0.5rem;
 }
-/* line 791, ../sass/mbj-ui.scss */
+/* line 790, ../sass/mbj-ui.scss */
 .mbj-form button:first-of-type {
   margin-top: 1.25rem;
 }
-/* line 797, ../sass/mbj-ui.scss */
+/* line 796, ../sass/mbj-ui.scss */
 .mbj-form label {
   display: block;
   font-size: 1em;
   margin-bottom: 3px;
   clear: both;
 }
-/* line 804, ../sass/mbj-ui.scss */
+/* line 803, ../sass/mbj-ui.scss */
 .mbj-form div,
 .mbj-form span,
 .mbj-form label,
@@ -838,11 +837,11 @@ label.large {
 .mbj-form button {
   font-family: inherit;
 }
-/* line 814, ../sass/mbj-ui.scss */
+/* line 813, ../sass/mbj-ui.scss */
 .mbj-form .large {
   width: 100%;
 }
-/* line 818, ../sass/mbj-ui.scss */
+/* line 817, ../sass/mbj-ui.scss */
 .mbj-form input[type=text],
 .mbj-form input[type=password],
 .mbj-form input[type=email] {
@@ -861,7 +860,7 @@ label.large {
   outline: 0;
   box-sizing: border-box;
 }
-/* line 835, ../sass/mbj-ui.scss */
+/* line 834, ../sass/mbj-ui.scss */
 .mbj-form input[type=text]:focus,
 .mbj-form input[type=password]:focus,
 .mbj-form input[type=email]:focus {
@@ -873,7 +872,7 @@ label.large {
           transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }
 
-/* line 846, ../sass/mbj-ui.scss */
+/* line 845, ../sass/mbj-ui.scss */
 .mbj-footer {
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 100%;
@@ -891,17 +890,17 @@ label.large {
   bottom: 0%;
   width: 100%;
 }
-/* line 863, ../sass/mbj-ui.scss */
+/* line 862, ../sass/mbj-ui.scss */
 .mbj-footer a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.4);
 }
-/* line 868, ../sass/mbj-ui.scss */
+/* line 867, ../sass/mbj-ui.scss */
 .mbj-footer p {
   margin: 1rem 0;
 }
 
-/* line 873, ../sass/mbj-ui.scss */
+/* line 872, ../sass/mbj-ui.scss */
 .slider_h3 {
   color: #cccccc;
   font-size: 0.5rem;
@@ -909,7 +908,7 @@ label.large {
   line-height: 0.6rem;
 }
 
-/* line 880, ../sass/mbj-ui.scss */
+/* line 879, ../sass/mbj-ui.scss */
 .slider_div {
   line-height: 0.7rem;
   height: 100% !important;
@@ -933,12 +932,12 @@ label.large {
           align-items: flex-start;
 }
 
-/* line 890, ../sass/mbj-ui.scss */
+/* line 889, ../sass/mbj-ui.scss */
 .slider_image {
   margin-bottom: 0.5rem;
 }
 
-/* line 894, ../sass/mbj-ui.scss */
+/* line 893, ../sass/mbj-ui.scss */
 #slider_components {
   display: block;
   display: -webkit-box;
@@ -956,7 +955,7 @@ label.large {
           align-items: center;
 }
 
-/* line 901, ../sass/mbj-ui.scss */
+/* line 900, ../sass/mbj-ui.scss */
 .footer-header-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -977,7 +976,7 @@ label.large {
   cursor: pointer;
 }
 
-/* line 914, ../sass/mbj-ui.scss */
+/* line 913, ../sass/mbj-ui.scss */
 .footer-header-strip-title {
   color: #dc5214;
   text-align: left;
@@ -985,7 +984,7 @@ label.large {
   padding-left: 3%;
 }
 
-/* line 921, ../sass/mbj-ui.scss */
+/* line 920, ../sass/mbj-ui.scss */
 .footer-header-strip-counter {
   color: #c09853;
   text-align: right;
@@ -993,7 +992,7 @@ label.large {
   padding-right: 3%;
 }
 
-/* line 928, ../sass/mbj-ui.scss */
+/* line 927, ../sass/mbj-ui.scss */
 .footer-signup-strip {
   display: -webkit-box;
   display: -webkit-flex;
@@ -1003,7 +1002,7 @@ label.large {
   width: 100%;
 }
 
-/* line 936, ../sass/mbj-ui.scss */
+/* line 935, ../sass/mbj-ui.scss */
 #mbj-footer-logo {
   width: 15%;
   display: -webkit-box;
@@ -1016,12 +1015,12 @@ label.large {
           align-items: center;
 }
 
-/* line 942, ../sass/mbj-ui.scss */
+/* line 941, ../sass/mbj-ui.scss */
 img#footer-logo {
   width: 100%;
 }
 
-/* line 946, ../sass/mbj-ui.scss */
+/* line 945, ../sass/mbj-ui.scss */
 #mbj-footer-cta {
   width: 85%;
   display: -webkit-box;
@@ -1040,7 +1039,7 @@ img#footer-logo {
   line-height: 1.5rem;
 }
 
-/* line 955, ../sass/mbj-ui.scss */
+/* line 954, ../sass/mbj-ui.scss */
 #mbj-footer-cta-sub {
   border: 0.5vh solid #222;
   background-color: #222 !important;
@@ -1057,7 +1056,7 @@ img#footer-logo {
   display: flex;
 }
 
-/* line 964, ../sass/mbj-ui.scss */
+/* line 963, ../sass/mbj-ui.scss */
 .footer-cta-title {
   font-size: 0.7rem;
   padding-left: 0.25rem;
@@ -1065,18 +1064,18 @@ img#footer-logo {
   width: 50%;
 }
 
-/* line 971, ../sass/mbj-ui.scss */
+/* line 970, ../sass/mbj-ui.scss */
 #splash-fade {
   pointer-events: none;
 }
 
-/* line 975, ../sass/mbj-ui.scss */
+/* line 974, ../sass/mbj-ui.scss */
 .form-checkbox {
   font-size: 0.7rem !important;
   color: #a9a9a9;
 }
 
-/* line 980, ../sass/mbj-ui.scss */
+/* line 979, ../sass/mbj-ui.scss */
 .frosted-overlay {
   width: 96%;
   height: 86%;
@@ -1102,21 +1101,21 @@ img#footer-logo {
   border-bottom: 1rem ridge rgba(255, 255, 255, 0.05);
 }
 
-/* line 1004, ../sass/mbj-ui.scss */
+/* line 1003, ../sass/mbj-ui.scss */
 #main_container {
   background-color: rgba(40, 40, 60, 0.7);
   box-shadow: inset 0 0 12rem rgba(165, 225, 255, 0.6);
   position: relative;
 }
 
-/* line 1010, ../sass/mbj-ui.scss */
+/* line 1009, ../sass/mbj-ui.scss */
 #slider_components * h3 {
   text-shadow: 0px 0px 3px #000000 !important;
   font-size: 0.8rem;
   line-height: 0.9rem;
 }
 
-/* line 1016, ../sass/mbj-ui.scss */
+/* line 1015, ../sass/mbj-ui.scss */
 img.grippy {
   width: auto;
   height: 50%;
@@ -1124,7 +1123,7 @@ img.grippy {
   margin-left: 2%;
 }
 
-/* line 1023, ../sass/mbj-ui.scss */
+/* line 1022, ../sass/mbj-ui.scss */
 .newcount {
   -webkit-animation: newcountglow 1s 1 linear;
   animation: newcountglow 1s 1 linear;
@@ -1135,7 +1134,7 @@ img.grippy {
  * ░░░░▒▒▓▓    Legacy modal styles
  * ░░░░▒▒▓▓
 */
-/* line 1040, ../sass/mbj-ui.scss */
+/* line 1039, ../sass/mbj-ui.scss */
 #mbj-youvewon-init {
   height: 399px;
   background-color: black;
@@ -1144,7 +1143,7 @@ img.grippy {
   background-repeat: no-repeat;
 }
 
-/* line 1049, ../sass/mbj-ui.scss */
+/* line 1048, ../sass/mbj-ui.scss */
 #mbj-notification-youve-won {
   max-width: none;
   width: 343px;
@@ -1153,7 +1152,7 @@ img.grippy {
   position: relative;
 }
 
-/* line 1057, ../sass/mbj-ui.scss */
+/* line 1056, ../sass/mbj-ui.scss */
 #mbj-label-init-username {
   float: left;
   color: white;
@@ -1164,13 +1163,13 @@ img.grippy {
   text-align: center;
 }
 
-/* line 1067, ../sass/mbj-ui.scss */
+/* line 1066, ../sass/mbj-ui.scss */
 #mbj-field-init-username {
   float: left;
   padding-right: 5px;
   margin-top: 0px;
 }
-/* line 1072, ../sass/mbj-ui.scss */
+/* line 1071, ../sass/mbj-ui.scss */
 #mbj-field-init-username #mbj_form_u {
   width: 120px;
   background-color: silver;
@@ -1179,38 +1178,38 @@ img.grippy {
   border-width: 3px;
 }
 
-/* line 1082, ../sass/mbj-ui.scss */
+/* line 1081, ../sass/mbj-ui.scss */
 form.mbj-form button.submit {
   height: 24px;
   margin-top: 0px;
   float: right;
   background: white;
 }
-/* line 1088, ../sass/mbj-ui.scss */
+/* line 1087, ../sass/mbj-ui.scss */
 form.mbj-form button.submit span {
   color: black;
 }
-/* line 1093, ../sass/mbj-ui.scss */
+/* line 1092, ../sass/mbj-ui.scss */
 form.mbj-form input,
 form.mbj-form select {
   -webkit-transition: background-color 0.2s;
           transition: background-color 0.2s;
 }
 
-/* line 1099, ../sass/mbj-ui.scss */
+/* line 1098, ../sass/mbj-ui.scss */
 #mbj-onboard-buttons {
   margin-left: 10px;
   position: absolute;
   bottom: 4px;
 }
 
-/* line 1106, ../sass/mbj-ui.scss */
+/* line 1105, ../sass/mbj-ui.scss */
 .mbj-aside,
 .mbj-form-label {
   color: #a9a9a9 !important;
 }
 
-/* line 1111, ../sass/mbj-ui.scss */
+/* line 1110, ../sass/mbj-ui.scss */
 .btn-location {
   margin-top: 0 !important;
   height: inherit;
@@ -1280,12 +1279,12 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 1238, ../sass/mbj-ui.scss */
+  /* line 1237, ../sass/mbj-ui.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 1243, ../sass/mbj-ui.scss */
+  /* line 1242, ../sass/mbj-ui.scss */
   #modal-content {
     zoom: 2;
     width: inherit;
@@ -1297,12 +1296,12 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (orientation: landscape) {
-  /* line 1260, ../sass/mbj-ui.scss */
+  /* line 1259, ../sass/mbj-ui.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 1264, ../sass/mbj-ui.scss */
+  /* line 1263, ../sass/mbj-ui.scss */
   #modal-content {
     width: 456px;
   }
@@ -1313,7 +1312,7 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (min-width: 600px) and (orientation: portrait) {
-  /* line 1280, ../sass/mbj-ui.scss */
+  /* line 1279, ../sass/mbj-ui.scss */
   #modal-content {
     width: 456px;
   }
