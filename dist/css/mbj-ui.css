@@ -139,7 +139,6 @@
  * ░░░░▒▒▓▓                          ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 */
-/* line 81, ../sass/mbj-ui.scss */
 html, body {
   height: 100%;
   /* Required for modal container table sizing */
@@ -147,7 +146,6 @@ html, body {
   /* Required for modal container table sizing */
 }
 
-/* line 89, ../sass/mbj-ui.scss */
 button #footer-signup {
   background-color: #fe8630;
   border: none;
@@ -158,12 +156,10 @@ button #footer-signup {
   text-align: left;
 }
 
-/* line 102, ../sass/mbj-ui.scss */
 .full-width {
   width: 100%;
 }
 
-/* line 107, ../sass/mbj-ui.scss */
 .mbj-modal,
 #mbj_modal {
   position: absolute;
@@ -174,25 +170,21 @@ button #footer-signup {
   z-index: 999999999;
   display: none;
 }
-/* line 117, ../sass/mbj-ui.scss */
 .mbj-modal a,
 #mbj_modal a {
   color: #ffc200;
 }
 
-/* line 124, ../sass/mbj-ui.scss */
 #modal-tbody,
 #modal-tr,
 #modal-td {
   height: 100%;
 }
 
-/* line 132, ../sass/mbj-ui.scss */
 #modal-td {
   vertical-align: middle;
 }
 
-/* line 138, ../sass/mbj-ui.scss */
 #modal-content {
   position: relative;
   left: 100%;
@@ -201,7 +193,6 @@ button #footer-signup {
   overflow: auto;
 }
 
-/* line 148, ../sass/mbj-ui.scss */
 .mbj_notification_sub_inner {
   width: 270px;
   padding: 5px;
@@ -210,39 +201,33 @@ button #footer-signup {
   background: black;
 }
 
-/* line 159, ../sass/mbj-ui.scss */
 .mbjBigButton {
   width: 200px;
   height: 75px;
 }
 
-/* line 166, ../sass/mbj-ui.scss */
 .geolocator-block {
   display: inline-block;
   font-family: inherit;
   color: #ffc200;
   font-size: 0.75rem;
 }
-/* line 173, ../sass/mbj-ui.scss */
 .geolocator-block .notification-geolocator span {
   padding-left: 0.5rem;
 }
 
-/* line 181, ../sass/mbj-ui.scss */
 .mbj-notification,
 .mbj_notification {
   -webkit-transform: translateZ(0);
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
-/* line 189, ../sass/mbj-ui.scss */
 .mbj_notification_container_container {
   position: absolute;
   top: 25%;
   left: 35%;
 }
 
-/* line 197, ../sass/mbj-ui.scss */
 .mbj-notification-container,
 .mbj_notification_container {
   font-size: 1rem !important;
@@ -256,6 +241,7 @@ button #footer-signup {
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.8);
   border-radius: 8px;
   border: 3px solid #101010;
+  -webkit-background-clip: padding-box;
   background-clip: padding-box !important;
   background: rgba(255, 255, 255, 0.75);
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222229', endColorstr='#37373e',GradientType=1 );
@@ -264,7 +250,6 @@ button #footer-signup {
   overflow: inherit;
   margin-top: 5vh;
 }
-/* line 219, ../sass/mbj-ui.scss */
 .mbj-notification-container input,
 .mbj-notification-container option,
 .mbj_notification_container input,
@@ -272,114 +257,72 @@ button #footer-signup {
   color: #666 !important;
 }
 
-/* line 227, ../sass/mbj-ui.scss */
 .mbj-notification-inner,
 .mbj_notification_inner {
   background: #000000;
   border-radius: 4px;
   padding: 10px;
   padding-top: 16px;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-between;
   min-height: 300px;
   padding: 10px !important;
   box-sizing: border-box;
 }
-/* line 241, ../sass/mbj-ui.scss */
 .mbj-notification-inner > .mbj_notification_title:first-child,
 .mbj_notification_inner > .mbj_notification_title:first-child {
   margin-top: 20px;
 }
 
-/* line 248, ../sass/mbj-ui.scss */
 .mbj-notification-beanticker,
 .mbj_notification_beanticker {
   min-height: 80px;
   margin: 2rem -10px;
 }
 
-/* line 256, ../sass/mbj-ui.scss */
 .action-buttons {
   position: relative;
 }
-/* line 259, ../sass/mbj-ui.scss */
 .action-buttons button {
   margin-top: 0.5rem;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
-/* line 270, ../sass/mbj-ui.scss */
 .mbj-form-block {
   margin: 0.5rem 0;
 }
-/* line 273, ../sass/mbj-ui.scss */
 .mbj-form-block:last-of-type {
   margin-bottom: 0;
 }
 
-/* line 280, ../sass/mbj-ui.scss */
 .mbj-button-text {
   text-align: right;
-  -webkit-box-flex: 1;
-  -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-          flex: 1 1 auto;
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
+  flex: 1 1 auto;
+  align-self: center;
 }
 
-/* line 288, ../sass/mbj-ui.scss */
 .mbj-button-icon i {
   font-size: 1.5rem;
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
+  align-self: center;
   float: left;
   /* hack for Firefox's flex issues */
 }
 
-/* line 296, ../sass/mbj-ui.scss */
 .category-list {
   max-height: 200px;
   overflow: scroll;
 }
 
-/* line 303, ../sass/mbj-ui.scss */
 .mbj-notiication-pane,
 .mbj_notiication_pane {
   display: inline-block;
   width: auto;
 }
 
-/* line 311, ../sass/mbj-ui.scss */
 .mbj-notification-copy,
 .mbj_notification_copy {
   padding: 0.75em 0;
@@ -391,25 +334,21 @@ button #footer-signup {
   text-align: justify;
   letter-spacing: -0.01em;
 }
-/* line 322, ../sass/mbj-ui.scss */
 .mbj-notification-copy:first-of-type,
 .mbj_notification_copy:first-of-type {
   padding-top: 0;
 }
-/* line 326, ../sass/mbj-ui.scss */
 .mbj-notification-copy p,
 .mbj_notification_copy p {
   margin: 0.5em 0;
   font-size: 0.75rem;
   color: white;
 }
-/* line 331, ../sass/mbj-ui.scss */
 .mbj-notification-copy p:first-of-type,
 .mbj_notification_copy p:first-of-type {
   margin-top: 0;
 }
 
-/* line 341, ../sass/mbj-ui.scss */
 .two-column {
   position: absolute;
   bottom: 24px;
@@ -417,45 +356,37 @@ button #footer-signup {
   width: 273px;
 }
 
-/* line 351, ../sass/mbj-ui.scss */
 p.status {
   text-align: center;
   vertical-align: middle;
   display: inline-block;
   width: 80%;
 }
-/* line 358, ../sass/mbj-ui.scss */
 p.fail {
   color: #fff;
 }
-/* line 362, ../sass/mbj-ui.scss */
 p.success {
   color: #fff;
 }
 
-/* line 371, ../sass/mbj-ui.scss */
 div.fail,
 input.fail {
   background-color: #c21010;
   border-radius: 3px;
 }
-/* line 376, ../sass/mbj-ui.scss */
 div.success,
 input.success {
   background-color: #0fc314;
   border-radius: 3px;
 }
 
-/* line 383, ../sass/mbj-ui.scss */
 div.fail {
   border-radius: 3px;
 }
-/* line 387, ../sass/mbj-ui.scss */
 div.success {
   border-radius: 3px;
 }
 
-/* line 394, ../sass/mbj-ui.scss */
 .btn-mbj {
   box-shadow: rgba(255, 255, 255, 0.2) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.04706) 0px 1px 2px 0px;
   background-color: #e6611c;
@@ -498,13 +429,11 @@ div.success {
   vertical-align: middle;
   color: #ffffff;
 }
-/* line 436, ../sass/mbj-ui.scss */
 .btn-mbj:active {
   background-image: none;
   outline: 0;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
 }
-/* line 442, ../sass/mbj-ui.scss */
 .btn-mbj.green {
   background-color: lightgreen;
   border-color: lightgreen;
@@ -512,7 +441,6 @@ div.success {
   font-size: 8pt;
 }
 
-/* line 452, ../sass/mbj-ui.scss */
 .btn-close {
   right: 0px;
   top: 0px;
@@ -526,12 +454,10 @@ div.success {
   -webkit-transform: translateZ(0);
   background-color: transparent;
 }
-/* line 465, ../sass/mbj-ui.scss */
 .btn-close > img {
   width: 100% !important;
   display: block;
 }
-/* line 470, ../sass/mbj-ui.scss */
 .btn-close:focus {
   box-shadow: none;
   outline: none;
@@ -539,7 +465,6 @@ div.success {
   outline: none;
 }
 
-/* line 480, ../sass/mbj-ui.scss */
 .btn-back {
   left: 0;
   top: 0;
@@ -552,13 +477,11 @@ div.success {
   -webkit-transform: translateZ(0);
   background-color: transparent;
 }
-/* line 492, ../sass/mbj-ui.scss */
 .btn-back > img {
   width: 100% !important;
   display: block;
 }
 
-/* line 500, ../sass/mbj-ui.scss */
 .mbj_login_response {
   background-color: #2b2c33;
   font-size: 14px;
@@ -585,7 +508,6 @@ div.success {
   vertical-align: baseline;
 }
 
-/* line 528, ../sass/mbj-ui.scss */
 .mbj_login_status {
   display: none;
   position: relative;
@@ -595,7 +517,6 @@ div.success {
   border-radius: 8px;
   background-color: transparent;
 }
-/* line 537, ../sass/mbj-ui.scss */
 .mbj_login_status img {
   width: 20%;
   height: auto;
@@ -603,20 +524,17 @@ div.success {
   position: relative;
 }
 
-/* line 548, ../sass/mbj-ui.scss */
 img.mbj_loading {
   margin: 0 auto;
   display: block;
   padding: 85px;
 }
 
-/* line 556, ../sass/mbj-ui.scss */
 .mbj-activity-indicator {
   left: 50%;
   top: 50%;
 }
 
-/* line 563, ../sass/mbj-ui.scss */
 .bean_notification_window {
   position: relative;
   top: -50%;
@@ -628,7 +546,6 @@ img.mbj_loading {
   z-index: 500;
 }
 
-/* line 576, ../sass/mbj-ui.scss */
 .bean_notification_text {
   position: absolute;
   top: 0;
@@ -646,7 +563,6 @@ img.mbj_loading {
   -webkit-transform: translateZ(0);
 }
 
-/* line 595, ../sass/mbj-ui.scss */
 .bean_notification_text p {
   position: relative;
   top: 0px;
@@ -654,19 +570,16 @@ img.mbj_loading {
   padding-left: 16px;
 }
 
-/* line 604, ../sass/mbj-ui.scss */
 .bean_notification_image {
   min-height: 199px;
 }
 
-/* line 610, ../sass/mbj-ui.scss */
 img.bean_notification_image {
   width: 100%;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* line 618, ../sass/mbj-ui.scss */
 p.mbj_caption {
   font-size: 0.7rem;
   color: #666;
@@ -675,7 +588,6 @@ p.mbj_caption {
   text-align: center;
 }
 
-/* line 628, ../sass/mbj-ui.scss */
 .mbj_login {
   display: none;
   margin: 0px auto;
@@ -687,53 +599,43 @@ p.mbj_caption {
   -webkit-transform: translateZ(0);
 }
 
-/* line 641, ../sass/mbj-ui.scss */
 .mbj_award_img {
   width: 100%;
 }
 
-/* line 647, ../sass/mbj-ui.scss */
 .mbj_notifier_header {
   width: 100%;
 }
 
-/* line 653, ../sass/mbj-ui.scss */
 .mbj_login_or_register {
   vertical-align: top;
   background-color: rgba(128, 128, 128, 0.1);
   display: none;
 }
 
-/* line 661, ../sass/mbj-ui.scss */
 .active_pane {
   display: block;
 }
 
-/* line 667, ../sass/mbj-ui.scss */
 .inactive_pane {
   display: none;
 }
 
-/* line 673, ../sass/mbj-ui.scss */
 .active_selector {
   background-color: rgba(128, 128, 128, 0.1);
 }
 
-/* line 679, ../sass/mbj-ui.scss */
 .inactive_selector {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-/* line 685, ../sass/mbj-ui.scss */
 .mbj_notification_title {
   text-align: center;
 }
-/* line 688, ../sass/mbj-ui.scss */
 .mbj_notification_title img {
   float: left;
   margin-top: 8px;
 }
-/* line 693, ../sass/mbj-ui.scss */
 .mbj_notification_title h2 {
   margin: 0.2em auto;
   display: inline;
@@ -742,7 +644,6 @@ p.mbj_caption {
   text-align: center;
   color: #ffc200;
 }
-/* line 702, ../sass/mbj-ui.scss */
 .mbj_notification_title h3 {
   position: relative;
   font-size: 1rem;
@@ -750,7 +651,6 @@ p.mbj_caption {
   color: white;
 }
 
-/* line 713, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selector {
   display: inline-block;
   width: 50%;
@@ -761,75 +661,53 @@ p.mbj_caption {
   font-size: 0.7rem;
 }
 
-/* line 725, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selectors {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: justify;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
-/* line 734, ../sass/mbj-ui.scss */
 input #mbj_form_u,
 input #mbj_form_p {
   font-size: 0.7rem;
 }
 
-/* line 742, ../sass/mbj-ui.scss */
 label.title,
 label.large {
   font-size: 0.75rem !important;
 }
 
-/* line 749, ../sass/mbj-ui.scss */
 .mbj_notification_pane_selector h2 {
   text-transform: uppercase;
   display: inline;
   vertical-align: middle;
 }
 
-/* line 757, ../sass/mbj-ui.scss */
 .nada {
   display: none;
 }
 
-/* line 774, ../sass/mbj-ui.scss */
 .mbj-form {
   margin: 0 auto;
 }
-/* line 778, ../sass/mbj-ui.scss */
 .mbj-form .element-input {
   margin-top: 0.5rem;
 }
-/* line 781, ../sass/mbj-ui.scss */
 .mbj-form .element-input:first-of-type {
   margin-top: 0;
 }
-/* line 787, ../sass/mbj-ui.scss */
 .mbj-form button {
   margin-top: 0.5rem;
 }
-/* line 790, ../sass/mbj-ui.scss */
 .mbj-form button:first-of-type {
   margin-top: 1.25rem;
 }
-/* line 796, ../sass/mbj-ui.scss */
 .mbj-form label {
   display: block;
   font-size: 1em;
   margin-bottom: 3px;
   clear: both;
 }
-/* line 803, ../sass/mbj-ui.scss */
 .mbj-form div,
 .mbj-form span,
 .mbj-form label,
@@ -837,11 +715,9 @@ label.large {
 .mbj-form button {
   font-family: inherit;
 }
-/* line 813, ../sass/mbj-ui.scss */
 .mbj-form .large {
   width: 100%;
 }
-/* line 817, ../sass/mbj-ui.scss */
 .mbj-form input[type=text],
 .mbj-form input[type=password],
 .mbj-form input[type=email] {
@@ -850,7 +726,6 @@ label.large {
   font-size: 0.8em;
   font-size: 0.8rem;
   font-weight: normal;
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.18), transparent 5px, transparent);
   background-image: linear-gradient(top, rgba(0, 0, 0, 0.18), transparent 5px, transparent);
   border-top: solid 1px #aaa;
   border-left: solid 1px #aaa;
@@ -860,19 +735,15 @@ label.large {
   outline: 0;
   box-sizing: border-box;
 }
-/* line 834, ../sass/mbj-ui.scss */
 .mbj-form input[type=text]:focus,
 .mbj-form input[type=password]:focus,
 .mbj-form input[type=email]:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #e6611c;
   border-color: #e6611c;
-  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.19), transparent 5px, transparent);
   background-image: linear-gradient(top, rgba(0, 0, 0, 0.19), transparent 5px, transparent);
-  -webkit-transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
-          transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
+  transition: border 0.2s linear 0s, box-shadow 0.2s linear 0s;
 }
 
-/* line 845, ../sass/mbj-ui.scss */
 .mbj-footer {
   font-family: Museo, Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 100%;
@@ -890,17 +761,14 @@ label.large {
   bottom: 0%;
   width: 100%;
 }
-/* line 862, ../sass/mbj-ui.scss */
 .mbj-footer a {
   text-decoration: none;
   color: rgba(255, 255, 255, 0.4);
 }
-/* line 867, ../sass/mbj-ui.scss */
 .mbj-footer p {
   margin: 1rem 0;
 }
 
-/* line 872, ../sass/mbj-ui.scss */
 .slider_h3 {
   color: #cccccc;
   font-size: 0.5rem;
@@ -908,75 +776,40 @@ label.large {
   line-height: 0.6rem;
 }
 
-/* line 879, ../sass/mbj-ui.scss */
 .slider_div {
   line-height: 0.7rem;
   height: 100% !important;
   display: block;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: start;
-  -webkit-align-items: flex-start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 
-/* line 889, ../sass/mbj-ui.scss */
 .slider_image {
   margin-bottom: 0.5rem;
 }
 
-/* line 893, ../sass/mbj-ui.scss */
 #slider_components {
   display: block;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  flex-direction: row;
+  align-items: center;
 }
 
-/* line 900, ../sass/mbj-ui.scss */
 .footer-header-strip {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   background-color: #37383d;
   font-size: 0.75rem;
   line-height: 2rem;
   border-bottom: 1px solid #282828;
   box-sizing: border-box;
   background: #4a4b51;
-  background: -webkit-linear-gradient(top, #4a4b51 0%, #2c2c30 100%);
   background: linear-gradient(to bottom, #4a4b51 0%, #2c2c30 100%);
   cursor: pointer;
 }
 
-/* line 913, ../sass/mbj-ui.scss */
 .footer-header-strip-title {
   color: #dc5214;
   text-align: left;
@@ -984,7 +817,6 @@ label.large {
   padding-left: 3%;
 }
 
-/* line 920, ../sass/mbj-ui.scss */
 .footer-header-strip-counter {
   color: #c09853;
   text-align: right;
@@ -992,71 +824,40 @@ label.large {
   padding-right: 3%;
 }
 
-/* line 927, ../sass/mbj-ui.scss */
 .footer-signup-strip {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   background-color: #37383d;
   width: 100%;
 }
 
-/* line 935, ../sass/mbj-ui.scss */
 #mbj-footer-logo {
   width: 15%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
 }
 
-/* line 941, ../sass/mbj-ui.scss */
 img#footer-logo {
   width: 100%;
 }
 
-/* line 945, ../sass/mbj-ui.scss */
 #mbj-footer-cta {
   width: 85%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  align-items: center;
+  justify-content: center;
   color: #c09853;
   line-height: 1.5rem;
 }
 
-/* line 954, ../sass/mbj-ui.scss */
 #mbj-footer-cta-sub {
   border: 0.5vh solid #222;
   background-color: #222 !important;
   width: 100%;
   text-align: left;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-  -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  flex-direction: row;
   display: flex;
 }
 
-/* line 963, ../sass/mbj-ui.scss */
 .footer-cta-title {
   font-size: 0.7rem;
   padding-left: 0.25rem;
@@ -1064,18 +865,15 @@ img#footer-logo {
   width: 50%;
 }
 
-/* line 970, ../sass/mbj-ui.scss */
 #splash-fade {
   pointer-events: none;
 }
 
-/* line 974, ../sass/mbj-ui.scss */
 .form-checkbox {
   font-size: 0.7rem !important;
   color: #a9a9a9;
 }
 
-/* line 979, ../sass/mbj-ui.scss */
 .frosted-overlay {
   width: 96%;
   height: 86%;
@@ -1092,8 +890,7 @@ img#footer-logo {
   -ms-filter: blur(3px);
   filter: url(#blur);
   filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='3');
-  -webkit-filter: blur(3px);
-          filter: blur(3px);
+  filter: blur(3px);
   border-style: ridge;
   border-radius: 0.2rem;
   border-top: 0.8rem ridge rgba(255, 255, 255, 0.2);
@@ -1101,21 +898,18 @@ img#footer-logo {
   border-bottom: 1rem ridge rgba(255, 255, 255, 0.05);
 }
 
-/* line 1003, ../sass/mbj-ui.scss */
 #main_container {
   background-color: rgba(40, 40, 60, 0.7);
   box-shadow: inset 0 0 12rem rgba(165, 225, 255, 0.6);
   position: relative;
 }
 
-/* line 1009, ../sass/mbj-ui.scss */
 #slider_components * h3 {
   text-shadow: 0px 0px 3px #000000 !important;
   font-size: 0.8rem;
   line-height: 0.9rem;
 }
 
-/* line 1015, ../sass/mbj-ui.scss */
 img.grippy {
   width: auto;
   height: 50%;
@@ -1123,9 +917,9 @@ img.grippy {
   margin-left: 2%;
 }
 
-/* line 1022, ../sass/mbj-ui.scss */
 .newcount {
   -webkit-animation: newcountglow 1s 1 linear;
+  -moz-animation: newcountglow 1s 1 linear;
   animation: newcountglow 1s 1 linear;
 }
 
@@ -1134,7 +928,6 @@ img.grippy {
  * ░░░░▒▒▓▓    Legacy modal styles
  * ░░░░▒▒▓▓
 */
-/* line 1039, ../sass/mbj-ui.scss */
 #mbj-youvewon-init {
   height: 399px;
   background-color: black;
@@ -1143,7 +936,6 @@ img.grippy {
   background-repeat: no-repeat;
 }
 
-/* line 1048, ../sass/mbj-ui.scss */
 #mbj-notification-youve-won {
   max-width: none;
   width: 343px;
@@ -1152,7 +944,6 @@ img.grippy {
   position: relative;
 }
 
-/* line 1056, ../sass/mbj-ui.scss */
 #mbj-label-init-username {
   float: left;
   color: white;
@@ -1163,13 +954,11 @@ img.grippy {
   text-align: center;
 }
 
-/* line 1066, ../sass/mbj-ui.scss */
 #mbj-field-init-username {
   float: left;
   padding-right: 5px;
   margin-top: 0px;
 }
-/* line 1071, ../sass/mbj-ui.scss */
 #mbj-field-init-username #mbj_form_u {
   width: 120px;
   background-color: silver;
@@ -1178,38 +967,31 @@ img.grippy {
   border-width: 3px;
 }
 
-/* line 1081, ../sass/mbj-ui.scss */
 form.mbj-form button.submit {
   height: 24px;
   margin-top: 0px;
   float: right;
   background: white;
 }
-/* line 1087, ../sass/mbj-ui.scss */
 form.mbj-form button.submit span {
   color: black;
 }
-/* line 1092, ../sass/mbj-ui.scss */
 form.mbj-form input,
 form.mbj-form select {
-  -webkit-transition: background-color 0.2s;
-          transition: background-color 0.2s;
+  transition: background-color 0.2s;
 }
 
-/* line 1098, ../sass/mbj-ui.scss */
 #mbj-onboard-buttons {
   margin-left: 10px;
   position: absolute;
   bottom: 4px;
 }
 
-/* line 1105, ../sass/mbj-ui.scss */
 .mbj-aside,
 .mbj-form-label {
   color: #a9a9a9 !important;
 }
 
-/* line 1110, ../sass/mbj-ui.scss */
 .btn-location {
   margin-top: 0 !important;
   height: inherit;
@@ -1223,6 +1005,28 @@ form.mbj-form select {
  * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 */
 @-webkit-keyframes newcountglow {
+  0% {
+    text-shadow: 0px 0px 0px #c09853;
+    color: #c09853;
+  }
+  25% {
+    text-shadow: 0px 0px 2px #c09853;
+    color: #c09853;
+  }
+  50% {
+    text-shadow: 0px 0px 4px #c09853;
+    color: #ffffff;
+  }
+  75% {
+    text-shadow: 0px 0px 2px #c09853;
+    color: #c09853;
+  }
+  100% {
+    text-shadow: 0px 0px 0px #c09853;
+    color: #c09853;
+  }
+}
+@-moz-keyframes newcountglow {
   0% {
     text-shadow: 0px 0px 0px #c09853;
     color: #c09853;
@@ -1279,12 +1083,10 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (max-device-width: 667px) and (orientation: portrait) {
-  /* line 1237, ../sass/mbj-ui.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 1242, ../sass/mbj-ui.scss */
   #modal-content {
     zoom: 2;
     width: inherit;
@@ -1296,12 +1098,10 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (orientation: landscape) {
-  /* line 1259, ../sass/mbj-ui.scss */
   .mbj_notification {
     width: 343px;
   }
 
-  /* line 1263, ../sass/mbj-ui.scss */
   #modal-content {
     width: 456px;
   }
@@ -1312,7 +1112,6 @@ form.mbj-form select {
  * ░░░░▒▒▓▓
 */
 @media all and (min-width: 600px) and (orientation: portrait) {
-  /* line 1279, ../sass/mbj-ui.scss */
   #modal-content {
     width: 456px;
   }

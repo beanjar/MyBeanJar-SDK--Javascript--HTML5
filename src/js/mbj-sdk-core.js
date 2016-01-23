@@ -1,69 +1,9 @@
-/* *
- *                                                                                                                        
- *       ************* **********                                            
- *       **      *    ****  *** ***                                           
- *       **   **   **  **   **   **                                           
- *       **   **   **   *   **   **                                           
- *       **   **   **   *   **   **                                           
- *       **   **   **   *   **   **                                           
- *       **   **   **   **   *   **                                           
- *       ********************    **                                           
- *       **           ********   **                                           
- *       **    ****    ***   *   **                                           
- *       **    *****   ****     **                                            
- *       **    *****   *************   ********** *************               
- *       **    *****   ****        *****        ***           **              
- *       **    ***    ***    ****   ***   ****   **    ****    **             
- *       **           ***    ****    *    ****    *    ****    ***            
- *       **    ****    **    ****   **   +****    *    ****    ***            
- *       **    *****   **     **   *****          *    ****    ***            
- *       **    *****   **       *******   ****    *    ****    ***            
- *       **    *****   **    ****    *    ****    *    ****    ***            
- *       **    *****   **    ****   **    ****    *    ****    ***            
- *       **    ***    ****    **   ****    **    **    ****    ***            
- *       **+*     ****  ****   *********      *****  ******  ***             
- *        *********    ******************    ******* **   *****              
- *                   ***+.   ..++*****    **    **     **    ***             
- *                   **+.    ....+***    ****    *    *****   ***            
- *                  ***..    ...+++**    ****    *    *****    **            
- *                  **+..    ....++*******       *    **********             
- *                 ***..     ....++***    **     *    ***   **               
- *             *****...     ....+++**    ****    *    ***                    
- *           ***++...     .....++++**    ****    *    ***                    
- *          ***+..       ....+++++***    ****    *    ***                    
- *          **+...    ......+++++*****          **    ***                    
- *          **+..........++++++****  *****  *******  ***                     
- *           ***++.....++++++****       ******   ******                      
- *            *****+++++++*****                                              
- *               ***********  
- *
- *
- *
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    mbj-sdk.js                 ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    MyBeanJar HTML / JS SDK    ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    Core Methods               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
- * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  
- * 
- *
- *  http://mybeanjar.com
- *  https://github.com/beanjar
- *
-*/
-
-
-
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
  * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
  * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
  * ░░░░▒▒▓▓    High-level request methods    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
  * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
- * ░░░░▒▒▓▓    (MBJRequest.js)               ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓    (mbj-sdk.api-methods.js)      ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
  * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 */
@@ -72,7 +12,7 @@
 
 
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    API Constants
  * ░░░░▒▒▓▓
@@ -85,7 +25,7 @@ var STATUS_FAIL  = "Status fail";
 
 
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    High-level API methods  
  * ░░░░▒▒▓▓
@@ -112,10 +52,10 @@ function delete_bean(username, password, beankey, callback) {
 
 function get_apps(username, password, limit_value, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
- * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓    Password optional at present. NOTE: This may change in the future.
  * ░░░░▒▒▓▓
 */
 
@@ -160,10 +100,10 @@ function get_beans(username, password, limit_value, sort_by, callback) {
 
 function get_categories(username, password, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
- * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓    Password optional at present. NOTE: This may change in the future.
  * ░░░░▒▒▓▓
 */
 
@@ -193,10 +133,10 @@ function get_locations_for_sponsor(username,password,sponsorkey,callback){
 
 function get_sponsors(username, password, limit_value, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
- * ░░░░▒▒▓▓    Password made optional at present. NOTE: This may change in the future.
+ * ░░░░▒▒▓▓    Password optional at present. NOTE: This may change in the future.
  * ░░░░▒▒▓▓
 */
 
@@ -236,7 +176,7 @@ function reedem_bean(username, password, beankey, callback) {
 
 function register_user(username, password, email, zipcode, lat, lon, categories, callback) {
 
-/*
+/* *
  * ░░░░▒▒▓▓
  * ░░░░▒▒▓▓    [NOTICE]
  * ░░░░▒▒▓▓    Issues have been reported with use of lat/long data
@@ -278,100 +218,30 @@ function validate_user(username,callback){
 
 
 
-/*
- * ░░░░▒▒▓▓
- * ░░░░▒▒▓▓    API request-builder and response handler
- * ░░░░▒▒▓▓    
- * ░░░░▒▒▓▓    Prepares cross-original request and selects the appropriate callbacks
- * ░░░░▒▒▓▓
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    API Response Parsers          ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓    (mbj-sdk.api-parser.**.js)    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
 */
 
 
-function request_to_api(callback, resource, method, params, url) {
-    var xhr = createCORSRequest("POST", url);
-    xhr.withCredentials = true;
-    if (!xhr) {
-        alert('CORS not supported');
-        return "corsNotSupported";
-    }
-    
-    // Response handlers.
-    xhr.onload = function() {
-        var data = xhr.responseText;
 
-        if (method === "winners"){
-            parse_winners_and_callback(data, callback);
-        } else if (method === "apps") {
-            parse_apps_and_callback(data, callback);
-        } else if (method === "sponsors"){
-            parse_sponsors_and_callback(data, callback);
-        } else if(method === "sponsorlocations"){
-            parse_sponsor_locations_and_callback(data, callback);
-        } else if (method === "beans"){
-            parse_beans_and_callback(data, callback);
-        } else if (method === "categories"){
-            parse_categories_and_callback(data, callback);
-        } else if (method === "awardcoupon"){
-            parse_award_and_callback(data, callback);
-        } else if (method === "registerUser"){
-            parse_register_and_callback(data, callback);
-        } else if (method === "sendpassword"){
-            parse_sendpassword_and_callback(data, callback);
-        } else if (method === "deletebean"){
-           parse_deletebean_and_callback(data, callback);
-        } else if (method === "redeembean"){
-           parse_redeembean_and_callback(data, callback);
-        } else if (method === "authenticateUser"){
-            parse_authenticateuser_and_callback(data, callback);
-        } else if (method === "validateuser"){
-            parse_validateuser_and_callback(data, callback);
-        }
-    };
-
-    xhr.onerror = function() {
-        alert('There was an error making the request.');
-    };
-
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhr.send(JSON.stringify({resource: resource, method: method, params: params}));
-
-    return "error";
-}
-
-function createCORSRequest(method, url) {
-    var xhr = new XMLHttpRequest();
-
-    if ("withCredentials" in xhr) {
-        // XHR for Chrome/Firefox/Opera/Safari.
-        xhr.open(method, url, true);
-    } else if (typeof XDomainRequest != "undefined") {
-        // XDomainRequest for IE.
-        xhr = new XDomainRequest();
-        xhr.open(method, url);
-    } else {
-        // CORS not supported.
-        xhr = null;
-    }
-    return xhr;
-}
-
-
-
-
-
-/*
+/* *
  * ░░░░▒▒▓▓
- * ░░░░▒▒▓▓    API response parsers
- * ░░░░▒▒▓▓    
- * ░░░░▒▒▓▓    Manipulates and prepares data received from MyBeanJar API
+ * ░░░░▒▒▓▓    Apps Response
  * ░░░░▒▒▓▓
 */
-
-
 
 var apps = [];
 var appsArray = [];
 var numberOfApps;
+
+
 
 function parse_apps(apps) {
     for (var i = 0; i < numberOfApps; i++) {
@@ -425,8 +295,11 @@ function parse_apps_and_callback(data, callback) {
         callback(result,apps);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Authentication Response
+ * ░░░░▒▒▓▓
+*/
 
 function parse_authenticateuser_and_callback(data, callback){
 
@@ -447,7 +320,7 @@ function parse_authenticateuser_and_callback(data, callback){
     } 
 
     else {
-        sessionStorage.removeItem('email') ;  	
+        sessionStorage.removeItem('email') ;    
     }
     var result;
 
@@ -461,10 +334,15 @@ function parse_authenticateuser_and_callback(data, callback){
         callback(result,message);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Award Response
+ * ░░░░▒▒▓▓
+*/
 
 var currentWinArray = [];
+
+
 
 function parse_award(currentWinArray) {
     var award = [];
@@ -511,12 +389,17 @@ function parse_award_and_callback(data, callback) {
         callback(result,award);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Beans Response
+ * ░░░░▒▒▓▓
+*/
 
 var beans = [];
 var beansArray = [];
 var numberOfBeans;
+
+
 
 function parse_beans(beans) {
     for (var i = 0; i < numberOfBeans; i++) {
@@ -587,12 +470,17 @@ function get_expiration_days(date) {
 
     return Math.floor(timeDiff / (60 * 60 * 24 * 1000));
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Categories Response
+ * ░░░░▒▒▓▓
+*/
 
 var categories = [];
 var categoriesArray = [];
 var numberOfCategories;
+
+
 
 function parse_categories(categories) {
     for (var i = 0; i < numberOfCategories; i++) {
@@ -640,8 +528,11 @@ function parse_categories_and_callback(data, callback) {
         callback(result,categories);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Delete Bean Response
+ * ░░░░▒▒▓▓
+*/
 
 function parse_deletebean_and_callback(data, callback) {
     
@@ -669,8 +560,11 @@ function parse_deletebean_and_callback(data, callback) {
         callback(result,message);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    MD5 Helper
+ * ░░░░▒▒▓▓
+*/
 
 var MD5 = function (string) {
  
@@ -872,66 +766,11 @@ var MD5 = function (string) {
  
     return temp.toLowerCase();
 }
-
-
-
-function parse_redeembean_and_callback(data, callback) {
-    
-    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
-        result = INTERNAL_SERVER_ERROR;
-        callback(result,message);
-        return;
-    }
-    
-    console.log("this is reedem data");
-    console.log(data);
-    var json = JSON.parse(data);
-    console.log("this is reedem json ");
-    console.log(json);
-    var status = json.status;
-    var result;
-    var message = json.response.message;
-
-    if (status === 1) {
-        result = STATUS_SUCCESS;
-        callback(result,message);
-    } 
-
-    else {
-        result = STATUS_FAIL;
-        callback(result,message);
-    }
-}
-
-
-
-function parse_register_and_callback(data, callback) {
-    
-    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
-        result = INTERNAL_SERVER_ERROR;
-        callback(result,message);
-        return;
-    }
-    
-    var json = JSON.parse(data);
-    console.log("this is register json ");
-    console.log(json);
-    var status = json.status;
-    var message = json.response.message;
-    var result;
-
-    if (status === 1) {
-        result = STATUS_SUCCESS;
-        callback(result,message);
-    } 
-
-    else {
-        result = STATUS_FAIL;
-        callback(result,message);
-    }
-}
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Password Recovery Response
+ * ░░░░▒▒▓▓
+*/
 
 function parse_sendpassword_and_callback(data, callback) {
     
@@ -967,8 +806,75 @@ function parse_sendpassword_and_callback(data, callback) {
         callback(result,message);
     }
 }
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Redeem Bean Response
+ * ░░░░▒▒▓▓
+*/
 
+function parse_redeembean_and_callback(data, callback) {
+    
+    if (data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+        result = INTERNAL_SERVER_ERROR;
+        callback(result,message);
+        return;
+    }
+    
+    console.log("this is reedem data");
+    console.log(data);
+    var json = JSON.parse(data);
+    console.log("this is reedem json ");
+    console.log(json);
+    var status = json.status;
+    var result;
+    var message = json.response.message;
 
+    if (status === 1) {
+        result = STATUS_SUCCESS;
+        callback(result,message);
+    } 
+
+    else {
+        result = STATUS_FAIL;
+        callback(result,message);
+    }
+}
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Registration Response
+ * ░░░░▒▒▓▓
+*/
+
+function parse_register_and_callback(data, callback) {
+    
+    if(data.indexOf(INTERNAL_SERVER_ERROR) > -1){
+        result = INTERNAL_SERVER_ERROR;
+        callback(result,message);
+        return;
+    }
+    
+    var json = JSON.parse(data);
+    console.log("this is register json ");
+    console.log(json);
+    var status = json.status;
+    var message = json.response.message;
+    var result;
+
+    if (status === 1) {
+        result = STATUS_SUCCESS;
+        callback(result,message);
+    } 
+
+    else {
+        result = STATUS_FAIL;
+        callback(result,message);
+    }
+}
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Password Recovery Response
+ * ░░░░▒▒▓▓
+*/
 
 function parse_sponsor_locations_and_callback(data, callback) {
     
@@ -996,12 +902,17 @@ function parse_sponsor_locations_and_callback(data, callback) {
         callback(result,message);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Sponsors Response
+ * ░░░░▒▒▓▓
+*/
 
 var sponsors = [];
 var sponsorArray = [];
 var numberOfSponsors;
+
+
 
 function parse_sponsors(sponsors) {
     for (var i = 0; i < numberOfSponsors; i++) {
@@ -1057,8 +968,11 @@ function parse_sponsors_and_callback(data, callback) {
         callback(result,sponsors);
     }
 }
-
-
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    User Validation Response
+ * ░░░░▒▒▓▓
+*/
 
 function parse_validateuser_and_callback(data, callback) {
     
@@ -1086,6 +1000,11 @@ function parse_validateuser_and_callback(data, callback) {
         callback(result,message);
     }
 }
+/* *
+ * ░░░░▒▒▓▓
+ * ░░░░▒▒▓▓    Winners Response
+ * ░░░░▒▒▓▓
+*/
 
 var winners = [];
 var winnersArray = [];
@@ -1142,3 +1061,147 @@ function parse_winners_and_callback(data, callback) {
         callback(result,winners);
     }
 }
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *\
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\  
+ * ░░░░▒▒▓▓    API Request Builder           ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░\ 
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓    (mbj-sdk.api-requester.js)    ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓                                  ▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+ * ░░░░▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+*/
+
+
+function request_to_api(callback, resource, method, params, url) {
+    var xhr = createCORSRequest("POST", url);
+    xhr.withCredentials = true;
+    if (!xhr) {
+        alert('CORS not supported');
+        return "corsNotSupported";
+    }
+    
+    // Response handlers.
+    xhr.onload = function() {
+        var data = xhr.responseText;
+
+        if (method === "winners"){
+            parse_winners_and_callback(data, callback);
+        } else if (method === "apps") {
+            parse_apps_and_callback(data, callback);
+        } else if (method === "sponsors"){
+            parse_sponsors_and_callback(data, callback);
+        } else if(method === "sponsorlocations"){
+            parse_sponsor_locations_and_callback(data, callback);
+        } else if (method === "beans"){
+            parse_beans_and_callback(data, callback);
+        } else if (method === "categories"){
+            parse_categories_and_callback(data, callback);
+        } else if (method === "awardcoupon"){
+            parse_award_and_callback(data, callback);
+        } else if (method === "registerUser"){
+            parse_register_and_callback(data, callback);
+        } else if (method === "sendpassword"){
+            parse_sendpassword_and_callback(data, callback);
+        } else if (method === "deletebean"){
+           parse_deletebean_and_callback(data, callback);
+        } else if (method === "redeembean"){
+           parse_redeembean_and_callback(data, callback);
+        } else if (method === "authenticateUser"){
+            parse_authenticateuser_and_callback(data, callback);
+        } else if (method === "validateuser"){
+            parse_validateuser_and_callback(data, callback);
+        }
+    };
+
+    xhr.onerror = function() {
+        alert('There was an error making the request.');
+    };
+
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+    xhr.send(JSON.stringify({resource: resource, method: method, params: params}));
+
+    return "error";
+}
+
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        // CORS not supported.
+        xhr = null;
+    }
+    return xhr;
+}
+
+
+
+
+
+
+/* *
+ *                                                                                                                        
+ *        ************ **********                                            
+ *       **      *    **** **** ***                                           
+ *       **   **   **  **   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   *   **   **                                           
+ *       **   **   **   **   *   **                                           
+ *       *******************     **                                           
+ *       **           ********   **                                           
+ *       **    ****    ***   *   **                                           
+ *       **    *****   ****     **                                            
+ *       **    *****   *************   **********  ************               
+ *       **    *****   ****        *****        ***           **              
+ *       **    ***    ***     **    **    ****   **    ****    **             
+ *       **           ***    ****    *    ****    *    ****    **             
+ *       **    ****    **    ****    ****+****    *    ****    **             
+ *       **    *****   **          ****           *    ****    **             
+ *       **    *****   **    *********    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    *****   **    ****   **    ****    *    ****    **             
+ *       **    ***    ****    **   ****    **    **    ****    **             
+ *       **+*     ****  ****      ******       ****   *****   **             
+ *         ********    ****************************************              
+ *                   ***+......++******         **           ***             
+ *                   **+.. ......+***    ****    *    ****    ***            
+ *                  ***..   ....+++**    ****    *    *****    **            
+ *                  **+..   .....++**********    *    **********             
+ *                 ***..    .....++***           *    ***   **               
+ *             *****...     ....+++**    ****    *    ***                    
+ *           ***++...     .....++++**    ****    *    ***                    
+ *          ***+..       ....+++++***    ****    *    ***                    
+ *          **+...    ......+++++*****    **    **    ***                    
+ *          **+..........++++++****  ***      *****  ***                     
+ *           ***++.....++++++****       ******    ****                       
+ *            *****+++++++*****                                              
+ *               **********  
+ *
+ *
+ *
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    mbj-sdk.js                 ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    MyBeanJar HTML / JS SDK    ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓    Core Methods               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓                               ▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░
+ * ░░░░░░░░░▒▒▒▒▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒▒▒▒░░░░░░░░░░  
+ * 
+ *
+ *  http://mybeanjar.com
+ *  https://github.com/beanjar
+ *
+*/
+
+
+
