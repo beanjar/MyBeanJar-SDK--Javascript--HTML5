@@ -10,7 +10,6 @@ The MyBeanJar JS SDK allows you to incorporate the [MyBeanJar rewardware service
 * [Customization](#customization)
 
 
-
 <a name="overview"></a>
 ## Overview
 MyBeanJar is a mobile commerce/game reward platform that distributes targeted digital coupons for game achievements. These rewards are redeemed straight from the MyBeanJar wallet, which prompts redemption via location-alerts, sharing, and a real-time leaderboard.
@@ -18,7 +17,6 @@ MyBeanJar is a mobile commerce/game reward platform that distributes targeted di
 Instead of providing users with empty badges, trophies, or achievements, MyBeanJar allows you to reward users with real-world coupons and offers served up on demand.
 
 The MyBeanJar SDK allows developers to incorporate the MyBeanJar rewardware service into their games and apps. This package contains basic methods used to interact with the various endpoints of the MyBeanJar API as well as a turn-key user interface manager that takes care of user sign-in, registration, and award fulfillment.
-
 
 
 <a name="installation"></a>
@@ -71,7 +69,6 @@ The MyBeanJar SDK depends on **jQuery** and **spin.js**—be sure to include the
 * https://github.com/fgnass/spin.js/
 
 
-
 <a name="configuration"></a>
 ## Configuration
 
@@ -112,7 +109,6 @@ MyBeanJarController.prototype = {
 Once you've added your app ID to the SDK code, you're ready to start making calls.
 
 
-
 <a name="usage"></a>
 ## Usage
 
@@ -132,24 +128,22 @@ All of this happens automagically, without the need for additional calls. Just m
 ### Advanced
 In addition to providing access to the endpoints used for awarding beans and registering and authenticating users, the MyBeanJar SDK also provides methods for accessing the MyBeanJar APIs other endpoints as well. The following is a list of all of the API methods available through the SDK,
 
-* authenticate_user()
-* get_apps()
-* get_award()
-* get_beans()
-* get_categories()
-* get_locations_for_sponsor()
-* get_sponsors()
-* get_winners()
-* redeem_bean()
-* delete_bean()
-* register_user()
-* send_password()
-* validate_user()
+* [authenticate_user()](#authenticate_user)
+* [get_apps()](#get_apps)
+* [get_award()](#get_award)
+* [get_beans()](#get_beans)
+* [get_categories()](#get_categories)
+* [get_locations_for_sponsor()](#get_locations_for_sponsor)
+* [get_sponsors()](#get_sponsors)
+* [get_winners()](#get_winners)
+* [redeem_bean()](#redeem_bean)
+* [delete_bean()](#delete_bean)
+* [register_user()](#register_user)
+* [send_password()](#send_password)
+* [validate_user()](#validate_user)
 
 
-
-
-
+<a name="authentivate_user"></a>
 #### authenticate_user()
 ##### Description
 Determines whether the supplied credentials are valid for a supplied username
@@ -183,7 +177,7 @@ A verbose description of the result of the request
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
-
+<a name="get_apps"></a>
 #### get_apps()
 ##### Description
 Returns an array of apps that use MyBeanJar
@@ -229,9 +223,7 @@ An array of apps, including key-value pairs for each app
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
-
-
-
+<a name="get_award"></a>
 #### get_award()
 ##### Description
 Adds a Bean to the user’s wallet. Information about the awarded Bean is returned in the callback.
@@ -274,8 +266,7 @@ An array of award Beans, including key-value pairs for each Bean.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
-
-
+<a name="get_beans"></a>
 #### get_beans()
 ##### Description
 Returns an array of Beans available to be awarded to users.
@@ -337,7 +328,7 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 
 
 
-
+<a name="get_categories"></a>
 #### get_categories()
 ##### Description
 Returns an array of categories in which Beans can be awarded.
@@ -374,9 +365,7 @@ An array of categories, including key-value pairs for each Bean.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
-
-
-
+<a name="get_locations_for_sponsor"></a>
 #### get_locations_for_sponsor()
 ##### Description
 Returns an array of redemption locations for a given sponsor.
@@ -415,9 +404,7 @@ This method is still under development. Any calls made using this method will yi
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
-
-
-
+<a name="get_sponsors"></a>
 #### get_sponsors()
 ##### Description
 Returns an array of sponsors associated with Beans
@@ -461,9 +448,7 @@ An array of sponsors, including key-value pairs for each location.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
-
-
-
+<a name="get_winners"></a>
 #### get_winners()
 ##### Description
 Returns the cumulative number of Beans awarded (system-wide) along with details on each Bean.
@@ -501,9 +486,7 @@ each.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
-
-
-
+<a name="redeem_bean"></a>
 #### redeem_bean()
 ##### Description
 Redeems a Bean contained within the user’s wallet. On redemption, the Bean is removed from the user’s wallet. This call returns a redemption code for the transaction.
@@ -548,9 +531,7 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 This method is still under development. The unparsed JSON response to this request appears to include a malformed key-value pair. Within the “data” object is an array containing keys of “0” and “1” with values of “redemptioncode” and an actual redemption code.
 
 
-
-
-
+<a name="delete_bean"></a>
 #### delete_bean()
 ##### Description
 Deletes a specified Bean from the user’s wallet.
@@ -587,9 +568,7 @@ A verbose description of the result of the request.
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
-
-
-
+<a name="register_user"></a>
 #### register_user()
 ##### Description
 Registers a new user account. Also triggers an activation e-mail message to be sent to the address supplied. Accounts remain inactive until they are activated by user.
@@ -634,9 +613,7 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 The categories parameter should have no fewer than three category IDs included within it.
 
 
-
-
-
+<a name="send_password"></a>
 #### send_password()
 ##### Description
 Sends an e-mailed password recovery link to the e-mail address associated with the specified username.
@@ -667,9 +644,7 @@ A verbose description of the result of the request.
 Contrary to its name, this method does not actually send a password to the specified user. Rather, this method triggers the sending of a password recovery link to the e-mail address of the specified user.
 
 
-
-
-
+<a name="validate_user"></a>
 #### validate_user()
 ##### Description
 Returns the status of the account for a specified username (i.e., whether or not the account exists).
@@ -698,8 +673,3 @@ A verbose description of the result of the request.
 
 ##### Additional Notes
 Does not actually validate the account of the username supplied. This method only indicates whether the account has been previously validated/activated by the user.
-
-
-
-
-
