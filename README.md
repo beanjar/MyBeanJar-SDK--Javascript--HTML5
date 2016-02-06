@@ -7,7 +7,6 @@ The MyBeanJar JS SDK allows you to incorporate the [MyBeanJar rewardware service
 * [Configuration](#configuration)
 * [Examples](#examples)
 * [Usage](#usage)
-* [Customization](#customization)
 
 
 <a name="overview"></a>
