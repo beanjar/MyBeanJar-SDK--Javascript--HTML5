@@ -8,6 +8,7 @@ The MyBeanJar JS SDK allows you to incorporate the [MyBeanJar rewardware service
 * [Usage](#usage)
 
 
+<br/>
 <a name="overview"></a>
 ## Overview
 MyBeanJar is a mobile commerce/game reward platform that distributes targeted digital coupons for game achievements. These rewards are redeemed straight from the MyBeanJar wallet, which prompts redemption via location-alerts, sharing, and a real-time leaderboard.
@@ -17,6 +18,7 @@ Instead of providing users with empty badges, trophies, or achievements, MyBeanJ
 The MyBeanJar SDK allows developers to incorporate the MyBeanJar rewardware service into their games and apps. This package contains basic methods used to interact with the various endpoints of the MyBeanJar API as well as a turn-key user interface manager that takes care of user sign-in, registration, and award fulfillment.
 
 
+<br/>
 <a name="installation"></a>
 ## Installation
 
@@ -67,6 +69,7 @@ The MyBeanJar SDK depends on **jQuery** and **spin.js**—be sure to include the
 * https://github.com/fgnass/spin.js/
 
 
+<br/>
 <a name="configuration"></a>
 ## Configuration
 
@@ -107,6 +110,7 @@ MyBeanJarController.prototype = {
 Once you've added your app ID to the SDK code, you're ready to start making calls.
 
 
+<br/>
 <a name="usage"></a>
 ## Usage
 
@@ -141,6 +145,7 @@ In addition to providing access to the endpoints used for awarding beans and reg
 * [validate_user()](#validate_user)
 
 
+<br/>
 <a name="authentivate_user"></a>
 #### authenticate_user()
 ###### Description
@@ -175,6 +180,7 @@ A verbose description of the result of the request
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
+<br/>
 <a name="get_apps"></a>
 #### get_apps()
 ###### Description
@@ -221,6 +227,7 @@ An array of apps, including key-value pairs for each app
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
+<br/>
 <a name="get_award"></a>
 #### get_award()
 ###### Description
@@ -264,6 +271,7 @@ An array of award Beans, including key-value pairs for each Bean.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
+<br/>
 <a name="get_beans"></a>
 #### get_beans()
 ###### Description
@@ -326,6 +334,7 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 
 
 
+<br/>
 <a name="get_categories"></a>
 #### get_categories()
 ###### Description
@@ -363,6 +372,7 @@ An array of categories, including key-value pairs for each Bean.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
+<br/>
 <a name="get_locations_for_sponsor"></a>
 #### get_locations_for_sponsor()
 ###### Description
@@ -402,6 +412,7 @@ This method is still under development. Any calls made using this method will yi
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
+<br/>
 <a name="get_sponsors"></a>
 #### get_sponsors()
 ###### Description
@@ -446,6 +457,7 @@ An array of sponsors, including key-value pairs for each location.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
+<br/>
 <a name="get_winners"></a>
 #### get_winners()
 ###### Description
@@ -484,6 +496,7 @@ each.
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
+<br/>
 <a name="redeem_bean"></a>
 #### redeem_bean()
 ###### Description
@@ -529,6 +542,7 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 This method is still under development. The unparsed JSON response to this request appears to include a malformed key-value pair. Within the "data" object is an array containing keys of "0" and "1" with values of "redemptioncode" and an actual redemption code.
 
 
+<br/>
 <a name="delete_bean"></a>
 #### delete_bean()
 ###### Description
@@ -566,6 +580,7 @@ A verbose description of the result of the request.
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
+<br/>
 <a name="register_user"></a>
 #### register_user()
 ###### Description
@@ -611,6 +626,7 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 The categories parameter should have no fewer than three category IDs included within it.
 
 
+<br/>
 <a name="send_password"></a>
 #### send_password()
 ###### Description
@@ -642,6 +658,7 @@ A verbose description of the result of the request.
 Contrary to its name, this method does not actually send a password to the specified user. Rather, this method triggers the sending of a password recovery link to the e-mail address of the specified user.
 
 
+<br/>
 <a name="validate_user"></a>
 #### validate_user()
 ###### Description
