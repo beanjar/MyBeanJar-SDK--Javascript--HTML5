@@ -143,10 +143,10 @@ In addition to providing access to the endpoints used for awarding beans and reg
 
 <a name="authentivate_user"></a>
 #### authenticate_user()
-##### Description
+###### Description
 Determines whether the supplied credentials are valid for a supplied username
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account to be authenticated
 
@@ -156,31 +156,31 @@ The password of the account to be authenticated
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `message`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `message` (string)
 A verbose description of the result of the request
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-    “message” :
+"response" : {
+    "message" :
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
 <a name="get_apps"></a>
 #### get_apps()
-##### Description
+###### Description
 Returns an array of apps that use MyBeanJar
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account making the request
 
@@ -193,40 +193,40 @@ The maximum number of apps to return
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `apps`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `apps` (array)
 An array of apps, including key-value pairs for each app
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-  “apps” : [{
-    “appkey” :,
-    “appstoreurl” :,
-    “description” :,
-    “iconurl” :,
-    “name” :,
-    “publisher” :,
-    “publisherkey” :,
-    “publisherurl” :
+"response" : {
+  "apps" : [{
+    "appkey" :,
+    "appstoreurl" :,
+    "description" :,
+    "iconurl" :,
+    "name" :,
+    "publisher" :,
+    "publisherkey" :,
+    "publisherurl" :
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
 <a name="get_award"></a>
 #### get_award()
-##### Description
+###### Description
 Adds a Bean to the user’s wallet. Information about the awarded Bean is returned in the callback.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account receiving the bean
 
@@ -239,37 +239,37 @@ The unique ID of the app making the request
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `award`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `award` (array)
 An array of award Beans, including key-value pairs for each Bean.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
+"response" : {
   award : [{
-    “awarded” :,
-    “beankey” :,
-    “imageurl” :,
-    “iconurl” :,
-    “message” :
+    "awarded" :,
+    "beankey" :,
+    "imageurl" :,
+    "iconurl" :,
+    "message" :
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
 <a name="get_beans"></a>
 #### get_beans()
-##### Description
+###### Description
 Returns an array of Beans available to be awarded to users.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account making the request.
 
@@ -290,37 +290,37 @@ The sort method by which results will returned. Valid sort methods include:
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `beans`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `beans` (array)
 An array of Beans, including key-value pairs for each Bean.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-  “beans” : [{
-    “beankey” :,
-    “expirationdate” :,
-    “game” :,
-    “geocodekey” :,
-    “longdescription” :,
-    “redeembarcodeurl” :,
-    “redemptionurl” :,
-    “redemptionvalidation” :,
-    “shortdescription” :,
-    “sponsorkey” :,
-    “sponsorlogourl” :,
-    “sponsorname” :,
-    "sponsorurl” :,
-    “wondate” :
+"response" : {
+  "beans" : [{
+    "beankey" :,
+    "expirationdate" :,
+    "game" :,
+    "geocodekey" :,
+    "longdescription" :,
+    "redeembarcodeurl" :,
+    "redemptionurl" :,
+    "redemptionvalidation" :,
+    "shortdescription" :,
+    "sponsorkey" :,
+    "sponsorlogourl" :,
+    "sponsorname" :,
+    "sponsorurl" :,
+    "wondate" :
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
@@ -328,10 +328,10 @@ The password parameter is expected in plaintext. The SDK automatically hashes it
 
 <a name="get_categories"></a>
 #### get_categories()
-##### Description
+###### Description
 Returns an array of categories in which Beans can be awarded.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account making the request.
 
@@ -341,34 +341,34 @@ The password of the account making the request.
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `categories`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `categories` (array)
 An array of categories, including key-value pairs for each Bean.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-  “categories” : [{
-    “categorykey” :,
-    “name” :
+"response" : {
+  "categories" : [{
+    "categorykey" :,
+    "name" :
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
 <a name="get_locations_for_sponsor"></a>
 #### get_locations_for_sponsor()
-##### Description
+###### Description
 Returns an array of redemption locations for a given sponsor.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account making the request.
 
@@ -381,22 +381,22 @@ The unique ID of the sponsor for which redemption locations are sought.
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `locations`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `locations` (array)
 An array of redemption location objects, including key-value pairs for each location.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
+"response" : {
   "locations" : [{}]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 This method is still under development. Any calls made using this method will yield only an empty locations array
 
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
@@ -404,10 +404,10 @@ This method does not automatically hash the password parameter before submitting
 
 <a name="get_sponsors"></a>
 #### get_sponsors()
-##### Description
+###### Description
 Returns an array of sponsors associated with Beans
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account making the request.
 
@@ -420,16 +420,16 @@ The maximum number of sponsors to return.
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `sponsors`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `sponsors` (array)
 An array of sponsors, including key-value pairs for each location.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
+"response" : {
   "sponsors" : [{
     "description" :,
     "geocodekey" :,
@@ -439,26 +439,26 @@ An array of sponsors, including key-value pairs for each location.
     "sponsorkey":
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
 <a name="get_winners"></a>
 #### get_winners()
-##### Description
+###### Description
 Returns the cumulative number of Beans awarded (system-wide) along with details on each Bean.
 
-##### Parameters
+###### Parameters
 `limit_value` (int)
 The maximum number of sponsors to return.
 
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `winners`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
@@ -466,9 +466,9 @@ The status of the request
 An array of winners and their awarded Beans, including key-value pairs for
 each.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
+"response" : {
   "totalbeans" :,
   "winners" : [{
     "appkey" :,
@@ -477,19 +477,19 @@ each.
     "username" :
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 This method does not automatically hash the password parameter before submitting. However, the server expects an MD5 hash. Be sure to hash passwords before passing them to this function.
 
 
 <a name="redeem_bean"></a>
 #### redeem_bean()
-##### Description
+###### Description
 Redeems a Bean contained within the user’s wallet. On redemption, the Bean is removed from the user’s wallet. This call returns a redemption code for the transaction.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account redeeming the Bean.
 
@@ -502,39 +502,39 @@ The unique ID of the Bean to be redeemed.
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `message`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `message` (array)
 A verbose description of the result of the request.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-  “message” :
-  “data” : [{
-    “0” :,
-    “1” :
+"response" : {
+  "message" :
+  "data" : [{
+    "0" :,
+    "1" :
   }]
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
-Earlier versions of the SDK contain a typo in the declaration of this method (i.e., “reedem_bean” versus “redeem_bean”).
+###### Additional Notes
+Earlier versions of the SDK contain a typo in the declaration of this method (i.e., "reedem_bean" versus "redeem_bean").
 
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
-This method is still under development. The unparsed JSON response to this request appears to include a malformed key-value pair. Within the “data” object is an array containing keys of “0” and “1” with values of “redemptioncode” and an actual redemption code.
+This method is still under development. The unparsed JSON response to this request appears to include a malformed key-value pair. Within the "data" object is an array containing keys of "0" and "1" with values of "redemptioncode" and an actual redemption code.
 
 
 <a name="delete_bean"></a>
 #### delete_bean()
-##### Description
+###### Description
 Deletes a specified Bean from the user’s wallet.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account from which the Bean is to be deleted.
 
@@ -547,31 +547,31 @@ The unique ID of the Bean to be deleted.
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `message`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `message` (array)
 A verbose description of the result of the request.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-  “message” :
+"response" : {
+  "message" :
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 
 <a name="register_user"></a>
 #### register_user()
-##### Description
+###### Description
 Registers a new user account. Also triggers an activation e-mail message to be sent to the address supplied. Accounts remain inactive until they are activated by user.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The desired username of the account to be registered.
 
@@ -590,22 +590,22 @@ An array of category ID strings.
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `message`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `message` (array)
 A verbose description of the result of the request.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
-  “message” :
+"response" : {
+  "message" :
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 The password parameter is expected in plaintext. The SDK automatically hashes it before it is included in the request.
 
 The categories parameter should have no fewer than three category IDs included within it.
@@ -613,61 +613,61 @@ The categories parameter should have no fewer than three category IDs included w
 
 <a name="send_password"></a>
 #### send_password()
-##### Description
+###### Description
 Sends an e-mailed password recovery link to the e-mail address associated with the specified username.
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account for which a password recovery message is to be sent.
 
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `message`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `message` (array)
 A verbose description of the result of the request.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
+"response" : {
   "message" :
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 Contrary to its name, this method does not actually send a password to the specified user. Rather, this method triggers the sending of a password recovery link to the e-mail address of the specified user.
 
 
 <a name="validate_user"></a>
 #### validate_user()
-##### Description
+###### Description
 Returns the status of the account for a specified username (i.e., whether or not the account exists).
 
-##### Parameters
+###### Parameters
 `username` (string)
 The username of the account for which a password recovery message is to be sent.
 
 `callback` (function)
 The function to be performed on completion of the request. Receives two parameters from the API, `result` and `message`
 
-##### Callback Parameters
+###### Callback Parameters
 `result` (string)
 The status of the request
 
 `message` (array)
 A verbose description of the result of the request.
 
-##### JSON Response Structure
+###### JSON Response Structure
 ```javascript
-“response” : {
+"response" : {
   "message" :
 }
-“status” :
+"status" :
 ```
 
-##### Additional Notes
+###### Additional Notes
 Does not actually validate the account of the username supplied. This method only indicates whether the account has been previously validated/activated by the user.
